@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     private Vector3 inputs;
 
-    private float speed;
+    private float speed = 2f;
     
 
     // Start is called before the first frame update
@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        character.Move((transform.forward * inputs.magnitude * Time.deltaTime * speed));
-        character.Move((Vector3.down * Time.deltaTime));
+        character.Move(inputs * Time.deltaTime * speed);
+        character.Move(Vector3.down * Time.deltaTime);
 
         if (inputs != Vector3.zero)
         {
