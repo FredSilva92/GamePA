@@ -11,6 +11,8 @@ public class EnemyScript : MonoBehaviour
 
     private float speed;
 
+    private int a = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +31,23 @@ public class EnemyScript : MonoBehaviour
         {
             animator.SetBool("isWalking", true);
             transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
+
+            Debug.Log("Forward: " + transform.forward);
+            Debug.Log("Conttar: " + a++);
         }
         else
         {
             animator.SetBool("isWalking", false);
         }
+
+        if (Input.GetButton("Fire1"))
+        {
+            animator.SetBool("isShooting", true);
+        }
+        else
+        {
+            animator.SetBool("isShooting", false);
+        }
+
     }
 }
