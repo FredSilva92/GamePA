@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Windows;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -19,9 +19,16 @@ public class EnemyScript : MonoBehaviour
     private float _rotationSpeed;
 
     private float _minDistance = 2f;
+    private float _maxDistance = 6f;
+    private float shootWeight = 0.0f;
 
     private Player _playerMovement;
     private Vector3 inputs;
+    private Vector3 destPoint;
+
+    private bool isMoving = false;
+
+    private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -32,82 +39,83 @@ public class EnemyScript : MonoBehaviour
 
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        _playerMovement = GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float playerDistance = Vector3.Distance(transform.position, player.position);
 
-        Debug.Log("DIst: " + Vector3.Distance(transform.position, player.position));
-
-        transform.LookAt(player);
-
-        if (Vector3.Distance(transform.position, player.position) > _minDistance)
+        if (playerDistance > _minDistance && playerDistance < _maxDistance)
         {
-            inputs.Set(transform.position.x, 0, transform.position.z);
+            transform.LookAt(player);
+            SetShootingAnimation(1.0f);
+
             animator.SetBool("isWalking", true);
-            
+            Move();
 
-            character.Move((transform.forward * inputs.magnitude * Time.deltaTime * _speed));
-            character.Move((Vector3.down * Time.deltaTime));
-        } else
+            CancelInvoke("RandomWalking");
+
+        } else if(playerDistance <= _minDistance)
         {
+            transform.LookAt(player);
             animator.SetBool("isWalking", false);
+
+        } else {
+            SetShootingAnimation(0.0f);
+            if (isMoving)
+            {
+
+                if (Vector3.Distance(transform.position, destPoint) < 0.5f)
+                {
+                    isMoving = false;
+                    animator.SetBool("isWalking", false);
+                }
+                else
+                {
+                    Move();
+                }
+
+                CancelInvoke("RandomWalking");
+
+            }
+            else
+            {
+                Invoke("RandomWalking", 4);
+            }
         }
-
-
-        //agent.SetDestination(player.transform.position);
-        /*
-        inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        character.Move((transform.forward * inputs.magnitude * Time.deltaTime * speed));
-        character.Move((Vector3.down * Time.deltaTime));
-
-        if (inputs != Vector3.zero)
-        {
-            animator.SetBool("isWalking", true);
-            transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
-
-            Debug.Log("Forward: " + transform.forward);
-            Debug.Log("Conttar: " + a++);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
-
-        int shootLayerIdx = animator.GetLayerIndex("Shoot");
-
-        if (Input.GetButton("Fire1"))
-        {
-            animator.SetLayerWeight(shootLayerIdx, 1);
-        }
-        else
-        {
-            animator.SetLayerWeight(shootLayerIdx, 0);
-        }*/
-
     }
 
-    private void FixedUpdate()
+    private void OnCollisionEnter(Collision collision)
     {
-        UpdatetargetDirection();
-        RotateTowardsTarget();
-        SetVelocity();
+        isMoving = false;
+        animator.SetBool("isWalking", false);
     }
 
-    private void UpdatetargetDirection()
+    private void Move()
     {
-
+        animator.SetBool("isWalking", true);
+        inputs.Set(transform.forward.x, 0, transform.forward.z);
+        character.Move(inputs * Time.deltaTime * _speed);
+        character.Move(Vector3.down * Time.deltaTime);
+        transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
     }
 
-    private void RotateTowardsTarget()
+    private void RandomWalking()
     {
+        animator.SetBool("isWalking", true);
+        isMoving = true;
+        destPoint = AIMovHelpers.GetDestinationPoint(transform.position, 10f);
 
+        Debug.Log("AI: " + destPoint);
+
+        transform.LookAt(destPoint);
+        Move();
     }
 
-    private void SetVelocity()
+    private void SetShootingAnimation(float fadeTime)
     {
-
-    }
+        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
+        animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
+    } 
 }
