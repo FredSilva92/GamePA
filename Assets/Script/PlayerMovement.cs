@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     private Vector3 inputs;
 
     private float speed = 2f;
+
+    private float shootWeight = 0.0f;
     
 
     // Start is called before the first frame update
@@ -26,6 +28,9 @@ public class Player : MonoBehaviour
         character.Move(inputs * Time.deltaTime * speed);
         character.Move(Vector3.down * Time.deltaTime);
 
+        //Debug.Log("DIst: " + transform.position);
+        //Debug.Log("Forward: " + transform.forward);
+
         if (inputs != Vector3.zero)
         {
             animator.SetBool("isWalking", true);
@@ -35,6 +40,12 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
+
+
+        float fadeTime = Input.GetButton("Fire1") ? 1.0f : 0.0f;
+
+        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
+        animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
     }
 
   
