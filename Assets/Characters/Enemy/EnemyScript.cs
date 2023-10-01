@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-
     private Transform player;
 
     private CharacterController character;
@@ -22,26 +17,19 @@ public class EnemyScript : MonoBehaviour
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
 
-    private Player _playerMovement;
     private Vector3 inputs;
     private Vector3 destPoint;
 
     private bool isMoving = false;
 
-    private NavMeshAgent agent;
 
-    // Start is called before the first frame update
     void Start()
     {
-
         player = GameObject.FindWithTag("Player").transform;
-
-
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float playerDistance = Vector3.Distance(transform.position, player.position);
@@ -56,16 +44,17 @@ public class EnemyScript : MonoBehaviour
 
             CancelInvoke("RandomWalking");
 
-        } else if(playerDistance <= _minDistance)
+        }
+        else if (playerDistance <= _minDistance)
         {
             transform.LookAt(player);
             animator.SetBool("isWalking", false);
-
-        } else {
+        }
+        else
+        {
             SetShootingAnimation(0.0f);
             if (isMoving)
             {
-
                 if (Vector3.Distance(transform.position, destPoint) < 0.5f)
                 {
                     isMoving = false;
@@ -77,7 +66,6 @@ public class EnemyScript : MonoBehaviour
                 }
 
                 CancelInvoke("RandomWalking");
-
             }
             else
             {
@@ -117,5 +105,5 @@ public class EnemyScript : MonoBehaviour
     {
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
         animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
-    } 
+    }
 }
