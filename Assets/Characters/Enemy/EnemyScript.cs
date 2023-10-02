@@ -54,8 +54,6 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("isWalking", true);
             Move();
 
-            CancelInvoke("RandomWalking");
-
         } else if(playerDistance <= _minDistance)
         {
             transform.LookAt(player);
@@ -76,20 +74,12 @@ public class EnemyScript : MonoBehaviour
                     Move();
                 }
 
-                CancelInvoke("RandomWalking");
-
             }
             else
             {
                 Invoke("RandomWalking", 4);
             }
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        isMoving = false;
-        animator.SetBool("isWalking", false);
     }
 
     private void Move()
@@ -111,6 +101,7 @@ public class EnemyScript : MonoBehaviour
 
         transform.LookAt(destPoint);
         Move();
+        CancelInvoke("RandomWalking");
     }
 
     private void SetShootingAnimation(float fadeTime)
