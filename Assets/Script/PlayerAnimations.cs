@@ -18,18 +18,12 @@ public class PlayerAnimations : MonoBehaviour
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isWalking = inputs != Vector3.zero;
 
-        if (isWalking)
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
+        animator.SetBool("isWalking", isWalking);
 
         float fadeTime = Input.GetButton("Fire1") ? 1.0f : 0.0f;
+        int layerIndex = animator.GetLayerIndex(Utils.Constants.SHOOT);
 
-        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
-        animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
+        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.1f);
+        animator.SetLayerWeight(layerIndex, shootWeight);
     }
 }

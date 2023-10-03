@@ -13,6 +13,9 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private float _rotationSpeed;
 
+    [SerializeField]
+    private float moveRadius;
+
     private float _minDistance = 2f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
@@ -96,5 +99,11 @@ public class EnemyScript : MonoBehaviour
     {
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
         animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        isMoving = false;
+        animator.SetBool("isWalking", false);
     }
 }
