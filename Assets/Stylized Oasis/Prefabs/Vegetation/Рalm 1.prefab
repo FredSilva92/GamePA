@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3587891601507100847}
   - component: {fileID: 460805270428133130}
   - component: {fileID: 2414471160406201280}
-  - component: {fileID: -4186239233705078588}
   - component: {fileID: 2201165441907981355}
   m_Layer: 0
   m_Name: "\u0420alm 1"
@@ -85,28 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-4186239233705078588
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4215669187755930133}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7698296028155590254, guid: d78b3028151556a47b45785f5c99d808, type: 3}
 --- !u!136 &2201165441907981355
 CapsuleCollider:
   m_ObjectHideFlags: 0
