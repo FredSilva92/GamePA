@@ -373,7 +373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130801234}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04763198, y: -0.0000000021483566, z: 1.02446746e-10, w: 0.99886495}
+  m_LocalRotation: {x: 0.047631975, y: -0.0000000021483562, z: 1.0244672e-10, w: 0.99886495}
   m_LocalPosition: {x: 3.7000008, y: -5.4730444, z: -54.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -470,12 +470,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b5db210770a5c40b55f8e52707439c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 1917195138}
-  player: {fileID: 1248913114}
-  playerObj: {fileID: 1848913156}
-  rb: {fileID: 1248913115}
+  orientation: {fileID: 0}
+  player: {fileID: 0}
+  playerObj: {fileID: 0}
+  rb: {fileID: 0}
   rotationSpeed: 7
-  combatLookAt: {fileID: 528209057}
+  combatLookAt: {fileID: 0}
   thirdPersonCam: {fileID: 1869040749}
   combatCam: {fileID: 900836652}
   currentStyle: 0
@@ -2051,8 +2051,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 528209057}
-  m_Follow: {fileID: 1248913114}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_CommonLens: 1
   m_Lens:
     FieldOfView: 45
@@ -5164,8 +5164,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1248913114}
-  m_Follow: {fileID: 1248913114}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_CommonLens: 1
   m_Lens:
     FieldOfView: 50
