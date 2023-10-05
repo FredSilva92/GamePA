@@ -74,6 +74,12 @@ public class ThirdPersonMovement : MonoBehaviour
         private set { _healthManager = value; }
     }
 
+    private bool _isDead = false;
+
+    public bool IsDead { 
+        get { return _isDead; }
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -88,7 +94,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_healthManager.Health <= 0) {
+        if (_isDead) {
             Debug.Log("I'm Death");
             return;
         };
@@ -108,7 +114,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_healthManager.Health <= 0)
+        if (_isDead)
         {
             Debug.Log("I'm Death");
             return;
@@ -307,10 +313,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (Utils.Constants.LAZER_BULLET_ENEMY.Equals(collision.gameObject.tag))
-        {
-            LaserBulletScript laserScript = collision.GetComponent<LaserBulletScript>();
-            _healthManager.TakeDamage(laserScript.Damage);
-        };
+        Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
     }
 }

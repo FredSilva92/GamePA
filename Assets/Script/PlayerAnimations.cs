@@ -24,9 +24,9 @@ public class PlayerAnimations : MonoBehaviour
     void Update()
     {
 
-        if (thridPersonMovement.HealthManager.Health <= 0)
+        if (thridPersonMovement.IsDead)
         {
-            isDead();
+            Utils.DeathAnimation(animator);
             return;
         }
 

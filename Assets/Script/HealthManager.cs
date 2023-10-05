@@ -31,12 +31,22 @@ public class HealthManager : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
-        HealthBar.fillAmount = _currentHealth / initialHealth;
+
+        UpdateBar();
     }
 
     public void UpdateHealth(float healingAmount) {
         _currentHealth += healingAmount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, initialHealth);
+
+        UpdateBar();
+    }
+
+    public void UpdateBar() { 
+        if (HealthBar == null)
+        {
+            return;
+        }
 
         HealthBar.fillAmount = _currentHealth / initialHealth;
     }
