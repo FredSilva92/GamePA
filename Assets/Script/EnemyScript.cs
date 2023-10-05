@@ -28,17 +28,20 @@ public class EnemyScript : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("PlayerPrefab").transform;
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        //transform.position += new Vector3(2, 0, 0);
         float playerDistance = Vector3.Distance(transform.position, player.position);
+        
 
         if (playerDistance > _minDistance && playerDistance < _maxDistance)
         {
+
             transform.LookAt(player);
             SetShootingAnimation(1.0f);
 
@@ -97,7 +100,7 @@ public class EnemyScript : MonoBehaviour
 
     private void SetShootingAnimation(float fadeTime)
     {
-        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
+        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.1f);
         animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
     }
 

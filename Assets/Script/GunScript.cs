@@ -42,9 +42,9 @@ public class GunScript : MonoBehaviour
 
 
 
-        Debug.Log("Shoot weight " + shootWeight);
+        //Debug.Log("Shoot weight " + shootWeight);
 
-        if (shootWeight > 0.999999f)
+        if (shootWeight > 0.99f)
         {
             ShootBullet();
 
@@ -68,10 +68,10 @@ public class GunScript : MonoBehaviour
 
             fireRate += (int)(animationClip.clip.length * animationClip.clip.frameRate);
 
-            GameObject cb = Instantiate(laser, spawnPoint.position, laser.transform.rotation);
+            GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
-            rb.AddForce(spawnPoint.forward * speed, ForceMode.Impulse);
+            rb.AddForce(transform.forward * speed, ForceMode.Impulse);
             
         }
         //fireRate++;

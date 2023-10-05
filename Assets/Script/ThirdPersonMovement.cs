@@ -44,6 +44,7 @@ public class ThirdPersonMovement : MonoBehaviour
     Rigidbody rb;
 
     public MovementState currentState;
+
     public enum MovementState
     {
         freeze,
@@ -61,6 +62,15 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private Animator animator;
 
+    [Header("Health Bar")]
+    [SerializeField]
+    private GameObject healthBar;
+
+    [SerializeField]
+    private float initialHealth;
+
+    private float healthPoints;
+
 
     private void Start()
     {
@@ -68,6 +78,8 @@ public class ThirdPersonMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+
+        healthPoints = initialHealth;
 
         animator = GetComponent<Animator>();
     }
@@ -280,5 +292,14 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         float mult = Mathf.Pow(10.0f, (float)digits);
         return Mathf.Round(value * mult) / mult;
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag.Equals(Utils.Constants.LAZER_BULLET_ENEMY))
+        {
+            HealthManager hm = healthBar.GetComponent<HealthManager>();
+            hm.TakeDamage(20);
+        };
     }
 }

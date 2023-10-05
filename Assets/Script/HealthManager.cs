@@ -16,7 +16,7 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && healthAmount >= 0)
+        /*if (Input.GetKeyDown(KeyCode.A) && healthAmount >= 0)
         {
             Debug.Log("Estou no A");
             TakeDamage(20);
@@ -26,7 +26,7 @@ public class HealthManager : MonoBehaviour
         {
             Debug.Log("Estou no S");
             UpdateHealth(20);
-        }
+        }*/
     }
 
     public void TakeDamage(float damage)
