@@ -66,11 +66,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField]
     private GameObject healthBar;
 
-    [SerializeField]
-    private float initialHealth;
-
-    private float healthPoints;
-
+    private HealthManager healthManager;
 
     private void Start()
     {
@@ -78,14 +74,16 @@ public class ThirdPersonMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
-
-        healthPoints = initialHealth;
+        healthManager = healthBar.GetComponent<HealthManager>(); ;
 
         animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        if (healthManager.Health <= 0) {
+            Debug.Log("I'm Death");
+        };
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -296,10 +294,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag.Equals(Utils.Constants.LAZER_BULLET_ENEMY))
+        if (Utils.Constants.LAZER_BULLET_ENEMY.Equals(collision.gameObject.tag))
         {
-            HealthManager hm = healthBar.GetComponent<HealthManager>();
-            hm.TakeDamage(20);
+            LaserBulletScript laserScript = collision.GetComponent<LaserBulletScript>();
+            healthManager.TakeDamage(laserScript.Damage);
         };
     }
 }
