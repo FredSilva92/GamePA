@@ -23,7 +23,6 @@ public class PlayerAnimations : MonoBehaviour
 
     void Update()
     {
-
         if (thridPersonMovement.IsDead)
         {
             Utils.DeathAnimation(animator);
@@ -36,7 +35,6 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetBool("isWalking", isWalking);
 
         float fadeTime = Input.GetButton("Fire1") ? 1.0f : 0.0f;
-        
 
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.1f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);

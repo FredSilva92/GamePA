@@ -76,7 +76,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private bool _isDead = false;
 
-    public bool IsDead { 
+    public bool IsDead
+    {
         get { return _isDead; }
     }
 
@@ -86,7 +87,7 @@ public class ThirdPersonMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
-        _healthManager = healthBar.GetComponent<HealthManager>(); 
+        _healthManager = healthBar.GetComponent<HealthManager>();
         HealthManager = _healthManager;
 
         animator = GetComponent<Animator>();
@@ -94,7 +95,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_isDead) {
+        if (_isDead)
+        {
             Debug.Log("I'm Death");
             return;
         };

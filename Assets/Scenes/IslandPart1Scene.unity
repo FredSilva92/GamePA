@@ -9285,9 +9285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 1024666603}
-  player: {fileID: 1324860795}
+  player: {fileID: 1324860794}
   playerObj: {fileID: 1410069772}
-  rb: {fileID: 1324860798}
   rotationSpeed: 7
   combatLookAt: {fileID: 1533149966}
   thirdPersonCam: {fileID: 1353393051}
@@ -15871,7 +15870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 1879253227}
-  healthAmount: 100
+  initialHealth: 100
 --- !u!4 &1122991896
 Transform:
   m_ObjectHideFlags: 0
@@ -18562,6 +18561,7 @@ MonoBehaviour:
   freeze: 0
   unlimited: 0
   restricted: 0
+  healthBar: {fileID: 1122991894}
 --- !u!136 &1324860797
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19595,7 +19595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397743787}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09252102, y: 0.000000017659856, z: -0.0000000016409463, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252102, y: -0.000000017659858, z: 0.0000000016409465, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19996,6 +19996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8115c0081c112d944a416140f746833d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMainComp: {fileID: 1324860794}
 --- !u!1001 &1424236503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30719,6 +30720,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _rotationSpeed: 0
+  moveRadius: 0
+  player: {fileID: 1324860794}
+  _healthManager: {fileID: 1122991895}
 --- !u!1 &2131374064
 GameObject:
   m_ObjectHideFlags: 3
