@@ -4,10 +4,8 @@ public class ThirdPersonCam : MonoBehaviour
 {
     [Header("References")]
     public Transform orientation;
-    public Transform player;
+    public GameObject player;
     public Transform playerObj;
-    public Rigidbody rb;
-
     public float rotationSpeed;
 
     public Transform combatLookAt;
@@ -30,12 +28,21 @@ public class ThirdPersonCam : MonoBehaviour
 
     private void Update()
     {
+        ThirdPersonMovement playerScript = player.GetComponent<ThirdPersonMovement>();
+
+        if (playerScript.IsDead)
+        {
+            return;
+        }
+
+        Transform playerTransform = player.transform;
+
         // switch styles
         if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchCameraStyle(CameraStyle.Basic);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchCameraStyle(CameraStyle.Combat);
 
         // rotate orientation
-        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+        Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
         // roate player object

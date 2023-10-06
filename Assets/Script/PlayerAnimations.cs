@@ -41,11 +41,4 @@ public class PlayerAnimations : MonoBehaviour
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.1f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);
     }
-
-    private void isDead()
-    {
-        animator.SetBool("isWalking", false);
-        animator.SetLayerWeight(layerShootIdx, Mathf.Lerp(shootWeight, 0.0f, 0.2f));
-        animator.SetBool("isDying", true);
-    }
 }
