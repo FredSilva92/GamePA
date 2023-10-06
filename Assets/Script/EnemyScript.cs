@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private Transform player;
+    private Transform playerTransform;
 
     private CharacterController character;
     private Animator animator;
@@ -13,6 +13,12 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private float _rotationSpeed;
 
+    [SerializeField]
+    private float moveRadius;
+
+    [SerializeField]
+    private GameObject player;
+
     private float _minDistance = 2f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
@@ -21,30 +27,48 @@ public class EnemyScript : MonoBehaviour
     private Vector3 destPoint;
 
     private bool isMoving = false;
+    private ThirdPersonMovement playerData;
+
+    [Header("Health Manager")]
+    [SerializeField]
+    private HealthManager _healthManager;
+
+    private bool _isDead = false;
+
 
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        //playerTransform = GameObject.FindWithTag("PlayerPrefab").transform;
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        playerData = player.GetComponent<ThirdPersonMovement>();
     }
 
     void Update()
     {
-        float playerDistance = Vector3.Distance(transform.position, player.position);
+        if (_isDead) {
+            Utils.DeathAnimation(animator);
+            return; 
+        }
 
-        if (playerDistance > _minDistance && playerDistance < _maxDistance)
+        Transform plTransform = player.transform;
+        float playerDistance = Vector3.Distance(transform.position, plTransform.position);
+        bool playerIsDead = playerData.IsDead;
+
+        if (playerDistance > _minDistance && playerDistance < _maxDistance && !playerIsDead)
         {
-            transform.LookAt(player);
+
+            transform.LookAt(plTransform);
             SetShootingAnimation(1.0f);
 
             animator.SetBool("isWalking", true);
             Move();
 
-        } else if(playerDistance <= _minDistance)
+        }
+        else if (playerDistance <= _minDistance && !playerIsDead)
         {
-            transform.LookAt(player);
+            transform.LookAt(plTransform);
             animator.SetBool("isWalking", false);
         }
         else
@@ -52,7 +76,7 @@ public class EnemyScript : MonoBehaviour
             SetShootingAnimation(0.0f);
             if (isMoving)
             {
-                if (Vector3.Distance(transform.position, destPoint) < 0.5f)
+                if (Vector3.Distance(transform.position, destPoint) < 4f)
                 {
                     isMoving = false;
                     animator.SetBool("isWalking", false);
@@ -94,7 +118,18 @@ public class EnemyScript : MonoBehaviour
 
     private void SetShootingAnimation(float fadeTime)
     {
-        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
-        animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
+        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.1f);
+        animator.SetLayerWeight(animator.GetLayerIndex(Utils.Constants.SHOOT), shootWeight);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        isMoving = false;
+        animator.SetBool("isWalking", false);
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
     }
 }

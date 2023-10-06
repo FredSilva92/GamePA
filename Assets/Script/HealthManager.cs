@@ -5,40 +5,49 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
-    public Image HealthBar;
-    public float healthAmount = 100f;
+    [SerializeField]
+    private Image HealthBar;
+
+    [SerializeField]
+    private float initialHealth = 100f;
+
+    private float _currentHealth;
+
+    public float Health { get { return _currentHealth;} }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _currentHealth = initialHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && healthAmount >= 0)
-        {
-            Debug.Log("Estou no A");
-            TakeDamage(20);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Estou no S");
-            UpdateHealth(20);
-        }
+        
     }
 
     public void TakeDamage(float damage)
     {
-        healthAmount -= damage;
-        HealthBar.fillAmount = healthAmount / 100;
+        _currentHealth -= damage;
+
+        UpdateBar();
     }
 
     public void UpdateHealth(float healingAmount) {
-        healthAmount += healingAmount;
-        healthAmount = Mathf.Clamp(healthAmount, 0, 100);
+        _currentHealth += healingAmount;
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, initialHealth);
 
-        HealthBar.fillAmount = healthAmount / 100f;
+        UpdateBar();
+    }
+
+    public void UpdateBar() { 
+        if (HealthBar == null)
+        {
+            return;
+        }
+
+        HealthBar.fillAmount = _currentHealth / initialHealth;
     }
 }

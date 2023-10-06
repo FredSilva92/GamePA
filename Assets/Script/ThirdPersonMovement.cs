@@ -44,6 +44,7 @@ public class ThirdPersonMovement : MonoBehaviour
     Rigidbody rb;
 
     public MovementState currentState;
+
     public enum MovementState
     {
         freeze,
@@ -61,6 +62,23 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private Animator animator;
 
+    [Header("Health Bar")]
+    [SerializeField]
+    private GameObject healthBar;
+
+    private HealthManager _healthManager;
+
+    public HealthManager HealthManager
+    {
+        get { return _healthManager; }
+        private set { _healthManager = value; }
+    }
+
+    private bool _isDead = false;
+
+    public bool IsDead { 
+        get { return _isDead; }
+    }
 
     private void Start()
     {
@@ -68,12 +86,18 @@ public class ThirdPersonMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+        _healthManager = healthBar.GetComponent<HealthManager>(); 
+        HealthManager = _healthManager;
 
         animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        if (_isDead) {
+            Debug.Log("I'm Death");
+            return;
+        };
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -90,6 +114,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_isDead)
+        {
+            Debug.Log("I'm Death");
+            return;
+        };
         MovePlayer();
     }
 
@@ -280,5 +309,10 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         float mult = Mathf.Pow(10.0f, (float)digits);
         return Mathf.Round(value * mult) / mult;
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
     }
 }
