@@ -6353,7 +6353,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 876452758954646499, guid: e8124b6be18c6eb44ae633fbdfe09ea0, type: 3}
       propertyPath: m_Name
-      value: Wooden_Table
+      value: WoodenTable
       objectReference: {fileID: 0}
     - target: {fileID: 876452758954646499, guid: e8124b6be18c6eb44ae633fbdfe09ea0, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -6398,6 +6398,10 @@ PrefabInstance:
     - target: {fileID: 4211588009531927024, guid: e8124b6be18c6eb44ae633fbdfe09ea0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637948020629258358, guid: e8124b6be18c6eb44ae633fbdfe09ea0, type: 3}
+      propertyPath: m_Name
+      value: WoodenTable
       objectReference: {fileID: 0}
     - target: {fileID: 4637948020629258358, guid: e8124b6be18c6eb44ae633fbdfe09ea0, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -11328,6 +11332,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1184790111}
     m_Modifications:
     - target: {fileID: 5488400055417792078, guid: 160ac283519f87049bd268d860865283, type: 3}
+      propertyPath: m_Name
+      value: ArmBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5488400055417792078, guid: 160ac283519f87049bd268d860865283, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -11338,6 +11346,10 @@ PrefabInstance:
     - target: {fileID: 5696679198491843081, guid: 160ac283519f87049bd268d860865283, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123391283414929115, guid: 160ac283519f87049bd268d860865283, type: 3}
+      propertyPath: m_Name
+      value: Hook_Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 7123391283414929115, guid: 160ac283519f87049bd268d860865283, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -20444,7 +20456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397743787}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09252102, y: -0.000000017659858, z: 0.0000000016409465, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252102, y: 0.000000017659856, z: -0.0000000016409463, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29228,7 +29240,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1594858969727413585, guid: e548d75c8014f8149aaf5b2e7c9a0758, type: 3}
       propertyPath: m_Name
-      value: Wood Plank
+      value: WoodPlank
       objectReference: {fileID: 0}
     - target: {fileID: 1594858969727413585, guid: e548d75c8014f8149aaf5b2e7c9a0758, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -29273,6 +29285,10 @@ PrefabInstance:
     - target: {fileID: 2339982916574273346, guid: e548d75c8014f8149aaf5b2e7c9a0758, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057077733944346828, guid: e548d75c8014f8149aaf5b2e7c9a0758, type: 3}
+      propertyPath: m_Name
+      value: WoodPlank
       objectReference: {fileID: 0}
     - target: {fileID: 5057077733944346828, guid: e548d75c8014f8149aaf5b2e7c9a0758, type: 3}
       propertyPath: m_StaticEditorFlags
