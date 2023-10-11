@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3711180054685614650}
   - component: {fileID: 301487246350093727}
   - component: {fileID: 2579417189389105493}
-  - component: {fileID: 6154744496413053885}
+  - component: {fileID: 7971269935940521341}
   m_Layer: 0
   m_Name: "\u0420alm 6"
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6154744496413053885
-MeshCollider:
+--- !u!136 &7971269935940521341
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8781570683700472367, guid: 66cf47548ba8c644595bc0d7ece9cca9, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.08409496
+  m_Height: 1.0021789
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.50269186, z: 0}
