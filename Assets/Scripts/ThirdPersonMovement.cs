@@ -100,6 +100,7 @@ public class ThirdPersonMovement : MonoBehaviour
             Debug.Log("I'm Death");
             return;
         };
+
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -109,9 +110,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
         // handle drag
         if (currentState == MovementState.walking)
+        {
             rb.drag = groundDrag;
+        }
         else
+        {
             rb.drag = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -121,6 +126,7 @@ public class ThirdPersonMovement : MonoBehaviour
             Debug.Log("I'm Death");
             return;
         };
+
         MovePlayer();
     }
 
@@ -284,6 +290,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
     private void ResetJump()
     {
         readyToJump = true;
