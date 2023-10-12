@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6072552552872786412}
   - component: {fileID: 8332500533328694566}
   m_Layer: 0
-  m_Name: SpaceCraft
+  m_Name: Spaceship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
