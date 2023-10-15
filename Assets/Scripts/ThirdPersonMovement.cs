@@ -20,6 +20,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+    bool _finishedJump;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -79,6 +80,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool IsDead
     {
         get { return _isDead; }
+    }
+
+    public bool FinishedJump
+    {
+        get { return _finishedJump; }
+        set { _finishedJump = value; }
     }
 
     private void Start()
@@ -283,6 +290,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Jump()
     {
+        _finishedJump = false;
+
         exitingSlope = true;
 
         // reset y velocity
@@ -294,6 +303,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+
+        _finishedJump = true;
 
         exitingSlope = false;
     }
