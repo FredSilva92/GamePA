@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : CharacterBase
 {
     private Transform playerTransform;
 
@@ -33,10 +33,6 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private HealthManager _healthManager;
 
-    private bool _isDead = false;
-
-
-
     void Start()
     {
         //playerTransform = GameObject.FindWithTag("PlayerPrefab").transform;
@@ -63,6 +59,8 @@ public class EnemyScript : MonoBehaviour
             SetShootingAnimation(1.0f);
 
             animator.SetBool("isWalking", true);
+            animator.SetBool("isShooting", true);
+            _isShooting = true;
             Move();
 
         }
@@ -70,6 +68,8 @@ public class EnemyScript : MonoBehaviour
         {
             transform.LookAt(plTransform);
             animator.SetBool("isWalking", false);
+            animator.SetBool("isShooting", true);
+            _isShooting = true;
         }
         else
         {
@@ -80,6 +80,8 @@ public class EnemyScript : MonoBehaviour
                 {
                     isMoving = false;
                     animator.SetBool("isWalking", false);
+                    animator.SetBool("isShooting", false);
+                    _isShooting = false;
                 }
                 else
                 {
@@ -100,7 +102,9 @@ public class EnemyScript : MonoBehaviour
         inputs.Set(transform.forward.x, 0, transform.forward.z);
         character.Move(inputs * Time.deltaTime * _speed);
         character.Move(Vector3.down * Time.deltaTime);
+        
         transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
+        Debug.Log("Forward: " + inputs);
     }
 
     private void RandomWalking()
