@@ -26,23 +26,19 @@ public class SpiderAI : MonoBehaviour
         if (walkingForward)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            
+             animator.SetBool("isWalking", true); 
+
             if (Vector3.Distance(firstPosition, transform.position) >= maxDistance)
             {
                 walkingForward = false;
-                animator.SetBool("isWalking", false); 
-            }
-            else
-            {
-                animator.SetBool("isWalking", true); 
-            }
+                animator.SetBool("isWalking", true);
+                transform.Rotate(Vector3.up, 180f);
+            }      
         }
         else
         {
-           
             transform.position = Vector3.MoveTowards(transform.position, firstPosition, speed * Time.deltaTime);
 
-           
             if (Vector3.Distance(firstPosition, transform.position) < 0.1f)
             {
                 walkingForward = true;
