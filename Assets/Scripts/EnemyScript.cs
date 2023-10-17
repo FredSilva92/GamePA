@@ -19,6 +19,9 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private GameObject player;
 
+    [SerializeField]
+    private GameObject droppableItem;
+
     private float _minDistance = 2f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
@@ -27,6 +30,7 @@ public class EnemyScript : CharacterBase
     private Vector3 destPoint;
 
     private bool isMoving = false;
+    private bool hasDropped = false;
     private ThirdPersonMovement playerData;
 
     [Header("Health Manager")]
@@ -44,7 +48,9 @@ public class EnemyScript : CharacterBase
     void Update()
     {
         if (_isDead) {
+            StopShooting();
             Utils.DeathAnimation(animator);
+            if(!hasDropped) DropItem();
             return; 
         }
 
@@ -74,14 +80,15 @@ public class EnemyScript : CharacterBase
         else
         {
             SetShootingAnimation(0.0f);
+            StopShooting();
+
             if (isMoving)
             {
                 if (Vector3.Distance(transform.position, destPoint) < 4f)
                 {
                     isMoving = false;
                     animator.SetBool("isWalking", false);
-                    animator.SetBool("isShooting", false);
-                    _isShooting = false;
+
                 }
                 else
                 {
@@ -104,7 +111,6 @@ public class EnemyScript : CharacterBase
         character.Move(Vector3.down * Time.deltaTime);
         
         transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
-        Debug.Log("Forward: " + inputs);
     }
 
     private void RandomWalking()
@@ -112,8 +118,6 @@ public class EnemyScript : CharacterBase
         animator.SetBool("isWalking", true);
         isMoving = true;
         destPoint = AIMovHelpers.GetDestinationPoint(transform.position, 10f);
-
-        Debug.Log("AI: " + destPoint);
 
         transform.LookAt(destPoint);
         Move();
@@ -135,5 +139,17 @@ public class EnemyScript : CharacterBase
     private void OnTriggerEnter(Collider collision)
     {
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
+    }
+
+    private void DropItem()
+    {
+        Instantiate(droppableItem, transform.position, Quaternion.identity);
+        hasDropped = true;
+    }
+
+    private void StopShooting()
+    {
+        animator.SetBool("isShooting", false);
+        _isShooting = false;
     }
 }

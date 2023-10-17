@@ -45,18 +45,6 @@ public class GunScript : MonoBehaviour
         {
             ShootBullet();  
         }
-
-
-        //Debug.Log("Shoot weight " + shootWeight);
-
-        //bool checkShoot = Time.time > lastShootTime + fireRate;
-
-
-        if (character.IsShooting)
-        {
-            ShootBullet();
-
-        }
     }
 
     private void ShootBullet()

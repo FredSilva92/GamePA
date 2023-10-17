@@ -33,6 +33,7 @@ public class ThirdPersonMovement : CharacterBase
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
+    private bool isItemToPick;
 
     public Transform orientation;
 
@@ -312,6 +313,22 @@ public class ThirdPersonMovement : CharacterBase
 
     private void OnTriggerEnter(Collider collision)
     {
+      
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
+
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Medicine") && Input.GetButton(Utils.Constants.PICK))
+        {
+            GameObject gameObject = collision.gameObject;
+            MedicineScript medicineScript = gameObject.GetComponent<MedicineScript>();
+            _healthManager.UpdateHealth(medicineScript.Health);
+
+            Destroy(collision.gameObject);
+        }
+    }
+
+
 }

@@ -7,6 +7,7 @@ public class Utils
         public static readonly string AIM_KEY = "Fire2";
         public static readonly string SHOOT_KEY = "Fire1";
         public static readonly string SHOOT = "ShootAnim";
+        public static readonly string PICK = "Pick";
         public static readonly string LAZER_BULLET_PLAYER = "LazerBulletPlayer";
         public static readonly string LAZER_BULLET_ENEMY = "LazerBulletEnemy";
     }
