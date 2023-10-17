@@ -47,11 +47,12 @@ public class EnemyScript : CharacterBase
 
     void Update()
     {
-        if (_isDead) {
+        if (_isDead)
+        {
             StopShooting();
             Utils.DeathAnimation(animator);
-            if(!hasDropped) DropItem();
-            return; 
+            if (!hasDropped) DropItem();
+            return;
         }
 
         Transform plTransform = player.transform;
@@ -88,13 +89,11 @@ public class EnemyScript : CharacterBase
                 {
                     isMoving = false;
                     animator.SetBool("isWalking", false);
-
                 }
                 else
                 {
                     Move();
                 }
-
             }
             else
             {
@@ -109,7 +108,7 @@ public class EnemyScript : CharacterBase
         inputs.Set(transform.forward.x, 0, transform.forward.z);
         character.Move(inputs * Time.deltaTime * _speed);
         character.Move(Vector3.down * Time.deltaTime);
-        
+
         transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
     }
 

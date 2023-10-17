@@ -1,24 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.TextCore.Text;
 
 public class GunScript : MonoBehaviour
 {
     [FormerlySerializedAs("Spawn Point")]
     [SerializeField]
     private Transform spawnPoint;
-    
+
     [SerializeField]
     private GameObject laser;
-    
-    [SerializeField] 
+
+    [SerializeField]
     private GameObject player;
 
     [SerializeField]
     private Animator animator;
-    
+
     [SerializeField]
     private float speed = 5f;
 
@@ -33,7 +30,7 @@ public class GunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -43,7 +40,7 @@ public class GunScript : MonoBehaviour
 
         if (character.IsShooting)
         {
-            ShootBullet();  
+            ShootBullet();
         }
     }
 
