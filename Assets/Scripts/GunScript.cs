@@ -22,7 +22,10 @@ public class GunScript : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
 
-    private int fireRate = 0;
+    [SerializeField]
+    private float fireRate = 0;
+
+    private float time = 0;
 
 
     private CharacterBase character;
@@ -44,44 +47,30 @@ public class GunScript : MonoBehaviour
         }
 
 
-        AnimatorClipInfo animationClip = animator.GetCurrentAnimatorClipInfo(animator.GetLayerIndex(Utils.Constants.SHOOT))[0];
-        AnimatorStateInfo animationState = animator.GetCurrentAnimatorStateInfo(animator.GetLayerIndex(Utils.Constants.SHOOT));
-        int currentFrame = (int)(animationState.normalizedTime * (animationClip.clip.length * animationClip.clip.frameRate));
-
-
-
         //Debug.Log("Shoot weight " + shootWeight);
+
+        //bool checkShoot = Time.time > lastShootTime + fireRate;
+
 
         if (character.IsShooting)
         {
             ShootBullet();
 
-
-        }
-        else
-        {
-            fireRate = currentFrame;
         }
     }
 
     private void ShootBullet()
     {
-        AnimatorClipInfo animationClip = animator.GetCurrentAnimatorClipInfo(animator.GetLayerIndex(Utils.Constants.SHOOT))[0];
-        AnimatorStateInfo animationState = animator.GetCurrentAnimatorStateInfo(animator.GetLayerIndex(Utils.Constants.SHOOT));
+        time += Time.deltaTime;
+        float nextTimeToFire = 1 / fireRate;
 
-        int currentFrame = (int)(animationState.normalizedTime * (animationClip.clip.length * animationClip.clip.frameRate));
-
-        if (currentFrame >= fireRate)
+        if (time >= nextTimeToFire)
         {
-
-            fireRate += (int)(animationClip.clip.length * animationClip.clip.frameRate);
-
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
             rb.AddForce(transform.forward * speed, ForceMode.Impulse);
-
+            time = 0;
         }
-
     }
 }
