@@ -13,6 +13,12 @@ public class PlayerAnimations : MonoBehaviour
     private ThirdPersonMovement thridPersonMovement;
 
     private int layerShootIdx;
+    private bool _isShooting;
+
+    public bool IsShooting { 
+        get { return _isShooting;} 
+    }
+
 
     void Start()
     {
@@ -51,12 +57,19 @@ public class PlayerAnimations : MonoBehaviour
 
         animator.SetBool("isWalking", isWalking);
 
+        
+        bool isAiming = Input.GetButton(Utils.Constants.AIM_KEY) || Input.GetButton(Utils.Constants.SHOOT_KEY);
 
-        // ---------- DISPARAR ----------
+        float fadeTime = isAiming ? 1.0f : 0.0f;
+        
 
-        float fadeTime = Input.GetButton("Fire1") ? 1.0f : 0.0f;
-
-        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.1f);
+        shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.5f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);
+
+        //Debug.Log("Shoot weight: " + shootWeight);
+
+        //_isShooting = Input.GetButton(Utils.Constants.SHOOT_KEY);
+        animator.SetBool("isShooting", thridPersonMovement.IsShooting);
+        
     }
 }
