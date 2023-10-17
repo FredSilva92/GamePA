@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ThirdPersonMovement : MonoBehaviour
+public class ThirdPersonMovement : CharacterBase
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -34,6 +34,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
+    private bool isItemToPick;
 
     public Transform orientation;
 
@@ -75,12 +76,7 @@ public class ThirdPersonMovement : MonoBehaviour
         private set { _healthManager = value; }
     }
 
-    private bool _isDead = false;
 
-    public bool IsDead
-    {
-        get { return _isDead; }
-    }
 
     public bool FinishedJump
     {
@@ -151,6 +147,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        _isShooting = Input.GetButton(Utils.Constants.SHOOT_KEY);
     }
 
     private void StateHandler()
@@ -333,6 +331,22 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+      
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
+
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Medicine") && Input.GetButton(Utils.Constants.PICK))
+        {
+            GameObject gameObject = collision.gameObject;
+            MedicineScript medicineScript = gameObject.GetComponent<MedicineScript>();
+            _healthManager.UpdateHealth(medicineScript.Health);
+
+            Destroy(collision.gameObject);
+        }
+    }
+
+
 }
