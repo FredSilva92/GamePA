@@ -23,16 +23,36 @@ public class PlayerAnimations : MonoBehaviour
 
     void Update()
     {
+        // ---------- MORRER ----------
         if (thridPersonMovement.IsDead)
         {
             Utils.DeathAnimation(animator);
             return;
         }
 
+
+        // ---------- SALTAR ----------
+
+        // se termina de saltar
+        if (thridPersonMovement.FinishedJump)
+        {
+            animator.SetBool("isJumping", false);
+        }
+        else if (!thridPersonMovement.FinishedJump && thridPersonMovement.currentState == ThirdPersonMovement.MovementState.air)
+        {
+            animator.SetBool("isJumping", true);
+        }
+
+
+        // ---------- ANDAR ----------
+
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isWalking = inputs != Vector3.zero;
 
         animator.SetBool("isWalking", isWalking);
+
+
+        // ---------- DISPARAR ----------
 
         float fadeTime = Input.GetButton("Fire1") ? 1.0f : 0.0f;
 

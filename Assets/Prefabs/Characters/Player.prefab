@@ -2492,19 +2492,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0862e1b5544fc4bb916c43e2eaf995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  airMinSpeed: 5
+  walkSpeed: 4
+  airMinSpeed: 4
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
   groundDrag: 4
-  jumpForce: 12
+  jumpForce: 7
   jumpCooldown: 0.25
   airMultiplier: 0.4
   jumpKey: 32
-  playerHeight: 2
+  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   grounded: 0
   maxSlopeAngle: 40
   orientation: {fileID: 3774561459912257939}

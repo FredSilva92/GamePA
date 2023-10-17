@@ -20,6 +20,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+    bool _finishedJump;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -81,6 +82,12 @@ public class ThirdPersonMovement : MonoBehaviour
         get { return _isDead; }
     }
 
+    public bool FinishedJump
+    {
+        get { return _finishedJump; }
+        set { _finishedJump = value; }
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -100,6 +107,7 @@ public class ThirdPersonMovement : MonoBehaviour
             Debug.Log("I'm Death");
             return;
         };
+
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -109,9 +117,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
         // handle drag
         if (currentState == MovementState.walking)
+        {
             rb.drag = groundDrag;
+        }
         else
+        {
             rb.drag = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -121,6 +133,7 @@ public class ThirdPersonMovement : MonoBehaviour
             Debug.Log("I'm Death");
             return;
         };
+
         MovePlayer();
     }
 
@@ -277,6 +290,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Jump()
     {
+        _finishedJump = false;
+
         exitingSlope = true;
 
         // reset y velocity
@@ -284,9 +299,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
     private void ResetJump()
     {
         readyToJump = true;
+
+        _finishedJump = true;
 
         exitingSlope = false;
     }
