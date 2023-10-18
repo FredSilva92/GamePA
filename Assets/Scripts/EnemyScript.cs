@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : CharacterBase
 {
@@ -37,12 +38,17 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private HealthManager _healthManager;
 
+    private NavMeshAgent agent;
+    private Vector3 initialPosition;
+
     void Start()
     {
-        //playerTransform = GameObject.FindWithTag("PlayerPrefab").transform;
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerData = player.GetComponent<ThirdPersonMovement>();
+        agent = GetComponent<NavMeshAgent>();
+        initialPosition = transform.position;
+
     }
 
     void Update()
@@ -61,19 +67,17 @@ public class EnemyScript : CharacterBase
 
         if (playerDistance > _minDistance && playerDistance < _maxDistance && !playerIsDead)
         {
-
-            transform.LookAt(plTransform);
+            agent.SetDestination(plTransform.position);
             SetShootingAnimation(1.0f);
 
             animator.SetBool("isWalking", true);
             animator.SetBool("isShooting", true);
             _isShooting = true;
-            Move();
 
         }
         else if (playerDistance <= _minDistance && !playerIsDead)
         {
-            transform.LookAt(plTransform);
+            agent.isStopped = true;
             animator.SetBool("isWalking", false);
             animator.SetBool("isShooting", true);
             _isShooting = true;
@@ -83,43 +87,22 @@ public class EnemyScript : CharacterBase
             SetShootingAnimation(0.0f);
             StopShooting();
 
-            if (isMoving)
+            if (!agent.hasPath)
             {
-                if (Vector3.Distance(transform.position, destPoint) < 4f)
-                {
-                    isMoving = false;
-                    animator.SetBool("isWalking", false);
-                }
-                else
-                {
-                    Move();
-                }
-            }
-            else
-            {
+                isMoving = false;
+                animator.SetBool("isWalking", false);
                 Invoke("RandomWalking", 4);
             }
         }
-    }
-
-    private void Move()
-    {
-        animator.SetBool("isWalking", true);
-        inputs.Set(transform.forward.x, 0, transform.forward.z);
-        character.Move(inputs * Time.deltaTime * _speed);
-        character.Move(Vector3.down * Time.deltaTime);
-
-        transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
     }
 
     private void RandomWalking()
     {
         animator.SetBool("isWalking", true);
         isMoving = true;
-        destPoint = AIMovHelpers.GetDestinationPoint(transform.position, 10f);
+        destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, 7f);
 
-        transform.LookAt(destPoint);
-        Move();
+        agent.SetDestination(destPoint);
         CancelInvoke("RandomWalking");
     }
 
