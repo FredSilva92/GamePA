@@ -2295,8 +2295,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 883823443035742769}
   laser: {fileID: 2525952955390799428, guid: ed14c9052451e634e99974d5adeac8c7, type: 3}
   player: {fileID: 3610248153917254521}
+  animator: {fileID: 8048444809673894841}
   speed: 5
-  nextFire: 0
+  fireRate: 0.75
 --- !u!1 &2238271108270802204
 GameObject:
   m_ObjectHideFlags: 0
@@ -3029,7 +3030,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3610248153917254521}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 71.5, y: -6.531361, z: 35.78561}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3063,6 +3064,7 @@ MonoBehaviour:
   _rotationSpeed: 0
   moveRadius: 4
   player: {fileID: 0}
+  droppableItem: {fileID: 1987713744733760, guid: b55df95fa6211964e8ad561501250fac, type: 3}
   _healthManager: {fileID: 4192548877204385939}
 --- !u!95 &8048444809673894841
 Animator:
@@ -3110,7 +3112,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!143 &5091520571383657342
 CharacterController:

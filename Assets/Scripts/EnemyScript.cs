@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : CharacterBase
 {
     private Transform playerTransform;
 
@@ -19,6 +19,9 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    [SerializeField]
+    private GameObject droppableItem;
+
     private float _minDistance = 2f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
@@ -27,15 +30,12 @@ public class EnemyScript : MonoBehaviour
     private Vector3 destPoint;
 
     private bool isMoving = false;
+    private bool hasDropped = false;
     private ThirdPersonMovement playerData;
 
     [Header("Health Manager")]
     [SerializeField]
     private HealthManager _healthManager;
-
-    private bool _isDead = false;
-
-
 
     void Start()
     {
@@ -47,9 +47,12 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        if (_isDead) {
+        if (_isDead)
+        {
+            StopShooting();
             Utils.DeathAnimation(animator);
-            return; 
+            if (!hasDropped) DropItem();
+            return;
         }
 
         Transform plTransform = player.transform;
@@ -63,6 +66,8 @@ public class EnemyScript : MonoBehaviour
             SetShootingAnimation(1.0f);
 
             animator.SetBool("isWalking", true);
+            animator.SetBool("isShooting", true);
+            _isShooting = true;
             Move();
 
         }
@@ -70,10 +75,14 @@ public class EnemyScript : MonoBehaviour
         {
             transform.LookAt(plTransform);
             animator.SetBool("isWalking", false);
+            animator.SetBool("isShooting", true);
+            _isShooting = true;
         }
         else
         {
             SetShootingAnimation(0.0f);
+            StopShooting();
+
             if (isMoving)
             {
                 if (Vector3.Distance(transform.position, destPoint) < 4f)
@@ -85,7 +94,6 @@ public class EnemyScript : MonoBehaviour
                 {
                     Move();
                 }
-
             }
             else
             {
@@ -100,6 +108,7 @@ public class EnemyScript : MonoBehaviour
         inputs.Set(transform.forward.x, 0, transform.forward.z);
         character.Move(inputs * Time.deltaTime * _speed);
         character.Move(Vector3.down * Time.deltaTime);
+
         transform.forward = Vector3.Slerp(transform.forward, inputs, Time.deltaTime * 10);
     }
 
@@ -108,8 +117,6 @@ public class EnemyScript : MonoBehaviour
         animator.SetBool("isWalking", true);
         isMoving = true;
         destPoint = AIMovHelpers.GetDestinationPoint(transform.position, 10f);
-
-        Debug.Log("AI: " + destPoint);
 
         transform.LookAt(destPoint);
         Move();
@@ -131,5 +138,17 @@ public class EnemyScript : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
+    }
+
+    private void DropItem()
+    {
+        Instantiate(droppableItem, transform.position, Quaternion.identity);
+        hasDropped = true;
+    }
+
+    private void StopShooting()
+    {
+        animator.SetBool("isShooting", false);
+        _isShooting = false;
     }
 }
