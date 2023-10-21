@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Utils;
 
 public class PlayerAnimations : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         thridPersonMovement = playerMainComp.GetComponent<ThirdPersonMovement>();
         animator = GetComponent<Animator>();
-        layerShootIdx = animator.GetLayerIndex(Utils.Constants.SHOOT);
+        layerShootIdx = animator.GetLayerIndex(Constants.SHOOT);
     }
 
     void Update()
@@ -33,21 +34,25 @@ public class PlayerAnimations : MonoBehaviour
         // ---------- MORRER ----------
         if (thridPersonMovement.IsDead)
         {
-            Utils.DeathAnimation(animator);
+            PlayAnimation(animator, Animations.DYING);
+            return;
+        } else if (thridPersonMovement.IsPicking)
+        {
+            PlayAnimation(animator, Animations.PICKING);
             return;
         }
 
-
+        animator.SetBool(Animations.PICKING, false);
         // ---------- SALTAR ----------
 
         // se termina de saltar
         if (thridPersonMovement.FinishedJump)
         {
-            animator.SetBool("isJumping", false);
+            animator.SetBool(Animations.JUMPING, false);
         }
         else if (!thridPersonMovement.FinishedJump && thridPersonMovement.currentState == ThirdPersonMovement.MovementState.air)
         {
-            animator.SetBool("isJumping", true);
+            animator.SetBool(Animations.JUMPING, true);
         }
 
 
@@ -56,10 +61,10 @@ public class PlayerAnimations : MonoBehaviour
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isWalking = inputs != Vector3.zero;
 
-        animator.SetBool("isWalking", isWalking);
+        animator.SetBool(Animations.WALKING, isWalking);
+        
 
-
-        bool isAiming = Input.GetButton(Utils.Constants.AIM_KEY) || Input.GetButton(Utils.Constants.SHOOT_KEY);
+        bool isAiming = Input.GetButton(Constants.AIM_KEY) || Input.GetButton(Constants.SHOOT_KEY);
 
         float fadeTime = isAiming ? 1.0f : 0.0f;
 
@@ -67,9 +72,6 @@ public class PlayerAnimations : MonoBehaviour
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.5f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);
 
-        //Debug.Log("Shoot weight: " + shootWeight);
-
-        //_isShooting = Input.GetButton(Utils.Constants.SHOOT_KEY);
-        animator.SetBool("isShooting", thridPersonMovement.IsShooting);
+        animator.SetBool(Animations.SHOOTING, thridPersonMovement.IsShooting);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThirdPersonMovement : CharacterBase
@@ -64,6 +65,12 @@ public class ThirdPersonMovement : CharacterBase
 
     private Animator animator;
 
+    private bool _isPicking = false;
+
+    public bool IsPicking { 
+        get { return _isPicking; }
+    }
+
     [Header("Health Bar")]
     [SerializeField]
     private GameObject healthBar;
@@ -98,6 +105,7 @@ public class ThirdPersonMovement : CharacterBase
 
     private void Update()
     {
+        Debug.Log("Picking val: " + _isPicking);
         if (_isDead)
         {
             Debug.Log("I'm Death");
@@ -333,20 +341,39 @@ public class ThirdPersonMovement : CharacterBase
     {
       
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
-
+        CheckMedicineCollision(collision);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("Medicine") && Input.GetButton(Utils.Constants.PICK))
-        {
-            GameObject gameObject = collision.gameObject;
-            MedicineScript medicineScript = gameObject.GetComponent<MedicineScript>();
-            _healthManager.UpdateHealth(medicineScript.Health);
-
-            Destroy(collision.gameObject);
-        }
+        CheckMedicineCollision(other);
     }
 
+    private void CheckMedicineCollision(Collider collision)
+    {
+        if (collision.gameObject.CompareTag(Utils.Constants.MEDICINE) && Input.GetButton(Utils.Constants.PICK) && !_isPicking)
+        {
+            _isPicking = true;
+            GameObject medicine = collision.gameObject.CloneViaSerialization();
 
+            StartCoroutine(PickUpMedicine(medicine));
+            StartCoroutine(StopPickingAnimation());
+        } 
+    }
+
+    IEnumerator PickUpMedicine(GameObject medicine)
+    {
+        yield return new WaitForSeconds(1f);
+        
+        MedicineScript medicineScript = medicine.GetComponent<MedicineScript>();
+        _healthManager.UpdateHealth(medicineScript.Health);
+        
+        Destroy(medicine);
+    }
+
+    IEnumerator StopPickingAnimation()
+    {
+        yield return new WaitForSeconds(2f);
+        _isPicking = false;
+    }
 }
