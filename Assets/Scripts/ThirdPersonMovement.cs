@@ -20,8 +20,6 @@ public class ThirdPersonMovement : CharacterBase
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
-    bool _finishedJump;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -83,12 +81,11 @@ public class ThirdPersonMovement : CharacterBase
         private set { _healthManager = value; }
     }
 
+    private bool _isJumping = false;
 
-
-    public bool FinishedJump
+    public bool IsJumping
     {
-        get { return _finishedJump; }
-        set { _finishedJump = value; }
+        get { return _isJumping; }
     }
 
     private void Start()
@@ -96,7 +93,6 @@ public class ThirdPersonMovement : CharacterBase
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        readyToJump = true;
         _healthManager = healthBar.GetComponent<HealthManager>();
         HealthManager = _healthManager;
 
@@ -147,13 +143,10 @@ public class ThirdPersonMovement : CharacterBase
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && grounded && !_isJumping)
         {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
+            _isJumping = true;
+            Invoke(nameof(Jump), 0.4f);
         }
 
         _isShooting = Input.GetButton(Utils.Constants.SHOOT_KEY);
@@ -267,7 +260,7 @@ public class ThirdPersonMovement : CharacterBase
         // in air
         else if (!grounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
     }
 
@@ -296,23 +289,24 @@ public class ThirdPersonMovement : CharacterBase
 
     private void Jump()
     {
-        _finishedJump = false;
-
         exitingSlope = true;
 
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        Invoke(nameof(ResetJump), jumpCooldown);
+        CancelInvoke(nameof(Jump));
     }
 
     private void ResetJump()
     {
-        readyToJump = true;
-
-        _finishedJump = true;
+        _isJumping = false;
 
         exitingSlope = false;
+
+        CancelInvoke(nameof(ResetJump));
     }
 
     public bool OnSlope()

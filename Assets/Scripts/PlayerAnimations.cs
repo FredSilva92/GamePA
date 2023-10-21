@@ -43,21 +43,12 @@ public class PlayerAnimations : MonoBehaviour
         }
 
         animator.SetBool(Animations.PICKING, false);
-        // ---------- SALTAR ----------
 
-        // se termina de saltar
-        if (thridPersonMovement.FinishedJump)
-        {
-            animator.SetBool(Animations.JUMPING, false);
-        }
-        else if (!thridPersonMovement.FinishedJump && thridPersonMovement.currentState == ThirdPersonMovement.MovementState.air)
-        {
-            animator.SetBool(Animations.JUMPING, true);
-        }
+        // ---------- SALTAR ----------
+        animator.SetBool(Animations.JUMPING, thridPersonMovement.IsJumping);
 
 
         // ---------- ANDAR ----------
-
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isWalking = inputs != Vector3.zero;
 
@@ -73,5 +64,9 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetLayerWeight(layerShootIdx, shootWeight);
 
         animator.SetBool(Animations.SHOOTING, thridPersonMovement.IsShooting);
+
+        Vector3 playerPosition = playerMainComp.transform.position;
+
+        transform.position = playerPosition;
     }
 }
