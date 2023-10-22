@@ -3061,8 +3061,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  _rotationSpeed: 0
-  moveRadius: 4
   player: {fileID: 0}
   droppableItem: {fileID: 1987713744733760, guid: b55df95fa6211964e8ad561501250fac, type: 3}
   _healthManager: {fileID: 4192548877204385939}
