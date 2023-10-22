@@ -1,21 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static Utils;
 
 public class EnemyScript : CharacterBase
 {
-    private Transform playerTransform;
-
-    private CharacterController character;
     private Animator animator;
 
     [SerializeField]
     private float _speed = 2f;
-
-    [SerializeField]
-    private float _rotationSpeed;
-
-    [SerializeField]
-    private float moveRadius;
 
     [SerializeField]
     private GameObject player;
@@ -43,7 +35,6 @@ public class EnemyScript : CharacterBase
 
     void Start()
     {
-        character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerData = player.GetComponent<ThirdPersonMovement>();
         agent = GetComponent<NavMeshAgent>();
@@ -56,7 +47,7 @@ public class EnemyScript : CharacterBase
         if (_isDead)
         {
             StopShooting();
-            Utils.DeathAnimation(animator);
+            PlayAnimation(animator, Animations.DYING);
             if (!hasDropped) DropItem();
             return;
         }
@@ -70,16 +61,16 @@ public class EnemyScript : CharacterBase
             agent.SetDestination(plTransform.position);
             SetShootingAnimation(1.0f);
 
-            animator.SetBool("isWalking", true);
-            animator.SetBool("isShooting", true);
+            animator.SetBool(Animations.WALKING, true);
+            animator.SetBool(Animations.SHOOTING, true);
             _isShooting = true;
 
         }
         else if (playerDistance <= _minDistance && !playerIsDead)
         {
             agent.isStopped = true;
-            animator.SetBool("isWalking", false);
-            animator.SetBool("isShooting", true);
+            animator.SetBool(Animations.WALKING, false);
+            animator.SetBool(Animations.SHOOTING, true);
             _isShooting = true;
         }
         else
@@ -90,7 +81,7 @@ public class EnemyScript : CharacterBase
             if (!agent.hasPath)
             {
                 isMoving = false;
-                animator.SetBool("isWalking", false);
+                animator.SetBool(Animations.WALKING, false);
                 Invoke("RandomWalking", 4);
             }
         }
@@ -98,7 +89,7 @@ public class EnemyScript : CharacterBase
 
     private void RandomWalking()
     {
-        animator.SetBool("isWalking", true);
+        animator.SetBool(Animations.WALKING, true);
         isMoving = true;
         destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, 7f);
 
@@ -115,7 +106,7 @@ public class EnemyScript : CharacterBase
     void OnCollisionEnter(Collision collision)
     {
         isMoving = false;
-        animator.SetBool("isWalking", false);
+        animator.SetBool(Animations.WALKING, false);
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -131,7 +122,7 @@ public class EnemyScript : CharacterBase
 
     private void StopShooting()
     {
-        animator.SetBool("isShooting", false);
+        animator.SetBool(Animations.SHOOTING, false);
         _isShooting = false;
     }
 }

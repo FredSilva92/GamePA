@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Utils
@@ -10,13 +11,24 @@ public class Utils
         public static readonly string PICK = "Pick";
         public static readonly string LAZER_BULLET_PLAYER = "LazerBulletPlayer";
         public static readonly string LAZER_BULLET_ENEMY = "LazerBulletEnemy";
+        public static readonly string MEDICINE = "Medicine";
     }
 
-    public static void DeathAnimation(Animator animator)
+    public static class Animations
     {
-        animator.SetBool("isWalking", false);
+        public static readonly string WALKING = "isWalking";
+        public static readonly string DYING = "isDying";
+        public static readonly string PICKING = "isPicking";
+        public static readonly string SHOOTING = "isShooting";
+        public static readonly string JUMPING = "isJumping";
+
+    }
+
+    public static void PlayAnimation(Animator animator, string animation)
+    {
+        animator.SetBool(Animations.WALKING, false);
         animator.SetLayerWeight(animator.GetLayerIndex(Constants.SHOOT), 0f);
-        animator.SetBool("isDying", true);
+        animator.SetBool(animation, true);
     }
 
     public static void CheckIfWasHitShooted(Collider collision, HealthManager healthManager, string bulletRef, ref bool isDead)
