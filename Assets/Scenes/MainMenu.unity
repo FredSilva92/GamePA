@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 500553799}
   - component: {fileID: 500553800}
   m_Layer: 0
-  m_Name: Game_Manager
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 1111391012}
   - component: {fileID: 1111391013}
   m_Layer: 0
-  m_Name: MainMenu_Manager
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

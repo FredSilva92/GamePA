@@ -51,7 +51,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        // dados das ações do jogador no mapa
+        MapAction[] actions = new MapAction[]
+        {
+            new MapAction(1, "Intro to the game", 1, true, true, false, false),
+            new MapAction(2, "Hide ship", 2, true, true, true, false),
+            new MapAction(3, "Wrong path 1 to the forest", 3, false, false, true, true),
+            new MapAction(4, "Wrong path 2 to the forest", 3, false, false, true, true),
+            new MapAction(5, "Correct path to the forest", 3, true, false, true, false)
+        };
     }
 
     void Update()
