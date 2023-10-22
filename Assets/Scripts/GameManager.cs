@@ -1,17 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
-
-public enum GameState
-{
-    MainMenu,   // quando está no menu
-    InIntro,    // quando está a iniciar as cena de jogo
-    InGame      // depois da cutscene inicial
-}
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
+    /* ATRIBUTOS */
+
     private static GameManager _instance;
 
-    [SerializeField] private GameState _currentState;
+    [SerializeField] private GameState _currentGameState;
+
+    [SerializeField] private List<GameStateInfo> _gameStateList;
+    [SerializeField] private List<MapAction> _mapActions;
+
+    private List<MapAction> _currentMapActions = new List<MapAction>();
+
+    [SerializeField] private Canvas _canvas;
+
+
+    /* PROPRIEDADES */
 
     public static GameManager Instance
     {
@@ -26,16 +33,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameState CurrentState
-    {
-        get { return _currentState; }
-        set { _currentState = value; }
-    }
+
+    /* MÉTODOS */
 
     /*
      * Permite apenas uma instância de GameManager por cena.
     */
-    void Awake()
+    private void Awake()
     {
         if (_instance == null)
         {
@@ -49,24 +53,83 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
-        // dados das ações do jogador no mapa
-        MapAction[] actions = new MapAction[]
+        _currentMapActions = GetCurrentMapActions();
+
+        if (_currentGameState == GameState.INTRO_TO_GAME)
         {
-            new MapAction(1, "Intro to the game", 1, true, true, false, false),
-            new MapAction(2, "Hide ship", 2, true, true, true, false),
-            new MapAction(3, "Wrong path 1 to the forest", 3, false, false, true, true),
-            new MapAction(4, "Wrong path 2 to the forest", 3, false, false, true, true),
-            new MapAction(5, "Correct path to the forest", 3, true, false, true, false)
-        };
+            OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+
+            // evento de término da cutscene
+            _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, GameState.HIDE_SHIP);
+        }
     }
 
-    void Update()
+    private void Update()
     {
-        if (CurrentState == GameState.InIntro)
+        if (_currentGameState == GameState.HIDE_SHIP)
         {
 
         }
+    }
+
+    private List<MapAction> GetCurrentMapActions()
+    {
+        _currentMapActions.Clear();
+
+        foreach (MapAction mapAction in _mapActions)
+        {
+            if (mapAction.gameStateInfo.gameState == _currentGameState)
+            {
+                _currentMapActions.Add(mapAction);
+            }
+        }
+
+        return _currentMapActions;
+    }
+
+    /*
+     * Procura a ação atual que diz respeito ao objetivo, que será a que tem "hasProgress" como true,
+     * e devolve o título.
+    */
+    public string GetCurrentGoal()
+    {
+        foreach (MapAction mapAction in GameManager.Instance._currentMapActions)
+        {
+            if (mapAction.hasProgress)
+            {
+                return mapAction.title;
+            }
+        }
+
+        return "";
+    }
+
+    private void OnCutsceneStart(VideoPlayer videoPlayer)
+    {
+        Time.timeScale = 0f;
+
+        _canvas.enabled = false;
+        videoPlayer.enabled = true;
+        videoPlayer.Play();
+    }
+
+    private void OnCutsceneEnd(VideoPlayer videoPlayer, GameState nextGameState)
+    {
+        _canvas.enabled = true;
+        videoPlayer.enabled = false;
+       
+        Time.timeScale = 1f;
+        TransitionGameState(nextGameState);
+    }
+
+    /*
+     * Altera o estado do jogo e atualiza a lista de ações do mapa atuais.
+    */
+    private void TransitionGameState(GameState nextGameState)
+    {
+        _currentGameState = nextGameState;
+        _currentMapActions = GetCurrentMapActions();
     }
 }
