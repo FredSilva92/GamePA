@@ -7517,19 +7517,19 @@ MonoBehaviour:
   _player: {fileID: 1683188781}
   _currentGameState: 1
   _gameStateList:
-  - gameState: 0
-    hasCutscene: 1
-    cutscene: {fileID: 1744062439}
   - gameState: 1
     hasCutscene: 1
-    cutscene: {fileID: 330409367}
+    cutscene: {fileID: 1744062439}
   - gameState: 2
+    hasCutscene: 1
+    cutscene: {fileID: 330409367}
+  - gameState: 3
     hasCutscene: 1
     cutscene: {fileID: 1129862107}
   _mapActions:
   - id: 1
     gameStateInfo:
-      gameState: 0
+      gameState: 1
       hasCutscene: 1
       cutscene: {fileID: 1744062439}
     title: Intro to game.
@@ -7541,7 +7541,7 @@ MonoBehaviour:
     isSingle: 1
   - id: 2
     gameStateInfo:
-      gameState: 1
+      gameState: 2
       hasCutscene: 1
       cutscene: {fileID: 330409367}
     title: Correct hiding place for ship.
@@ -7553,7 +7553,7 @@ MonoBehaviour:
     isSingle: 1
   - id: 3
     gameStateInfo:
-      gameState: 1
+      gameState: 2
       hasCutscene: 1
       cutscene: {fileID: 330409367}
     title: Wrong hiding place 1 for ship.
@@ -7565,7 +7565,7 @@ MonoBehaviour:
     isSingle: 0
   - id: 4
     gameStateInfo:
-      gameState: 1
+      gameState: 2
       hasCutscene: 1
       cutscene: {fileID: 330409367}
     title: Wrong hiding place 2 for ship.
@@ -7577,7 +7577,7 @@ MonoBehaviour:
     isSingle: 0
   - id: 5
     gameStateInfo:
-      gameState: 2
+      gameState: 3
       hasCutscene: 1
       cutscene: {fileID: 1129862107}
     title: Correct path to forest.
@@ -7589,7 +7589,7 @@ MonoBehaviour:
     isSingle: 1
   - id: 6
     gameStateInfo:
-      gameState: 2
+      gameState: 3
       hasCutscene: 1
       cutscene: {fileID: 1129862107}
     title: Wrong path 1 to forest.
@@ -7601,7 +7601,7 @@ MonoBehaviour:
     isSingle: 0
   - id: 7
     gameStateInfo:
-      gameState: 2
+      gameState: 3
       hasCutscene: 1
       cutscene: {fileID: 1129862107}
     title: Wrong path 2 to forest.
@@ -7612,7 +7612,7 @@ MonoBehaviour:
     hasDialogue: 1
     isSingle: 0
   _actionButtonsVisibilityDistance: 25
-  _actionButtonsClickDistance: 3
+  _actionButtonsClickDistance: 2
   _canvas: {fileID: 857343782}
 --- !u!1001 &401430472
 PrefabInstance:
@@ -28984,7 +28984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397743787}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09252102, y: 0.000000017659856, z: -0.0000000016409463, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252102, y: -0.000000017659858, z: 0.0000000016409465, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

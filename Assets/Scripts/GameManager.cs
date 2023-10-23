@@ -80,11 +80,6 @@ public class GameManager : MonoBehaviour
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
         }
-
-        if (_currentGameState == GameState.HIDE_SHIP)
-        {
-
-        }
     }
 
     private List<MapAction> GetCurrentMapActions()
@@ -117,6 +112,15 @@ public class GameManager : MonoBehaviour
         }
 
         return "";
+    }
+
+    /*
+     * Obtém o próximo estado do jogo pelo seu número identificador.
+    */
+    private GameState GetNextGameState(int gameStateNumber)
+    {
+        int nextGameStateNumber = gameStateNumber + 1;
+        return (GameState)nextGameStateNumber;
     }
 
     private void OnCutsceneStart(VideoPlayer videoPlayer)
@@ -204,6 +208,16 @@ public class GameManager : MonoBehaviour
                 {
                     mapAction.button.SetActive(false);
                     mapAction.hasClick = false;
+
+                    if (mapAction.gameStateInfo.hasCutscene)
+                    {
+                        OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+
+                        GameState nextGameState = GetNextGameState((int)_currentGameState);
+
+                        // evento de término da cutscene
+                        _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+                    }
                 }
             }
         }
