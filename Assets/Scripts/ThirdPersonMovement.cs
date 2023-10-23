@@ -90,9 +90,6 @@ public class ThirdPersonMovement : CharacterBase
         set { _finishedJump = value; }
     }
 
-    [SerializeField] private GameObject[] actionObjects;
-    [SerializeField] private float distanceFromActionObject;
-
 
     private void Start()
     {
@@ -104,8 +101,6 @@ public class ThirdPersonMovement : CharacterBase
         HealthManager = _healthManager;
 
         animator = GetComponent<Animator>();
-
-        HideAllActionObjects();
     }
 
     private void Update()
@@ -116,8 +111,6 @@ public class ThirdPersonMovement : CharacterBase
             Debug.Log("I'm Death");
             return;
         };
-
-        CheckDistanceWithActionObjects();
 
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -381,30 +374,5 @@ public class ThirdPersonMovement : CharacterBase
     {
         yield return new WaitForSeconds(2f);
         _isPicking = false;
-    }
-
-    /*
-     * Ao iniciar a cena, todos os botões de ação são ocultos por padrão.
-    */
-    private void HideAllActionObjects()
-    {
-        foreach (GameObject actionObject in actionObjects)
-        {
-            actionObject.SetActive(false);
-        }
-    }
-
-    /*
-     * Se o jogador estiver perto das ações de jogo, o botão de ação será visível, caso contrário continuará oculto.
-    */
-    private void CheckDistanceWithActionObjects()
-    {
-        foreach (GameObject actionObject in actionObjects)
-        {
-            if (distanceFromActionObject >= Utils.GetDistanceBetween2Objects(this.gameObject, actionObject))
-            {
-                actionObject.SetActive(true);
-            }
-        }
     }
 }

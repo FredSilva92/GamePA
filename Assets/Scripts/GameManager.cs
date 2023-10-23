@@ -8,12 +8,17 @@ public class GameManager : MonoBehaviour
 
     private static GameManager _instance;
 
+    [SerializeField] private GameObject _player;
+
     [SerializeField] private GameState _currentGameState;
 
     [SerializeField] private List<GameStateInfo> _gameStateList;
     [SerializeField] private List<MapAction> _mapActions;
 
     private List<MapAction> _currentMapActions = new List<MapAction>();
+
+    [SerializeField] private float _actionButtonsVisibilityDistance;
+    [SerializeField] private float _actionButtonsClickDistance;
 
     [SerializeField] private Canvas _canvas;
 
@@ -64,10 +69,18 @@ public class GameManager : MonoBehaviour
             // evento de término da cutscene
             _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, GameState.HIDE_SHIP);
         }
+
+        HideAllActionButtons();
     }
 
     private void Update()
     {
+        if (_currentGameState != GameState.INTRO_TO_GAME)
+        {
+            CheckActionButtonsVisibilityDistance();
+            CheckActionButtonsClickDistance();
+        }
+
         if (_currentGameState == GameState.HIDE_SHIP)
         {
 
@@ -119,7 +132,7 @@ public class GameManager : MonoBehaviour
     {
         _canvas.enabled = true;
         videoPlayer.enabled = false;
-       
+
         Time.timeScale = 1f;
         TransitionGameState(nextGameState);
     }
@@ -129,7 +142,70 @@ public class GameManager : MonoBehaviour
     */
     private void TransitionGameState(GameState nextGameState)
     {
+        HideCurrentActionButtons();
+
         _currentGameState = nextGameState;
         _currentMapActions = GetCurrentMapActions();
+    }
+
+    /*
+     * Ao iniciar a cena, todos os botões de ação são ocultos por padrão.
+    */
+    private void HideAllActionButtons()
+    {
+        foreach (MapAction mapAction in _mapActions)
+        {
+            if (mapAction.button != null)
+            {
+                mapAction.button.SetActive(false);
+            }
+        }
+    }
+
+    /*
+     * Esconde os botões das ações do estado atual.
+     * Utilizável quando o utilizador transita para o próximo estado de jogo e as ações do estado anterior já não interessam.
+    */
+    private void HideCurrentActionButtons()
+    {
+        foreach (MapAction mapAction in _currentMapActions)
+        {
+            if (mapAction.button != null)
+            {
+                mapAction.button.SetActive(false);
+            }
+        }
+    }
+
+    /*
+     * Se o jogador estiver perto das ações de jogo, o botão de ação será visível, caso contrário continuará oculto.
+    */
+    private void CheckActionButtonsVisibilityDistance()
+    {
+        foreach (MapAction mapAction in _mapActions)
+        {
+            if (mapAction.hasClick && _actionButtonsVisibilityDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+            {
+                mapAction.button.SetActive(true);
+            }
+        }
+    }
+
+    /*
+     * Se o jogador estiver muito perto das ações de jogo, o botão de ação poderá ser clicado, caso contrário não.
+    */
+    private void CheckActionButtonsClickDistance()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            foreach (MapAction mapAction in _mapActions)
+            {
+                if (mapAction.hasClick && mapAction.isSingle && _actionButtonsClickDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+                {
+                    mapAction.button.SetActive(false);
+                    mapAction.hasClick = false;
+                }
+            }
+        }
     }
 }

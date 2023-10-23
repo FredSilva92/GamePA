@@ -14,4 +14,5 @@ public class MapAction
     public bool hasClick;
     public GameObject button;
     public bool hasDialogue;
+    public bool isSingle;
 }

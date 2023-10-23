@@ -6689,7 +6689,7 @@ GameObject:
   - component: {fileID: 348547685}
   - component: {fileID: 348547684}
   m_Layer: 0
-  m_Name: CorrectPath_Collider
+  m_Name: CorrectPathToForest_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7514,7 +7514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20e63ddf822e75408d2a3147eced7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentGameState: 0
+  _player: {fileID: 1683188781}
+  _currentGameState: 1
   _gameStateList:
   - gameState: 0
     hasCutscene: 1
@@ -7537,6 +7538,7 @@ MonoBehaviour:
     hasClick: 0
     button: {fileID: 0}
     hasDialogue: 0
+    isSingle: 1
   - id: 2
     gameStateInfo:
       gameState: 1
@@ -7548,6 +7550,7 @@ MonoBehaviour:
     hasClick: 1
     button: {fileID: 1571671505}
     hasDialogue: 0
+    isSingle: 1
   - id: 3
     gameStateInfo:
       gameState: 1
@@ -7559,6 +7562,7 @@ MonoBehaviour:
     hasClick: 1
     button: {fileID: 1795912216}
     hasDialogue: 1
+    isSingle: 0
   - id: 4
     gameStateInfo:
       gameState: 1
@@ -7570,6 +7574,7 @@ MonoBehaviour:
     hasClick: 1
     button: {fileID: 601543489}
     hasDialogue: 1
+    isSingle: 0
   - id: 5
     gameStateInfo:
       gameState: 2
@@ -7581,6 +7586,7 @@ MonoBehaviour:
     hasClick: 1
     button: {fileID: 1158577816}
     hasDialogue: 0
+    isSingle: 1
   - id: 6
     gameStateInfo:
       gameState: 2
@@ -7592,6 +7598,7 @@ MonoBehaviour:
     hasClick: 1
     button: {fileID: 1097787044}
     hasDialogue: 1
+    isSingle: 0
   - id: 7
     gameStateInfo:
       gameState: 2
@@ -7603,6 +7610,9 @@ MonoBehaviour:
     hasClick: 1
     button: {fileID: 948114930}
     hasDialogue: 1
+    isSingle: 0
+  _actionButtonsVisibilityDistance: 25
+  _actionButtonsClickDistance: 3
   _canvas: {fileID: 857343782}
 --- !u!1001 &401430472
 PrefabInstance:
@@ -42540,13 +42550,53 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: actionObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: distanceFromActionButton
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: distanceFromActionObject
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: clickActionButtonDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtonsClickDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1571671505}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1795912216}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 601543489}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1158577816}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.data[4]
+      value: 
+      objectReference: {fileID: 1097787044}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtons.Array.data[5]
+      value: 
+      objectReference: {fileID: 948114930}
     - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: actionObjects.Array.data[0]
       value: 
@@ -42559,6 +42609,14 @@ PrefabInstance:
       propertyPath: actionObjects.Array.data[2]
       value: 
       objectReference: {fileID: 1097787044}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: visibleActionButtonDistance
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: actionButtonsVisibilityDistance
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5920569304665231625, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: m_Layer
       value: 0
