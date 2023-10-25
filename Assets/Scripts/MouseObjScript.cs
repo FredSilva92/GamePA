@@ -26,7 +26,7 @@ public class MouseObjScript : MonoBehaviour
 
         if (aimTarget.active)
         {
-            Vector3 screenCenter = new Vector3((Screen.width + Screen.width / 8) / 2f, (Screen.height - Screen.height / 8) / 2f, Camera.main.transform.position.z);
+            Vector3 screenCenter = new Vector3((Screen.width + Screen.width / 8) / 2f, (Screen.height - Screen.height / 8) / 2f, 100f);
             Vector3 worldCenter = m_Camera.ScreenToWorldPoint(screenCenter);
             aimTarget.transform.position = worldCenter;
         }

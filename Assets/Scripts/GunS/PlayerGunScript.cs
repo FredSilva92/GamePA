@@ -63,7 +63,7 @@ public class PlayerGunScript : MonoBehaviour
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
 
-                Vector3 screenCenter = new Vector3((Screen.width + Screen.width/8) / 2f, (Screen.height - Screen.height/8) / 2f, Camera.main.transform.position.z);             
+                Vector3 screenCenter = new Vector3((Screen.width + Screen.width/8) / 2f, (Screen.height) / 2f, Camera.main.transform.position.z);             
                 Vector3 worldCenter = camera.ScreenToWorldPoint(screenCenter);
 
                 Vector3 forceDirection = worldCenter - transform.position;

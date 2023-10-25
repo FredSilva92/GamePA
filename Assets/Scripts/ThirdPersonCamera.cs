@@ -18,9 +18,6 @@ public class ThirdPersonCam : MonoBehaviour
     [SerializeField]
     private GameObject crossHair;
 
-    [SerializeField]
-    private Rig aimRig;
-
     private CameraStyle currentStyle;
 
     public CameraStyle CurrentStye { get { return currentStyle; } }
@@ -67,8 +64,6 @@ public class ThirdPersonCam : MonoBehaviour
 
             if (inputDir != Vector3.zero)
                 playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
-
-            rigWeight = 0.0f;
         }
 
         else if (currentStyle == CameraStyle.Combat)
@@ -76,10 +71,9 @@ public class ThirdPersonCam : MonoBehaviour
             Vector3 dirToCombatLookAt = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y, transform.position.z);
             orientation.forward = dirToCombatLookAt.normalized;
 
-            rigWeight = 1.0f;
+            playerObj.forward = dirToCombatLookAt.normalized;
         }
 
-        aimRig.weight = Mathf.Lerp(aimRig.weight, rigWeight, 0.2f);
     }
 
     private void SwitchCameraStyle(CameraStyle newStyle)
