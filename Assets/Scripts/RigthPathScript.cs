@@ -21,7 +21,7 @@ public class RigthPathScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (wall.active)
+        /*if (wall.active)
         {
             return;
         }
@@ -29,6 +29,6 @@ public class RigthPathScript : MonoBehaviour
         if(Utils.Environments.FOREST.Equals(ThirdPersonMovement.CurrentEnvironment))
         {
             wall.SetActive(true);
-        }
+        }*/
     }
 }

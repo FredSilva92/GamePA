@@ -1,31 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class GunScript : MonoBehaviour
+public class EnemyGunScript : MonoBehaviour
 {
     [FormerlySerializedAs("Spawn Point")]
     [SerializeField]
-    private Transform spawnPoint;
+    protected Transform spawnPoint;
 
     [SerializeField]
-    private GameObject laser;
+    protected GameObject laser;
 
     [SerializeField]
-    private GameObject player;
+    protected GameObject player;
 
     [SerializeField]
-    private Animator animator;
+    protected Animator animator;
 
     [SerializeField]
-    private float speed = 5f;
+    protected float speed = 5f;
 
     [SerializeField]
-    private float fireRate = 0;
+    protected float fireRate = 0;
 
-    private float time = 0;
+    protected float time = 0;
 
 
-    private CharacterBase character;
+    protected CharacterBase character;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +35,6 @@ public class GunScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         character = player.GetComponentInParent<CharacterBase>();
@@ -44,7 +45,7 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    private void ShootBullet()
+    protected void ShootBullet()
     {
         time += Time.deltaTime;
         float nextTimeToFire = 1 / fireRate;
@@ -54,7 +55,7 @@ public class GunScript : MonoBehaviour
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
-            rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+            rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z) * speed, ForceMode.Impulse);
             time = 0;
         }
     }
