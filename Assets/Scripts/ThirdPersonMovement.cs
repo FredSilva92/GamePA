@@ -88,6 +88,10 @@ public class ThirdPersonMovement : CharacterBase
         get { return _isJumping; }
     }
 
+    private string _currentEnvironment;
+
+    public string CurrentEnvironment { get { return _currentEnvironment; } }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -101,10 +105,8 @@ public class ThirdPersonMovement : CharacterBase
 
     private void Update()
     {
-        Debug.Log("Picking val: " + _isPicking);
         if (_isDead)
         {
-            Debug.Log("I'm Death");
             return;
         };
 
@@ -341,6 +343,17 @@ public class ThirdPersonMovement : CharacterBase
     private void OnTriggerStay(Collider other)
     {
         CheckMedicineCollision(other);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        var tag = collision.gameObject.tag;
+        bool isTerrain = Utils.Environments.GetValues().Contains(tag);
+
+        if(isTerrain)
+        {
+            _currentEnvironment = tag;
+        }
     }
 
     private void CheckMedicineCollision(Collider collision)

@@ -5,6 +5,7 @@ public class ThirdPersonCam : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public GameObject player;
+    public GameObject aimTarget;
     public Transform playerObj;
     public float rotationSpeed;
 
@@ -75,11 +76,13 @@ public class ThirdPersonCam : MonoBehaviour
         combatCam.SetActive(false);
         thirdPersonCam.SetActive(false);
         crossHair.SetActive(false);
+        //aimTarget.SetActive(false);
 
         if (newStyle == CameraStyle.Basic) thirdPersonCam.SetActive(true);
         else if (newStyle == CameraStyle.Combat) {
             combatCam.SetActive(true);
             crossHair.SetActive(true);
+            //aimTarget.SetActive(true);
         } 
 
         currentStyle = newStyle;
