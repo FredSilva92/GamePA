@@ -59,31 +59,39 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Obtém as ações atuais do estado de jogo inicial pré-definido.
-     * Mostra a cutscene inicial.
      * Esconde todos os botões de ação no mapa.
+     * Obtém as ações atuais do estado de jogo inicial, pré-definido.
+     * Inicia a cutscene inicial.
     */
     private void Start()
     {
+        HideAllActionButtons();
+
         _currentMapActions = GetCurrentMapActions();
 
-        if (_currentGameState == GameState.INTRO_TO_GAME)
+        // quando o estado pré-definido é apenas para mostrar a cutscene
+        // aciona o evento de progredir, que irá iniciar a cutscene de imediato
+        if (_currentGameState == GameState.INTRO_GAME ||
+            _currentGameState == GameState.INTRO_FOREST ||
+            _currentGameState == GameState.INTRO_CAVE)
         {
-            OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
-
-            // evento de término da cutscene
-            _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, GameState.HIDE_SHIP);
+            // [0] - porque existe sempre pelo menos uma ação ligada a um game state
+            ProgressActionEvent(_currentMapActions[0]);
         }
-
-        HideAllActionButtons();
     }
 
     private void Update()
     {
-        if (_currentGameState != GameState.INTRO_TO_GAME)
+        if (_currentGameState != GameState.INTRO_GAME ||
+            _currentGameState != GameState.INTRO_FOREST ||
+            _currentGameState != GameState.INTRO_CAVE)
         {
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
+        }
+        else  // se for um dos estados que é apenas a cutscene, progride de imediato
+        {
+            //ProgressActionEvent(_currentMapActions[0]);
         }
     }
 
@@ -155,6 +163,12 @@ public class GameManager : MonoBehaviour
 
         _currentGameState = nextGameState;
         _currentMapActions = GetCurrentMapActions();
+
+        if (_currentMapActions[0].gameStateInfo.hasNewPosition)
+        {
+            _player.transform.localPosition = _currentMapActions[0].gameStateInfo.position;
+            _player.transform.localRotation = Quaternion.Euler(_currentMapActions[0].gameStateInfo.rotation);
+        }
     }
 
     /*
@@ -193,9 +207,12 @@ public class GameManager : MonoBehaviour
     {
         foreach (MapAction mapAction in _mapActions)
         {
-            if (mapAction.hasClick && _actionButtonsVisibilityDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+            if (mapAction.hasClick)
             {
-                mapAction.button.SetActive(true);
+                if (_actionButtonsVisibilityDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+                {
+                    mapAction.button.SetActive(true);
+                }
             }
         }
     }
@@ -209,48 +226,57 @@ public class GameManager : MonoBehaviour
         {
             foreach (MapAction mapAction in _mapActions)
             {
-                if (mapAction.hasClick && _actionButtonsClickDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+                if (mapAction.hasClick)
                 {
-                    OnSingleActionEvent(mapAction);
-
-                    OnMultipleActionEvent(mapAction);
+                    if (_actionButtonsClickDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+                    {
+                        ProgressActionEvent(mapAction);
+                        NoProgressActionEvent(mapAction);
+                    }
                 }
             }
         }
     }
 
     /*
-     * Quando ação clicada só pode ser realizada uma vez pelo jogador no jogo.
-     * Exemplo: quando o jogador alcança um objetivo, este não pode voltar ao objetivo anterior.
+     * Quando ação clicada permite que o jogador progrida no jogo.
+     * Quando o jogador alcança um objetivo, este não pode voltar ao objetivo anterior.
+     * Exemplo: quando o encontra o esconderijo para a nave.
     */
-    private void OnSingleActionEvent(MapAction mapAction)
+    private void ProgressActionEvent(MapAction mapAction)
     {
-        if (mapAction.isSingle)
+        if (mapAction.hasProgress)
         {
-            mapAction.button.SetActive(false);
-            mapAction.hasClick = false;
+            if (mapAction.hasClick)
+            {
+                mapAction.button.SetActive(false);
+                mapAction.hasClick = false;
+            }
 
             if (mapAction.gameStateInfo.hasCutscene)
             {
-                OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+                OnCutsceneStart(mapAction.gameStateInfo.cutscene);
 
                 GameState nextGameState = GetNextGameState((int)_currentGameState);
 
                 // evento de término da cutscene
-                _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+                mapAction.gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(mapAction.gameStateInfo.cutscene, nextGameState);
             }
         }
     }
 
     /*
-     * Quando ação clicada pode ser realizada várias vezes pelo jogador no jogo.
+     * Quando ação clicada não permite que o jogador progrida no jogo.
      * Exemplo: quando o jogador tenta um caminho errado para a floresta.
     */
-    private void OnMultipleActionEvent(MapAction mapAction)
+    private void NoProgressActionEvent(MapAction mapAction)
     {
-        if (!mapAction.isSingle && !mapAction.hasProgress & mapAction.hasDialogue)
+        if (!mapAction.hasProgress)
         {
-            Debug.Log("Ação sem progressão! Halley deve falar algo!");
+            if (mapAction.hasDialogue)
+            {
+                Debug.Log("Ação sem progressão! Halley deve falar algo!");
+            }
         }
     }
 }

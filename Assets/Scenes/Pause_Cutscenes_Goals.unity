@@ -3916,6 +3916,90 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211681881}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &221578729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221578730}
+  - component: {fileID: 221578731}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221578730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221578729}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.09475589, z: -0, w: -0.99550056}
+  m_LocalPosition: {x: 10.259, y: 1.855, z: 146.999}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053990395}
+  m_LocalEulerAnglesHint: {x: 0, y: 370.875, z: 0}
+--- !u!212 &221578731
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221578729}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 51e4a45e200e45348ace479000266436, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.92, y: 4.19}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &222191288
 GameObject:
   m_ObjectHideFlags: 0
@@ -4941,6 +5025,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7752413967213281240, guid: f47226c561e2365439643306b6c48e26, type: 3}
   m_PrefabInstance: {fileID: 288654063}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &288668881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288668882}
+  - component: {fileID: 288668883}
+  m_Layer: 0
+  m_Name: IntroCave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288668882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288668881}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2002796395}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &288668883
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288668881}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: cf40dfeb0af0a4841aa7a4fd354b0fd3, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 699748541}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &290556791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5101,6 +5251,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5516981368636729767, guid: bc9df40177e17274b855c81a0d7f4760, type: 3}
   m_PrefabInstance: {fileID: 290940216}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &295822884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295822885}
+  - component: {fileID: 295822886}
+  m_Layer: 0
+  m_Name: GoToCamp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295822885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295822884}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2002796395}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &295822886
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295822884}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 14d7d65b5d891d24cb3bb4129054898c, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 699748541}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &300395356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7409,33 +7625,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1683188781}
-  _currentGameState: 1
+  _currentGameState: 0
   _gameStateList:
   - gameState: 0
     hasCutscene: 1
     cutscene: {fileID: 1744062439}
-    playerPosition: {x: 69.7, y: -7.457, z: 25.35}
-    playerRotation: {x: 0, y: 3.719, z: 0}
+    hasNewPosition: 1
+    position: {x: 69.7, y: -7.457, z: 25.35}
+    rotation: {x: 0, y: 3.719, z: 0}
   - gameState: 1
     hasCutscene: 1
     cutscene: {fileID: 330409367}
-    playerPosition: {x: 69.7, y: -7.457, z: 25.35}
-    playerRotation: {x: 0, y: 3.719, z: 0}
+    hasNewPosition: 1
+    position: {x: 69.7, y: -7.457, z: 25.35}
+    rotation: {x: 0, y: 3.719, z: 0}
   - gameState: 2
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 3
     hasCutscene: 1
     cutscene: {fileID: 1129862107}
-    playerPosition: {x: 68, y: -4, z: 159}
-    playerRotation: {x: 0, y: 0, z: 0}
+    hasNewPosition: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 4
+    hasCutscene: 1
+    cutscene: {fileID: 295822886}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 5
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 6
+    hasCutscene: 1
+    cutscene: {fileID: 288668883}
+    hasNewPosition: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 7
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
   _mapActions:
   - id: 1
     gameStateInfo:
       gameState: 0
       hasCutscene: 1
       cutscene: {fileID: 1744062439}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
     title: Intro to game.
-    priority: 1
     hasProgress: 1
     hasClick: 0
     button: {fileID: 0}
@@ -7446,10 +7695,10 @@ MonoBehaviour:
       gameState: 1
       hasCutscene: 1
       cutscene: {fileID: 330409367}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
     title: Correct hiding place for ship.
-    priority: 2
     hasProgress: 1
     hasClick: 1
     button: {fileID: 1571671505}
@@ -7460,10 +7709,10 @@ MonoBehaviour:
       gameState: 1
       hasCutscene: 1
       cutscene: {fileID: 330409367}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
     title: Wrong hiding place 1 for ship.
-    priority: 2
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1795912216}
@@ -7474,10 +7723,10 @@ MonoBehaviour:
       gameState: 1
       hasCutscene: 1
       cutscene: {fileID: 330409367}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
     title: Wrong hiding place 2 for ship.
-    priority: 2
     hasProgress: 0
     hasClick: 1
     button: {fileID: 601543489}
@@ -7486,12 +7735,12 @@ MonoBehaviour:
   - id: 5
     gameStateInfo:
       gameState: 2
-      hasCutscene: 1
-      cutscene: {fileID: 1129862107}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
     title: Correct path to forest.
-    priority: 3
     hasProgress: 1
     hasClick: 1
     button: {fileID: 1158577816}
@@ -7500,12 +7749,12 @@ MonoBehaviour:
   - id: 6
     gameStateInfo:
       gameState: 2
-      hasCutscene: 1
-      cutscene: {fileID: 1129862107}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
     title: Wrong path 1 to forest.
-    priority: 3
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1097787044}
@@ -7514,15 +7763,57 @@ MonoBehaviour:
   - id: 7
     gameStateInfo:
       gameState: 2
-      hasCutscene: 1
-      cutscene: {fileID: 1129862107}
-      playerPosition: {x: 0, y: 0, z: 0}
-      playerRotation: {x: 0, y: 0, z: 0}
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
     title: Wrong path 2 to forest.
-    priority: 3
     hasProgress: 0
     hasClick: 1
     button: {fileID: 948114930}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 8
+    gameStateInfo:
+      gameState: 3
+      hasCutscene: 1
+      cutscene: {fileID: 1129862107}
+      hasNewPosition: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Intro to forest.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 221578729}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 9
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 1.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 221578729}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 10
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 2.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 221578729}
     hasDialogue: 1
     isSingle: 0
   _actionButtonsVisibilityDistance: 25
@@ -21722,6 +22013,7 @@ Transform:
   - {fileID: 1158577817}
   - {fileID: 1097787045}
   - {fileID: 948114931}
+  - {fileID: 221578730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1054525222
@@ -23484,7 +23776,7 @@ GameObject:
   - component: {fileID: 1129862106}
   - component: {fileID: 1129862107}
   m_Layer: 0
-  m_Name: EnterForestCutscene
+  m_Name: IntroForest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23513,7 +23805,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129862105}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: fff2362a3f78cd84e92f872ef6b58321, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c268e91f4bf083541bf9fbcc839be5c5, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 699748541}
@@ -35956,7 +36248,7 @@ GameObject:
   - component: {fileID: 1744062438}
   - component: {fileID: 1744062439}
   m_Layer: 0
-  m_Name: Initial
+  m_Name: IntroGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41626,6 +41918,8 @@ Transform:
   - {fileID: 1744062438}
   - {fileID: 330409366}
   - {fileID: 1129862106}
+  - {fileID: 295822885}
+  - {fileID: 288668882}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2010255921
@@ -42551,7 +42845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: walkSpeed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: airMinSpeed

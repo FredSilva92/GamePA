@@ -9,7 +9,6 @@ public class MapAction
     public int id;
     public GameStateInfo gameStateInfo;     // uma ação pertence a um estado do jogo
     public string title;                    // para quando for um objetivo, mostra no menu de pausa
-    public int priority;                    // a posição (ID) do estado do jogo que pertence
     public bool hasProgress;                // quando a ação é um objetivo concluido, quer dizer que progride no jogo
     public bool hasClick;                   // se a ação é preciso pressionar 'F'
     public GameObject button;               // guarda o game object para que ação seja clicável
