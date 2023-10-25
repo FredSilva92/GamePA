@@ -58,6 +58,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    /*
+     * Obtém as ações atuais do estado de jogo inicial pré-definido.
+     * Mostra a cutscene inicial.
+     * Esconde todos os botões de ação no mapa.
+    */
     private void Start()
     {
         _currentMapActions = GetCurrentMapActions();
@@ -204,22 +209,48 @@ public class GameManager : MonoBehaviour
         {
             foreach (MapAction mapAction in _mapActions)
             {
-                if (mapAction.hasClick && mapAction.isSingle && _actionButtonsClickDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
+                if (mapAction.hasClick && _actionButtonsClickDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
                 {
-                    mapAction.button.SetActive(false);
-                    mapAction.hasClick = false;
+                    OnSingleActionEvent(mapAction);
 
-                    if (mapAction.gameStateInfo.hasCutscene)
-                    {
-                        OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
-
-                        GameState nextGameState = GetNextGameState((int)_currentGameState);
-
-                        // evento de término da cutscene
-                        _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
-                    }
+                    OnMultipleActionEvent(mapAction);
                 }
             }
+        }
+    }
+
+    /*
+     * Quando ação clicada só pode ser realizada uma vez pelo jogador no jogo.
+     * Exemplo: quando o jogador alcança um objetivo, este não pode voltar ao objetivo anterior.
+    */
+    private void OnSingleActionEvent(MapAction mapAction)
+    {
+        if (mapAction.isSingle)
+        {
+            mapAction.button.SetActive(false);
+            mapAction.hasClick = false;
+
+            if (mapAction.gameStateInfo.hasCutscene)
+            {
+                OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+
+                GameState nextGameState = GetNextGameState((int)_currentGameState);
+
+                // evento de término da cutscene
+                _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+            }
+        }
+    }
+
+    /*
+     * Quando ação clicada pode ser realizada várias vezes pelo jogador no jogo.
+     * Exemplo: quando o jogador tenta um caminho errado para a floresta.
+    */
+    private void OnMultipleActionEvent(MapAction mapAction)
+    {
+        if (!mapAction.isSingle && !mapAction.hasProgress & mapAction.hasDialogue)
+        {
+            Debug.Log("Ação sem progressão! Halley deve falar algo!");
         }
     }
 }
