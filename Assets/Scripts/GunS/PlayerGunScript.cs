@@ -60,18 +60,17 @@ public class PlayerGunScript : MonoBehaviour
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
-            Debug.Log("Gun: " + transform.forward);
-
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
-                Vector3 mousePos = Input.mousePosition;
-                mousePos.z = Camera.main.transform.position.z; // Set the z coordinate to match the camera's
 
-                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
-                Vector3 forceDirection = mouseWorldPos - transform.position;
+                Vector3 screenCenter = new Vector3((Screen.width + Screen.width/8) / 2f, (Screen.height - Screen.height/8) / 2f, Camera.main.transform.position.z);             
+                Vector3 worldCenter = camera.ScreenToWorldPoint(screenCenter);
 
-                rb.AddForce(forceDirection * 0.2f, ForceMode.Impulse);
-            } else
+                Vector3 forceDirection = worldCenter - transform.position;
+                rb.AddForce(forceDirection * 0.05f, ForceMode.Impulse);
+                
+            }
+            else
             {
                 rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z) * speed, ForceMode.Impulse);
             }

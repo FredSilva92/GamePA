@@ -23,23 +23,14 @@ public class MouseObjScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
-        int playerLayer = LayerMask.NameToLayer("Player"); // Assuming your player is on a layer named "Player"
-        int layerMask = ~(1 << playerLayer);
 
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 50f, layerMask))
+        if (aimTarget.active)
         {
-            if (aimTarget.active) aimTarget.transform.position = raycastHit.point;
-            
+            Vector3 screenCenter = new Vector3((Screen.width + Screen.width / 8) / 2f, (Screen.height - Screen.height / 8) / 2f, Camera.main.transform.position.z);
+            Vector3 worldCenter = m_Camera.ScreenToWorldPoint(screenCenter);
+            aimTarget.transform.position = worldCenter;
         }
-
-        if (crossHair.active) {
-            Vector3 mousePosition = Input.mousePosition;
-
-            Transform croosHairTransform = crossHair.GetComponent<RectTransform>().transform;
-            croosHairTransform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
         }
-    }
 
     private void OnTriggerEnter(Collider other)
     {

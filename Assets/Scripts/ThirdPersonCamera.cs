@@ -77,7 +77,6 @@ public class ThirdPersonCam : MonoBehaviour
             orientation.forward = dirToCombatLookAt.normalized;
 
             rigWeight = 1.0f;
-            //playerObj.forward = dirToCombatLookAt.normalized;
         }
 
         aimRig.weight = Mathf.Lerp(aimRig.weight, rigWeight, 0.2f);
