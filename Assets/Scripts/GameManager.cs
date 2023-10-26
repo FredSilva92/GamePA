@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UniRx;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _player;
 
-    [SerializeField] private GameState _currentGameState;
+    [SerializeField] private ReactiveProperty<GameState> _currentGameState = new();
 
     [SerializeField] private List<GameStateInfo> _gameStateList;
     [SerializeField] private List<MapAction> _mapActions;
 
-    private List<MapAction> _currentMapActions = new List<MapAction>();
+    private List<MapAction> _currentMapActions = new();
 
     [SerializeField] private float _actionButtonsVisibilityDistance;
     [SerializeField] private float _actionButtonsClickDistance;
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     /* MÉTODOS */
 
     /*
-     * Permite apenas uma instância de GameManager por cena.
+     * Garante apenas uma instância de GameManager por cena.
     */
     private void Awake()
     {
@@ -59,49 +60,80 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Esconde todos os botões de ação no mapa.
-     * Obtém as ações atuais do estado de jogo inicial, pré-definido.
-     * Inicia a cutscene inicial.
+     * Esconde todos os botões de ação no mapa por padrão.
+     * Observa o estado atual do jogo, para que sempre que haja uma mudança o evento seja acionado.
     */
     private void Start()
     {
         HideAllActionButtons();
 
-        _currentMapActions = GetCurrentMapActions();
-
-        // quando o estado pré-definido é apenas para mostrar a cutscene
-        // aciona o evento de progredir, que irá iniciar a cutscene de imediato
-        if (_currentGameState == GameState.INTRO_GAME ||
-            _currentGameState == GameState.INTRO_FOREST ||
-            _currentGameState == GameState.INTRO_CAVE)
+        // assina o observável para detetar mudanças de estado
+        _currentGameState.Subscribe(state =>
         {
-            // [0] - porque existe sempre pelo menos uma ação ligada a um game state
-            ProgressActionEvent(_currentMapActions[0]);
-        }
+            HandleGameStateChange(state);
+        });
     }
 
     private void Update()
     {
-        if (_currentGameState != GameState.INTRO_GAME ||
-            _currentGameState != GameState.INTRO_FOREST ||
-            _currentGameState != GameState.INTRO_CAVE)
+        // não há necessidade de verificar se clicou no botão de ação,
+        // quando o estado é apenas de mostrar uma cutscene
+        if (_currentGameState.Value != GameState.INTRO_GAME ||
+            _currentGameState.Value != GameState.INTRO_FOREST ||
+            _currentGameState.Value != GameState.INTRO_CAVE)
         {
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
         }
-        else  // se for um dos estados que é apenas a cutscene, progride de imediato
+    }
+
+    /*
+     * Trata da mudança para os diferentes estados do jogo.
+     * _currentMapActions[0] - porque existe sempre pelo menos uma ação do mapa associada a um game state
+    */
+    private void HandleGameStateChange(GameState nextGameState)
+    {
+        /* CONFIGURAÇÕES PADRÃO NA MUDANÇA DE ESTADO */
+
+        HideCurrentActionButtons();
+
+        _currentGameState.Value = nextGameState;
+        _currentMapActions = GetCurrentMapActions();
+
+        if (_currentMapActions[0].gameStateInfo.hasNewPosition)
         {
-            //ProgressActionEvent(_currentMapActions[0]);
+            ChangePlayerPosition(_currentMapActions[0].gameStateInfo.position, _currentMapActions[0].gameStateInfo.rotation);
+        }
+
+        /* CONFIGURAÇÕES ESPECÍFICAS NA MUDANÇA DE ESTADO */
+
+        switch (nextGameState)
+        {
+            case GameState.INTRO_FOREST:
+                Debug.Log("O estado do jogo mudou para INTRO_FOREST");
+
+                OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+
+                nextGameState = GetNextGameState(_currentGameState.Value);
+
+                // evento de término da cutscene
+                _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+                break;
+            default:
+                break;
         }
     }
 
+    /*
+     * Obtém as ações atuais do mapa associadas ao estado de jogo atual.
+    */
     private List<MapAction> GetCurrentMapActions()
     {
         _currentMapActions.Clear();
 
         foreach (MapAction mapAction in _mapActions)
         {
-            if (mapAction.gameStateInfo.gameState == _currentGameState)
+            if (mapAction.gameStateInfo.gameState == _currentGameState.Value)
             {
                 _currentMapActions.Add(mapAction);
             }
@@ -111,8 +143,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Procura a ação atual que diz respeito ao objetivo, que será a que tem "hasProgress" como true,
-     * e devolve o título.
+     * Procura a ação atual que diz respeito ao objetivo,
+     * que será a que tem "hasProgress" como true e devolve o título.
     */
     public string GetCurrentGoal()
     {
@@ -127,12 +159,9 @@ public class GameManager : MonoBehaviour
         return "";
     }
 
-    /*
-     * Obtém o próximo estado do jogo pelo seu número identificador.
-    */
-    private GameState GetNextGameState(int gameStateNumber)
+    private GameState GetNextGameState(GameState currentGameState)
     {
-        int nextGameStateNumber = gameStateNumber + 1;
+        int nextGameStateNumber = (int)currentGameState + 1;
         return (GameState)nextGameStateNumber;
     }
 
@@ -151,24 +180,18 @@ public class GameManager : MonoBehaviour
         videoPlayer.enabled = false;
 
         Time.timeScale = 1f;
-        TransitionGameState(nextGameState);
+        ChangeGameState(nextGameState);
     }
 
-    /*
-     * Altera o estado do jogo e atualiza a lista de ações do mapa atuais.
-    */
-    private void TransitionGameState(GameState nextGameState)
+    private void ChangePlayerPosition(Vector3 position, Vector3 rotation)
     {
-        HideCurrentActionButtons();
+        _player.transform.localPosition = position;
+        _player.transform.localRotation = Quaternion.Euler(rotation);
+    }
 
-        _currentGameState = nextGameState;
-        _currentMapActions = GetCurrentMapActions();
-
-        if (_currentMapActions[0].gameStateInfo.hasNewPosition)
-        {
-            _player.transform.localPosition = _currentMapActions[0].gameStateInfo.position;
-            _player.transform.localRotation = Quaternion.Euler(_currentMapActions[0].gameStateInfo.rotation);
-        }
+    public void ChangeGameState(GameState newGameState)
+    {
+        _currentGameState.Value = newGameState;
     }
 
     /*
@@ -193,7 +216,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (MapAction mapAction in _currentMapActions)
         {
-            if (mapAction.button != null)
+            if (mapAction.hasClick)
             {
                 mapAction.button.SetActive(false);
             }
@@ -205,7 +228,7 @@ public class GameManager : MonoBehaviour
     */
     private void CheckActionButtonsVisibilityDistance()
     {
-        foreach (MapAction mapAction in _mapActions)
+        foreach (MapAction mapAction in _currentMapActions)
         {
             if (mapAction.hasClick)
             {
@@ -224,14 +247,16 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            foreach (MapAction mapAction in _mapActions)
+            foreach (MapAction mapAction in _currentMapActions)
             {
                 if (mapAction.hasClick)
                 {
                     if (_actionButtonsClickDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
                     {
+                        // aciona eventos
                         ProgressActionEvent(mapAction);
                         NoProgressActionEvent(mapAction);
+                        return;
                     }
                 }
             }
@@ -239,9 +264,9 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Quando ação clicada permite que o jogador progrida no jogo.
+     * Quando ação clicada permite que o jogador progrida no jogo (passe para o próximo game state).
      * Quando o jogador alcança um objetivo, este não pode voltar ao objetivo anterior.
-     * Exemplo: quando o encontra o esconderijo para a nave.
+     * Exemplo: Quando encontra o esconderijo para a nave.
     */
     private void ProgressActionEvent(MapAction mapAction)
     {
@@ -253,11 +278,17 @@ public class GameManager : MonoBehaviour
                 mapAction.hasClick = false;
             }
 
+            if (_currentGameState.Value == GameState.GO_TO_FOREST)
+            {
+                GameState nextGameState = GetNextGameState(_currentGameState.Value);
+                ChangeGameState(nextGameState);
+            }
+
             if (mapAction.gameStateInfo.hasCutscene)
             {
                 OnCutsceneStart(mapAction.gameStateInfo.cutscene);
 
-                GameState nextGameState = GetNextGameState((int)_currentGameState);
+                GameState nextGameState = GetNextGameState(_currentGameState.Value);
 
                 // evento de término da cutscene
                 mapAction.gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(mapAction.gameStateInfo.cutscene, nextGameState);
@@ -266,8 +297,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Quando ação clicada não permite que o jogador progrida no jogo.
-     * Exemplo: quando o jogador tenta um caminho errado para a floresta.
+     * Quando ação clicada não permite que o jogador progrida no jogo (passe para o próximo game state).
+     * Exemplo: Quando o jogador tenta um caminho errado para a floresta. Quando observa uma pista na floresta.
     */
     private void NoProgressActionEvent(MapAction mapAction)
     {
