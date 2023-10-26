@@ -109,9 +109,10 @@ public class GameManager : MonoBehaviour
 
         switch (nextGameState)
         {
+            // mostra a cutscene
+            case GameState.INTRO_GAME:
             case GameState.INTRO_FOREST:
-                Debug.Log("O estado do jogo mudou para INTRO_FOREST");
-
+            case GameState.INTRO_CAVE:
                 OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
 
                 nextGameState = GetNextGameState(_currentGameState.Value);
