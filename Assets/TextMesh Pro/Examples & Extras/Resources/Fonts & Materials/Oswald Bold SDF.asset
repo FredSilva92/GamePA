@@ -673,16 +673,10 @@ Texture2D:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 2
-<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset
-  m_Width: 0
-  m_Height: 0
-  m_CompleteImageSize: 0
-=======
   m_Width: 1024
   m_Height: 1024
   m_CompleteImageSize: 1048576
   m_MipsStripped: 0
->>>>>>> Vânia:Assets/TextMeshPro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset
   m_TextureFormat: 1
   m_MipCount: 1
   m_IsReadable: 1
