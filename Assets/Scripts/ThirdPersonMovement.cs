@@ -65,7 +65,8 @@ public class ThirdPersonMovement : CharacterBase
 
     private bool _isPicking = false;
 
-    public bool IsPicking { 
+    public bool IsPicking
+    {
         get { return _isPicking; }
     }
 
@@ -335,7 +336,6 @@ public class ThirdPersonMovement : CharacterBase
 
     private void OnTriggerEnter(Collider collision)
     {
-      
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
         CheckMedicineCollision(collision);
     }
@@ -365,16 +365,16 @@ public class ThirdPersonMovement : CharacterBase
 
             StartCoroutine(PickUpMedicine(medicine));
             StartCoroutine(StopPickingAnimation());
-        } 
+        }
     }
 
     IEnumerator PickUpMedicine(GameObject medicine)
     {
         yield return new WaitForSeconds(1f);
-        
+
         MedicineScript medicineScript = medicine.GetComponent<MedicineScript>();
         _healthManager.UpdateHealth(medicineScript.Health);
-        
+
         Destroy(medicine);
     }
 

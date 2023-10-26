@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SplashScreen.unity
+    guid: 6bfbc7e21fd6bed46aac0a8f4ac850e3
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: cefc8f127b5fe8b4ba887ffa1ffa0561
+  - enabled: 1
+    path: Assets/Scenes/Pause_Cutscenes_Goals.unity
+    guid: c4abed27381fe374696348b0df82958b
+  - enabled: 1
     path: Assets/Scenes/IslandPart1.unity
     guid: 8429d4dcac000dd42ac7d61300ea5ca4
   m_configObjects: {}
