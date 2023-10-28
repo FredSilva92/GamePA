@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: cefc8f127b5fe8b4ba887ffa1ffa0561
   - enabled: 1
-    path: Assets/Scenes/IslandPart1.unity
+    path: Assets/Scenes/BeachAndForest.unity
     guid: 8429d4dcac000dd42ac7d61300ea5ca4
   - enabled: 1
     path: Assets/Scenes/Cave.unity

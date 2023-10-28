@@ -224,12 +224,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100580215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfc79ba44c04a1f478c9c2d30ed338a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d774c41e674071438c83233504d5b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  painelMainMenu: {fileID: 1390882951}
-  painelControls: {fileID: 468454558}
-  painelCredits: {fileID: 1268760783}
+  panelButtons: {fileID: 1390882951}
+  panelControls: {fileID: 468454558}
+  panelCredits: {fileID: 1268760783}
 --- !u!4 &100580217
 Transform:
   m_ObjectHideFlags: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 100580216}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:

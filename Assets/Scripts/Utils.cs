@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Utils
@@ -34,7 +33,7 @@ public class Utils
         {
             return new List<string> {
                 BEACH,
-                FOREST, 
+                FOREST,
                 CAVE
             };
         }
