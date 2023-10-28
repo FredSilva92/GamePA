@@ -39,7 +39,6 @@ public class EnemyScript : CharacterBase
         playerData = player.GetComponent<ThirdPersonMovement>();
         agent = GetComponent<NavMeshAgent>();
         initialPosition = transform.position;
-
     }
 
     void Update()
@@ -63,11 +62,9 @@ public class EnemyScript : CharacterBase
             animator.SetBool(Animations.WALKING, true);
             animator.SetBool(Animations.SHOOTING, true);
 
-
             _isShooting = true;
             agent.isStopped = false;
             FaceTarget();
-
         }
         else if (playerDistance <= _minDistance && !playerIsDead)
         {
@@ -79,7 +76,7 @@ public class EnemyScript : CharacterBase
         }
         else
         {
-            if(_isShooting)
+            if (_isShooting)
             {
                 agent.isStopped = false;
                 agent.SetDestination(transform.position);
@@ -93,7 +90,6 @@ public class EnemyScript : CharacterBase
             {
                 animator.SetBool(Animations.WALKING, false);
             }
-            
 
             if (!agent.hasPath)
             {
@@ -138,7 +134,7 @@ public class EnemyScript : CharacterBase
     private void FaceTarget()
     {
         Vector3 direction = (player.transform.position - transform.position);
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0 , direction.z));
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = lookRotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
         agent.SetDestination(player.transform.position);

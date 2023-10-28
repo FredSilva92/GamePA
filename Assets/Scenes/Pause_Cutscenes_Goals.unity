@@ -5968,7 +5968,7 @@ GameObject:
   - component: {fileID: 316072967}
   - component: {fileID: 316072966}
   m_Layer: 5
-  m_Name: TextMeshPro_Title
+  m_Name: TextTMP_Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8517,7 +8517,7 @@ GameObject:
   - component: {fileID: 415731263}
   - component: {fileID: 415731262}
   m_Layer: 5
-  m_Name: TextMeshPro_Goal
+  m_Name: TextTMP_Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16393,7 +16393,7 @@ GameObject:
   - component: {fileID: 830819270}
   - component: {fileID: 830819269}
   m_Layer: 5
-  m_Name: TextMeshPro_Title
+  m_Name: TextTMP_Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30775,7 +30775,7 @@ GameObject:
   - component: {fileID: 1465332617}
   - component: {fileID: 1465332616}
   m_Layer: 5
-  m_Name: TextMeshPro
+  m_Name: TextTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31945,7 +31945,7 @@ GameObject:
   - component: {fileID: 1526167784}
   - component: {fileID: 1526167783}
   m_Layer: 0
-  m_Name: Event System
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37219,7 +37219,7 @@ GameObject:
   - component: {fileID: 1753573337}
   - component: {fileID: 1753573336}
   m_Layer: 5
-  m_Name: TextMeshPro
+  m_Name: TextTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
