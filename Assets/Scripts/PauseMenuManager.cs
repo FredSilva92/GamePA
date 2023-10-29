@@ -1,12 +1,15 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public GameObject pauseMenuPanel;
+    [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
 
-    void Start()
+    [SerializeField] private TextMeshProUGUI goalTextMeshPro;
+
+    private void Start()
     {
         // oculta menu de pausa ao abrir a cena
         pauseMenuPanel.SetActive(false);
@@ -16,7 +19,7 @@ public class PauseMenuManager : MonoBehaviour
      * Se pressiona "ESC", abre o menu de pausa;
      * Com o menu de pausa ativo, se pressiona "ESC" ou clica no botão de continuar, retorna ao jogo.
     */
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -42,6 +45,8 @@ public class PauseMenuManager : MonoBehaviour
         // congela o tempo
         Time.timeScale = 0;
 
+        DisplayCurrentGoal();
+
         isPaused = true;
         pauseMenuPanel.SetActive(true);
     }
@@ -64,5 +69,10 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1;
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void DisplayCurrentGoal()
+    {
+        goalTextMeshPro.text = GameManager.Instance.GetCurrentGoal();
     }
 }

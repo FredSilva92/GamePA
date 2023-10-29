@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Utils
@@ -39,5 +38,10 @@ public class Utils
             healthManager.TakeDamage(laserScript.Damage);
             isDead = healthManager.Health <= 0;
         };
+    }
+
+    public static float GetDistanceBetween2Objects(GameObject object1, GameObject object2)
+    {
+        return Vector3.Distance(object1.transform.position, object2.transform.position);
     }
 }
