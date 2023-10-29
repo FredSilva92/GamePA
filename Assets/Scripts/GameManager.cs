@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Canvas _canvas;
 
+    [SerializeField] private BeachAndForestManager _beachAndForestManager;
+
 
     /* PROPRIEDADES */
 
@@ -113,6 +115,20 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_GAME:
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAVE:
+                OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+
+                nextGameState = GetNextGameState(_currentGameState.Value);
+
+                // evento de término da cutscene
+                _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+                break;
+            // desativa o colisor do acampamento e mostra a cutscene
+            case GameState.INTRO_CAMP:
+                if (_beachAndForestManager)
+                {
+                    _beachAndForestManager.DisableCampCollider();
+                }
+
                 OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
 
                 nextGameState = GetNextGameState(_currentGameState.Value);
