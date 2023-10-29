@@ -3,20 +3,41 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private GameManager gameManager;
-
-    void Start()
-    {
-        gameManager = GameManager.Instance;
-    }
-
-    void Update()
-    {
-
-    }
+    [SerializeField] private GameObject panelButtons;
+    [SerializeField] private GameObject panelControls;
+    [SerializeField] private GameObject panelCredits;
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Pause_Cutscenes_Goals");  // SceneManager.LoadScene("IslandPart1");
+        SceneManager.LoadScene("IslandPart1");
+    }
+
+    public void OpenControls()
+    {
+        panelButtons.SetActive(false);
+        panelControls.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        panelControls.SetActive(false);
+        panelButtons.SetActive(true);
+    }
+
+    public void OpenCredits()
+    {
+        panelButtons.SetActive(false);
+        panelCredits.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        panelCredits.SetActive(false);
+        panelButtons.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

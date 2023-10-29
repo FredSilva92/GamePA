@@ -20,8 +20,6 @@ public class ThirdPersonMovement : CharacterBase
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
-    bool _finishedJump;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -72,10 +70,9 @@ public class ThirdPersonMovement : CharacterBase
         get { return _isPicking; }
     }
 
-    [Header("Health Bar")]
+    [Header("Health")]
     [SerializeField]
-    private GameObject healthBar;
-
+    private GameObject healthObject;
     private HealthManager _healthManager;
 
     public HealthManager HealthManager
@@ -84,20 +81,23 @@ public class ThirdPersonMovement : CharacterBase
         private set { _healthManager = value; }
     }
 
-    public bool FinishedJump
+    private bool _isJumping = false;
+
+    public bool IsJumping
     {
-        get { return _finishedJump; }
-        set { _finishedJump = value; }
+        get { return _isJumping; }
     }
 
+    private string _currentEnvironment;
+
+    public string CurrentEnvironment { get { return _currentEnvironment; } }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        readyToJump = true;
-        _healthManager = healthBar.GetComponent<HealthManager>();
+        _healthManager = healthObject.GetComponent<HealthManager>();
         HealthManager = _healthManager;
 
         animator = GetComponent<Animator>();
@@ -105,10 +105,8 @@ public class ThirdPersonMovement : CharacterBase
 
     private void Update()
     {
-        Debug.Log("Picking val: " + _isPicking);
         if (_isDead)
         {
-            Debug.Log("I'm Death");
             return;
         };
 
@@ -147,13 +145,10 @@ public class ThirdPersonMovement : CharacterBase
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && grounded && !_isJumping)
         {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
+            _isJumping = true;
+            Invoke(nameof(Jump), 0.4f);
         }
 
         _isShooting = Input.GetButton(Utils.Constants.SHOOT_KEY);
@@ -267,7 +262,7 @@ public class ThirdPersonMovement : CharacterBase
         // in air
         else if (!grounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
     }
 
@@ -296,23 +291,24 @@ public class ThirdPersonMovement : CharacterBase
 
     private void Jump()
     {
-        _finishedJump = false;
-
         exitingSlope = true;
 
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        Invoke(nameof(ResetJump), jumpCooldown);
+        CancelInvoke(nameof(Jump));
     }
 
     private void ResetJump()
     {
-        readyToJump = true;
-
-        _finishedJump = true;
+        _isJumping = false;
 
         exitingSlope = false;
+
+        CancelInvoke(nameof(ResetJump));
     }
 
     public bool OnSlope()
@@ -346,6 +342,17 @@ public class ThirdPersonMovement : CharacterBase
     private void OnTriggerStay(Collider other)
     {
         CheckMedicineCollision(other);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        var tag = collision.gameObject.tag;
+        bool isTerrain = Utils.Environments.GetValues().Contains(tag);
+
+        if (isTerrain)
+        {
+            _currentEnvironment = tag;
+        }
     }
 
     private void CheckMedicineCollision(Collider collision)

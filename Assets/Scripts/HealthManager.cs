@@ -1,31 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
     [SerializeField]
-    private Image HealthBar;
+    private Image _currentHealthImage;
 
     [SerializeField]
-    private float initialHealth = 100f;
+    private float _initialHealth = 100f;
 
     private float _currentHealth;
 
-    public float Health { get { return _currentHealth;} }
+    public float Health { get { return _currentHealth; } }
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        _currentHealth = initialHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _currentHealth = _initialHealth;
     }
 
     public void TakeDamage(float damage)
@@ -35,19 +25,21 @@ public class HealthManager : MonoBehaviour
         UpdateBar();
     }
 
-    public void UpdateHealth(float healingAmount) {
+    public void UpdateHealth(float healingAmount)
+    {
         _currentHealth += healingAmount;
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, initialHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _initialHealth);
 
         UpdateBar();
     }
 
-    public void UpdateBar() { 
-        if (HealthBar == null)
+    public void UpdateBar()
+    {
+        if (_currentHealthImage == null)
         {
             return;
         }
 
-        HealthBar.fillAmount = _currentHealth / initialHealth;
+        _currentHealthImage.fillAmount = _currentHealth / _initialHealth;
     }
 }

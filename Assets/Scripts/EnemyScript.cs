@@ -15,7 +15,7 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private GameObject droppableItem;
 
-    private float _minDistance = 2f;
+    private float _minDistance = 1f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
 
@@ -39,7 +39,6 @@ public class EnemyScript : CharacterBase
         playerData = player.GetComponent<ThirdPersonMovement>();
         agent = GetComponent<NavMeshAgent>();
         initialPosition = transform.position;
-
     }
 
     void Update()
@@ -58,13 +57,14 @@ public class EnemyScript : CharacterBase
 
         if (playerDistance > _minDistance && playerDistance < _maxDistance && !playerIsDead)
         {
-            agent.SetDestination(plTransform.position);
             SetShootingAnimation(1.0f);
 
             animator.SetBool(Animations.WALKING, true);
             animator.SetBool(Animations.SHOOTING, true);
-            _isShooting = true;
 
+            _isShooting = true;
+            agent.isStopped = false;
+            FaceTarget();
         }
         else if (playerDistance <= _minDistance && !playerIsDead)
         {
@@ -72,16 +72,27 @@ public class EnemyScript : CharacterBase
             animator.SetBool(Animations.WALKING, false);
             animator.SetBool(Animations.SHOOTING, true);
             _isShooting = true;
+            FaceTarget();
         }
         else
         {
+            if (_isShooting)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(transform.position);
+            }
+
             SetShootingAnimation(0.0f);
             StopShooting();
+            isMoving = false;
+
+            if (agent.remainingDistance < 0.1f)
+            {
+                animator.SetBool(Animations.WALKING, false);
+            }
 
             if (!agent.hasPath)
             {
-                isMoving = false;
-                animator.SetBool(Animations.WALKING, false);
                 Invoke("RandomWalking", 4);
             }
         }
@@ -103,12 +114,6 @@ public class EnemyScript : CharacterBase
         animator.SetLayerWeight(animator.GetLayerIndex(Utils.Constants.SHOOT), shootWeight);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        isMoving = false;
-        animator.SetBool(Animations.WALKING, false);
-    }
-
     private void OnTriggerEnter(Collider collision)
     {
         Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
@@ -124,5 +129,14 @@ public class EnemyScript : CharacterBase
     {
         animator.SetBool(Animations.SHOOTING, false);
         _isShooting = false;
+    }
+
+    private void FaceTarget()
+    {
+        Vector3 direction = (player.transform.position - transform.position);
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = lookRotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
+        agent.SetDestination(player.transform.position);
     }
 }

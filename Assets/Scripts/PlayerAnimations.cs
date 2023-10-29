@@ -21,7 +21,6 @@ public class PlayerAnimations : MonoBehaviour
         get { return _isShooting; }
     }
 
-
     void Start()
     {
         thridPersonMovement = playerMainComp.GetComponent<ThirdPersonMovement>();
@@ -36,33 +35,25 @@ public class PlayerAnimations : MonoBehaviour
         {
             PlayAnimation(animator, Animations.DYING);
             return;
-        } else if (thridPersonMovement.IsPicking)
+        }
+        else if (thridPersonMovement.IsPicking)
         {
             PlayAnimation(animator, Animations.PICKING);
             return;
         }
 
         animator.SetBool(Animations.PICKING, false);
-        // ---------- SALTAR ----------
 
-        // se termina de saltar
-        if (thridPersonMovement.FinishedJump)
-        {
-            animator.SetBool(Animations.JUMPING, false);
-        }
-        else if (!thridPersonMovement.FinishedJump && thridPersonMovement.currentState == ThirdPersonMovement.MovementState.air)
-        {
-            animator.SetBool(Animations.JUMPING, true);
-        }
+        // ---------- SALTAR ----------
+        animator.SetBool(Animations.JUMPING, thridPersonMovement.IsJumping);
 
 
         // ---------- ANDAR ----------
-
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isWalking = inputs != Vector3.zero;
 
         animator.SetBool(Animations.WALKING, isWalking);
-        
+
 
         bool isAiming = Input.GetButton(Constants.AIM_KEY) || Input.GetButton(Constants.SHOOT_KEY);
 
@@ -73,5 +64,9 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetLayerWeight(layerShootIdx, shootWeight);
 
         animator.SetBool(Animations.SHOOTING, thridPersonMovement.IsShooting);
+
+        Vector3 playerPosition = playerMainComp.transform.position;
+
+        transform.position = playerPosition;
     }
 }

@@ -154,13 +154,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201778429321067923}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: 0.4304593, y: -0.56098557, z: -0.4304593, w: 0.56098557}
   m_LocalPosition: {x: -0.0018, y: 0.0552, z: 0.1354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2109191148471345673}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -75}
 --- !u!1 &247021469765691121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,7 +2255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2109191148471345673}
-  - component: {fileID: 48479932825358236}
+  - component: {fileID: 1498605723672354293}
   m_Layer: 0
   m_Name: EnemyGun
   m_TagString: Untagged
@@ -2271,16 +2271,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111876372847063413}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40249974, y: -0.46764117, z: -0.5056928, w: -0.6029764}
-  m_LocalPosition: {x: 0.0019998439, y: 0.21700042, z: 0.05799885}
+  m_LocalRotation: {x: 0.5026211, y: -0.3835685, z: -0.5718779, w: -0.52268815}
+  m_LocalPosition: {x: 0.004, y: 0.223, z: 0.042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2109218510050600783}
   - {fileID: 883823443035742769}
   m_Father: {fileID: 2841464097547594208}
-  m_LocalEulerAnglesHint: {x: -73.408, y: 33.322, z: -305.18298}
---- !u!114 &48479932825358236
+  m_LocalEulerAnglesHint: {x: -74.609, y: -40.937, z: -233.103}
+--- !u!114 &1498605723672354293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2289,7 +2289,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2111876372847063413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c86c9e7e4939984393ca92f223ceb4b, type: 3}
+  m_Script: {fileID: 11500000, guid: f5297315ee7521c4aacb70cab79c1e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 883823443035742769}
@@ -3015,6 +3015,7 @@ GameObject:
   - component: {fileID: 6691210167261473788}
   - component: {fileID: 5517952795582800752}
   - component: {fileID: 984051526534265241}
+  - component: {fileID: 7057659790303643864}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3176,6 +3177,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &7057659790303643864
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610248153917254521}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.31443167
+  m_Height: 1.9020945
+  m_Direction: 1
+  m_Center: {x: -0.060334682, y: 0.8487887, z: 0}
 --- !u!1 &4011116375206427695
 GameObject:
   m_ObjectHideFlags: 0

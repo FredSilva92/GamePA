@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Utils
@@ -20,7 +21,22 @@ public class Utils
         public static readonly string PICKING = "isPicking";
         public static readonly string SHOOTING = "isShooting";
         public static readonly string JUMPING = "isJumping";
+    }
 
+    public static class Environments
+    {
+        public static readonly string BEACH = "Beach";
+        public static readonly string FOREST = "Forest";
+        public static readonly string CAVE = "Cave";
+
+        public static List<string> GetValues()
+        {
+            return new List<string> {
+                BEACH,
+                FOREST,
+                CAVE
+            };
+        }
     }
 
     public static void PlayAnimation(Animator animator, string animation)

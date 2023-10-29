@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpiderAI : MonoBehaviour
-{ 
+{
     private CharacterController characterController;
     private Animator animator;
 
@@ -12,7 +10,6 @@ public class SpiderAI : MonoBehaviour
     private Vector3 firstPosition;
     private bool walkingForward = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -20,20 +17,19 @@ public class SpiderAI : MonoBehaviour
         firstPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (walkingForward)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-             animator.SetBool("isWalking", true); 
+            animator.SetBool("isWalking", true);
 
             if (Vector3.Distance(firstPosition, transform.position) >= maxDistance)
             {
                 walkingForward = false;
                 animator.SetBool("isWalking", true);
                 transform.Rotate(Vector3.up, 180f);
-            }      
+            }
         }
         else
         {
@@ -47,5 +43,3 @@ public class SpiderAI : MonoBehaviour
         }
     }
 }
-
-
