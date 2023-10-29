@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     private CharacterController character;
     private Animator animator;
     private Vector3 inputs;
@@ -12,16 +9,13 @@ public class Player : MonoBehaviour
     private float speed = 2f;
 
     private float shootWeight = 0.0f;
-    
 
-    // Start is called before the first frame update
     void Start()
     {
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -41,12 +35,9 @@ public class Player : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
-
         float fadeTime = Input.GetButton("Fire1") ? 1.0f : 0.0f;
 
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.05f);
         animator.SetLayerWeight(animator.GetLayerIndex("Shoot"), shootWeight);
     }
-
-  
 }

@@ -21,7 +21,6 @@ public class PlayerAnimations : MonoBehaviour
         get { return _isShooting; }
     }
 
-
     void Start()
     {
         thridPersonMovement = playerMainComp.GetComponent<ThirdPersonMovement>();
@@ -36,7 +35,8 @@ public class PlayerAnimations : MonoBehaviour
         {
             PlayAnimation(animator, Animations.DYING);
             return;
-        } else if (thridPersonMovement.IsPicking)
+        }
+        else if (thridPersonMovement.IsPicking)
         {
             PlayAnimation(animator, Animations.PICKING);
             return;
@@ -53,7 +53,7 @@ public class PlayerAnimations : MonoBehaviour
         bool isWalking = inputs != Vector3.zero;
 
         animator.SetBool(Animations.WALKING, isWalking);
-        
+
 
         bool isAiming = Input.GetButton(Constants.AIM_KEY) || Input.GetButton(Constants.SHOOT_KEY);
 

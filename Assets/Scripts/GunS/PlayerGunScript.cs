@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -26,7 +24,6 @@ public class PlayerGunScript : MonoBehaviour
 
     protected float time = 0;
 
-
     protected CharacterBase character;
 
     [SerializeField]
@@ -34,7 +31,6 @@ public class PlayerGunScript : MonoBehaviour
 
     private ThirdPersonCam cameraScript;
 
-    // Start is called before the first frame update
     void Start()
     {
         cameraScript = camera.GetComponent<ThirdPersonCam>();
@@ -62,13 +58,11 @@ public class PlayerGunScript : MonoBehaviour
 
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
-
-                Vector3 screenCenter = new Vector3((Screen.width + Screen.width/8) / 2f, (Screen.height) / 2f, Camera.main.transform.position.z);             
+                Vector3 screenCenter = new Vector3((Screen.width + Screen.width / 8) / 2f, (Screen.height) / 2f, Camera.main.transform.position.z);
                 Vector3 worldCenter = camera.ScreenToWorldPoint(screenCenter);
 
                 Vector3 forceDirection = worldCenter - transform.position;
                 rb.AddForce(forceDirection * 0.05f, ForceMode.Impulse);
-                
             }
             else
             {

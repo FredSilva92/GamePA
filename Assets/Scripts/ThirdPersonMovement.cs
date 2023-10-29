@@ -349,7 +349,7 @@ public class ThirdPersonMovement : CharacterBase
         var tag = collision.gameObject.tag;
         bool isTerrain = Utils.Environments.GetValues().Contains(tag);
 
-        if(isTerrain)
+        if (isTerrain)
         {
             _currentEnvironment = tag;
         }
