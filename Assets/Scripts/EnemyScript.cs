@@ -22,7 +22,6 @@ public class EnemyScript : CharacterBase
     private Vector3 inputs;
     private Vector3 destPoint;
 
-    private bool isMoving = false;
     private bool hasDropped = false;
     private ThirdPersonMovement playerData;
 
@@ -84,12 +83,10 @@ public class EnemyScript : CharacterBase
 
             SetShootingAnimation(0.0f);
             StopShooting();
-            isMoving = false;
 
-            if (agent.remainingDistance < 0.1f)
-            {
-                animator.SetBool(Animations.WALKING, false);
-            }
+            Debug.Log("Remaining distance: " + agent.remainingDistance);
+
+            animator.SetBool(Animations.WALKING, agent.remainingDistance > 0.1f);
 
             if (!agent.hasPath)
             {
@@ -100,8 +97,6 @@ public class EnemyScript : CharacterBase
 
     private void RandomWalking()
     {
-        animator.SetBool(Animations.WALKING, true);
-        isMoving = true;
         destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, 7f);
 
         agent.SetDestination(destPoint);

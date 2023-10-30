@@ -9,7 +9,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("IslandPart1");
+        SceneManager.LoadScene("BeachAndForest");
     }
 
     public void OpenControls()
