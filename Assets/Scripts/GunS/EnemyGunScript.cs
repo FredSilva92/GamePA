@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -26,15 +24,8 @@ public class EnemyGunScript : MonoBehaviour
 
     protected float time = 0;
 
-
     protected CharacterBase character;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+  
     void Update()
     {
         character = player.GetComponentInParent<CharacterBase>();

@@ -70,10 +70,9 @@ public class ThirdPersonMovement : CharacterBase
         get { return _isPicking; }
     }
 
-    [Header("Health Bar")]
+    [Header("Health")]
     [SerializeField]
-    private GameObject healthBar;
-
+    private GameObject healthObject;
     private HealthManager _healthManager;
 
     public HealthManager HealthManager
@@ -98,7 +97,7 @@ public class ThirdPersonMovement : CharacterBase
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        _healthManager = healthBar.GetComponent<HealthManager>();
+        _healthManager = healthObject.GetComponent<HealthManager>();
         HealthManager = _healthManager;
 
         animator = GetComponent<Animator>();
@@ -350,7 +349,7 @@ public class ThirdPersonMovement : CharacterBase
         var tag = collision.gameObject.tag;
         bool isTerrain = Utils.Environments.GetValues().Contains(tag);
 
-        if(isTerrain)
+        if (isTerrain)
         {
             _currentEnvironment = tag;
         }

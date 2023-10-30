@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scripts/GunS.meta
-guid: d80dfb1b858085147ba72516618937ac
-=======
+<<<<<<<< HEAD:Assets/StylizedHandPaintedDungeon(Free).meta
 guid: 69731e5aaf2f929408498d85dc63d846
->>>>>>> Vânia:Assets/StylizedHandPaintedDungeon(Free).meta
 folderAsset: yes
 DefaultImporter:
+========
+guid: 560b04d1a97f54a4e82edc0cbbb69285
+AssemblyDefinitionImporter:
+>>>>>>>> luis:Assets/Plugins/UniRx/Scripts/UniRx.asmdef.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

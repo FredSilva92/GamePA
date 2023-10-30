@@ -1,14 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    
-    enum levelList {
+    enum levelList
+    {
         Cave,
         Forest
     };
@@ -22,16 +19,6 @@ public class LevelChanger : MonoBehaviour
     [SerializeField]
     private GameObject loadScreen;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Player"))
@@ -43,7 +30,7 @@ public class LevelChanger : MonoBehaviour
 
     private string GetLevelStr()
     {
-        switch(Level)
+        switch (Level)
         {
             case levelList.Cave:
                 return Utils.Environments.CAVE;
@@ -58,6 +45,6 @@ public class LevelChanger : MonoBehaviour
     {
         yield return new WaitForSeconds(transitionTime);
 
-        SceneManager.LoadScene("Scenes/" +  GetLevelStr());
+        SceneManager.LoadScene("Scenes/" + GetLevelStr());
     }
 }

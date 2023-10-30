@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public class ThirdPersonCam : MonoBehaviour
 {
@@ -82,10 +81,11 @@ public class ThirdPersonCam : MonoBehaviour
         crossHair.SetActive(false);
 
         if (newStyle == CameraStyle.Basic) thirdPersonCam.SetActive(true);
-        else if (newStyle == CameraStyle.Combat) {
+        else if (newStyle == CameraStyle.Combat)
+        {
             combatCam.SetActive(true);
             crossHair.SetActive(true);
-        } 
+        }
 
         currentStyle = newStyle;
     }
