@@ -35,12 +35,11 @@ public class LevelChanger : MonoBehaviour
             {
                 case GameState.GO_TO_FOREST:
                     gameManager.SetGameState(GameState.INTRO_FOREST);
-                    // remove este script anexado ao game object
                     Destroy(this);
                     break;
                 case GameState.GO_TO_CAMP:
-                    DisableCollider();
                     gameManager.SetGameState(GameState.INTRO_CAMP);
+                    Destroy(this);
                     break;
                 case GameState.GO_TO_CAVE:
                     EnableScreen();
@@ -77,10 +76,5 @@ public class LevelChanger : MonoBehaviour
     private void EnableScreen()
     {
         loadScreen.SetActive(true);
-    }
-
-    private void DisableCollider()
-    {
-        gameObject.SetActive(false);
     }
 }
