@@ -1,45 +1,48 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpiderAI : MonoBehaviour
 {
-    private CharacterController characterController;
+    private NavMeshAgent navMeshAgent;
     private Animator animator;
+    private Vector3 initialPosition;
+    private Vector3 targetPosition;
+    private bool movingForward = true;
 
-    public float speed = 5.0f;
-    public float maxDistance = 10.0f;
-    private Vector3 firstPosition;
-    private bool walkingForward = true;
+    public float moveSpeed;
+    public float maxDistance;
+
+
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        firstPosition = transform.position;
+        initialPosition = transform.position;
+        SetRandomTarget();
     }
 
     void Update()
     {
-        if (walkingForward)
+        if (navMeshAgent.remainingDistance < 0.1f)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            animator.SetBool("isWalking", true);
-
-            if (Vector3.Distance(firstPosition, transform.position) >= maxDistance)
-            {
-                walkingForward = false;
-                animator.SetBool("isWalking", true);
-                transform.Rotate(Vector3.up, 180f);
-            }
+            SetRandomTarget();
+        }
+    }
+    void SetRandomTarget()
+    {
+        if (movingForward)
+        {
+            targetPosition = initialPosition + Random.insideUnitSphere * maxDistance;
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, firstPosition, speed * Time.deltaTime);
-
-            if (Vector3.Distance(firstPosition, transform.position) < 0.1f)
-            {
-                walkingForward = true;
-                animator.SetBool("isWalking", true);
-            }
+            targetPosition = initialPosition;
         }
+
+        navMeshAgent.SetDestination(targetPosition);
+        movingForward = !movingForward;
+        animator.SetBool("isWalking", true);
     }
 }
+
