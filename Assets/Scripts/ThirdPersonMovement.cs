@@ -92,6 +92,7 @@ public class ThirdPersonMovement : CharacterBase
 
     public string CurrentEnvironment { get { return _currentEnvironment; } }
 
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -132,7 +133,6 @@ public class ThirdPersonMovement : CharacterBase
     {
         if (_isDead)
         {
-            Debug.Log("I'm Death");
             return;
         };
 

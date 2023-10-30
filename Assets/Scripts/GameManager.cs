@@ -11,19 +11,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _player;
 
-    [SerializeField] private ReactiveProperty<GameState> _currentGameState = new();
+    [SerializeField] public ReactiveProperty<GameState> _currentGameState = new();
+    private List<MapAction> _currentMapActions = new();
 
     [SerializeField] private List<GameStateInfo> _gameStateList;
     [SerializeField] private List<MapAction> _mapActions;
-
-    private List<MapAction> _currentMapActions = new();
 
     [SerializeField] private float _actionButtonsVisibilityDistance;
     [SerializeField] private float _actionButtonsClickDistance;
 
     [SerializeField] private Canvas _canvas;
 
-    [SerializeField] private BeachAndForestManager _beachAndForestManager;
+    public bool _isChangingPositon;
+
+    private Vector3 positionToChange;
+    private Vector3 rotationToChange;
 
 
     /* PROPRIEDADES */
@@ -39,6 +41,14 @@ public class GameManager : MonoBehaviour
 
             return _instance;
         }
+    }
+
+    public IReadOnlyReactiveProperty<GameState> CurrentGameState => _currentGameState;
+
+    public List<MapAction> CurrentMapActions
+    {
+        get { return _currentMapActions; }
+        set { _currentMapActions = value; }
     }
 
 
@@ -70,9 +80,9 @@ public class GameManager : MonoBehaviour
         HideAllActionButtons();
 
         // assina o observável para detetar mudanças de estado
-        _currentGameState.Subscribe(state =>
+        _currentGameState.Subscribe(gameState =>
         {
-            HandleGameStateChange(state);
+            HandleGameStateChange(gameState);
         });
     }
 
@@ -82,10 +92,20 @@ public class GameManager : MonoBehaviour
         // quando o estado é apenas de mostrar uma cutscene
         if (_currentGameState.Value != GameState.INTRO_GAME ||
             _currentGameState.Value != GameState.INTRO_FOREST ||
+            _currentGameState.Value != GameState.INTRO_CAMP ||
             _currentGameState.Value != GameState.INTRO_CAVE)
         {
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isChangingPositon)
+        {
+            ChangePlayerPosition(positionToChange, rotationToChange);
+            _isChangingPositon = false;
         }
     }
 
@@ -95,8 +115,6 @@ public class GameManager : MonoBehaviour
     */
     private void HandleGameStateChange(GameState nextGameState)
     {
-        /* CONFIGURAÇÕES PADRÃO NA MUDANÇA DE ESTADO */
-
         HideCurrentActionButtons();
 
         _currentGameState.Value = nextGameState;
@@ -104,37 +122,20 @@ public class GameManager : MonoBehaviour
 
         if (_currentMapActions[0].gameStateInfo.hasNewPosition)
         {
-            ChangePlayerPosition(_currentMapActions[0].gameStateInfo.position, _currentMapActions[0].gameStateInfo.rotation);
+            positionToChange = _currentMapActions[0].gameStateInfo.position;
+            rotationToChange = _currentMapActions[0].gameStateInfo.rotation;
+            _isChangingPositon = true;
         }
 
-        /* CONFIGURAÇÕES ESPECÍFICAS NA MUDANÇA DE ESTADO */
-
+        // configurações específicas na mudança de estado
         switch (nextGameState)
         {
-            // mostra a cutscene
+            // mostra a cutscene e trata do colisor no script LevelChanger
             case GameState.INTRO_GAME:
             case GameState.INTRO_FOREST:
-            case GameState.INTRO_CAVE:
-                OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
-
-                nextGameState = GetNextGameState(_currentGameState.Value);
-
-                // evento de término da cutscene
-                _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
-                break;
-            // desativa o colisor do acampamento e mostra a cutscene
             case GameState.INTRO_CAMP:
-                if (_beachAndForestManager)
-                {
-                    _beachAndForestManager.DisableCampCollider();
-                }
-
-                OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
-
-                nextGameState = GetNextGameState(_currentGameState.Value);
-
-                // evento de término da cutscene
-                _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+            case GameState.INTRO_CAVE:
+                ConfigCutscene(nextGameState);
                 break;
             default:
                 break;
@@ -182,6 +183,36 @@ public class GameManager : MonoBehaviour
         return (GameState)nextGameStateNumber;
     }
 
+    private int GetLastGameStateInfoIndex()
+    {
+        int lastGameStateInfoIndex = 0;
+
+        for (int i = 0; i < _gameStateList.Count; i++)
+        {
+            if (_currentGameState.Value == _gameStateList[i].gameState)
+            {
+                lastGameStateInfoIndex = i;
+            }
+        }
+
+        return lastGameStateInfoIndex;
+    }
+
+    public void SetGameState(GameState newGameState)
+    {
+        _currentGameState.Value = newGameState;
+    }
+
+    private void ConfigCutscene(GameState nextGameState)
+    {
+        OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+
+        nextGameState = GetNextGameState(_currentGameState.Value);
+
+        // evento de término da cutscene
+        _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+    }
+
     private void OnCutsceneStart(VideoPlayer videoPlayer)
     {
         Time.timeScale = 0f;
@@ -197,18 +228,28 @@ public class GameManager : MonoBehaviour
         videoPlayer.enabled = false;
 
         Time.timeScale = 1f;
+
+        if (_currentMapActions[0].gameStateInfo.hasNewPosition)
+        {
+            int lastGameStateInfoIndex = GetLastGameStateInfoIndex();
+            positionToChange = _gameStateList[lastGameStateInfoIndex].position;
+            rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
+           
+            _isChangingPositon = true;
+        }
+
         ChangeGameState(nextGameState);
     }
 
-    private void ChangePlayerPosition(Vector3 position, Vector3 rotation)
-    {
-        _player.transform.localPosition = position;
-        _player.transform.localRotation = Quaternion.Euler(rotation);
-    }
-
-    public void ChangeGameState(GameState newGameState)
+    private void ChangeGameState(GameState newGameState)
     {
         _currentGameState.Value = newGameState;
+    }
+
+    public void ChangePlayerPosition(Vector3 positon, Vector3 rotation)
+    {
+        _player.transform.localPosition = positon;
+        _player.transform.localRotation = Quaternion.Euler(rotation);
     }
 
     /*

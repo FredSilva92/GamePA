@@ -25,18 +25,24 @@ public class Utils
 
     public static class Environments
     {
-        public static readonly string BEACH = "Beach";
         public static readonly string FOREST = "Forest";
+        public static readonly string CAMP = "Camp";
         public static readonly string CAVE = "Cave";
 
         public static List<string> GetValues()
         {
             return new List<string> {
-                BEACH,
                 FOREST,
+                CAMP,
                 CAVE
             };
         }
+    }
+
+    public static class SceneNames
+    {
+        public static readonly string BEACH_AND_FOREST = "BeachAndForest";
+        public static readonly string CAVE_AND_PYRAMID = "CaveAndPyramid";
     }
 
     public static void PlayAnimation(Animator animator, string animation)

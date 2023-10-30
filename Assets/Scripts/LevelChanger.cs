@@ -6,25 +6,49 @@ public class LevelChanger : MonoBehaviour
 {
     enum levelList
     {
-        Cave,
-        Forest
+        Forest,
+        Camp,
+        Cave
     };
 
     [SerializeField]
     private levelList Level;
 
     [SerializeField]
-    private float transitionTime = 3f;
+    private float transitionTime = 2f;
 
     [SerializeField]
     private GameObject loadScreen;
 
-    private void OnTriggerEnter(Collider other)
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            loadScreen.SetActive(true);
-            StartCoroutine(LoadLevel());
+            switch (gameManager.CurrentGameState.Value)
+            {
+                case GameState.GO_TO_FOREST:
+                    gameManager.SetGameState(GameState.INTRO_FOREST);
+                    // remove este script anexado ao game object
+                    Destroy(this);
+                    break;
+                case GameState.GO_TO_CAMP:
+                    DisableCollider();
+                    gameManager.SetGameState(GameState.INTRO_CAMP);
+                    break;
+                case GameState.GO_TO_CAVE:
+                    EnableScreen();
+                    StartCoroutine(LoadLevel());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -32,19 +56,31 @@ public class LevelChanger : MonoBehaviour
     {
         switch (Level)
         {
-            case levelList.Cave:
-                return Utils.Environments.CAVE;
             case levelList.Forest:
                 return Utils.Environments.FOREST;
+            case levelList.Camp:
+                return Utils.Environments.CAMP;
+            case levelList.Cave:
+                return Utils.SceneNames.CAVE_AND_PYRAMID;
             default:
                 return "";
         }
     }
 
-    IEnumerator LoadLevel()
+    private IEnumerator LoadLevel()
     {
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene("Scenes/" + GetLevelStr());
+    }
+
+    private void EnableScreen()
+    {
+        loadScreen.SetActive(true);
+    }
+
+    private void DisableCollider()
+    {
+        gameObject.SetActive(false);
     }
 }
