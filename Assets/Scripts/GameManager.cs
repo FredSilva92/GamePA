@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UniRx;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +23,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Canvas _canvas;
 
-    public bool _isChangingPositon;
-
+    private bool _isChangingPositon;
     private Vector3 positionToChange;
     private Vector3 rotationToChange;
 
@@ -71,14 +71,22 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        HideAllActionButtons();
+    }
+
     /*
      * Esconde todos os botões de ação no mapa por padrão.
      * Observa o estado atual do jogo, para que sempre que haja uma mudança o evento seja acionado.
     */
     private void Start()
     {
-        HideAllActionButtons();
-
         // assina o observável para detetar mudanças de estado
         _currentGameState.Subscribe(gameState =>
         {
@@ -90,13 +98,16 @@ public class GameManager : MonoBehaviour
     {
         // não há necessidade de verificar se clicou no botão de ação,
         // quando o estado é apenas de mostrar uma cutscene
-        if (_currentGameState.Value != GameState.INTRO_GAME ||
+        if (_player)
+        {
+            if (_currentGameState.Value != GameState.INTRO_GAME ||
             _currentGameState.Value != GameState.INTRO_FOREST ||
             _currentGameState.Value != GameState.INTRO_CAMP ||
             _currentGameState.Value != GameState.INTRO_CAVE)
-        {
-            CheckActionButtonsVisibilityDistance();
-            CheckActionButtonsClickDistance();
+            {
+                CheckActionButtonsVisibilityDistance();
+                CheckActionButtonsClickDistance();
+            }
         }
     }
 
@@ -134,9 +145,15 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_GAME:
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
-            case GameState.INTRO_CAVE:
                 ConfigCutscene(nextGameState);
                 break;
+
+            // mostra a cutscene, trata do colisor no script LevelChanger e muda de cena
+            case GameState.INTRO_CAVE:
+                SceneManager.LoadScene("CaveAndPyramid");
+                ConfigCutscene(nextGameState);
+                break;
+
             default:
                 break;
         }
@@ -234,7 +251,7 @@ public class GameManager : MonoBehaviour
             int lastGameStateInfoIndex = GetLastGameStateInfoIndex();
             positionToChange = _gameStateList[lastGameStateInfoIndex].position;
             rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
-           
+
             _isChangingPositon = true;
         }
 

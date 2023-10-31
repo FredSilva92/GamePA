@@ -84,7 +84,7 @@ public class EnemyScript : CharacterBase
             SetShootingAnimation(0.0f);
             StopShooting();
 
-            Debug.Log("Remaining distance: " + agent.remainingDistance);
+            //Debug.Log("Remaining distance: " + agent.remainingDistance);
 
             animator.SetBool(Animations.WALKING, agent.remainingDistance > 0.1f);
 

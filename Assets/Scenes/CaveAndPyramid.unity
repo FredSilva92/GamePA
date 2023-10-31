@@ -3849,7 +3849,7 @@ Transform:
   m_GameObject: {fileID: 184830181}
   serializedVersion: 2
   m_LocalRotation: {x: 0.06533486, y: -0, z: -0, w: 0.9978635}
-  m_LocalPosition: {x: 69.99, y: -5.383044, z: 16.940002}
+  m_LocalPosition: {x: 69.99, y: -5.357544, z: 16.940002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5602,7 +5602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4423989589994539629, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.555
+      value: -7.5295
       objectReference: {fileID: 0}
     - target: {fileID: 4423989589994539629, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16278,6 +16278,364 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740772123876876446, guid: 31c7e1268dad3b4469eb6d0fcb46c1bb, type: 3}
   m_PrefabInstance: {fileID: 751827591}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &752726218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 752726220}
+  - component: {fileID: 752726219}
+  m_Layer: 0
+  m_Name: Manager_Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &752726219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752726218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20e63ddf822e75408d2a3147eced7f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 272748781}
+  _currentGameState:
+    value: 7
+  _gameStateList:
+  - gameState: 0
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 69.7, y: -7.457, z: 25.35}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 1
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 69.7, y: -7.457, z: 25.35}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 2
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 3
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 64.869, y: -4.2548, z: 157.627}
+    rotation: {x: 0, y: 43.733, z: 0}
+  - gameState: 4
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 5
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 34.14, y: -4.0862, z: 257.87}
+    rotation: {x: 0, y: 61.355, z: 0}
+  - gameState: 6
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 7
+    hasCutscene: 1
+    cutscene: {fileID: 1856330756}
+    hasNewPosition: 1
+    position: {x: 69.99, y: -7.5295, z: 23.94}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 8
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  _mapActions:
+  - id: 1
+    gameStateInfo:
+      gameState: 0
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Intro to game.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 2
+    gameStateInfo:
+      gameState: 1
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Correct hiding place for ship.
+    hasProgress: 1
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 3
+    gameStateInfo:
+      gameState: 1
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Wrong hiding place 1 for ship.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 4
+    gameStateInfo:
+      gameState: 1
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Wrong hiding place 2 for ship.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 5
+    gameStateInfo:
+      gameState: 2
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Correct path to forest.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 6
+    gameStateInfo:
+      gameState: 2
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Wrong path 1 to forest.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 7
+    gameStateInfo:
+      gameState: 2
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Wrong path 2 to forest.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 8
+    gameStateInfo:
+      gameState: 3
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 64.869, y: -4.2548, z: 157.627}
+      rotation: {x: 0, y: 43.733, z: 0}
+    title: Intro to forest.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 9
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 1.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 10
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 2.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 11
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 3.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 12
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Enemy camp found.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 13
+    gameStateInfo:
+      gameState: 5
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 34.14, y: -4.0862, z: 257.87}
+      rotation: {x: 0, y: 61.355, z: 0}
+    title: Intro to camp.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 14
+    gameStateInfo:
+      gameState: 6
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 4.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 15
+    gameStateInfo:
+      gameState: 6
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 5.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 16
+    gameStateInfo:
+      gameState: 6
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Cave entrance.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 17
+    gameStateInfo:
+      gameState: 7
+      hasCutscene: 1
+      cutscene: {fileID: 1856330756}
+      hasNewPosition: 1
+      position: {x: 69.99, y: -7.5295, z: 23.94}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Intro to cave.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 18
+    gameStateInfo:
+      gameState: 8
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Follow the cave to maze.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  _actionButtonsVisibilityDistance: 20
+  _actionButtonsClickDistance: 2
+  _canvas: {fileID: 857343782}
+--- !u!4 &752726220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752726218}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.695557, y: -1.02427, z: 126.56563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &754887753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19215,6 +19573,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
+--- !u!1 &881449544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881449545}
+  m_Layer: 0
+  m_Name: ActionButtons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881449545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881449544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.129053, y: 3.6728911, z: 116.055824}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &884152057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
@@ -28644,7 +29033,7 @@ Transform:
   m_GameObject: {fileID: 1333388924}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 69.99, y: -5.383044, z: 16.940002}
+  m_LocalPosition: {x: 69.99, y: -5.357544, z: 16.940002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39354,6 +39743,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740772123876876446, guid: 31c7e1268dad3b4469eb6d0fcb46c1bb, type: 3}
   m_PrefabInstance: {fileID: 1853733517}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1856330754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1856330755}
+  - component: {fileID: 1856330756}
+  m_Layer: 0
+  m_Name: IntroCave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1856330755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856330754}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1909486393}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &1856330756
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856330754}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: cf40dfeb0af0a4841aa7a4fd354b0fd3, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 184830187}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &1861465718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40671,6 +41126,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
   m_PrefabInstance: {fileID: 1908444072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1909486392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1909486393}
+  m_Layer: 0
+  m_Name: Cutscenes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1909486393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909486392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.492159, y: 0.40319633, z: 128.85739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1856330755}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1911462902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44973,7 +45460,10 @@ SceneRoots:
   - {fileID: 2134167374}
   - {fileID: 549069459}
   - {fileID: 1769570461}
+  - {fileID: 752726220}
   - {fileID: 988140845}
+  - {fileID: 1909486393}
+  - {fileID: 881449545}
   - {fileID: 2081950654}
   - {fileID: 568938450}
   - {fileID: 1372159286}

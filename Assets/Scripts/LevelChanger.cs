@@ -42,8 +42,10 @@ public class LevelChanger : MonoBehaviour
                     Destroy(this);
                     break;
                 case GameState.GO_TO_CAVE:
-                    EnableScreen();
-                    StartCoroutine(LoadLevel());
+                    //SceneManager.LoadScene("CaveAndPyramid");
+                    gameManager.SetGameState(GameState.INTRO_CAVE);
+                    //EnableScreen();
+                    //StartCoroutine(LoadLevel());
                     break;
                 default:
                     break;
@@ -70,7 +72,7 @@ public class LevelChanger : MonoBehaviour
     {
         yield return new WaitForSeconds(transitionTime);
 
-        SceneManager.LoadScene("Scenes/" + GetLevelStr());
+        SceneManager.LoadScene(GetLevelStr());
     }
 
     private void EnableScreen()
