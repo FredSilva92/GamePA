@@ -23950,7 +23950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 272748781}
   _currentGameState:
-    value: 7
+    value: 8
   _gameStateList:
   - gameState: 0
     hasCutscene: 1
@@ -32925,7 +32925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1390593593
@@ -46263,7 +46263,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930957272}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.110375404, y: 0.000000017101248, z: -0.000000001899161, w: 0.99389}
+  m_LocalRotation: {x: 0.110375404, y: -0.000000017101248, z: 0.000000001899161, w: 0.99389}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
