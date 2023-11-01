@@ -79,6 +79,27 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         HideAllActionButtons();
+
+        // se a cena inicializada é da caverna e o estado atual é GO_TO_CAVE,
+        // quer dizer que passou da cena da floresta para a caverna
+        if (scene.name == "CaveAndPyramid" && CurrentGameState.Value == GameState.GO_TO_CAVE)
+        {
+            // reatribui as instâncias dos game objects do Game Manager da nova cena
+            _currentMapActions.Clear();
+            _player = GameObject.Find("Player");
+            _canvas = FindObjectOfType<Canvas>();
+
+            VideoPlayer introCaveCutscene = GameObject.Find("IntroCave").GetComponent<VideoPlayer>();
+            _gameStateList[7].cutscene = introCaveCutscene;
+            _mapActions[16].gameStateInfo.cutscene = introCaveCutscene;
+
+            ChangeGameState(GameState.INTRO_CAVE);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     /*
@@ -145,12 +166,7 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_GAME:
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
-                ConfigCutscene(nextGameState);
-                break;
-
-            // mostra a cutscene, trata do colisor no script LevelChanger e muda de cena
             case GameState.INTRO_CAVE:
-                SceneManager.LoadScene("CaveAndPyramid");
                 ConfigCutscene(nextGameState);
                 break;
 

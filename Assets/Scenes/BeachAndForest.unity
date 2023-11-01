@@ -39856,8 +39856,8 @@ MonoBehaviour:
     hasCutscene: 1
     cutscene: {fileID: 0}
     hasNewPosition: 1
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
+    position: {x: 69.99, y: -7.5266, z: 23.94}
+    rotation: {x: 0, y: 3.719, z: 0}
   - gameState: 8
     hasCutscene: 0
     cutscene: {fileID: 0}
@@ -40095,9 +40095,23 @@ MonoBehaviour:
       hasCutscene: 1
       cutscene: {fileID: 1355491713}
       hasNewPosition: 1
+      position: {x: 69.99, y: -7.5266, z: 23.94}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Intro to cave.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 17
+    gameStateInfo:
+      gameState: 8
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Intro to cave.
+    title: Follow the cave to maze.
     hasProgress: 1
     hasClick: 0
     button: {fileID: 0}
