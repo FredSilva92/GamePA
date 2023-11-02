@@ -15,7 +15,7 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private GameObject droppableItem;
 
-    private float _minDistance = 1f;
+    private float _minDistance = 2f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
 
@@ -31,6 +31,9 @@ public class EnemyScript : CharacterBase
 
     private NavMeshAgent agent;
     private Vector3 initialPosition;
+
+    private float timeWalking = 7f;
+    private float currentTimeWalking = 0f;
 
     void Start()
     {
@@ -49,6 +52,8 @@ public class EnemyScript : CharacterBase
             if (!hasDropped) DropItem();
             return;
         }
+
+        Debug.Log("dt: " + Time.deltaTime);
 
         Transform plTransform = player.transform;
         float playerDistance = Vector3.Distance(transform.position, plTransform.position);
@@ -84,23 +89,30 @@ public class EnemyScript : CharacterBase
             SetShootingAnimation(0.0f);
             StopShooting();
 
-            //Debug.Log("Remaining distance: " + agent.remainingDistance);
 
-            animator.SetBool(Animations.WALKING, agent.remainingDistance > 0.1f);
+            animator.SetBool(Animations.WALKING, agent.remainingDistance > 0.2f);
 
-            if (!agent.hasPath)
+            if (currentTimeWalking < 0)
             {
-                Invoke("RandomWalking", 4);
+                currentTimeWalking = timeWalking;
+                agent.isStopped = true;
+                animator.SetBool(Animations.WALKING, false);
+                RandomWalking();
+            } else
+            {
+                currentTimeWalking -= Time.deltaTime;
             }
         }
     }
 
     private void RandomWalking()
     {
-        destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, 7f);
+        destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, 5f);
 
         agent.SetDestination(destPoint);
-        CancelInvoke("RandomWalking");
+        transform.LookAt(destPoint);
+
+        agent.isStopped = false;
     }
 
     private void SetShootingAnimation(float fadeTime)
@@ -129,9 +141,12 @@ public class EnemyScript : CharacterBase
     private void FaceTarget()
     {
         Vector3 direction = (player.transform.position - transform.position);
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = lookRotation;
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Quaternion shootRotation = Quaternion.AngleAxis(20, transform.up) * lookRotation;
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, shootRotation, Time.deltaTime * 100);
+
+        transform.rotation = Quaternion.AngleAxis(15, transform.up) * lookRotation;
         agent.SetDestination(player.transform.position);
     }
 }
