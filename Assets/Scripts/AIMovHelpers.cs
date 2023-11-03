@@ -6,6 +6,6 @@ internal static class AIMovHelpers
     {
         Vector3 randomPoint = center + Random.insideUnitSphere * range;
 
-        return new Vector3(randomPoint.x, 0, randomPoint.z);
+        return randomPoint;
     }
 }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CinemachineBlenderSettings
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: Basic Camera
-    m_To: Combat Camera
+  - m_From: Basic
+    m_To: Combat
     m_Blend:
       m_Style: 6
       m_Time: 0.5
@@ -24,8 +24,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Combat Camera
-    m_To: Basic Camera
+  - m_From: Combat
+    m_To: Basic
     m_Blend:
       m_Style: 6
       m_Time: 0.5
