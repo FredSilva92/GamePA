@@ -53,8 +53,6 @@ public class EnemyScript : CharacterBase
             return;
         }
 
-        Debug.Log("dt: " + Time.deltaTime);
-
         Transform plTransform = player.transform;
         float playerDistance = Vector3.Distance(transform.position, plTransform.position);
         bool playerIsDead = playerData.IsDead;

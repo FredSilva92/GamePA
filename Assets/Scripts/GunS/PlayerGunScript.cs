@@ -22,6 +22,9 @@ public class PlayerGunScript : MonoBehaviour
     [SerializeField]
     protected float fireRate = 0;
 
+    [SerializeField]
+    protected GameObject crossHair;
+
     protected float time = 0;
 
     protected CharacterBase character;
@@ -53,22 +56,36 @@ public class PlayerGunScript : MonoBehaviour
 
         if (time >= nextTimeToFire)
         {
+
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
-                Vector3 screenCenter = new Vector3((Screen.width + Screen.width / 8) / 2f, (Screen.height) / 2f, Camera.main.transform.position.z);
-                Vector3 worldCenter = camera.ScreenToWorldPoint(screenCenter);
+                RectTransform crossHairRect = crossHair.GetComponent<RectTransform>();
 
-                Vector3 forceDirection = worldCenter - transform.position;
+                Vector3 crossHairCenter = GetCrossHairWorldCoordinates(crossHairRect);
+                Vector3 forceDirection = crossHairCenter - transform.position;
+
                 rb.AddForce(forceDirection * 0.05f, ForceMode.Impulse);
             }
             else
             {
+
                 rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z) * speed, ForceMode.Impulse);
             }
             time = 0;
         }
+    }
+
+    private Vector3 GetCrossHairWorldCoordinates(RectTransform crossHairRect)
+    {
+        Vector3[] screenCenter = new Vector3[4];
+        crossHairRect.GetWorldCorners(screenCenter);
+
+        float x = screenCenter[2].x + 20f;
+        float y = screenCenter[1].y + 10f;
+
+        return camera.ScreenToWorldPoint(new Vector3(x, y, camera.transform.position.z));
     }
 }
