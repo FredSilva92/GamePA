@@ -62,10 +62,10 @@ public class PlayerGunScript : MonoBehaviour
 
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
-                RectTransform crossHairRect = crossHair.GetComponent<RectTransform>();
+                Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2 , 100f);
+                Vector3 worldCenter = camera.ScreenToWorldPoint(screenCenter);
 
-                Vector3 crossHairCenter = GetCrossHairWorldCoordinates(crossHairRect);
-                Vector3 forceDirection = crossHairCenter - transform.position;
+                Vector3 forceDirection = worldCenter - transform.position;
 
                 rb.AddForce(forceDirection * 0.05f, ForceMode.Impulse);
             }
@@ -76,16 +76,5 @@ public class PlayerGunScript : MonoBehaviour
             }
             time = 0;
         }
-    }
-
-    private Vector3 GetCrossHairWorldCoordinates(RectTransform crossHairRect)
-    {
-        Vector3[] screenCenter = new Vector3[4];
-        crossHairRect.GetWorldCorners(screenCenter);
-
-        float x = screenCenter[2].x + 20f;
-        float y = screenCenter[1].y + 10f;
-
-        return camera.ScreenToWorldPoint(new Vector3(x, y, camera.transform.position.z));
     }
 }
