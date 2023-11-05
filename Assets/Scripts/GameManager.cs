@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UniRx;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     private bool _isChangingPositon;
     private Vector3 positionToChange;
     private Vector3 rotationToChange;
+
+    [SerializeField] public Camera _playerCamera;
 
 
     /* PROPRIEDADES */
@@ -326,6 +329,7 @@ public class GameManager : MonoBehaviour
                 if (_actionButtonsVisibilityDistance >= Utils.GetDistanceBetween2Objects(_player, mapAction.button))
                 {
                     mapAction.button.SetActive(true);
+                    CenterActionButtonInCamera(mapAction.button);
                 }
             }
         }
@@ -400,5 +404,14 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Ação sem progressão! Halley deve falar algo!");
             }
         }
+    }
+
+    private void CenterActionButtonInCamera(GameObject actionButton)
+    {
+        Vector3 cameraPosition = _playerCamera.transform.position;
+        Vector3 objectPosition = actionButton.transform.position;
+        Vector3 direction = cameraPosition - objectPosition;
+
+        actionButton.transform.rotation = Quaternion.LookRotation(direction);
     }
 }
