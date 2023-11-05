@@ -15,6 +15,9 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private GameObject droppableItem;
 
+    [SerializeField]
+    private float movingRadius = 5f;
+
     private float _minDistance = 2f;
     private float _maxDistance = 6f;
     private float shootWeight = 0.0f;
@@ -105,7 +108,7 @@ public class EnemyScript : CharacterBase
 
     private void RandomWalking()
     {
-        destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, 5f);
+        destPoint = AIMovHelpers.GetDestinationPoint(initialPosition, movingRadius);
 
         agent.SetDestination(destPoint);
         transform.LookAt(destPoint);
