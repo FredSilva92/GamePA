@@ -12,4 +12,8 @@ public enum GameState
     GO_TO_CAVE,     // quando segue o caminho depois do acampamento até à entrada da caverna
     INTRO_CAVE,     // quando passa da floresta para a caverna
     GO_TO_MAZE,     // quando segue o caminho da caverna até ao labirinto
+    GO_TO_PYRAMID,  // quando segue o caminho depois do labirinto até à pirâmide
+    INTRO_PYRAMID,  // quando passa do caminho armadilhado para a pirâmide
+    PICK_TREASURE,  // quando tem de derrotar os inimigos e pegar no tesouro
+    FINISH_GAME,    // quando passa de pegar o tesouro para a cutscene final
 }
