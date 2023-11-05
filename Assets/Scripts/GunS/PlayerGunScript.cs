@@ -22,6 +22,9 @@ public class PlayerGunScript : MonoBehaviour
     [SerializeField]
     protected float fireRate = 0;
 
+    [SerializeField]
+    protected GameObject crossHair;
+
     protected float time = 0;
 
     protected CharacterBase character;
@@ -53,19 +56,22 @@ public class PlayerGunScript : MonoBehaviour
 
         if (time >= nextTimeToFire)
         {
+
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
-                Vector3 screenCenter = new Vector3((Screen.width + Screen.width / 8) / 2f, (Screen.height) / 2f, Camera.main.transform.position.z);
+                Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2 , 100f);
                 Vector3 worldCenter = camera.ScreenToWorldPoint(screenCenter);
 
                 Vector3 forceDirection = worldCenter - transform.position;
+
                 rb.AddForce(forceDirection * 0.05f, ForceMode.Impulse);
             }
             else
             {
+
                 rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z) * speed, ForceMode.Impulse);
             }
             time = 0;
