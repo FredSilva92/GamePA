@@ -42,6 +42,8 @@ public class PlayerAnimations : MonoBehaviour
             return;
         }
 
+        animator.SetBool(Animations.DYING, false);
+
         animator.SetBool(Animations.PICKING, false);
 
         // ---------- SALTAR ----------
