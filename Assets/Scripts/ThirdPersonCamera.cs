@@ -53,8 +53,6 @@ public class ThirdPersonCam : MonoBehaviour
         Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
-        Debug.Log("transform: " + playerTransform.position);
-
         // roate player object
         if (currentStyle == CameraStyle.Basic)
         {

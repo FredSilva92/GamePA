@@ -12,6 +12,7 @@ public class Utils
         public static readonly string LAZER_BULLET_PLAYER = "LazerBulletPlayer";
         public static readonly string LAZER_BULLET_ENEMY = "LazerBulletEnemy";
         public static readonly string MEDICINE = "Medicine";
+        public static readonly string TREASURE = "Treasure";
     }
 
     public static class Animations
@@ -21,6 +22,7 @@ public class Utils
         public static readonly string PICKING = "isPicking";
         public static readonly string SHOOTING = "isShooting";
         public static readonly string JUMPING = "isJumping";
+        public static readonly string GRABING = "isGrabing";
     }
 
     public static class Environments

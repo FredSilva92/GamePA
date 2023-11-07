@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
@@ -15,4 +16,6 @@ public class CharacterBase : MonoBehaviour
     {
         get { return _isShooting; }
     }
+
+
 }
