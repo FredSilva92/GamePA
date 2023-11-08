@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Video;
 using UniRx;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,10 +32,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _lastCheckPointPos;
     private ThirdPersonMovement _playerScript;
 
-    public Vector3 LastCheckPointPos { 
-        get { return _lastCheckPointPos; }
-        set { _lastCheckPointPos = value; }
-    }
+    private PuzzleManager _puzzleManager;
 
 
     /* PROPRIEDADES */
@@ -60,6 +56,12 @@ public class GameManager : MonoBehaviour
     {
         get { return _currentMapActions; }
         set { _currentMapActions = value; }
+    }
+
+    public Vector3 LastCheckPointPos
+    {
+        get { return _lastCheckPointPos; }
+        set { _lastCheckPointPos = value; }
     }
 
 
@@ -120,6 +122,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
+
         // assina o observável para detetar mudanças de estado
         _currentGameState.Subscribe(gameState =>
         {
@@ -129,8 +132,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // não há necessidade de verificar se clicou no botão de ação,
-        // quando o estado é apenas de mostrar uma cutscene
+        // bloquea outras ações quando está a resolver o puzzle
+        if (_puzzleManager != null)
+        {
+            if (_puzzleManager.CheckPuzzleSolved())
+            {
+                Debug.Log("Resolveu puzzle");
+            }
+
+            _puzzleManager.DoPlay();
+
+            return;
+        }
 
         if (_player == null)
         {
@@ -143,7 +156,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        
+        // não há necessidade de verificar se clicou no botão de ação,
+        // quando o estado é apenas de mostrar uma cutscene
         if (_currentGameState.Value != GameState.INTRO_GAME ||
         _currentGameState.Value != GameState.INTRO_FOREST ||
         _currentGameState.Value != GameState.INTRO_CAMP ||
@@ -152,7 +166,6 @@ public class GameManager : MonoBehaviour
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
         }
-        
     }
 
     private void FixedUpdate()
@@ -191,6 +204,10 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_CAMP:
             case GameState.INTRO_CAVE:
                 ConfigCutscene(nextGameState);
+                break;
+
+            case GameState.SOLVE_PUZZLE:
+                _puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
                 break;
 
             default:
@@ -393,7 +410,8 @@ public class GameManager : MonoBehaviour
                 mapAction.hasClick = false;
             }
 
-            if (_currentGameState.Value == GameState.GO_TO_FOREST)
+            if (_currentGameState.Value == GameState.GO_TO_FOREST ||
+                _currentGameState.Value == GameState.GO_TO_PYRAMID)
             {
                 GameState nextGameState = GetNextGameState(_currentGameState.Value);
                 ChangeGameState(nextGameState);
@@ -437,7 +455,7 @@ public class GameManager : MonoBehaviour
 
     private void RestartGame()
     {
-        if(_lastCheckPointPos != null) _player.transform.position = _lastCheckPointPos;
+        if (_lastCheckPointPos != null) _player.transform.position = _lastCheckPointPos;
         _playerScript.IsDead = false;
         CancelInvoke(nameof(RestartGame));
     }
