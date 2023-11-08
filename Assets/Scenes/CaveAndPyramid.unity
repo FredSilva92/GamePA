@@ -971,6 +971,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
   m_PrefabInstance: {fileID: 18632176}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &28121436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28121437}
+  m_Layer: 0
+  m_Name: Cutscenes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28121437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28121436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.492159, y: 0.40319633, z: 128.85739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 954273967}
+  - {fileID: 892394914}
+  - {fileID: 1923568002}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &34339864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3046,72 +3080,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6966706505589406848, guid: 49a5f24a081cbbc44bd23d76c2869723, type: 3}
   m_PrefabInstance: {fileID: 91076050}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &96498976
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 96498977}
-  - component: {fileID: 96498978}
-  m_Layer: 0
-  m_Name: FinishGame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &96498977
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96498976}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1977516857}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &96498978
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96498976}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 54d537872ecec60449964736296de959, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 184830187}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1001 &104052020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9605,6 +9573,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740772123876876446, guid: 31c7e1268dad3b4469eb6d0fcb46c1bb, type: 3}
   m_PrefabInstance: {fileID: 281568502}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &285662507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285662508}
+  m_Layer: 0
+  m_Name: ActionButtons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285662508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285662507}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.129053, y: 3.6728911, z: 116.055824}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 644179775}
+  - {fileID: 1823729994}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &287163016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18005,90 +18006,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e348e7143b6247b488737e4be26fb038, type: 3}
---- !u!1 &523175755
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 523175756}
-  - component: {fileID: 523175757}
-  m_Layer: 0
-  m_Name: PickTreasure
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &523175756
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523175755}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.684, y: -1.4060001, z: 156.46}
-  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1118555454}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &523175757
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523175755}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51e4a45e200e45348ace479000266436, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 3.92, y: 4.19}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1001 &524375325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20444,90 +20361,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5239272197777735519, guid: e348e7143b6247b488737e4be26fb038, type: 3}
   m_PrefabInstance: {fileID: 584258526}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &586788702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 586788703}
-  - component: {fileID: 586788704}
-  m_Layer: 0
-  m_Name: PyramidEntrance
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &586788703
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 586788702}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.575, y: -1.4060001, z: 154.621}
-  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1118555454}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &586788704
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 586788702}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51e4a45e200e45348ace479000266436, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 3.92, y: 4.19}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1001 &587504616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22413,6 +22246,90 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffd77da92125de43beff28f0051721e, type: 3}
+--- !u!1 &644179774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644179775}
+  - component: {fileID: 644179776}
+  m_Layer: 0
+  m_Name: SolvePuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644179775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644179774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.395, y: -1.62, z: 160.571}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 285662508}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &644179776
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644179774}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 51e4a45e200e45348ace479000266436, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.92, y: 4.19}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1001 &644576807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30789,6 +30706,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740772123876876446, guid: 31c7e1268dad3b4469eb6d0fcb46c1bb, type: 3}
   m_PrefabInstance: {fileID: 889327153}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &892394913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892394914}
+  - component: {fileID: 892394915}
+  m_Layer: 0
+  m_Name: IntroPyramid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892394914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892394913}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 28121437}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &892394915
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892394913}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: ba69ece53929d6c45896fc2103a410e0, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &893499471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33565,6 +33548,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
   m_PrefabInstance: {fileID: 952732314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &954273966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954273967}
+  - component: {fileID: 954273968}
+  m_Layer: 0
+  m_Name: IntroCave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &954273967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954273966}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 28121437}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &954273968
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954273966}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: cf40dfeb0af0a4841aa7a4fd354b0fd3, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &955203702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35937,448 +35986,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
   m_PrefabInstance: {fileID: 1014502859}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1015057160
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1015057162}
-  - component: {fileID: 1015057161}
-  m_Layer: 0
-  m_Name: Manager_Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1015057161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015057160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20e63ddf822e75408d2a3147eced7f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 272748781}
-  _currentGameState:
-    value: 8
-  _gameStateList:
-  - gameState: 0
-    hasCutscene: 1
-    cutscene: {fileID: 0}
-    hasNewPosition: 1
-    position: {x: 69.7, y: -7.457, z: 25.35}
-    rotation: {x: 0, y: 3.719, z: 0}
-  - gameState: 1
-    hasCutscene: 1
-    cutscene: {fileID: 0}
-    hasNewPosition: 1
-    position: {x: 69.7, y: -7.457, z: 25.35}
-    rotation: {x: 0, y: 3.719, z: 0}
-  - gameState: 2
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 3
-    hasCutscene: 1
-    cutscene: {fileID: 0}
-    hasNewPosition: 1
-    position: {x: 64.869, y: -4.2548, z: 157.627}
-    rotation: {x: 0, y: 43.733, z: 0}
-  - gameState: 4
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 5
-    hasCutscene: 1
-    cutscene: {fileID: 0}
-    hasNewPosition: 1
-    position: {x: 34.14, y: -4.0862, z: 257.87}
-    rotation: {x: 0, y: 61.355, z: 0}
-  - gameState: 6
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 7
-    hasCutscene: 1
-    cutscene: {fileID: 1216132875}
-    hasNewPosition: 1
-    position: {x: 69.99, y: -7.5295, z: 23.94}
-    rotation: {x: 0, y: 3.719, z: 0}
-  - gameState: 8
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 9
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 10
-    hasCutscene: 1
-    cutscene: {fileID: 1266716063}
-    hasNewPosition: 1
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 11
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 12
-    hasCutscene: 1
-    cutscene: {fileID: 96498978}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  _mapActions:
-  - id: 1
-    gameStateInfo:
-      gameState: 0
-      hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
-    title: Intro to game.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 2
-    gameStateInfo:
-      gameState: 1
-      hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
-    title: Find a good place to hide the spaceship so the enemies don't see it.
-    hasProgress: 1
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 3
-    gameStateInfo:
-      gameState: 1
-      hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
-    title: Wrong hiding place 1 for ship.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 4
-    gameStateInfo:
-      gameState: 1
-      hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
-    title: Wrong hiding place 2 for ship.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 5
-    gameStateInfo:
-      gameState: 2
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Find the correct path to enter the forest where the cave that holds the
-      treasure is located.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 6
-    gameStateInfo:
-      gameState: 2
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Wrong path 1 to forest.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 7
-    gameStateInfo:
-      gameState: 2
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Wrong path 2 to forest.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 8
-    gameStateInfo:
-      gameState: 3
-      hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 64.869, y: -4.2548, z: 157.627}
-      rotation: {x: 0, y: 43.733, z: 0}
-    title: Intro to forest.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 9
-    gameStateInfo:
-      gameState: 4
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 1.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 10
-    gameStateInfo:
-      gameState: 4
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 2.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 11
-    gameStateInfo:
-      gameState: 4
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 3.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 12
-    gameStateInfo:
-      gameState: 4
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Be cautious, there will be an enemy camp. Find it.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 13
-    gameStateInfo:
-      gameState: 5
-      hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 34.14, y: -4.0862, z: 257.87}
-      rotation: {x: 0, y: 61.355, z: 0}
-    title: Intro to camp.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 14
-    gameStateInfo:
-      gameState: 6
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 4.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 15
-    gameStateInfo:
-      gameState: 6
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 5.
-    hasProgress: 0
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 1
-    isSingle: 0
-  - id: 16
-    gameStateInfo:
-      gameState: 6
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: It's time to continue the mission. Defeat the enemies and discover the
-      cave that guards the treasure.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 17
-    gameStateInfo:
-      gameState: 7
-      hasCutscene: 1
-      cutscene: {fileID: 1216132875}
-      hasNewPosition: 1
-      position: {x: 69.99, y: -7.5295, z: 23.94}
-      rotation: {x: 0, y: 3.719, z: 0}
-    title: Intro to cave.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 18
-    gameStateInfo:
-      gameState: 8
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Walk through the maze and find the way out. You can do it.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 19
-    gameStateInfo:
-      gameState: 9
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Head to the pyramid, be cautious of the booby-trapped floor, and solve
-      the puzzle.
-    hasProgress: 1
-    hasClick: 1
-    button: {fileID: 586788702}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 20
-    gameStateInfo:
-      gameState: 10
-      hasCutscene: 1
-      cutscene: {fileID: 1266716063}
-      hasNewPosition: 1
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Intro to pyramid.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 21
-    gameStateInfo:
-      gameState: 11
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Face the final battle and seize the treasure to save the cosmos.
-    hasProgress: 1
-    hasClick: 1
-    button: {fileID: 523175755}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 22
-    gameStateInfo:
-      gameState: 12
-      hasCutscene: 1
-      cutscene: {fileID: 96498978}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Finish the game.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  _actionButtonsVisibilityDistance: 20
-  _actionButtonsClickDistance: 2
-  _canvas: {fileID: 857343782}
-  _playerCamera: {fileID: 184830187}
---- !u!4 &1015057162
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015057160}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.695557, y: -1.02427, z: 126.56563}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1017490826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39819,39 +39426,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.499999, y: 0, z: 2.5}
   m_Center: {x: 0.00000047683716, y: 0, z: 0.000000059604645}
---- !u!1 &1118555453
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1118555454}
-  m_Layer: 0
-  m_Name: ActionButtons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1118555454
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118555453}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.129053, y: 3.6728911, z: 116.055824}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 586788703}
-  - {fileID: 523175756}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1125316599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43860,72 +43434,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010653347892, guid: d7ba4fe833670a140b9b6085652f0e26, type: 3}
   m_PrefabInstance: {fileID: 1213384423}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1216132873
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1216132874}
-  - component: {fileID: 1216132875}
-  m_Layer: 0
-  m_Name: IntroCave
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1216132874
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216132873}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1977516857}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &1216132875
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216132873}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: cf40dfeb0af0a4841aa7a4fd354b0fd3, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 184830187}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1001 &1217779999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45985,72 +45493,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740772123876876446, guid: 31c7e1268dad3b4469eb6d0fcb46c1bb, type: 3}
   m_PrefabInstance: {fileID: 1265290822}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1266716061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1266716062}
-  - component: {fileID: 1266716063}
-  m_Layer: 0
-  m_Name: IntroPyramid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1266716062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266716061}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1977516857}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &1266716063
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266716061}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: ba69ece53929d6c45896fc2103a410e0, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 184830187}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1001 &1268433831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49634,6 +49076,468 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
   m_PrefabInstance: {fileID: 1366000866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1366268183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1366268185}
+  - component: {fileID: 1366268184}
+  m_Layer: 0
+  m_Name: Manager_Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1366268184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366268183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20e63ddf822e75408d2a3147eced7f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 272748781}
+  _currentGameState:
+    value: 8
+  _gameStateList:
+  - gameState: 0
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 69.7, y: -7.457, z: 25.35}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 1
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 69.7, y: -7.457, z: 25.35}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 2
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 3
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 64.869, y: -4.2548, z: 157.627}
+    rotation: {x: 0, y: 43.733, z: 0}
+  - gameState: 4
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 5
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 34.14, y: -4.0862, z: 257.87}
+    rotation: {x: 0, y: 61.355, z: 0}
+  - gameState: 6
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 7
+    hasCutscene: 1
+    cutscene: {fileID: 954273968}
+    hasNewPosition: 1
+    position: {x: 69.99, y: -7.5295, z: 23.94}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 8
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 9
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 10
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 11
+    hasCutscene: 1
+    cutscene: {fileID: 892394915}
+    hasNewPosition: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 12
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 13
+    hasCutscene: 1
+    cutscene: {fileID: 1923568003}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  _mapActions:
+  - id: 1
+    gameStateInfo:
+      gameState: 0
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Intro to game.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 2
+    gameStateInfo:
+      gameState: 1
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Find a good place to hide the spaceship so the enemies don't see it.
+    hasProgress: 1
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 3
+    gameStateInfo:
+      gameState: 1
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Wrong hiding place 1 for ship.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 4
+    gameStateInfo:
+      gameState: 1
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 69.7, y: -7.457, z: 25.35}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Wrong hiding place 2 for ship.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 5
+    gameStateInfo:
+      gameState: 2
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Find the correct path to enter the forest where the cave that holds the
+      treasure is located.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 6
+    gameStateInfo:
+      gameState: 2
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Wrong path 1 to forest.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 7
+    gameStateInfo:
+      gameState: 2
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Wrong path 2 to forest.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 8
+    gameStateInfo:
+      gameState: 3
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 64.869, y: -4.2548, z: 157.627}
+      rotation: {x: 0, y: 43.733, z: 0}
+    title: Intro to forest.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 9
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 1.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 10
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 2.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 11
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 3.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 12
+    gameStateInfo:
+      gameState: 4
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Be cautious, there will be an enemy camp. Find it.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 13
+    gameStateInfo:
+      gameState: 5
+      hasCutscene: 1
+      cutscene: {fileID: 0}
+      hasNewPosition: 1
+      position: {x: 34.14, y: -4.0862, z: 257.87}
+      rotation: {x: 0, y: 61.355, z: 0}
+    title: Intro to camp.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 14
+    gameStateInfo:
+      gameState: 6
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 4.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 15
+    gameStateInfo:
+      gameState: 6
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Clue found 5.
+    hasProgress: 0
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 1
+    isSingle: 0
+  - id: 16
+    gameStateInfo:
+      gameState: 6
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: It's time to continue the mission. Defeat the enemies and discover the
+      cave that guards the treasure.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 17
+    gameStateInfo:
+      gameState: 7
+      hasCutscene: 1
+      cutscene: {fileID: 954273968}
+      hasNewPosition: 1
+      position: {x: 69.99, y: -7.5295, z: 23.94}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Intro to cave.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 18
+    gameStateInfo:
+      gameState: 8
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Walk through the maze and find the way out. You can do it.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 19
+    gameStateInfo:
+      gameState: 9
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Head to the pyramid, be cautious of the booby-trapped floor, and solve
+      the puzzle.
+    hasProgress: 1
+    hasClick: 1
+    button: {fileID: 644179774}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 20
+    gameStateInfo:
+      gameState: 10
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Solve the puzzle to enter the pyramid.
+    hasProgress: 0
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 21
+    gameStateInfo:
+      gameState: 11
+      hasCutscene: 1
+      cutscene: {fileID: 892394915}
+      hasNewPosition: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Intro to pyramid.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 22
+    gameStateInfo:
+      gameState: 11
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Face the final battle and seize the treasure to save the cosmos.
+    hasProgress: 1
+    hasClick: 1
+    button: {fileID: 1823729993}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 23
+    gameStateInfo:
+      gameState: 12
+      hasCutscene: 1
+      cutscene: {fileID: 1923568003}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Finish the game.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  _actionButtonsVisibilityDistance: 20
+  _actionButtonsClickDistance: 2
+  _canvas: {fileID: 857343782}
+  _playerCamera: {fileID: 184830187}
+--- !u!4 &1366268185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366268183}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.695557, y: -1.02427, z: 126.56563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1366289467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65200,6 +65104,90 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4733772755456769034, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
   m_PrefabInstance: {fileID: 1820414792}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1823729993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823729994}
+  - component: {fileID: 1823729995}
+  m_Layer: 0
+  m_Name: PickTreasure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1823729994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823729993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.684, y: -1.62, z: 158.28902}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 285662508}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1823729995
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823729993}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 51e4a45e200e45348ace479000266436, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.92, y: 4.19}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1001 &1824061737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69249,6 +69237,72 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.499999, y: 0, z: 2.5}
   m_Center: {x: 0.00000047683716, y: 0, z: 0.000000059604645}
+--- !u!1 &1923568001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1923568002}
+  - component: {fileID: 1923568003}
+  m_Layer: 0
+  m_Name: FinishGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1923568002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923568001}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 28121437}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &1923568003
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923568001}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 54d537872ecec60449964736296de959, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &1923701740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71127,40 +71181,6 @@ Transform:
   - {fileID: 1084205519}
   - {fileID: 2018638612}
   m_Father: {fileID: 490672492}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1977516856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1977516857}
-  m_Layer: 0
-  m_Name: Cutscenes
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1977516857
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977516856}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.492159, y: 0.40319633, z: 128.85739}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1216132874}
-  - {fileID: 1266716062}
-  - {fileID: 96498977}
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1977777073
 PrefabInstance:
@@ -76792,11 +76812,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2242020383033095221, guid: 9f7d87a21c39d974688037bf43292138, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000018988336
+      value: -0.000000018988336
       objectReference: {fileID: 0}
     - target: {fileID: 2242020383033095221, guid: 9f7d87a21c39d974688037bf43292138, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000030850345
+      value: 0.0000000030850345
       objectReference: {fileID: 0}
     - target: {fileID: 2261185234492572564, guid: 9f7d87a21c39d974688037bf43292138, type: 3}
       propertyPath: player
@@ -77121,10 +77141,10 @@ SceneRoots:
   - {fileID: 1985031220}
   - {fileID: 549069459}
   - {fileID: 7919502925073509573}
-  - {fileID: 1015057162}
+  - {fileID: 1366268185}
   - {fileID: 217174588}
-  - {fileID: 1977516857}
-  - {fileID: 1118555454}
+  - {fileID: 28121437}
+  - {fileID: 285662508}
   - {fileID: 2081950654}
   - {fileID: 141756321}
   - {fileID: 619326971}
