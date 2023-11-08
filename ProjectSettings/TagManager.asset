@@ -9,6 +9,7 @@ TagManager:
   - LazerBulletEnemy
   - Medicine
   - Forest
+  - Treasure
   layers:
   - Default
   - TransparentFX

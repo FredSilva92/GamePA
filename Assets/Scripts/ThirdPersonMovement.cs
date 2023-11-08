@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -68,6 +69,13 @@ public class ThirdPersonMovement : CharacterBase
     public bool IsPicking
     {
         get { return _isPicking; }
+    }
+
+    private bool _isGrabing = false;
+
+    public bool IsGrabing
+    {
+        get { return _isGrabing; }
     }
 
     [Header("Health")]
@@ -357,14 +365,29 @@ public class ThirdPersonMovement : CharacterBase
 
     private void CheckMedicineCollision(Collider collision)
     {
-        if (collision.gameObject.CompareTag(Utils.Constants.MEDICINE) && Input.GetButton(Utils.Constants.PICK) && !_isPicking)
+        if (Input.GetButton(Utils.Constants.PICK))
         {
-            _isPicking = true;
-            GameObject medicine = collision.gameObject.CloneViaSerialization();
+            if (collision.gameObject.CompareTag(Utils.Constants.MEDICINE) && !_isPicking)
+            {
+                OnItemIter(collision, PickUpMedicine, out _isPicking);
+            }
 
-            StartCoroutine(PickUpMedicine(medicine));
-            StartCoroutine(StopPickingAnimation());
+            if (collision.gameObject.CompareTag(Utils.Constants.TREASURE) && !_isGrabing)
+            {
+                OnItemIter(collision, GrabTreasure, out _isGrabing);
+            }
         }
+
+    }
+
+    private void OnItemIter(Collider collision, Func<GameObject, IEnumerator> IterFunc, out bool var) {
+
+        var = true;
+
+        GameObject item = collision.gameObject.CloneViaSerialization();
+
+        StartCoroutine(IterFunc(item));
+        StartCoroutine(StopPickingAnimation());
     }
 
     IEnumerator PickUpMedicine(GameObject medicine)
@@ -377,9 +400,17 @@ public class ThirdPersonMovement : CharacterBase
         Destroy(medicine);
     }
 
+    IEnumerator GrabTreasure(GameObject treasure)
+    {
+        yield return new WaitForSeconds(1f);
+
+        Destroy(treasure);
+    }
+
     IEnumerator StopPickingAnimation()
     {
         yield return new WaitForSeconds(2f);
         _isPicking = false;
+        _isGrabing = false;
     }
 }

@@ -30,6 +30,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public Camera _playerCamera;
 
+    private Vector3 _lastCheckPointPos;
+    private ThirdPersonMovement _playerScript;
+
+    public Vector3 LastCheckPointPos { 
+        get { return _lastCheckPointPos; }
+        set { _lastCheckPointPos = value; }
+    }
+
 
     /* PROPRIEDADES */
 
@@ -111,6 +119,7 @@ public class GameManager : MonoBehaviour
     */
     private void Start()
     {
+        _playerScript = _player.GetComponent<ThirdPersonMovement>();
         // assina o observável para detetar mudanças de estado
         _currentGameState.Subscribe(gameState =>
         {
@@ -122,17 +131,28 @@ public class GameManager : MonoBehaviour
     {
         // não há necessidade de verificar se clicou no botão de ação,
         // quando o estado é apenas de mostrar uma cutscene
-        if (_player)
+
+        if (_player == null)
         {
-            if (_currentGameState.Value != GameState.INTRO_GAME ||
-            _currentGameState.Value != GameState.INTRO_FOREST ||
-            _currentGameState.Value != GameState.INTRO_CAMP ||
-            _currentGameState.Value != GameState.INTRO_CAVE)
-            {
-                CheckActionButtonsVisibilityDistance();
-                CheckActionButtonsClickDistance();
-            }
+            return;
         }
+
+        if (_playerScript.IsDead)
+        {
+            Invoke(nameof(RestartGame), 4);
+            return;
+        }
+
+        
+        if (_currentGameState.Value != GameState.INTRO_GAME ||
+        _currentGameState.Value != GameState.INTRO_FOREST ||
+        _currentGameState.Value != GameState.INTRO_CAMP ||
+        _currentGameState.Value != GameState.INTRO_CAVE)
+        {
+            CheckActionButtonsVisibilityDistance();
+            CheckActionButtonsClickDistance();
+        }
+        
     }
 
     private void FixedUpdate()
@@ -413,5 +433,12 @@ public class GameManager : MonoBehaviour
         Vector3 direction = cameraPosition - objectPosition;
 
         actionButton.transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    private void RestartGame()
+    {
+        if(_lastCheckPointPos != null) _player.transform.position = _lastCheckPointPos;
+        _playerScript.IsDead = false;
+        CancelInvoke(nameof(RestartGame));
     }
 }

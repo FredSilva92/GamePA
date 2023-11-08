@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
@@ -8,10 +9,13 @@ public class CharacterBase : MonoBehaviour
     public bool IsDead
     {
         get { return _isDead; }
+        set { _isDead = value; }
     }
 
     public bool IsShooting
     {
         get { return _isShooting; }
     }
+
+
 }

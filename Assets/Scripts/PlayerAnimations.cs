@@ -41,8 +41,15 @@ public class PlayerAnimations : MonoBehaviour
             PlayAnimation(animator, Animations.PICKING);
             return;
         }
+        else if (thridPersonMovement.IsGrabing)
+        {
+            PlayAnimation(animator, Animations.GRABING);
+            return;
+        }
 
+        animator.SetBool(Animations.DYING, false);
         animator.SetBool(Animations.PICKING, false);
+        animator.SetBool(Animations.GRABING, false);
 
         // ---------- SALTAR ----------
         animator.SetBool(Animations.JUMPING, thridPersonMovement.IsJumping);
