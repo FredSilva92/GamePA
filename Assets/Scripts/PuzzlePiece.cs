@@ -9,4 +9,5 @@ public class PuzzlePiece
     public int id;              // identificador da peça
     public int position;        // posição da peça
     public GameObject piece;    // guarda o game object correspondente à peça na parede
+    public GameObject point;    // guarda o game object correspondente ao centro da posição da peça
 }

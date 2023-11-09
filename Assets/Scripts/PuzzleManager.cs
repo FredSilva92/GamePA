@@ -10,12 +10,52 @@ public class PuzzleManager : MonoBehaviour
     private PuzzlePiece _secondPiece;
 
 
+    private void Start()
+    {
+        InitializePuzzle();
+    }
+
     private void InitializePuzzle()
     {
-        foreach (PuzzlePiece puzzlePiece in _puzzlePieces)
-        {
+        PuzzlePiece originalPiece1 = _puzzlePieces[0];
+        PuzzlePiece originalPiece2 = _puzzlePieces[1];
+        PuzzlePiece originalPiece3 = _puzzlePieces[2];
+        PuzzlePiece originalPiece4 = _puzzlePieces[3];
+        PuzzlePiece originalPiece5 = _puzzlePieces[4];
+        PuzzlePiece originalPiece6 = _puzzlePieces[5];
+        PuzzlePiece originalPiece7 = _puzzlePieces[6];
+        PuzzlePiece originalPiece8 = _puzzlePieces[7];
+        PuzzlePiece originalPiece9 = _puzzlePieces[8];
 
-        }
+        Vector3 originalPositionPoint1 = _puzzlePieces[0].point.transform.localPosition;
+        Vector3 originalPositionPoint2 = _puzzlePieces[1].point.transform.localPosition;
+        Vector3 originalPositionPoint3 = _puzzlePieces[2].point.transform.localPosition;
+        Vector3 originalPositionPoint4 = _puzzlePieces[3].point.transform.localPosition;
+        Vector3 originalPositionPoint5 = _puzzlePieces[4].point.transform.localPosition;
+        Vector3 originalPositionPoint6 = _puzzlePieces[5].point.transform.localPosition;
+        Vector3 originalPositionPoint7 = _puzzlePieces[6].point.transform.localPosition;
+        Vector3 originalPositionPoint8 = _puzzlePieces[7].point.transform.localPosition;
+        Vector3 originalPositionPoint9 = _puzzlePieces[8].point.transform.localPosition;
+
+        _puzzlePieces[0].piece.transform.localPosition = originalPositionPoint9;
+        _puzzlePieces[1].piece.transform.localPosition = originalPositionPoint5;
+        _puzzlePieces[2].piece.transform.localPosition = originalPositionPoint8;
+        _puzzlePieces[3].piece.transform.localPosition = originalPositionPoint6;
+        _puzzlePieces[4].piece.transform.localPosition = originalPositionPoint7;
+        _puzzlePieces[5].piece.transform.localPosition = originalPositionPoint1;
+        _puzzlePieces[6].piece.transform.localPosition = originalPositionPoint4;
+        _puzzlePieces[7].piece.transform.localPosition = originalPositionPoint3;
+        _puzzlePieces[8].piece.transform.localPosition = originalPositionPoint2;
+
+        _puzzlePieces[0] = originalPiece9;
+        _puzzlePieces[1] = originalPiece5;
+        _puzzlePieces[2] = originalPiece8;
+        _puzzlePieces[3] = originalPiece6;
+        _puzzlePieces[4] = originalPiece7;
+        _puzzlePieces[5] = originalPiece1;
+        _puzzlePieces[6] = originalPiece4;
+        _puzzlePieces[7] = originalPiece3;
+        _puzzlePieces[8] = originalPiece2;
     }
 
     /*
@@ -31,8 +71,6 @@ public class PuzzleManager : MonoBehaviour
 
             if (CheckValidPlay(inputtedNumber))
             {
-                Debug.Log("Foi pressionada a tecla numérica: " + inputtedNumber);
-
                 // se AINDA NÃO escolheu a primeira peça, escolhe essa
                 // se JÁ escolheu a primeira, agora escolhe a segunda
                 if (_firstPiece == null)
@@ -43,7 +81,7 @@ public class PuzzleManager : MonoBehaviour
                 else
                 {
                     _secondPiece = ChoosePiece(inputtedNumber);
-                    MovePieces(_firstPiece, _secondPiece);
+                    MovePieces();
                 }
             }
         }
@@ -92,16 +130,16 @@ public class PuzzleManager : MonoBehaviour
         return null;
     }
 
-    private void MovePieces(PuzzlePiece firstPiece, PuzzlePiece secondPiece)
+    private void MovePieces()
     {
         // se ambas as peças existem, troca as peças
-        if (firstPiece != null && secondPiece != null)
+        if (_firstPiece != null && _secondPiece != null)
         {
-            int firstIndex = _puzzlePieces.IndexOf(firstPiece);
-            int secondIndex = _puzzlePieces.IndexOf(secondPiece);
+            int firstIndex = _puzzlePieces.IndexOf(_firstPiece);
+            int secondIndex = _puzzlePieces.IndexOf(_secondPiece);
 
             // troca as posições dos objetos na cena
-            Vector3 tempPosition = _puzzlePieces[firstIndex].piece.transform.position;
+            Vector3 tempPosition = _puzzlePieces[firstIndex].piece.transform.localPosition;
             //_puzzlePieces[firstIndex].piece.transform.position = _puzzlePieces[secondIndex].piece.transform.position;
             //_puzzlePieces[secondIndex].piece.transform.position = tempPosition;
 
@@ -109,14 +147,14 @@ public class PuzzleManager : MonoBehaviour
             //_puzzlePieces[firstIndex].position = _puzzlePieces[secondIndex].position;
             //_puzzlePieces[secondIndex].position = tempPositionValue;
 
-            _puzzlePieces[firstIndex] = firstPiece;
-            _puzzlePieces[secondIndex] = secondPiece;
+            _puzzlePieces[firstIndex].piece.transform.localPosition = _puzzlePieces[secondIndex].piece.transform.localPosition;
+            _puzzlePieces[secondIndex].piece.transform.localPosition = tempPosition;
 
-            _puzzlePieces[firstIndex].piece.transform.position = _puzzlePieces[secondIndex].piece.transform.position;
-            _puzzlePieces[secondIndex].piece.transform.position = tempPosition;
+            _puzzlePieces[firstIndex] = _firstPiece;
+            _puzzlePieces[secondIndex] = _secondPiece;
 
-            firstPiece = null;
-            secondPiece = null;
+            _firstPiece = null;
+            _secondPiece = null;
         }
     }
 
