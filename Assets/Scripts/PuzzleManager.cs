@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    /* ATRIBUTOS */
+
     [SerializeField] private int[] pieceOrder = { 6, 9, 8, 7, 2, 4, 5, 3, 1 };
 
     [SerializeField] private List<Transform> _wallPoints;
@@ -15,12 +17,33 @@ public class PuzzleManager : MonoBehaviour
     private int _firstPositionChosen = -1;
     private int _secondPositionChosen = -1;
 
+    private bool _isSolving = false;
+
+    [SerializeField] private GameObject _door;
+    private DoorAnimationManager _doorScript;
+    [SerializeField] private GameObject _pyramidEntranceCollider;
+
+
+    /* PROPRIEDADES */
+
+    public bool IsSolving
+    {
+        get { return _isSolving; }
+        set { _isSolving = value; }
+    }
+
+
+    /* MÉTODOS */
+
     /*
      * Embaralha a lista das peças do puzzle, de acordo com a ordem dada. 
      * E atualiza as posições das peças na parede.
     */
     private void Start()
     {
+        _doorScript = _door.GetComponent<DoorAnimationManager>();
+        _pyramidEntranceCollider.SetActive(false);
+
         ShufflePuzzle();
     }
 
@@ -166,5 +189,16 @@ public class PuzzleManager : MonoBehaviour
         }
 
         return isSolved;
+    }
+
+    /*
+     * Limpar os valores do turno anterior (troca de 2 peças).
+    */
+    public void AfterSolvePuzzle()
+    {
+        _isSolving = false;
+
+        _doorScript.StartMoving = true;
+        _pyramidEntranceCollider.SetActive(true);
     }
 }

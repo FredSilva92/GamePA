@@ -30,6 +30,7 @@ public class Utils
         public static readonly string FOREST = "Forest";
         public static readonly string CAMP = "Camp";
         public static readonly string CAVE = "Cave";
+        public static readonly string PYRAMID = "Pyramid";
 
         public static List<string> GetValues()
         {
