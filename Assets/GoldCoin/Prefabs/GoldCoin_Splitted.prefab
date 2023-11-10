@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1040210969204890602}
   m_Layer: 0
-  m_Name: GoldCoin_Splitted_Random
+  m_Name: GoldCoin_Splitted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,22 +196,22 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9082086926904958952}
-  - {fileID: 6300992292344284383}
   - {fileID: 330123043530754731}
-  - {fileID: 6074223673074601301}
   - {fileID: 6225616828465573848}
-  - {fileID: 327182342700666042}
   - {fileID: 2059450599360300838}
-  - {fileID: 8997170569138707467}
   - {fileID: 6343632353967914044}
-  - {fileID: 7750589363212954184}
   - {fileID: 1108771044510468090}
-  - {fileID: 8393129191878819493}
   - {fileID: 1865728674363628661}
-  - {fileID: 8875168755329939427}
   - {fileID: 2690745520271866665}
-  - {fileID: 359185215361614687}
   - {fileID: 7306049271569093378}
+  - {fileID: 6300992292344284383}
+  - {fileID: 6074223673074601301}
+  - {fileID: 327182342700666042}
+  - {fileID: 8997170569138707467}
+  - {fileID: 7750589363212954184}
+  - {fileID: 8393129191878819493}
+  - {fileID: 8875168755329939427}
+  - {fileID: 359185215361614687}
   - {fileID: 2541215314609398673}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 180}
@@ -308,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2541215314609398673}
   m_Layer: 0
-  m_Name: Point.09
+  m_Name: WallPoint.09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6074223673074601301}
   m_Layer: 0
-  m_Name: Point.02
+  m_Name: WallPoint.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8393129191878819493}
   m_Layer: 0
-  m_Name: Point.06
+  m_Name: WallPoint.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327182342700666042}
   m_Layer: 0
-  m_Name: Point.03
+  m_Name: WallPoint.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -764,7 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8875168755329939427}
   m_Layer: 0
-  m_Name: Point.07
+  m_Name: WallPoint.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6300992292344284383}
   m_Layer: 0
-  m_Name: Point.01
+  m_Name: WallPoint.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -909,7 +909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 359185215361614687}
   m_Layer: 0
-  m_Name: Point.08
+  m_Name: WallPoint.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,7 +940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7750589363212954184}
   m_Layer: 0
-  m_Name: Point.05
+  m_Name: WallPoint05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,7 +1054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8997170569138707467}
   m_Layer: 0
-  m_Name: Point.04
+  m_Name: WallPoint.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
