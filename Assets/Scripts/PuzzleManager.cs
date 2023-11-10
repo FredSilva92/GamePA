@@ -1,66 +1,68 @@
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PuzzleManager : MonoBehaviour
 {
+    /* ATRIBUTOS */
+
+    [SerializeField] private int[] pieceOrder = { 6, 9, 8, 7, 2, 4, 5, 3, 1 };
+
+    [SerializeField] private List<Transform> _wallPoints;
     [SerializeField] private List<PuzzlePiece> _puzzlePieces;
-    private PuzzlePiece _firstPiece;
-    private PuzzlePiece _secondPiece;
+
+    private PuzzlePiece _firstPiece = null;
+    private PuzzlePiece _secondPiece = null;
+    private int _firstPositionChosen = -1;
+    private int _secondPositionChosen = -1;
+
+    private bool _isSolving = false;
+
+    [SerializeField] private GameObject _door;
+    private DoorAnimationManager _doorScript;
+    [SerializeField] private GameObject _pyramidEntranceCollider;
 
 
-    private void Start()
+    /* PROPRIEDADES */
+
+    public bool IsSolving
     {
-        InitializePuzzle();
+        get { return _isSolving; }
+        set { _isSolving = value; }
     }
 
-    private void InitializePuzzle()
-    {
-        PuzzlePiece originalPiece1 = _puzzlePieces[0];
-        PuzzlePiece originalPiece2 = _puzzlePieces[1];
-        PuzzlePiece originalPiece3 = _puzzlePieces[2];
-        PuzzlePiece originalPiece4 = _puzzlePieces[3];
-        PuzzlePiece originalPiece5 = _puzzlePieces[4];
-        PuzzlePiece originalPiece6 = _puzzlePieces[5];
-        PuzzlePiece originalPiece7 = _puzzlePieces[6];
-        PuzzlePiece originalPiece8 = _puzzlePieces[7];
-        PuzzlePiece originalPiece9 = _puzzlePieces[8];
 
-        Vector3 originalPositionPoint1 = _puzzlePieces[0].point.transform.localPosition;
-        Vector3 originalPositionPoint2 = _puzzlePieces[1].point.transform.localPosition;
-        Vector3 originalPositionPoint3 = _puzzlePieces[2].point.transform.localPosition;
-        Vector3 originalPositionPoint4 = _puzzlePieces[3].point.transform.localPosition;
-        Vector3 originalPositionPoint5 = _puzzlePieces[4].point.transform.localPosition;
-        Vector3 originalPositionPoint6 = _puzzlePieces[5].point.transform.localPosition;
-        Vector3 originalPositionPoint7 = _puzzlePieces[6].point.transform.localPosition;
-        Vector3 originalPositionPoint8 = _puzzlePieces[7].point.transform.localPosition;
-        Vector3 originalPositionPoint9 = _puzzlePieces[8].point.transform.localPosition;
-
-        _puzzlePieces[0].piece.transform.localPosition = originalPositionPoint9;
-        _puzzlePieces[1].piece.transform.localPosition = originalPositionPoint5;
-        _puzzlePieces[2].piece.transform.localPosition = originalPositionPoint8;
-        _puzzlePieces[3].piece.transform.localPosition = originalPositionPoint6;
-        _puzzlePieces[4].piece.transform.localPosition = originalPositionPoint7;
-        _puzzlePieces[5].piece.transform.localPosition = originalPositionPoint1;
-        _puzzlePieces[6].piece.transform.localPosition = originalPositionPoint4;
-        _puzzlePieces[7].piece.transform.localPosition = originalPositionPoint3;
-        _puzzlePieces[8].piece.transform.localPosition = originalPositionPoint2;
-
-        _puzzlePieces[0] = originalPiece9;
-        _puzzlePieces[1] = originalPiece5;
-        _puzzlePieces[2] = originalPiece8;
-        _puzzlePieces[3] = originalPiece6;
-        _puzzlePieces[4] = originalPiece7;
-        _puzzlePieces[5] = originalPiece1;
-        _puzzlePieces[6] = originalPiece4;
-        _puzzlePieces[7] = originalPiece3;
-        _puzzlePieces[8] = originalPiece2;
-    }
+    /* MÉTODOS */
 
     /*
-     * Se a tecla pressionada for um número e converte o valor se a tecla for um número entre 0 a 9 e -1 se não for.
+     * Embaralha a lista das peças do puzzle, de acordo com a ordem dada. 
+     * E atualiza as posições das peças na parede.
     */
+    private void Start()
+    {
+        _doorScript = _door.GetComponent<DoorAnimationManager>();
+        _pyramidEntranceCollider.SetActive(false);
+
+        ShufflePuzzle();
+    }
+
+    private void ShufflePuzzle()
+    {
+        _puzzlePieces = _puzzlePieces.OrderBy(puzzlePiece => Array.IndexOf(pieceOrder, puzzlePiece.position)).ToList();
+
+        for (int i = 0; i < _puzzlePieces.Count; i++)
+        {
+            Vector3 newPosition = _wallPoints[i].localPosition;
+            UpdatePosition(i, newPosition);
+        }
+    }
+
+    private void UpdatePosition(int listIndex, Vector3 wallPosition)
+    {
+        _puzzlePieces[listIndex].piece.transform.localPosition = wallPosition;
+    }
+
     public void DoPlay()
     {
         // se uma tecla for pressionada
@@ -76,19 +78,24 @@ public class PuzzleManager : MonoBehaviour
                 if (_firstPiece == null)
                 {
                     _firstPiece = ChoosePiece(inputtedNumber);
+                    _firstPositionChosen = inputtedNumber;
                     return;
                 }
                 else
                 {
                     _secondPiece = ChoosePiece(inputtedNumber);
+                    _secondPositionChosen = inputtedNumber;
                     MovePieces();
+                    ResetValues();
                 }
             }
         }
     }
 
     /*
-     * Recebe a tecla pressionada e converte o valor se a tecla for um número entre 0 a 9 e -1 se não for.
+     * Recebe a tecla pressionada e converte o valor.
+     * 0 a 9 - se a tecla for um número.
+     * -1 - se não for.
     */
     private int GetNumericKeyValue()
     {
@@ -119,43 +126,53 @@ public class PuzzleManager : MonoBehaviour
 
     private PuzzlePiece ChoosePiece(int inputtedNumber)
     {
-        foreach (PuzzlePiece puzzlePiece in _puzzlePieces)
-        {
-            if (puzzlePiece.position == inputtedNumber)
-            {
-                return puzzlePiece;
-            }
-        }
+        PuzzlePiece puzzlePiece = _puzzlePieces[inputtedNumber - 1];
 
-        return null;
+        if (puzzlePiece != null)
+        {
+            return puzzlePiece;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void MovePieces()
     {
-        // se ambas as peças existem, troca as peças
-        if (_firstPiece != null && _secondPiece != null)
-        {
-            int firstIndex = _puzzlePieces.IndexOf(_firstPiece);
-            int secondIndex = _puzzlePieces.IndexOf(_secondPiece);
+        int firstIndex = _puzzlePieces.IndexOf(_firstPiece);
+        int secondIndex = _puzzlePieces.IndexOf(_secondPiece);
 
-            // troca as posições dos objetos na cena
-            Vector3 tempPosition = _puzzlePieces[firstIndex].piece.transform.localPosition;
-            //_puzzlePieces[firstIndex].piece.transform.position = _puzzlePieces[secondIndex].piece.transform.position;
-            //_puzzlePieces[secondIndex].piece.transform.position = tempPosition;
+        SwapPuzzlePiecePosition(firstIndex, secondIndex);
+        SwapPuzzlePieceInList(firstIndex, secondIndex);
+    }
 
-            //int tempPositionValue = _puzzlePieces[firstIndex].position;
-            //_puzzlePieces[firstIndex].position = _puzzlePieces[secondIndex].position;
-            //_puzzlePieces[secondIndex].position = tempPositionValue;
+    private void SwapPuzzlePiecePosition(int firstIndex, int secondIndex)
+    {
+        Vector3 firstWallPosition = _wallPoints[_firstPositionChosen - 1].localPosition;
+        Vector3 secondWallPosition = _wallPoints[_secondPositionChosen - 1].localPosition;
 
-            _puzzlePieces[firstIndex].piece.transform.localPosition = _puzzlePieces[secondIndex].piece.transform.localPosition;
-            _puzzlePieces[secondIndex].piece.transform.localPosition = tempPosition;
+        UpdatePosition(firstIndex, secondWallPosition);
+        UpdatePosition(secondIndex, firstWallPosition);
+    }
 
-            _puzzlePieces[firstIndex] = _firstPiece;
-            _puzzlePieces[secondIndex] = _secondPiece;
+    private void SwapPuzzlePieceInList(int firstIndex, int secondIndex)
+    {
+        PuzzlePiece tempPuzzlePiece = _puzzlePieces[firstIndex];
+        _puzzlePieces[firstIndex] = _puzzlePieces[secondIndex];
+        _puzzlePieces[secondIndex] = tempPuzzlePiece;
+    }
 
-            _firstPiece = null;
-            _secondPiece = null;
-        }
+    /*
+     * Limpar os valores do turno anterior (troca de 2 peças).
+    */
+    private void ResetValues()
+    {
+        _firstPiece = null;
+        _secondPiece = null;
+
+        _firstPositionChosen = -1;
+        _secondPositionChosen = -1;
     }
 
     public bool CheckPuzzleSolved()
@@ -172,5 +189,16 @@ public class PuzzleManager : MonoBehaviour
         }
 
         return isSolved;
+    }
+
+    /*
+     * Limpar os valores do turno anterior (troca de 2 peças).
+    */
+    public void AfterSolvePuzzle()
+    {
+        _isSolving = false;
+
+        _doorScript.StartMoving = true;
+        _pyramidEntranceCollider.SetActive(true);
     }
 }

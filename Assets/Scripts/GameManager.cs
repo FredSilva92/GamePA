@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameStateInfo> _gameStateList;
     [SerializeField] private List<MapAction> _mapActions;
 
-    [SerializeField] private float _actionButtonsVisibilityDistance;
-    [SerializeField] private float _actionButtonsClickDistance;
+    [SerializeField] private float _actionButtonsVisibilityDistance = 20f;
+    [SerializeField] private float _actionButtonsClickDistance = 2f;
 
     [SerializeField] private Canvas _canvas;
 
@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
     private Vector3 _lastCheckPointPos;
     private ThirdPersonMovement _playerScript;
 
-    private PuzzleManager _puzzleManager;
+    [SerializeField] private GameObject _puzzleManagerObject;
+    private PuzzleManager _puzzleManagerScript;
 
 
     /* PROPRIEDADES */
@@ -132,15 +133,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // bloquea outras ações quando está a resolver o puzzle
-        if (_puzzleManager != null)
+        // bloqueia outras ações quando está a resolver o puzzle
+        if (_puzzleManagerScript != null)
         {
-            if (_puzzleManager.CheckPuzzleSolved())
+            if (_puzzleManagerScript.IsSolving)
             {
-                Debug.Log("Resolveu puzzle");
-            }
+                if (_puzzleManagerScript.CheckPuzzleSolved())
+                {
+                    _puzzleManagerScript.AfterSolvePuzzle();
+                }
 
-            _puzzleManager.DoPlay();
+                _puzzleManagerScript.DoPlay();
+            }
 
             return;
         }
@@ -203,11 +207,13 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
             case GameState.INTRO_CAVE:
+            case GameState.INTRO_PYRAMID:
                 ConfigCutscene(nextGameState);
                 break;
 
             case GameState.SOLVE_PUZZLE:
-                _puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
+                _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
+                _puzzleManagerScript.IsSolving = true;
                 break;
 
             default:

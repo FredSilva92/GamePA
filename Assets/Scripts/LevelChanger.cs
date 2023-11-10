@@ -8,7 +8,8 @@ public class LevelChanger : MonoBehaviour
     {
         Forest,
         Camp,
-        Cave
+        Cave,
+        Pyramid
     };
 
     [SerializeField]
@@ -46,6 +47,10 @@ public class LevelChanger : MonoBehaviour
                     //EnableScreen();
                     //StartCoroutine(LoadLevel());
                     break;
+                case GameState.SOLVE_PUZZLE:
+                    gameManager.SetGameState(GameState.INTRO_PYRAMID);
+                    Destroy(this);
+                    break;
                 default:
                     break;
             }
@@ -62,6 +67,8 @@ public class LevelChanger : MonoBehaviour
                 return Utils.Environments.CAMP;
             case levelList.Cave:
                 return Utils.SceneNames.CAVE_AND_PYRAMID;
+            case levelList.Pyramid:
+                return Utils.Environments.PYRAMID;
             default:
                 return "";
         }
