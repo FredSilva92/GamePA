@@ -67,7 +67,7 @@ public class PlayerGunScript : MonoBehaviour
 
                 Vector3 forceDirection = worldCenter - transform.position;
 
-                rb.AddForce(forceDirection * 0.05f, ForceMode.Impulse);
+                rb.AddForce(forceDirection * 0.5f, ForceMode.Impulse);
             }
             else
             {

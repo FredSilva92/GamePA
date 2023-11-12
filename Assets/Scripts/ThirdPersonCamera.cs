@@ -1,10 +1,13 @@
+using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class ThirdPersonCam : MonoBehaviour
 {
     [Header("References")]
     public Transform orientation;
     public GameObject player;
+    public GameObject aimTarget;
     public Transform playerObj;
     public float rotationSpeed;
 
