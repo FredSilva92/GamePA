@@ -45,5 +45,6 @@ public class HealthManager : MonoBehaviour
 
     public void restoreHealth() {
         _currentHealth = _initialHealth;
+        UpdateBar();
     }
 }

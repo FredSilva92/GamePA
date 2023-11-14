@@ -116,7 +116,6 @@ public class ThirdPersonMovement : CharacterBase
     {
         if (_isDead)
         {
-            _healthManager.restoreHealth();
             return;
         };
 

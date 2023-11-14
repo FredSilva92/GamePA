@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/BeachAndForest.unity
     guid: 683ea810a740c3d4bafbf9a860a376d7
   - enabled: 1
-    path: Assets/Scenes/CaveAndPyramid.unity
+    path: Assets/Scenes/CaveAndPyramid3.unity
     guid: 3dd963076b5bb5046bb2bffc17dfcb78
   m_configObjects: {}
