@@ -42,4 +42,9 @@ public class HealthManager : MonoBehaviour
 
         _currentHealthImage.fillAmount = _currentHealth / _initialHealth;
     }
+
+    public void restoreHealth() {
+        _currentHealth = _initialHealth;
+        UpdateBar();
+    }
 }
