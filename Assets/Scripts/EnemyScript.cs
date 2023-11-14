@@ -52,6 +52,7 @@ public class EnemyScript : CharacterBase
         {
             StopShooting();
             PlayAnimation(animator, Animations.DYING);
+            GetComponent<CapsuleCollider>().enabled = false;
             if (!hasDropped) DropItem();
             return;
         }
