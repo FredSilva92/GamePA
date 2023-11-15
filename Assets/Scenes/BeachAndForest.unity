@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45502454, g: 0.5572461, b: 0.7288356, a: 1}
+  m_IndirectSpecularColor: {r: 0.45502508, g: 0.557247, b: 0.72883666, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2816,7 +2816,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -7912,7 +7912,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -12590,7 +12590,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439176276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05800655, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.058006555, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12880,7 +12880,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -14243,7 +14243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483890414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023717433, y: 0.025117593, z: 0.00059608073, w: 0.99940294}
+  m_LocalRotation: {x: -0.023715986, y: 0.027422702, z: 0.00065078435, w: 0.9993424}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19191,7 +19191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017243136, y: 0.029964793, z: 0.0005169963, w: 0.9994021}
+  m_LocalRotation: {x: -0.017241897, y: 0.032269884, z: 0.000556767, w: 0.9993303}
   m_LocalPosition: {x: 69.381516, y: -5.9850435, z: 20.45034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40108,7 +40108,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -44445,7 +44445,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -46890,7 +46890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017243138, y: 0.029964795, z: 0.0005169962, w: 0.9994021}
+  m_LocalRotation: {x: -0.017241884, y: 0.03226989, z: 0.0005567666, w: 0.99933034}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -50088,9 +50088,9 @@ MonoBehaviour:
   - gameState: 1
     hasCutscene: 1
     cutscene: {fileID: 2145835085}
-    hasNewPosition: 1
-    position: {x: 69.7, y: -7.457, z: 25.35}
-    rotation: {x: 0, y: 3.719, z: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
   - gameState: 2
     hasCutscene: 0
     cutscene: {fileID: 0}
@@ -50177,9 +50177,9 @@ MonoBehaviour:
       gameState: 1
       hasCutscene: 1
       cutscene: {fileID: 2145835085}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
     title: Find a good place to hide the spaceship so the enemies don't see it.
     hasProgress: 1
     hasClick: 1
@@ -50190,10 +50190,10 @@ MonoBehaviour:
     gameStateInfo:
       gameState: 1
       hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
+      cutscene: {fileID: 2145835085}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
     title: Wrong hiding place 1 for ship.
     hasProgress: 0
     hasClick: 1
@@ -50204,10 +50204,10 @@ MonoBehaviour:
     gameStateInfo:
       gameState: 1
       hasCutscene: 1
-      cutscene: {fileID: 0}
-      hasNewPosition: 1
-      position: {x: 69.7, y: -7.457, z: 25.35}
-      rotation: {x: 0, y: 3.719, z: 0}
+      cutscene: {fileID: 2145835085}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
     title: Wrong hiding place 2 for ship.
     hasProgress: 0
     hasClick: 1
@@ -56476,7 +56476,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.012298463, y: 0.014817987, z: 0.00018227226, w: 0.99981457}
+  m_LocalRotation: {x: -0.01229802, y: 0.017122934, z: 0.00021062505, w: 0.9997778}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58900,7 +58900,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -62955,7 +62955,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -63518,7 +63518,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2134167374}
-  - {fileID: 1206374108}
   - {fileID: 206342124}
   - {fileID: 39798817}
   - {fileID: 134895719}
@@ -63526,4 +63525,5 @@ SceneRoots:
   - {fileID: 809605330}
   - {fileID: 564788139}
   - {fileID: 1017854460}
+  - {fileID: 1206374108}
   - {fileID: 308752573}
