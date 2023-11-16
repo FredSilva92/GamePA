@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,6 +36,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _puzzleManagerObject;
     private PuzzleManager _puzzleManagerScript;
+
+    [SerializeField] private GameObject _currentActionPanel;
+    [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
 
 
     /* PROPRIEDADES */
@@ -92,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        HideCurrentActionLabel();
         HideAllActionButtons();
 
         // se a cena inicializada é da caverna e o estado atual é GO_TO_CAVE,
@@ -360,6 +366,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void HideCurrentActionLabel()
+    {
+        _currentActionPanel.SetActive(false);
+    }
+
+    /*
+     * Mostra o texto da ação atual apenas por 4 segundos e depois volta a desaparecer (apenas as que não tenhem progressão - caminhos errados ou pistas).
+    */
+    IEnumerator ShowAndHideActionLabel(string text)
+    {
+        _currentActionTextMeshPro.text = text;
+        _currentActionPanel.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
+
+        _currentActionPanel.SetActive(false);
+    }
+
     /*
      * Se o jogador estiver perto das ações de jogo, o botão de ação será visível, caso contrário continuará oculto.
     */
@@ -445,7 +469,7 @@ public class GameManager : MonoBehaviour
         {
             if (mapAction.hasDialogue)
             {
-                Debug.Log("Ação sem progressão! Halley deve falar algo!");
+                StartCoroutine(ShowAndHideActionLabel(mapAction.title));
             }
         }
     }
