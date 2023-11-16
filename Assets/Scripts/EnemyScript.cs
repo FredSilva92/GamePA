@@ -7,9 +7,6 @@ public class EnemyScript : CharacterBase
     private Animator animator;
 
     [SerializeField]
-    private float _speed = 2f;
-
-    [SerializeField]
     private GameObject player;
 
     [SerializeField]
@@ -44,6 +41,7 @@ public class EnemyScript : CharacterBase
         playerData = player.GetComponent<ThirdPersonMovement>();
         agent = GetComponent<NavMeshAgent>();
         initialPosition = transform.position;
+        agent.speed = 3.5f;
     }
 
     void Update()

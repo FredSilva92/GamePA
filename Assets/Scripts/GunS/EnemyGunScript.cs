@@ -16,7 +16,6 @@ public class EnemyGunScript : MonoBehaviour
     [SerializeField]
     protected Animator animator;
 
-    [SerializeField]
     protected float speed = 10f;
 
     [SerializeField]
