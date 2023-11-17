@@ -123,7 +123,7 @@ public class EnemyScript : CharacterBase
 
     private void OnTriggerEnter(Collider collision)
     {
-        Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
+        Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
     }
 
     private void DropItem()

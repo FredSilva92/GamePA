@@ -25,6 +25,13 @@ public class HealthManager : MonoBehaviour
         UpdateBar();
     }
 
+    public void TakeAllDamage()
+    {
+        _currentHealth = 0f;
+
+        UpdateBar();
+    }
+
     public void UpdateHealth(float healingAmount)
     {
         _currentHealth += healingAmount;

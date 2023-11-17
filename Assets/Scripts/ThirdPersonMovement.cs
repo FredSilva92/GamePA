@@ -344,7 +344,7 @@ public class ThirdPersonMovement : CharacterBase
 
     private void OnTriggerEnter(Collider collision)
     {
-        Utils.CheckIfWasHitShooted(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
+        Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
         CheckMedicineCollision(collision);
     }
 
