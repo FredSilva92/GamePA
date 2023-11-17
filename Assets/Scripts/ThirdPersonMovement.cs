@@ -116,6 +116,7 @@ public class ThirdPersonMovement : CharacterBase
     {
         if (_isDead)
         {
+            _isShooting = false;
             return;
         };
 
