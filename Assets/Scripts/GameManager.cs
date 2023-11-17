@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _currentActionPanel;
     [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
 
+    [SerializeField] private GameObject _starship;
+
 
     /* PROPRIEDADES */
 
@@ -220,6 +222,11 @@ public class GameManager : MonoBehaviour
             case GameState.SOLVE_PUZZLE:
                 _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
                 _puzzleManagerScript.IsSolving = true;
+                break;
+
+            case GameState.GO_TO_FOREST:
+                _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
+                _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
                 break;
 
             default:
