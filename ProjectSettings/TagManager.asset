@@ -10,6 +10,8 @@ TagManager:
   - Medicine
   - Forest
   - Treasure
+  - SpineRotation
+  - DeathCollider
   layers:
   - Default
   - TransparentFX

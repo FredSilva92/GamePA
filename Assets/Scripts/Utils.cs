@@ -14,6 +14,7 @@ public class Utils
         public static readonly string MEDICINE = "Medicine";
         public static readonly string TREASURE = "Treasure";
         public static readonly string SPINE_ROTATION = "SpineRotation";
+        public static readonly string DEATH_COLLDER = "DeathCollider";
     }
 
     public static class Animations
@@ -57,14 +58,20 @@ public class Utils
         animator.SetBool(animation, true);
     }
 
-    public static void CheckIfWasHitShooted(Collider collision, HealthManager healthManager, string bulletRef, ref bool isDead)
+    public static void CheckIfIsDead(Collider collision, HealthManager healthManager, string bulletRef, ref bool isDead)
     {
         if (collision.gameObject.CompareTag(bulletRef))
         {
             LaserBulletScript laserScript = collision.GetComponent<LaserBulletScript>();
             healthManager.TakeDamage(laserScript.Damage);
             isDead = healthManager.Health <= 0;
-        };
+        }
+
+        if (collision.gameObject.CompareTag(Constants.DEATH_COLLDER))
+        {
+            healthManager.TakeAllDamage();
+            isDead = true;
+        }
     }
 
     public static float GetDistanceBetween2Objects(GameObject object1, GameObject object2)

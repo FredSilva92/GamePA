@@ -67,7 +67,6 @@ public class PlayerAnimations : MonoBehaviour
 
         float fadeTime = isAiming ? 1.0f : 0.0f;
 
-
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.5f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);
 
