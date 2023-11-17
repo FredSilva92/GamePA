@@ -13,6 +13,7 @@ public class Utils
         public static readonly string LAZER_BULLET_ENEMY = "LazerBulletEnemy";
         public static readonly string MEDICINE = "Medicine";
         public static readonly string TREASURE = "Treasure";
+        public static readonly string SPINE_ROTATION = "SpineRotation";
     }
 
     public static class Animations

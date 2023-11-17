@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using static Utils;
 
 public class PlayerAnimations : MonoBehaviour
@@ -66,11 +67,13 @@ public class PlayerAnimations : MonoBehaviour
 
         float fadeTime = isAiming ? 1.0f : 0.0f;
 
-
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.5f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);
 
         animator.SetBool(Animations.SHOOTING, thridPersonMovement.IsShooting);
+
+        GameObject spineRotation = GameObject.FindGameObjectWithTag(Constants.SPINE_ROTATION);
+        spineRotation.GetComponent<OverrideTransform>().weight = thridPersonMovement.IsShooting ? 1f : 0f;
 
         Vector3 playerPosition = playerMainComp.transform.position;
 
