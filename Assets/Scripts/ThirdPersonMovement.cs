@@ -140,7 +140,7 @@ public class ThirdPersonMovement : CharacterBase
 
     private void FixedUpdate()
     {
-        if (_isDead)
+        if (_isDead || _isPicking)
         {
             return;
         };
