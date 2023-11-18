@@ -48,10 +48,6 @@ public class LevelChanger : MonoBehaviour
                     //EnableScreen();
                     //StartCoroutine(LoadLevel());
                     break;
-                case GameState.GO_TO_MAZE:
-                    gameManager.SetGameState(GameState.GO_TO_PYRAMID);
-                    Destroy(this);
-                    break;
                 case GameState.SOLVE_PUZZLE:
                     gameManager.SetGameState(GameState.INTRO_PYRAMID);
                     Destroy(this);

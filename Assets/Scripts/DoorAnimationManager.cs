@@ -31,9 +31,6 @@ public class DoorAnimationManager : MonoBehaviour
         }
     }
 
-    /*
-     * 
-    */
     IEnumerator MoveDoorToRight()
     {
         float elapsedtime = 0f;

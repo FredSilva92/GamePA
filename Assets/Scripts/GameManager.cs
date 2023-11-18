@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
@@ -25,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Canvas _canvas;
 
-    private bool _isChangingPositon;
+    private bool _isChangingPositon = false;
     private Vector3 positionToChange;
     private Vector3 rotationToChange;
 
@@ -88,40 +87,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        HideCurrentActionLabel();
-        HideAllActionButtons();
-
-        // se a cena inicializada é da caverna e o estado atual é GO_TO_CAVE,
-        // quer dizer que passou da cena da floresta para a caverna
-        if (scene.name == "CaveAndPyramid" && CurrentGameState.Value == GameState.GO_TO_CAVE)
-        {
-            // reatribui as instâncias dos game objects do Game Manager da nova cena
-            _currentMapActions.Clear();
-            _player = GameObject.Find("Player");
-            _canvas = FindObjectOfType<Canvas>();
-
-            VideoPlayer introCaveCutscene = GameObject.Find("IntroCave").GetComponent<VideoPlayer>();
-            _gameStateList[7].cutscene = introCaveCutscene;
-            _mapActions[16].gameStateInfo.cutscene = introCaveCutscene;
-
-            ChangeGameState(GameState.INTRO_CAVE);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     /*
@@ -130,6 +95,9 @@ public class GameManager : MonoBehaviour
     */
     private void Start()
     {
+        HideCurrentActionLabel();
+        HideAllActionButtons();
+
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
         // assina o observável para detetar mudanças de estado
@@ -171,9 +139,10 @@ public class GameManager : MonoBehaviour
         // não há necessidade de verificar se clicou no botão de ação,
         // quando o estado é apenas de mostrar uma cutscene
         if (_currentGameState.Value != GameState.INTRO_GAME ||
-        _currentGameState.Value != GameState.INTRO_FOREST ||
-        _currentGameState.Value != GameState.INTRO_CAMP ||
-        _currentGameState.Value != GameState.INTRO_CAVE)
+            _currentGameState.Value != GameState.INTRO_FOREST ||
+            _currentGameState.Value != GameState.INTRO_CAMP ||
+            _currentGameState.Value != GameState.INTRO_CAVE ||
+            _currentGameState.Value != GameState.INTRO_PYRAMID)
         {
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
@@ -219,14 +188,16 @@ public class GameManager : MonoBehaviour
                 ConfigCutscene(nextGameState);
                 break;
 
-            case GameState.SOLVE_PUZZLE:
-                _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
-                _puzzleManagerScript.IsSolving = true;
-                break;
-
+            // muda a posição da nave na praia
             case GameState.GO_TO_FOREST:
                 _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
                 _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
+                break;
+
+            // permite que o jogador comece a resolver o puzzle
+            case GameState.SOLVE_PUZZLE:
+                _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
+                _puzzleManagerScript.IsSolving = true;
                 break;
 
             default:
