@@ -15,8 +15,8 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private float movingRadius = 5f;
 
-    private float _minDistance = 2f;
-    private float _maxDistance = 6f;
+    private float _minDistance = 3f;
+    private float _maxDistance = 10f;
     private float shootWeight = 0.0f;
 
     private Vector3 inputs;
@@ -41,13 +41,14 @@ public class EnemyScript : CharacterBase
         playerData = player.GetComponent<ThirdPersonMovement>();
         agent = GetComponent<NavMeshAgent>();
         initialPosition = transform.position;
-        agent.speed = 3.5f;
+        agent.speed = 5f;
     }
 
     void Update()
     {
         if (_isDead)
         {
+            agent.isStopped = true;
             StopShooting();
             PlayAnimation(animator, Animations.DYING);
             GetComponent<CapsuleCollider>().enabled = false;
