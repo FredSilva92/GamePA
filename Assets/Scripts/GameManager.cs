@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
@@ -190,6 +191,7 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_CAMP:
             case GameState.INTRO_CAVE:
             case GameState.INTRO_PYRAMID:
+            case GameState.FINISH_GAME:
                 ConfigCutscene(nextGameState);
                 break;
 
@@ -307,6 +309,12 @@ public class GameManager : MonoBehaviour
             rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
 
             _isChangingPositon = true;
+        }
+
+        if (_currentGameState.Value == GameState.FINISH_GAME)
+        {
+            SceneManager.LoadScene("MainMenu");
+            return;
         }
 
         ChangeGameState(nextGameState);
@@ -457,7 +465,8 @@ public class GameManager : MonoBehaviour
             }
 
             if (_currentGameState.Value == GameState.GO_TO_FOREST ||
-                _currentGameState.Value == GameState.GO_TO_PYRAMID)
+                _currentGameState.Value == GameState.GO_TO_PYRAMID ||
+                _currentGameState.Value == GameState.PICK_TREASURE)
             {
                 GameState nextGameState = GetNextGameState(_currentGameState.Value);
                 ChangeGameState(nextGameState);
