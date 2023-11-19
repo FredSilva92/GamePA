@@ -505,7 +505,7 @@ public class GameManager : MonoBehaviour
         Vector3 objectPosition = actionButton.transform.position;
         Vector3 direction = cameraPosition - objectPosition;
 
-        actionButton.transform.rotation = Quaternion.LookRotation(direction);
+        actionButton.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180, 0);
     }
 
     private void RestartGame()
