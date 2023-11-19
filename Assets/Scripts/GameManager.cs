@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _puzzleManagerObject;
     private PuzzleManager _puzzleManagerScript;
 
+    [SerializeField] private GameObject _currentGoalPanel;
+    [SerializeField] private TextMeshProUGUI _currentGoalTextMeshPro;
+
     [SerializeField] private GameObject _currentActionPanel;
     [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
 
@@ -97,6 +100,8 @@ public class GameManager : MonoBehaviour
     {
         HideCurrentActionLabel();
         HideAllActionButtons();
+
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 30f);
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
@@ -190,8 +195,11 @@ public class GameManager : MonoBehaviour
 
             // muda a posição da nave na praia
             case GameState.GO_TO_FOREST:
-                _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
-                _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
+                if (_starship != null)
+                {
+                    _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
+                    _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
+                }
                 break;
 
             // permite que o jogador comece a resolver o puzzle
@@ -349,10 +357,15 @@ public class GameManager : MonoBehaviour
         _currentActionPanel.SetActive(false);
     }
 
+    private void HideCurrentGoalLabel()
+    {
+        _currentGoalPanel.SetActive(false);
+    }
+
     /*
      * Mostra o texto da ação atual apenas por 4 segundos e depois volta a desaparecer (apenas as que não tenhem progressão - caminhos errados ou pistas).
     */
-    IEnumerator ShowAndHideActionLabel(string text)
+    private IEnumerator ShowAndHideActionLabel(string text)
     {
         _currentActionTextMeshPro.text = text;
         _currentActionPanel.SetActive(true);
@@ -360,6 +373,31 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         _currentActionPanel.SetActive(false);
+    }
+
+    private void ShowAndHideGoalLoop()
+    {
+        StartCoroutine(ShowAndHideGoalLabel());
+    }
+
+    /*
+     * Mostra o texto do objetivo no canto superior direito apenas por 4 segundos a cada 20 segundos e depois volta a desaparecer.
+    */
+    private IEnumerator ShowAndHideGoalLabel()
+    {
+        foreach (MapAction mapAction in _currentMapActions)
+        {
+            if (mapAction.hasProgress)
+            {
+                _currentGoalTextMeshPro.text = mapAction.title;
+            }
+        }
+
+        _currentGoalPanel.SetActive(true);
+
+        yield return new WaitForSeconds(7f);
+
+        _currentGoalPanel.SetActive(false);
     }
 
     /*
