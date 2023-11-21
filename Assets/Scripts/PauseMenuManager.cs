@@ -7,8 +7,6 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
 
-    [SerializeField] private TextMeshProUGUI goalTextMeshPro;
-
     private void Start()
     {
         // oculta menu de pausa ao abrir a cena
@@ -45,8 +43,6 @@ public class PauseMenuManager : MonoBehaviour
         // congela o tempo
         Time.timeScale = 0;
 
-        DisplayCurrentGoal();
-
         isPaused = true;
         pauseMenuPanel.SetActive(true);
     }
@@ -69,10 +65,5 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1;
 
         SceneManager.LoadScene("MainMenu");
-    }
-
-    private void DisplayCurrentGoal()
-    {
-        goalTextMeshPro.text = GameManager.Instance.GetCurrentGoal();
     }
 }

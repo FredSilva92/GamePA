@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Canvas _canvas;
 
-    private bool _isChangingPositon;
+    private bool _isChangingPositon = false;
     private Vector3 positionToChange;
     private Vector3 rotationToChange;
 
@@ -34,6 +36,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _puzzleManagerObject;
     private PuzzleManager _puzzleManagerScript;
+
+    [SerializeField] private GameObject _currentGoalPanel;
+    [SerializeField] private TextMeshProUGUI _currentGoalTextMeshPro;
+
+    [SerializeField] private GameObject _currentActionPanel;
+    [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
+
+    [SerializeField] private GameObject _starship;
 
 
     /* PROPRIEDADES */
@@ -81,39 +91,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        HideAllActionButtons();
-
-        // se a cena inicializada é da caverna e o estado atual é GO_TO_CAVE,
-        // quer dizer que passou da cena da floresta para a caverna
-        if (scene.name == "CaveAndPyramid" && CurrentGameState.Value == GameState.GO_TO_CAVE)
-        {
-            // reatribui as instâncias dos game objects do Game Manager da nova cena
-            _currentMapActions.Clear();
-            _player = GameObject.Find("Player");
-            _canvas = FindObjectOfType<Canvas>();
-
-            VideoPlayer introCaveCutscene = GameObject.Find("IntroCave").GetComponent<VideoPlayer>();
-            _gameStateList[7].cutscene = introCaveCutscene;
-            _mapActions[16].gameStateInfo.cutscene = introCaveCutscene;
-
-            ChangeGameState(GameState.INTRO_CAVE);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     /*
@@ -122,6 +99,11 @@ public class GameManager : MonoBehaviour
     */
     private void Start()
     {
+        HideCurrentActionLabel();
+        HideAllActionButtons();
+
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 30f);
+
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
         // assina o observável para detetar mudanças de estado
@@ -163,9 +145,10 @@ public class GameManager : MonoBehaviour
         // não há necessidade de verificar se clicou no botão de ação,
         // quando o estado é apenas de mostrar uma cutscene
         if (_currentGameState.Value != GameState.INTRO_GAME ||
-        _currentGameState.Value != GameState.INTRO_FOREST ||
-        _currentGameState.Value != GameState.INTRO_CAMP ||
-        _currentGameState.Value != GameState.INTRO_CAVE)
+            _currentGameState.Value != GameState.INTRO_FOREST ||
+            _currentGameState.Value != GameState.INTRO_CAMP ||
+            _currentGameState.Value != GameState.INTRO_CAVE ||
+            _currentGameState.Value != GameState.INTRO_PYRAMID)
         {
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
@@ -208,9 +191,20 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_CAMP:
             case GameState.INTRO_CAVE:
             case GameState.INTRO_PYRAMID:
+            case GameState.FINISH_GAME:
                 ConfigCutscene(nextGameState);
                 break;
 
+            // muda a posição da nave na praia
+            case GameState.GO_TO_FOREST:
+                if (_starship != null)
+                {
+                    _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
+                    _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
+                }
+                break;
+
+            // permite que o jogador comece a resolver o puzzle
             case GameState.SOLVE_PUZZLE:
                 _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
                 _puzzleManagerScript.IsSolving = true;
@@ -317,6 +311,12 @@ public class GameManager : MonoBehaviour
             _isChangingPositon = true;
         }
 
+        if (_currentGameState.Value == GameState.FINISH_GAME)
+        {
+            SceneManager.LoadScene("MainMenu");
+            return;
+        }
+
         ChangeGameState(nextGameState);
     }
 
@@ -358,6 +358,54 @@ public class GameManager : MonoBehaviour
                 mapAction.button.SetActive(false);
             }
         }
+    }
+
+    private void HideCurrentActionLabel()
+    {
+        _currentActionPanel.SetActive(false);
+    }
+
+    private void HideCurrentGoalLabel()
+    {
+        _currentGoalPanel.SetActive(false);
+    }
+
+    /*
+     * Mostra o texto da ação atual apenas por 4 segundos e depois volta a desaparecer (apenas as que não tenhem progressão - caminhos errados ou pistas).
+    */
+    private IEnumerator ShowAndHideActionLabel(string text)
+    {
+        _currentActionTextMeshPro.text = text;
+        _currentActionPanel.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
+
+        _currentActionPanel.SetActive(false);
+    }
+
+    private void ShowAndHideGoalLoop()
+    {
+        StartCoroutine(ShowAndHideGoalLabel());
+    }
+
+    /*
+     * Mostra o texto do objetivo no canto superior direito apenas por 4 segundos a cada 20 segundos e depois volta a desaparecer.
+    */
+    private IEnumerator ShowAndHideGoalLabel()
+    {
+        foreach (MapAction mapAction in _currentMapActions)
+        {
+            if (mapAction.hasProgress)
+            {
+                _currentGoalTextMeshPro.text = mapAction.title;
+            }
+        }
+
+        _currentGoalPanel.SetActive(true);
+
+        yield return new WaitForSeconds(7f);
+
+        _currentGoalPanel.SetActive(false);
     }
 
     /*
@@ -417,7 +465,8 @@ public class GameManager : MonoBehaviour
             }
 
             if (_currentGameState.Value == GameState.GO_TO_FOREST ||
-                _currentGameState.Value == GameState.GO_TO_PYRAMID)
+                _currentGameState.Value == GameState.GO_TO_PYRAMID ||
+                _currentGameState.Value == GameState.PICK_TREASURE)
             {
                 GameState nextGameState = GetNextGameState(_currentGameState.Value);
                 ChangeGameState(nextGameState);
@@ -445,7 +494,7 @@ public class GameManager : MonoBehaviour
         {
             if (mapAction.hasDialogue)
             {
-                Debug.Log("Ação sem progressão! Halley deve falar algo!");
+                StartCoroutine(ShowAndHideActionLabel(mapAction.title));
             }
         }
     }
@@ -456,7 +505,7 @@ public class GameManager : MonoBehaviour
         Vector3 objectPosition = actionButton.transform.position;
         Vector3 direction = cameraPosition - objectPosition;
 
-        actionButton.transform.rotation = Quaternion.LookRotation(direction);
+        actionButton.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180, 0);
     }
 
     private void RestartGame()

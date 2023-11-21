@@ -9,6 +9,7 @@ public class LevelChanger : MonoBehaviour
         Forest,
         Camp,
         Cave,
+        AfterMaze,
         Pyramid
     };
 
@@ -57,6 +58,22 @@ public class LevelChanger : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Player"))
+        {
+            switch (gameManager.CurrentGameState.Value)
+            {
+                case GameState.GO_TO_MAZE:
+                    gameManager.SetGameState(GameState.GO_TO_PYRAMID);
+                    Destroy(this);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     private string GetLevelStr()
     {
         switch (Level)
@@ -67,6 +84,8 @@ public class LevelChanger : MonoBehaviour
                 return Utils.Environments.CAMP;
             case levelList.Cave:
                 return Utils.SceneNames.CAVE_AND_PYRAMID;
+            case levelList.AfterMaze:
+                return Utils.Environments.AFTER_MAZE;
             case levelList.Pyramid:
                 return Utils.Environments.PYRAMID;
             default:
