@@ -15,6 +15,7 @@ public class Utils
         public static readonly string TREASURE = "Treasure";
         public static readonly string SPINE_ROTATION = "SpineRotation";
         public static readonly string DEATH_COLLDER = "DeathCollider";
+        public static readonly string PLAYER_TAG = "Player";
     }
 
     public static class Animations
