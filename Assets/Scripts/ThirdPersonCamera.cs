@@ -38,9 +38,8 @@ public class ThirdPersonCam : MonoBehaviour
     private void Update()
     {
         ThirdPersonMovement playerScript = player.GetComponent<ThirdPersonMovement>();
-        float rigWeight = 0f;
 
-        if (playerScript.IsDead || playerScript.IsPicking)
+        if (playerScript.IsDead || playerScript.IsPicking || Cursor.lockState == CursorLockMode.None)
         {
             return;
         }
