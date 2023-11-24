@@ -13,6 +13,8 @@ public class CheckpointScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag(Utils.Constants.PLAYER_TAG)) return;
+        
         gameManagerInstance.LastCheckPointPos = transform.position;
     }
 }

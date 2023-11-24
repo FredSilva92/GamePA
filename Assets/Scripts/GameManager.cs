@@ -115,6 +115,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (_player == null)
+        {
+            return;
+        }
+
+        if (_playerScript.IsDead)
+        {
+            Invoke(nameof(RestartGame), 4);
+            return;
+        }
         // bloqueia outras ações quando está a resolver o puzzle
         if (_puzzleManagerScript != null)
         {
@@ -128,17 +138,6 @@ public class GameManager : MonoBehaviour
                 _puzzleManagerScript.DoPlay();
             }
 
-            return;
-        }
-
-        if (_player == null)
-        {
-            return;
-        }
-
-        if (_playerScript.IsDead)
-        {
-            Invoke(nameof(RestartGame), 4);
             return;
         }
 

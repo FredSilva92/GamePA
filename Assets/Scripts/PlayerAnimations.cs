@@ -48,6 +48,11 @@ public class PlayerAnimations : MonoBehaviour
             return;
         }
 
+        if (Cursor.lockState == CursorLockMode.None)
+        {
+            return;
+        }
+
         animator.SetBool(Animations.DYING, false);
         animator.SetBool(Animations.PICKING, false);
         animator.SetBool(Animations.GRABING, false);
