@@ -22,6 +22,7 @@ public class PickTreasureManager : MonoBehaviour
             if (_enemiesInPyramid.Count == 0)
             {
                 _gameManager.CurrentMapActions[0].hasClick = true;
+                _gameManager.CurrentMapActions[0].button.SetActive(true);
                 Destroy(this);
                 return;
             }

@@ -200,5 +200,7 @@ public class PuzzleManager : MonoBehaviour
 
         _doorScript.StartMoving = true;
         _pyramidEntranceCollider.SetActive(true);
+
+        Destroy(this);
     }
 }

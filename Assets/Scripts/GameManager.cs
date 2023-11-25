@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
             Invoke(nameof(RestartGame), 4);
             return;
         }
+
         // bloqueia outras ações quando está a resolver o puzzle
         if (_puzzleManagerScript != null)
         {
@@ -312,6 +313,7 @@ public class GameManager : MonoBehaviour
 
         if (_currentGameState.Value == GameState.FINISH_GAME)
         {
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("MainMenu");
             return;
         }
