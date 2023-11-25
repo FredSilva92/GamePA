@@ -12456,7 +12456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439176276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05800655, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.058006555, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46967,7 +46967,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.01724341, y: 0.029418493, z: 0.0005075704, w: 0.9994183}
+  m_LocalRotation: {x: -0.017243417, y: 0.029418493, z: 0.0005075706, w: 0.9994183}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -51591,8 +51591,8 @@ Transform:
   m_GameObject: {fileID: 1703734827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9420501, z: -0, w: -0.3354722}
-  m_LocalPosition: {x: 84.88, y: 38.95, z: 222.78}
-  m_LocalScale: {x: 0.1659496, y: 9.428705, z: 10.760377}
+  m_LocalPosition: {x: 84.02, y: 36.82, z: 223.88}
+  m_LocalScale: {x: 0.1659496, y: 4.2790227, z: 3.4895782}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 12145635}
@@ -56620,7 +56620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.012298564, y: 0.014271766, z: 0.00017555339, w: 0.9998225}
+  m_LocalRotation: {x: -0.012298566, y: 0.014271766, z: 0.0001755534, w: 0.9998225}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -59533,7 +59533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016554226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11310568, y: -0.0000000042739914, z: 4.865348e-10, w: 0.99358296}
+  m_LocalRotation: {x: 0.11310568, y: 0.000000004273992, z: -4.8653487e-10, w: 0.99358296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
