@@ -12,7 +12,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private float shootWeight = 0.0f;
 
-    private ThirdPersonMovement thridPersonMovement;
+    private ThirdPersonMovement thirdPersonMovement;
 
     private int layerShootIdx;
     private bool _isShooting;
@@ -24,7 +24,7 @@ public class PlayerAnimations : MonoBehaviour
 
     void Start()
     {
-        thridPersonMovement = playerMainComp.GetComponent<ThirdPersonMovement>();
+        thirdPersonMovement = playerMainComp.GetComponent<ThirdPersonMovement>();
         animator = GetComponent<Animator>();
         layerShootIdx = animator.GetLayerIndex(Constants.SHOOT);
     }
@@ -32,17 +32,17 @@ public class PlayerAnimations : MonoBehaviour
     void Update()
     {
         // ---------- MORRER ----------
-        if (thridPersonMovement.IsDead)
+        if (thirdPersonMovement.IsDead)
         {
             PlayAnimation(animator, Animations.DYING);
             return;
         }
-        else if (thridPersonMovement.IsPicking)
+        else if (thirdPersonMovement.IsPicking)
         {
             PlayAnimation(animator, Animations.PICKING);
             return;
         }
-        else if (thridPersonMovement.IsGrabing)
+        else if (thirdPersonMovement.IsGrabing)
         {
             PlayAnimation(animator, Animations.GRABING);
             return;
@@ -53,8 +53,10 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetBool(Animations.GRABING, false);
 
         // ---------- SALTAR ----------
-        animator.SetBool(Animations.JUMPING, thridPersonMovement.IsJumping);
+        animator.SetBool(Animations.JUMPING, thirdPersonMovement.IsJumping);
 
+        // ---------- Correr ----------
+        animator.SetBool(Animations.RUNNING, thirdPersonMovement.IsRunning);
 
         // ---------- ANDAR ----------
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -70,10 +72,10 @@ public class PlayerAnimations : MonoBehaviour
         shootWeight = Mathf.Lerp(shootWeight, fadeTime, 0.5f);
         animator.SetLayerWeight(layerShootIdx, shootWeight);
 
-        animator.SetBool(Animations.SHOOTING, thridPersonMovement.IsShooting);
+        animator.SetBool(Animations.SHOOTING, thirdPersonMovement.IsShooting);
 
         GameObject spineRotation = GameObject.FindGameObjectWithTag(Constants.SPINE_ROTATION);
-        spineRotation.GetComponent<OverrideTransform>().weight = thridPersonMovement.IsShooting ? 1f : 0f;
+        spineRotation.GetComponent<OverrideTransform>().weight = thirdPersonMovement.IsShooting ? 1f : 0f;
 
         Vector3 playerPosition = playerMainComp.transform.position;
 
