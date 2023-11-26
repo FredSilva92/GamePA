@@ -372,14 +372,19 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Mostra o texto da ação atual apenas por 4 segundos e depois volta a desaparecer (apenas as que não tenhem progressão - caminhos errados ou pistas).
+     * Mostra o texto da ação atual e fala, apenas por 4 segundos e depois volta a desaparecer
     */
-    private IEnumerator ShowAndHideActionLabel(string text)
+    private IEnumerator ShowAndHideActionLabel(string text, GameObject dialogueObject)
     {
+        AudioSource dialogueSource = dialogueObject.GetComponent<AudioSource>();
+        float dialogueDuration = dialogueSource.clip.length;
+
+        dialogueSource.Play();
+
         _currentActionTextMeshPro.text = text;
         _currentActionPanel.SetActive(true);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(dialogueDuration + 1f);
 
         _currentActionPanel.SetActive(false);
     }
@@ -495,7 +500,7 @@ public class GameManager : MonoBehaviour
         {
             if (mapAction.hasDialogue)
             {
-                StartCoroutine(ShowAndHideActionLabel(mapAction.title));
+                StartCoroutine(ShowAndHideActionLabel(mapAction.title, mapAction.dialogue));
             }
         }
     }

@@ -13,5 +13,6 @@ public class MapAction
     public bool hasClick;                   // se a ação é preciso pressionar 'F'
     public GameObject button;               // guarda o game object para que ação seja clicável
     public bool hasDialogue;                // para determinar se o personagem irá falar
+    public GameObject dialogue;             // guarda o game object para que a personagem fale
     public bool isSingle;                   // se esta ação só pode ser feita exclusivamente uma vez
 }
