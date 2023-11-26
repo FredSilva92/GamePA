@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45502454, g: 0.5572461, b: 0.7288356, a: 1}
+  m_IndirectSpecularColor: {r: 0.32555112, g: 0.40205997, b: 0.5303371, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2769,72 +2769,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87133445}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &89036267
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 89036268}
-  - component: {fileID: 89036269}
-  m_Layer: 0
-  m_Name: IntroPyramid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &89036268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89036267}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 564788139}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &89036269
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89036267}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: ba69ece53929d6c45896fc2103a410e0, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 680776768}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 5
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1 &102127771
 GameObject:
   m_ObjectHideFlags: 0
@@ -14109,7 +14043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483890414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023718506, y: 0.023246853, z: 0.000551685, w: 0.99944824}
+  m_LocalRotation: {x: -0.023717748, y: 0.024571288, z: 0.00058311585, w: 0.99941653}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15805,9 +15739,6 @@ Transform:
   - {fileID: 2145835084}
   - {fileID: 293340518}
   - {fileID: 443252862}
-  - {fileID: 1355491712}
-  - {fileID: 89036268}
-  - {fileID: 1506140911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &567437663
@@ -19057,7 +18988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017244073, y: 0.02809405, z: 0.00048471938, w: 0.9994564}
+  m_LocalRotation: {x: -0.01724341, y: 0.029418493, z: 0.00050757057, w: 0.9994183}
   m_LocalPosition: {x: 69.381516, y: -5.9850435, z: 20.45034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29480,10 +29411,10 @@ Transform:
   - {fileID: 1226809506}
   - {fileID: 1077235897}
   - {fileID: 1564984488}
+  - {fileID: 1969492117}
   - {fileID: 141723022}
   - {fileID: 2018037510}
   - {fileID: 166219746}
-  - {fileID: 1969492117}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1021747622
@@ -40063,72 +39994,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9095784887643905698, guid: 4c22dade7f9c21b44b6cea88848f5e8d, type: 3}
   m_PrefabInstance: {fileID: 1351887732}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1355491711
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1355491712}
-  - component: {fileID: 1355491713}
-  m_Layer: 0
-  m_Name: IntroCave
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1355491712
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355491711}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 564788139}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &1355491713
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355491711}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: cf40dfeb0af0a4841aa7a4fd354b0fd3, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 680776768}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 5
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1001 &1357614087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44505,72 +44370,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503472251}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1506140910
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1506140911}
-  - component: {fileID: 1506140912}
-  m_Layer: 0
-  m_Name: FinishGame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1506140911
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506140910}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.844, y: 2.35, z: -13.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 564788139}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &1506140912
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506140910}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 54d537872ecec60449964736296de959, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 680776768}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 5
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1 &1511499603
 GameObject:
   m_ObjectHideFlags: 0
@@ -46971,7 +46770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017244082, y: 0.02809405, z: 0.0004847196, w: 0.99945647}
+  m_LocalRotation: {x: -0.017243413, y: 0.029418493, z: 0.0005075705, w: 0.9994183}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -50383,48 +50182,6 @@ MonoBehaviour:
     hasNewPosition: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
-  - gameState: 7
-    hasCutscene: 1
-    cutscene: {fileID: 0}
-    hasNewPosition: 1
-    position: {x: 69.99, y: -7.5266, z: 23.94}
-    rotation: {x: 0, y: 3.719, z: 0}
-  - gameState: 8
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 9
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 10
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 11
-    hasCutscene: 1
-    cutscene: {fileID: 89036269}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 12
-    hasCutscene: 0
-    cutscene: {fileID: 0}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-  - gameState: 13
-    hasCutscene: 1
-    cutscene: {fileID: 1506140912}
-    hasNewPosition: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
   _mapActions:
   - id: 1
     gameStateInfo:
@@ -50462,7 +50219,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong hiding place 1 for ship.
+    title: Wrong hiding place for ship.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1218464066}
@@ -50476,7 +50233,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong hiding place 2 for ship.
+    title: Wrong hiding place for ship.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 586841397}
@@ -50505,7 +50262,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong path 1 to forest.
+    title: Wrong path to forest.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1226809505}
@@ -50519,7 +50276,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong path 2 to forest.
+    title: Wrong path to forest.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1077235896}
@@ -50547,7 +50304,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 1.
+    title: Ahh, the pirates must already be here.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1564984487}
@@ -50561,7 +50318,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 2.
+    title: These cans may have served some purpose.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1969492116}
@@ -50575,7 +50332,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 3.
+    title: Humn, pirates leave their mark wherever they go.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 141723021}
@@ -50617,7 +50374,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 4.
+    title: Another insignia left by the pirates.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 2018037509}
@@ -50631,7 +50388,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Clue found 5.
+    title: Why did they leave a knife stabbed into wood??
     hasProgress: 0
     hasClick: 1
     button: {fileID: 166219745}
@@ -50647,91 +50404,6 @@ MonoBehaviour:
       rotation: {x: 0, y: 0, z: 0}
     title: It's time to continue the mission. Defeat the enemies and discover the
       cave that guards the treasure.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 17
-    gameStateInfo:
-      gameState: 7
-      hasCutscene: 1
-      cutscene: {fileID: 1355491713}
-      hasNewPosition: 1
-      position: {x: 69.99, y: -7.5266, z: 23.94}
-      rotation: {x: 0, y: 3.719, z: 0}
-    title: Intro to cave.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 18
-    gameStateInfo:
-      gameState: 8
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Walk through the maze and find the way out. You can do it.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 19
-    gameStateInfo:
-      gameState: 9
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Head to the pyramid, be cautious of the booby-trapped floor, and solve
-      the puzzle.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 20
-    gameStateInfo:
-      gameState: 10
-      hasCutscene: 1
-      cutscene: {fileID: 89036269}
-      hasNewPosition: 1
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Intro to pyramid.
-    hasProgress: 1
-    hasClick: 0
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 21
-    gameStateInfo:
-      gameState: 11
-      hasCutscene: 0
-      cutscene: {fileID: 0}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Face the final battle and seize the treasure to save the cosmos.
-    hasProgress: 1
-    hasClick: 1
-    button: {fileID: 0}
-    hasDialogue: 0
-    isSingle: 1
-  - id: 22
-    gameStateInfo:
-      gameState: 12
-      hasCutscene: 1
-      cutscene: {fileID: 1506140912}
-      hasNewPosition: 0
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-    title: Finish the game.
     hasProgress: 1
     hasClick: 0
     button: {fileID: 0}
@@ -51722,8 +51394,8 @@ Transform:
   m_GameObject: {fileID: 1703734827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9420501, z: -0, w: -0.3354722}
-  m_LocalPosition: {x: 84.88, y: 38.95, z: 222.78}
-  m_LocalScale: {x: 0.1659496, y: 9.428705, z: 10.760377}
+  m_LocalPosition: {x: 84.02, y: 36.82, z: 223.88}
+  m_LocalScale: {x: 0.1659496, y: 4.279023, z: 3.489578}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 12145635}
@@ -56751,7 +56423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.012298798, y: 0.012947583, z: 0.0001592651, w: 0.99984056}
+  m_LocalRotation: {x: -0.012298569, y: 0.014271765, z: 0.00017555343, w: 0.9998225}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
