@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.5
+  m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.32555112, g: 0.40205997, b: 0.5303371, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.45502454, g: 0.5572461, b: 0.7288356, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12456,7 +12456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439176276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.058006555, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.05800655, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14109,7 +14109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483890414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023717748, y: 0.024571288, z: 0.00058311585, w: 0.99941653}
+  m_LocalRotation: {x: -0.023718506, y: 0.023246853, z: 0.000551685, w: 0.99944824}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19057,7 +19057,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.01724341, y: 0.029418493, z: 0.00050757057, w: 0.9994183}
+  m_LocalRotation: {x: -0.017244073, y: 0.02809405, z: 0.00048471938, w: 0.9994564}
   m_LocalPosition: {x: 69.381516, y: -5.9850435, z: 20.45034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -39915,6 +39915,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: runSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860151913032744127, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 481978292}
@@ -46967,7 +46971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017243417, y: 0.029418493, z: 0.0005075706, w: 0.9994183}
+  m_LocalRotation: {x: -0.017244082, y: 0.02809405, z: 0.0004847196, w: 0.99945647}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -50335,7 +50339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1348621370}
   _currentGameState:
-    value: 1
+    value: 0
   _gameStateList:
   - gameState: 0
     hasCutscene: 1
@@ -50379,6 +50383,48 @@ MonoBehaviour:
     hasNewPosition: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
+  - gameState: 7
+    hasCutscene: 1
+    cutscene: {fileID: 0}
+    hasNewPosition: 1
+    position: {x: 69.99, y: -7.5266, z: 23.94}
+    rotation: {x: 0, y: 3.719, z: 0}
+  - gameState: 8
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 9
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 10
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 11
+    hasCutscene: 1
+    cutscene: {fileID: 89036269}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 12
+    hasCutscene: 0
+    cutscene: {fileID: 0}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  - gameState: 13
+    hasCutscene: 1
+    cutscene: {fileID: 1506140912}
+    hasNewPosition: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
   _mapActions:
   - id: 1
     gameStateInfo:
@@ -50416,7 +50462,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong hiding place for ship.
+    title: Wrong hiding place 1 for ship.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1218464066}
@@ -50430,7 +50476,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong hiding place for ship.
+    title: Wrong hiding place 2 for ship.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 586841397}
@@ -50459,7 +50505,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong path to forest.
+    title: Wrong path 1 to forest.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1226809505}
@@ -50473,7 +50519,7 @@ MonoBehaviour:
       hasNewPosition: 0
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
-    title: Wrong path to forest.
+    title: Wrong path 2 to forest.
     hasProgress: 0
     hasClick: 1
     button: {fileID: 1077235896}
@@ -50601,6 +50647,91 @@ MonoBehaviour:
       rotation: {x: 0, y: 0, z: 0}
     title: It's time to continue the mission. Defeat the enemies and discover the
       cave that guards the treasure.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 17
+    gameStateInfo:
+      gameState: 7
+      hasCutscene: 1
+      cutscene: {fileID: 1355491713}
+      hasNewPosition: 1
+      position: {x: 69.99, y: -7.5266, z: 23.94}
+      rotation: {x: 0, y: 3.719, z: 0}
+    title: Intro to cave.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 18
+    gameStateInfo:
+      gameState: 8
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Walk through the maze and find the way out. You can do it.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 19
+    gameStateInfo:
+      gameState: 9
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Head to the pyramid, be cautious of the booby-trapped floor, and solve
+      the puzzle.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 20
+    gameStateInfo:
+      gameState: 10
+      hasCutscene: 1
+      cutscene: {fileID: 89036269}
+      hasNewPosition: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Intro to pyramid.
+    hasProgress: 1
+    hasClick: 0
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 21
+    gameStateInfo:
+      gameState: 11
+      hasCutscene: 0
+      cutscene: {fileID: 0}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Face the final battle and seize the treasure to save the cosmos.
+    hasProgress: 1
+    hasClick: 1
+    button: {fileID: 0}
+    hasDialogue: 0
+    isSingle: 1
+  - id: 22
+    gameStateInfo:
+      gameState: 12
+      hasCutscene: 1
+      cutscene: {fileID: 1506140912}
+      hasNewPosition: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    title: Finish the game.
     hasProgress: 1
     hasClick: 0
     button: {fileID: 0}
@@ -51591,8 +51722,8 @@ Transform:
   m_GameObject: {fileID: 1703734827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9420501, z: -0, w: -0.3354722}
-  m_LocalPosition: {x: 84.02, y: 36.82, z: 223.88}
-  m_LocalScale: {x: 0.1659496, y: 4.2790227, z: 3.4895782}
+  m_LocalPosition: {x: 84.88, y: 38.95, z: 222.78}
+  m_LocalScale: {x: 0.1659496, y: 9.428705, z: 10.760377}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 12145635}
@@ -56620,7 +56751,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.012298566, y: 0.014271766, z: 0.0001755534, w: 0.9998225}
+  m_LocalRotation: {x: -0.012298798, y: 0.012947583, z: 0.0001592651, w: 0.99984056}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -59533,7 +59664,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016554226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11310568, y: 0.000000004273992, z: -4.8653487e-10, w: 0.99358296}
+  m_LocalRotation: {x: 0.11310568, y: -0.0000000042739914, z: 4.865348e-10, w: 0.99358296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

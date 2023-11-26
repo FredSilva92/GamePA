@@ -11,6 +11,7 @@ public class ThirdPersonMovement : CharacterBase
     private float lastDesiredMoveSpeed;
     public float walkSpeed;
     public float airMinSpeed;
+    public float runSpeed;
 
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
@@ -96,6 +97,13 @@ public class ThirdPersonMovement : CharacterBase
         get { return _isJumping; }
     }
 
+    private bool _isRunning = false;
+
+    public bool IsRunning
+    {
+        get { return _isRunning; }
+    }
+
     private string _currentEnvironment;
 
     public string CurrentEnvironment { get { return _currentEnvironment; } }
@@ -152,6 +160,8 @@ public class ThirdPersonMovement : CharacterBase
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        _isRunning = Input.GetKey(KeyCode.LeftShift);
 
         // when to jump
         if (Input.GetKeyDown(jumpKey) && grounded && !_isJumping)
@@ -211,6 +221,12 @@ public class ThirdPersonMovement : CharacterBase
             }
         }
 
+        if (grounded && _isRunning)
+        {
+            currentState = MovementState.walking;
+            desiredMoveSpeed = runSpeed;
+        }
+
         lastDesiredMoveSpeed = desiredMoveSpeed;
 
         // deactivate keepMomentum
@@ -250,6 +266,12 @@ public class ThirdPersonMovement : CharacterBase
 
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        moveDirection.Normalize();
+
+        float speedMultiplier = _isRunning ? runSpeed : walkSpeed;
+
+        rb.AddForce(moveDirection.normalized * speedMultiplier, ForceMode.Acceleration);
 
         // on slope
         if (OnSlope() && !exitingSlope)
