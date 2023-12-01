@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Canvas _canvas;
 
+    [SerializeField] private AudioSource _audioSource;
+
     private bool _isChangingPositon = false;
     private Vector3 positionToChange;
     private Vector3 rotationToChange;
@@ -288,6 +290,12 @@ public class GameManager : MonoBehaviour
 
     private void OnCutsceneStart(VideoPlayer videoPlayer)
     {
+        if (_audioSource != null && _audioSource.isPlaying)
+        {
+            _audioSource.Pause();
+        }
+
+
         Time.timeScale = 0f;
 
         _canvas.enabled = false;
@@ -297,6 +305,11 @@ public class GameManager : MonoBehaviour
 
     private void OnCutsceneEnd(VideoPlayer videoPlayer, GameState nextGameState)
     {
+        if (_audioSource != null && !_audioSource.isPlaying)
+        {
+            _audioSource.UnPause();
+        }
+
         _canvas.enabled = true;
         videoPlayer.enabled = false;
 
