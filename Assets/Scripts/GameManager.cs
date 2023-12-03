@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
@@ -187,20 +188,29 @@ public class GameManager : MonoBehaviour
         // configurações específicas na mudança de estado
         switch (nextGameState)
         {
-            // mostra a cutscene e trata do colisor no script LevelChanger
+            // mostra a cutscene externa e trata do colisor no script LevelChanger
             case GameState.INTRO_GAME:
+            case GameState.FINISH_GAME:
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
             case GameState.INTRO_CAVE:
             case GameState.INTRO_PYRAMID:
-            case GameState.FINISH_GAME:
-                ConfigCutscene(nextGameState);
+                ConfigVideoCutscene(nextGameState);
                 break;
 
-            // muda a posição da nave na praia
+            // mostra a cutscene dentro do unity e trata do colisor no script LevelChanger
+            //case GameState.INTRO_FOREST:
+            //case GameState.INTRO_CAMP:
+            //case GameState.INTRO_CAVE:
+            //case GameState.INTRO_PYRAMID:
+                //ConfigTimelineCutscene(nextGameState);
+                break;
+
+            // muda a posi??o da nave na praia
             case GameState.GO_TO_FOREST:
                 if (_starship != null)
                 {
+                    _starship.SetActive(true);
                     _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
                     _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
                 }
@@ -278,23 +288,36 @@ public class GameManager : MonoBehaviour
         _currentGameState.Value = newGameState;
     }
 
-    private void ConfigCutscene(GameState nextGameState)
+    private void ConfigVideoCutscene(GameState nextGameState)
     {
-        OnCutsceneStart(_currentMapActions[0].gameStateInfo.cutscene);
+        OnVideoCutsceneStart(_currentMapActions[0].gameStateInfo.videoCutscene);
 
         nextGameState = GetNextGameState(_currentGameState.Value);
 
         // evento de término da cutscene
-        _currentMapActions[0].gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(_currentMapActions[0].gameStateInfo.cutscene, nextGameState);
+        _currentMapActions[0].gameStateInfo.videoCutscene.loopPointReached += (videoPlayer) => OnVideoCutsceneEnd(_currentMapActions[0].gameStateInfo.videoCutscene, nextGameState);
     }
 
-    private void OnCutsceneStart(VideoPlayer videoPlayer)
+    private void ConfigTimelineCutscene(GameState nextGameState)
+    {
+        GameObject timelineObject = _currentMapActions[0].gameStateInfo.timelineCutscene;
+        PlayableDirector timeline = timelineObject.GetComponent<PlayableDirector>();
+
+        timeline.played += (timelineObject) => OnTimelineCutsceneStart(timeline, _currentMapActions[0].gameStateInfo.timelineCutscene);
+        OnTimelineCutsceneStart(timeline, timelineObject);
+
+        nextGameState = GetNextGameState(_currentGameState.Value);
+
+        // evento de término da cutscene
+        timeline.stopped += (timeline) => OnTimelineCutsceneEnd(timeline, timelineObject, nextGameState);
+    }
+
+    private void OnVideoCutsceneStart(VideoPlayer videoPlayer)
     {
         if (_audioSource != null && _audioSource.isPlaying)
         {
             _audioSource.Pause();
         }
-
 
         Time.timeScale = 0f;
 
@@ -303,7 +326,7 @@ public class GameManager : MonoBehaviour
         videoPlayer.Play();
     }
 
-    private void OnCutsceneEnd(VideoPlayer videoPlayer, GameState nextGameState)
+    private void OnVideoCutsceneEnd(VideoPlayer videoPlayer, GameState nextGameState)
     {
         if (_audioSource != null && !_audioSource.isPlaying)
         {
@@ -332,6 +355,45 @@ public class GameManager : MonoBehaviour
         }
 
         ChangeGameState(nextGameState);
+    }
+
+    private void OnTimelineCutsceneStart(PlayableDirector timeline, GameObject timelineObject)
+    {
+        _player.SetActive(false);
+
+        if (_audioSource != null && _audioSource.isPlaying)
+        {
+            _audioSource.Pause();
+        }
+
+        _canvas.enabled = false;
+
+        timelineObject.SetActive(true);
+        timeline.Play();
+    }
+
+    private void OnTimelineCutsceneEnd(PlayableDirector timeline, GameObject timelineObject, GameState nextGameState)
+    {
+        if (_audioSource != null && !_audioSource.isPlaying)
+        {
+            _audioSource.UnPause();
+        }
+
+        _canvas.enabled = true;
+        timelineObject.SetActive(false);
+
+        if (_currentMapActions[0].gameStateInfo.hasNewPosition)
+        {
+            int lastGameStateInfoIndex = GetLastGameStateInfoIndex();
+            positionToChange = _gameStateList[lastGameStateInfoIndex].position;
+            rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
+
+            _isChangingPositon = true;
+        }
+
+        ChangeGameState(nextGameState);
+
+        _player.SetActive(true);
     }
 
     private void ChangeGameState(GameState newGameState)
@@ -493,12 +555,33 @@ public class GameManager : MonoBehaviour
 
             if (mapAction.gameStateInfo.hasCutscene)
             {
-                OnCutsceneStart(mapAction.gameStateInfo.cutscene);
+                if (mapAction.gameStateInfo.cutsceneType == CutsceneType.EXTERNAL)
+                {
+                    OnVideoCutsceneStart(mapAction.gameStateInfo.videoCutscene);
 
-                GameState nextGameState = GetNextGameState(_currentGameState.Value);
+                    GameState nextGameState = GetNextGameState(_currentGameState.Value);
 
-                // evento de término da cutscene
-                mapAction.gameStateInfo.cutscene.loopPointReached += (videoPlayer) => OnCutsceneEnd(mapAction.gameStateInfo.cutscene, nextGameState);
+                    // evento de término da cutscene
+                    mapAction.gameStateInfo.videoCutscene.loopPointReached += (videoPlayer) => OnVideoCutsceneEnd(mapAction.gameStateInfo.videoCutscene, nextGameState);
+                }
+                else if (mapAction.gameStateInfo.cutsceneType == CutsceneType.INSIDE_EDITOR)
+                {
+                    if (_currentGameState.Value == GameState.HIDE_SHIP)
+                    {
+                        _starship.SetActive(false);
+                    }
+
+                    GameObject timelineObject = mapAction.gameStateInfo.timelineCutscene;
+                    PlayableDirector timeline = timelineObject.GetComponent<PlayableDirector>();
+
+                    timeline.played += (timelineObject) => OnTimelineCutsceneStart(timeline, mapAction.gameStateInfo.timelineCutscene);
+                    OnTimelineCutsceneStart(timeline, timelineObject);
+
+                    GameState nextGameState = GetNextGameState(_currentGameState.Value);
+
+                    // evento de término da cutscene
+                    timeline.stopped += (timeline) => OnTimelineCutsceneEnd(timeline, timelineObject, nextGameState);
+                }
             }
         }
     }
