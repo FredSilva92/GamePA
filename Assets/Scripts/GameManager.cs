@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
                 ConfigTimelineCutscene(nextGameState);
                 break;
 
-            // muda a posi??o da nave na praia
+            // muda a posição da nave na praia
             case GameState.GO_TO_FOREST:
                 _starship.SetActive(true);
                 _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);

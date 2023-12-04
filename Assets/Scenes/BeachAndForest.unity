@@ -3887,7 +3887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 114174549}
   m_Layer: 5
-  m_Name: Panel_Cutscenes
+  m_Name: Panel_Cutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15627,7 +15627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475101442}
   m_Layer: 5
-  m_Name: Panel_Cutscenes
+  m_Name: Panel_Cutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15972,7 +15972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483890414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.02370896, y: -0.036664147, z: -0.0008700987, w: 0.999046}
+  m_LocalRotation: {x: -0.023715176, y: -0.028655771, z: -0.0006800474, w: 0.99930775}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21108,7 +21108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017242145, y: -0.031826165, z: -0.0005491112, w: 0.9993445}
+  m_LocalRotation: {x: -0.017245967, y: -0.023815531, z: -0.00041089937, w: 0.9995675}
   m_LocalPosition: {x: 69.381516, y: -5.9850435, z: 20.45034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35686,7 +35686,7 @@ GameObject:
   - component: {fileID: 1098913776}
   - component: {fileID: 1098913775}
   m_Layer: 5
-  m_Name: Panel_HideShip_Subtitle_2
+  m_Name: Panel_Subtitle_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48781,7 +48781,7 @@ GameObject:
   - component: {fileID: 1473459483}
   - component: {fileID: 1473459482}
   m_Layer: 5
-  m_Name: Panel_HideShip_Subtitle_1
+  m_Name: Panel_Subtitle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52288,7 +52288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017242137, y: -0.031826142, z: -0.0005491105, w: 0.9993446}
+  m_LocalRotation: {x: -0.017245974, y: -0.023815522, z: -0.00041089952, w: 0.99956757}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58257,7 +58257,7 @@ GameObject:
   - component: {fileID: 1720577993}
   - component: {fileID: 1720577992}
   m_Layer: 5
-  m_Name: Panel_HideShip_Subtitle_1
+  m_Name: Panel_Subtitle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61149,7 +61149,7 @@ GameObject:
   - component: {fileID: 1768208513}
   - component: {fileID: 1768208512}
   m_Layer: 5
-  m_Name: Panel_HideShip_Subtitle_2
+  m_Name: Panel_Subtitle_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63953,6 +63953,10 @@ PrefabInstance:
       propertyPath: crossHair
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8711716572856622713, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9216385738284355952, guid: 4a79c2f9209c1c544841343330a472a7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.1068777
@@ -65034,7 +65038,7 @@ GameObject:
   - component: {fileID: 1844285950}
   - component: {fileID: 1844285949}
   m_Layer: 5
-  m_Name: Panel_HideShip_Subtitle_3
+  m_Name: Panel_Subtitle_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66525,7 +66529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.012286322, y: -0.04682279, z: -0.0005759551, w: 0.9988275}
+  m_LocalRotation: {x: -0.012290521, y: -0.038851786, z: -0.0004779057, w: 0.9991693}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -67256,7 +67260,7 @@ GameObject:
   - component: {fileID: 1935454157}
   - component: {fileID: 1935454156}
   m_Layer: 5
-  m_Name: Panel_HideShip_Subtitle_3
+  m_Name: Panel_Subtitle_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
