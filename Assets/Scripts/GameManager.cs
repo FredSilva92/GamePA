@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Canvas _canvas;
 
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource _backgroundAaudioSource;
 
     private bool _isChangingPositon = false;
     private Vector3 positionToChange;
@@ -193,15 +193,14 @@ public class GameManager : MonoBehaviour
             case GameState.FINISH_GAME:
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAVE:
-            case GameState.INTRO_PYRAMID:
                 ConfigVideoCutscene(nextGameState);
                 break;
 
             // mostra a cutscene dentro do unity e trata do colisor no script LevelChanger
             //case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
-                //case GameState.INTRO_CAVE:
-                //case GameState.INTRO_PYRAMID:
+            //case GameState.INTRO_CAVE:
+            case GameState.INTRO_PYRAMID:
                 ConfigTimelineCutscene(nextGameState);
                 break;
 
@@ -312,9 +311,9 @@ public class GameManager : MonoBehaviour
 
     private void OnVideoCutsceneStart(VideoPlayer videoPlayer)
     {
-        if (_audioSource != null && _audioSource.isPlaying)
+        if (_backgroundAaudioSource != null && _backgroundAaudioSource.isPlaying)
         {
-            _audioSource.Pause();
+            _backgroundAaudioSource.Pause();
         }
 
         Time.timeScale = 0f;
@@ -326,9 +325,9 @@ public class GameManager : MonoBehaviour
 
     private void OnVideoCutsceneEnd(VideoPlayer videoPlayer, GameState nextGameState)
     {
-        if (_audioSource != null && !_audioSource.isPlaying)
+        if (_backgroundAaudioSource != null && !_backgroundAaudioSource.isPlaying)
         {
-            _audioSource.UnPause();
+            _backgroundAaudioSource.UnPause();
         }
 
         _canvas.enabled = true;
@@ -359,9 +358,9 @@ public class GameManager : MonoBehaviour
     {
         _player.SetActive(false);
 
-        if (_audioSource != null && _audioSource.isPlaying)
+        if (_backgroundAaudioSource != null && _backgroundAaudioSource.isPlaying)
         {
-            _audioSource.Pause();
+            _backgroundAaudioSource.Pause();
         }
 
         _canvas.enabled = false;
@@ -372,9 +371,9 @@ public class GameManager : MonoBehaviour
 
     private void OnTimelineCutsceneEnd(PlayableDirector timeline, GameObject timelineObject, GameState nextGameState)
     {
-        if (_audioSource != null && !_audioSource.isPlaying)
+        if (_backgroundAaudioSource != null && !_backgroundAaudioSource.isPlaying)
         {
-            _audioSource.UnPause();
+            _backgroundAaudioSource.UnPause();
         }
 
         _canvas.enabled = true;
