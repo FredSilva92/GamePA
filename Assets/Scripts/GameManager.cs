@@ -192,7 +192,6 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_GAME:
             case GameState.FINISH_GAME:
             case GameState.INTRO_FOREST:
-            case GameState.INTRO_CAMP:
             case GameState.INTRO_CAVE:
             case GameState.INTRO_PYRAMID:
                 ConfigVideoCutscene(nextGameState);
@@ -200,20 +199,17 @@ public class GameManager : MonoBehaviour
 
             // mostra a cutscene dentro do unity e trata do colisor no script LevelChanger
             //case GameState.INTRO_FOREST:
-            //case GameState.INTRO_CAMP:
-            //case GameState.INTRO_CAVE:
-            //case GameState.INTRO_PYRAMID:
-                //ConfigTimelineCutscene(nextGameState);
+            case GameState.INTRO_CAMP:
+                //case GameState.INTRO_CAVE:
+                //case GameState.INTRO_PYRAMID:
+                ConfigTimelineCutscene(nextGameState);
                 break;
 
             // muda a posi??o da nave na praia
             case GameState.GO_TO_FOREST:
-                if (_starship != null)
-                {
-                    _starship.SetActive(true);
-                    _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
-                    _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
-                }
+                _starship.SetActive(true);
+                _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
+                _starship.transform.localRotation = Quaternion.Euler(2.002f, -27.307f, -1.41f);
                 break;
 
             // permite que o jogador comece a resolver o puzzle
@@ -300,6 +296,8 @@ public class GameManager : MonoBehaviour
 
     private void ConfigTimelineCutscene(GameState nextGameState)
     {
+        _player.SetActive(false);
+
         GameObject timelineObject = _currentMapActions[0].gameStateInfo.timelineCutscene;
         PlayableDirector timeline = timelineObject.GetComponent<PlayableDirector>();
 
