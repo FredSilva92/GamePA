@@ -78,7 +78,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 8097960068099924701}
-    m_Duration: 16.5
+    m_Duration: 17
     m_TimeScale: 1
     m_ParentTrack: {fileID: -6714537079515849668}
     m_EaseInDuration: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: VirtualCamera_FollowStarship
+    m_DisplayName: Virtual Camera (2)
   m_Markers:
     m_Objects: []
 --- !u!114 &-6527222475461383251
@@ -730,7 +730,7 @@ MonoBehaviour:
     m_Start: 5
     m_ClipIn: 0
     m_Asset: {fileID: 8950050384735377096}
-    m_Duration: 4.5
+    m_Duration: 5
     m_TimeScale: 1
     m_ParentTrack: {fileID: -4406092757358266448}
     m_EaseInDuration: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
     m_Start: 1
     m_ClipIn: 0
     m_Asset: {fileID: -4178091204088990706}
-    m_Duration: 13.5
+    m_Duration: 14
     m_TimeScale: 1
     m_ParentTrack: {fileID: -4305941067651648888}
     m_EaseInDuration: 0
@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 11.5
+    m_Start: 12
     m_ClipIn: 0
     m_Asset: {fileID: 147048034132010965}
     m_Duration: 5
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 9.5
+    m_Start: 10
     m_ClipIn: 0
     m_Asset: {fileID: -2393910541147559724}
     m_Duration: 5
@@ -1792,7 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 13.5
+  m_Time: 14
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: c76724aeec18b614ba712cf301f7084d, type: 2}
