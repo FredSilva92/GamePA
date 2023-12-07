@@ -192,14 +192,13 @@ public class GameManager : MonoBehaviour
             case GameState.INTRO_GAME:
             case GameState.FINISH_GAME:
             case GameState.INTRO_FOREST:
-            case GameState.INTRO_CAVE:
                 ConfigVideoCutscene(nextGameState);
                 break;
 
             // mostra a cutscene dentro do unity e trata do colisor no script LevelChanger
             //case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
-            //case GameState.INTRO_CAVE:
+            case GameState.INTRO_CAVE:
             case GameState.INTRO_PYRAMID:
                 ConfigTimelineCutscene(nextGameState);
                 break;
