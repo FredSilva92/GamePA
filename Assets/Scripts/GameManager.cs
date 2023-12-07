@@ -79,10 +79,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-    /* MÉTODOS */
+    /* Mï¿½TODOS */
 
     /*
-     * Garante apenas uma instância de GameManager por cena.
+     * Garante apenas uma instï¿½ncia de GameManager por cena.
     */
     private void Awake()
     {
@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Esconde todos os botões de ação no mapa por padrão.
-     * Observa o estado atual do jogo, para que sempre que haja uma mudança o evento seja acionado.
+     * Esconde todos os botï¿½es de aï¿½ï¿½o no mapa por padrï¿½o.
+     * Observa o estado atual do jogo, para que sempre que haja uma mudanï¿½a o evento seja acionado.
     */
     private void Start()
     {
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
-        // assina o observável para detetar mudanças de estado
+        // assina o observï¿½vel para detetar mudanï¿½as de estado
         _currentGameState.Subscribe(gameState =>
         {
             HandleGameStateChange(gameState);
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // bloqueia outras ações quando está a resolver o puzzle
+        // bloqueia outras aï¿½ï¿½es quando estï¿½ a resolver o puzzle
         if (_puzzleManagerScript != null)
         {
             if (_puzzleManagerScript.IsSolving)
@@ -145,8 +145,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // não há necessidade de verificar se clicou no botão de ação,
-        // quando o estado é apenas de mostrar uma cutscene
+        // nï¿½o hï¿½ necessidade de verificar se clicou no botï¿½o de aï¿½ï¿½o,
+        // quando o estado ï¿½ apenas de mostrar uma cutscene
         if (_currentGameState.Value != GameState.INTRO_GAME ||
             _currentGameState.Value != GameState.INTRO_FOREST ||
             _currentGameState.Value != GameState.INTRO_CAMP ||
@@ -168,8 +168,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Trata da mudança para os diferentes estados do jogo.
-     * _currentMapActions[0] - porque existe sempre pelo menos uma ação do mapa associada a um game state
+     * Trata da mudanï¿½a para os diferentes estados do jogo.
+     * _currentMapActions[0] - porque existe sempre pelo menos uma aï¿½ï¿½o do mapa associada a um game state
     */
     private void HandleGameStateChange(GameState nextGameState)
     {
@@ -185,26 +185,24 @@ public class GameManager : MonoBehaviour
             _isChangingPositon = true;
         }
 
-        // configurações específicas na mudança de estado
+        // configuraï¿½ï¿½es especï¿½ficas na mudanï¿½a de estado
         switch (nextGameState)
         {
             // mostra a cutscene externa e trata do colisor no script LevelChanger
             case GameState.INTRO_GAME:
             case GameState.FINISH_GAME:
-            //case GameState.INTRO_FOREST:
-            case GameState.INTRO_CAVE:
                 ConfigVideoCutscene(nextGameState);
                 break;
 
             // mostra a cutscene dentro do unity e trata do colisor no script LevelChanger
             case GameState.INTRO_FOREST:
             case GameState.INTRO_CAMP:
-            //case GameState.INTRO_CAVE:
+            case GameState.INTRO_CAVE:
             case GameState.INTRO_PYRAMID:
                 ConfigTimelineCutscene(nextGameState);
                 break;
 
-            // muda a posição da nave na praia
+            // muda a posiï¿½ï¿½o da nave na praia
             case GameState.GO_TO_FOREST:
                 _starship.SetActive(true);
                 _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
@@ -223,7 +221,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Obtém as ações atuais do mapa associadas ao estado de jogo atual.
+     * Obtï¿½m as aï¿½ï¿½es atuais do mapa associadas ao estado de jogo atual.
     */
     private List<MapAction> GetCurrentMapActions()
     {
@@ -241,8 +239,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Procura a ação atual que diz respeito ao objetivo,
-     * que será a que tem "hasProgress" como true e devolve o título.
+     * Procura a aï¿½ï¿½o atual que diz respeito ao objetivo,
+     * que serï¿½ a que tem "hasProgress" como true e devolve o tï¿½tulo.
     */
     public string GetCurrentGoal()
     {
@@ -289,7 +287,7 @@ public class GameManager : MonoBehaviour
 
         nextGameState = GetNextGameState(_currentGameState.Value);
 
-        // evento de término da cutscene
+        // evento de tï¿½rmino da cutscene
         _currentMapActions[0].gameStateInfo.videoCutscene.loopPointReached += (videoPlayer) => OnVideoCutsceneEnd(_currentMapActions[0].gameStateInfo.videoCutscene, nextGameState);
     }
 
@@ -305,7 +303,7 @@ public class GameManager : MonoBehaviour
 
         nextGameState = GetNextGameState(_currentGameState.Value);
 
-        // evento de término da cutscene
+        // evento de tï¿½rmino da cutscene
         timeline.stopped += (timeline) => OnTimelineCutsceneEnd(timeline, timelineObject, nextGameState);
     }
 
@@ -405,7 +403,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Ao iniciar a cena, todos os botões de ação são ocultos por padrão.
+     * Ao iniciar a cena, todos os botï¿½es de aï¿½ï¿½o sï¿½o ocultos por padrï¿½o.
     */
     private void HideAllActionButtons()
     {
@@ -419,8 +417,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Esconde os botões das ações do estado atual.
-     * Utilizável quando o utilizador transita para o próximo estado de jogo e as ações do estado anterior já não interessam.
+     * Esconde os botï¿½es das aï¿½ï¿½es do estado atual.
+     * Utilizï¿½vel quando o utilizador transita para o prï¿½ximo estado de jogo e as aï¿½ï¿½es do estado anterior jï¿½ nï¿½o interessam.
     */
     private void HideCurrentActionButtons()
     {
@@ -444,7 +442,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Mostra o texto da ação atual e fala, apenas por 4 segundos e depois volta a desaparecer
+     * Mostra o texto da aï¿½ï¿½o atual e fala, apenas por 4 segundos e depois volta a desaparecer
     */
     private IEnumerator ShowAndHideActionLabel(string text, GameObject dialogueObject)
     {
@@ -487,7 +485,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Se o jogador estiver perto das ações de jogo, o botão de ação será visível, caso contrário continuará oculto.
+     * Se o jogador estiver perto das aï¿½ï¿½es de jogo, o botï¿½o de aï¿½ï¿½o serï¿½ visï¿½vel, caso contrï¿½rio continuarï¿½ oculto.
     */
     private void CheckActionButtonsVisibilityDistance()
     {
@@ -505,7 +503,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Se o jogador estiver muito perto das ações de jogo, o botão de ação poderá ser clicado, caso contrário não.
+     * Se o jogador estiver muito perto das aï¿½ï¿½es de jogo, o botï¿½o de aï¿½ï¿½o poderï¿½ ser clicado, caso contrï¿½rio nï¿½o.
     */
     private void CheckActionButtonsClickDistance()
     {
@@ -528,8 +526,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Quando ação clicada permite que o jogador progrida no jogo (passe para o próximo game state).
-     * Quando o jogador alcança um objetivo, este não pode voltar ao objetivo anterior.
+     * Quando aï¿½ï¿½o clicada permite que o jogador progrida no jogo (passe para o prï¿½ximo game state).
+     * Quando o jogador alcanï¿½a um objetivo, este nï¿½o pode voltar ao objetivo anterior.
      * Exemplo: Quando encontra o esconderijo para a nave.
     */
     private void ProgressActionEvent(MapAction mapAction)
@@ -558,7 +556,7 @@ public class GameManager : MonoBehaviour
 
                     GameState nextGameState = GetNextGameState(_currentGameState.Value);
 
-                    // evento de término da cutscene
+                    // evento de tï¿½rmino da cutscene
                     mapAction.gameStateInfo.videoCutscene.loopPointReached += (videoPlayer) => OnVideoCutsceneEnd(mapAction.gameStateInfo.videoCutscene, nextGameState);
                 }
                 else if (mapAction.gameStateInfo.cutsceneType == CutsceneType.INSIDE_EDITOR)
@@ -576,7 +574,7 @@ public class GameManager : MonoBehaviour
 
                     GameState nextGameState = GetNextGameState(_currentGameState.Value);
 
-                    // evento de término da cutscene
+                    // evento de tï¿½rmino da cutscene
                     timeline.stopped += (timeline) => OnTimelineCutsceneEnd(timeline, timelineObject, nextGameState);
                 }
             }
@@ -584,7 +582,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Quando ação clicada não permite que o jogador progrida no jogo (passe para o próximo game state).
+     * Quando aï¿½ï¿½o clicada nï¿½o permite que o jogador progrida no jogo (passe para o prï¿½ximo game state).
      * Exemplo: Quando o jogador tenta um caminho errado para a floresta. Quando observa uma pista na floresta.
     */
     private void NoProgressActionEvent(MapAction mapAction)
