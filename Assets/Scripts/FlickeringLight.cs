@@ -7,11 +7,11 @@ public class FlickeringLight : MonoBehaviour
 
     [SerializeField] private float _minIntensity = 1.5f;
     [SerializeField] private float _maxIntensity = 2.5f;
-
-    [SerializeField] private float _originalIntensity = 2.5f;
     [SerializeField] private float _flickerSpeed = 3f;
 
-    private void OnEnable()
+    private float _originalIntensity = 2.5f;
+
+    private void Start()
     {
         _originalIntensity = _light.intensity;
 
