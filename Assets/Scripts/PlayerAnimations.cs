@@ -17,9 +17,17 @@ public class PlayerAnimations : MonoBehaviour
     private int layerShootIdx;
     private bool _isShooting;
 
+    private bool _freezeAllAnimations = false;
+
     public bool IsShooting
     {
         get { return _isShooting; }
+    }
+
+    public bool FreezeAllAnimations
+    {
+        get { return _freezeAllAnimations; }
+        set { _freezeAllAnimations = value; }
     }
 
     void Start()
@@ -32,7 +40,7 @@ public class PlayerAnimations : MonoBehaviour
     void Update()
     {
         // impedir outras animações quando está a resolver o puzzle
-        if (thirdPersonMovement.freeze)
+        if (_freezeAllAnimations)
         {
             return;
         }

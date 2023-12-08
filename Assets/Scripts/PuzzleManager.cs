@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Utils;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -25,7 +26,10 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private GameObject _pyramidEntranceCollider;
 
     [SerializeField] private GameObject _walkToPuzzlePoint;
+    [SerializeField] private GameObject _lookToPuzzlePoint;
+
     private bool _walkStarted = false;
+    private bool _lookStarted = false;
 
 
     /* PROPRIEDADES */
@@ -56,6 +60,10 @@ public class PuzzleManager : MonoBehaviour
         if (_walkStarted)
         {
             WalkToPuzzle();
+        }
+        if (_lookStarted)
+        {
+            LookToPuzzle();
         }
     }
 
@@ -218,48 +226,78 @@ public class PuzzleManager : MonoBehaviour
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.Basic);
 
-        playerScript.freeze = false;
 
         _doorScript.StartMoving = true;
         _pyramidEntranceCollider.SetActive(true);
 
+        playerScript.freeze = false;
+
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+        playerAnimations.FreezeAllAnimations = false;
+
         Destroy(this);
     }
 
-    private void LookToPuzzle()
-    {
-        // obtém o game object do player prefab para atualizar a rotação para que olhe para o puzzle
-        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
-
-        // aplica a nova rotação
-        playerPrefab.transform.localRotation = Quaternion.Euler(
-            playerPrefab.transform.localRotation.x,
-            23f,
-            playerPrefab.transform.localRotation.z);
-    }
-
+    /*
+     * Caminhar automaticamente até à posição dos botões que movem o puzzle.
+    */
     private void WalkToPuzzle()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+
+        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+        playerAnimations.FreezeAllAnimations = true;
+        playerPrefab.GetComponent<Animator>().SetBool(Animations.WALKING, true);
 
         // calcula a direção para o ponto de destino
-        Vector3 direction = _walkToPuzzlePoint.transform.position - player.transform.position;
+        Vector3 direction = _walkToPuzzlePoint.transform.position - playerPrefab.transform.position;
         direction.Normalize();
 
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+        playerPrefab.transform.rotation = lookRotation;
+
         // obtém o game object do player prefab para move-lo até aos botões do puzzle
-        player.transform.position += direction * 2f * Time.deltaTime;
+        playerPrefab.transform.position += direction * 1.5f * Time.deltaTime;
 
         // verifica se o jogador chegou ao ponto de destino
-        if (Vector3.Distance(player.transform.position, _walkToPuzzlePoint.transform.position) < 0.1f)
+        if (Vector3.Distance(playerPrefab.transform.position, _walkToPuzzlePoint.transform.position) < 0.1f)
         {
-            Debug.Log("O jogador chegou ao ponto de destino!");
-
             _walkStarted = false;
+            _lookStarted = true;
 
-            LookToPuzzle();
-
+            playerPrefab.GetComponent<Animator>().SetBool(Animations.WALKING, false);
             player.GetComponent<ThirdPersonMovement>().freeze = true;
+        }
+    }
 
+    /*
+     * Olhar até à posição do puzzle na parede.
+    */
+    private void LookToPuzzle()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+
+        Vector3 direction = _lookToPuzzlePoint.transform.position - playerPrefab.transform.position;
+        direction.Normalize();
+
+        // Calcula a rotação desejada
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+
+        // suaviza a transição de rotação
+        float rotationSpeed = 2f;
+        playerPrefab.transform.rotation = Quaternion.Slerp(playerPrefab.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+        Vector3 forwardDirection = playerPrefab.transform.forward;
+
+        float dotProduct = Vector3.Dot(direction, forwardDirection);
+
+        // verifica se o jogador está a olhar para o puzzle
+        float angleThreshold = 0.9f;
+        if (dotProduct > angleThreshold)
+        {
             _isSolving = true;
         }
     }
