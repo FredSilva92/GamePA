@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,8 +6,12 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
 
+    private GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
+
         // oculta menu de pausa ao abrir a cena
         pauseMenuPanel.SetActive(false);
     }
@@ -37,6 +40,15 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (gameManager.CurrentActionDialogue != null)
+        {
+            gameManager.CurrentActionDialogue.Pause();
+        }
+        if (gameManager.BackgroundAaudioSource != null)
+        {
+            gameManager.BackgroundAaudioSource.Pause();
+        }
+
         // desbloqueia este atributo, uma vez que é bloqueado quando a câmera de jogo está ativa
         Cursor.lockState = CursorLockMode.None;
 
@@ -57,6 +69,16 @@ public class PauseMenuManager : MonoBehaviour
 
         isPaused = false;
         pauseMenuPanel.SetActive(false);
+
+        if (gameManager.CurrentActionDialogue != null)
+        {
+            gameManager.CurrentActionDialogue.Play();
+        }
+        if (gameManager.BackgroundAaudioSource != null)
+        {
+            gameManager.BackgroundAaudioSource.Play();
+        }
+
     }
 
     public void QuitGame()

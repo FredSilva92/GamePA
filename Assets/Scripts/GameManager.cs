@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _currentActionPanel;
     [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
 
+    private AudioSource _currentActionDialogue;
+
     [SerializeField] private GameObject _starship;
 
     private GameObject _targetToLook;
@@ -74,6 +76,18 @@ public class GameManager : MonoBehaviour
     {
         get { return _currentMapActions; }
         set { _currentMapActions = value; }
+    }
+
+    public AudioSource BackgroundAaudioSource
+    {
+        get { return _backgroundAaudioSource; }
+        set { _backgroundAaudioSource = value; }
+    }
+
+    public AudioSource CurrentActionDialogue
+    {
+        get { return _currentActionDialogue; }
+        set { _currentActionDialogue = value; }
     }
 
     public Vector3 LastCheckPointPos
@@ -456,17 +470,19 @@ public class GameManager : MonoBehaviour
     */
     private IEnumerator ShowAndHideActionLabel(string text, GameObject dialogueObject, GameObject actionButtonObject)
     {
-        AudioSource dialogueSource = dialogueObject.GetComponent<AudioSource>();
-        float dialogueDuration = dialogueSource.clip.length;
-        dialogueSource.Play();
+        _currentActionDialogue = dialogueObject.GetComponent<AudioSource>();
+        float dialogueDuration = _currentActionDialogue.clip.length;
+        _currentActionDialogue.Play();
 
         _targetToLook = actionButtonObject;
         _isLookingToObject = true;
- 
+
         _currentActionTextMeshPro.text = text;
         _currentActionPanel.SetActive(true);
 
         yield return new WaitForSeconds(dialogueDuration + 1f);
+
+        _currentActionDialogue = null;
 
         _isLookingToObject = false;
         _targetToLook = null;
@@ -664,7 +680,7 @@ public class GameManager : MonoBehaviour
         _playerScript.freeze = true;
 
         GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
-      
+
         PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
         playerAnimations.FreezeAllAnimations = true;
 
@@ -677,7 +693,7 @@ public class GameManager : MonoBehaviour
         _playerScript.freeze = false;
 
         GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
-    
+
         PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
         playerAnimations.FreezeAllAnimations = false;
     }
