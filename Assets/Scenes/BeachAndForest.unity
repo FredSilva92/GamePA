@@ -14051,7 +14051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439176276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.058006555, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.05800655, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20975,7 +20975,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 28.96
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -21109,8 +21109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.058006566, y: -0, z: -0, w: 0.9983162}
-  m_LocalPosition: {x: 69.7, y: -5.2850437, z: 18.349998}
+  m_LocalRotation: {x: 0.25627792, y: 0.36764708, z: -0.10621535, w: 0.8876236}
+  m_LocalPosition: {x: 49.426155, y: 4.6981506, z: 15.99942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40035,12 +40035,12 @@ GameObject:
   - component: {fileID: 1228724561}
   - component: {fileID: 1228724562}
   m_Layer: 0
-  m_Name: HideShip
+  m_Name: StarshipEngine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1228724561
 Transform:
   m_ObjectHideFlags: 0
@@ -40097,6 +40097,8 @@ PlayableDirector:
     value: {fileID: 1059684169}
   - key: {fileID: -3755620899053301080, guid: 4fbecab0b728cf241b142b03279ed1a7, type: 2}
     value: {fileID: 1942130183}
+  - key: {fileID: -4249189523975811935, guid: 4fbecab0b728cf241b142b03279ed1a7, type: 2}
+    value: {fileID: 474413747}
   m_ExposedReferences:
     m_References:
     - c2f0412349eeae445a7c3bc376da7ca9: {fileID: 1667723947}
@@ -56195,6 +56197,7 @@ MonoBehaviour:
   _actionButtonsClickDistance: 2
   _canvas: {fileID: 1727921096}
   _backgroundAaudioSource: {fileID: 704925618}
+  _treasureChestAudioSource: {fileID: 0}
   _playerCameraObject: {fileID: 680776767}
   _puzzleManagerObject: {fileID: 0}
   _currentGoalPanel: {fileID: 1640218210}
@@ -56202,6 +56205,7 @@ MonoBehaviour:
   _currentActionPanel: {fileID: 1526656436}
   _currentActionTextMeshPro: {fileID: 1051060256}
   _starship: {fileID: 1666853567}
+  _treasureChestAnimator: {fileID: 0}
 --- !u!4 &1663026652
 Transform:
   m_ObjectHideFlags: 0

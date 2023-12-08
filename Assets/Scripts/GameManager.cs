@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private GameObject _targetToLook;
     private bool _isLookingToObject;
 
-    [SerializeField] private Animator _animator; 
+    [SerializeField] private Animator _treasureChestAnimator;
 
 
     /* PROPRIEDADES */
@@ -129,8 +129,6 @@ public class GameManager : MonoBehaviour
         InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 30f);
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
-
-        _animator = _animator.GetComponent<Animator>();
 
         // assina o observável para detetar mudanças de estado
         _currentGameState.Subscribe(gameState =>
@@ -499,11 +497,11 @@ public class GameManager : MonoBehaviour
         _currentActionPanel.SetActive(false);
     }
 
-    private IEnumerator OpenChestAndStartCutscene (GameState nextGameState)
+    private IEnumerator OpenChestAndStartCutscene(GameState nextGameState)
     {
-
-        _animator.SetBool("isOpen", true);
+        _treasureChestAnimator.SetBool("isOpen", true);
         _treasureChestAudioSource.Play();
+
         yield return new WaitForSeconds(10f);
 
         ConfigVideoCutscene(nextGameState);
