@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         HideCurrentActionLabel();
         HideAllActionButtons();
 
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 30f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
@@ -217,8 +217,10 @@ public class GameManager : MonoBehaviour
         {
             // mostra a cutscene externa e trata do colisor no script LevelChanger
             case GameState.INTRO_GAME:
+                ConfigVideoCutscene(nextGameState);
+                break;
 
-            //abre o baú e no fim mostra a cutscene final
+            // abre o baú e no fim mostra a cutscene final
             case GameState.FINISH_GAME:
                 StartCoroutine(OpenChestAndStartCutscene(nextGameState));
                 break;
@@ -517,17 +519,23 @@ public class GameManager : MonoBehaviour
     */
     private IEnumerator ShowAndHideGoalLabel()
     {
+        float dialogueDuration = 0f;
+
         foreach (MapAction mapAction in _currentMapActions)
         {
-            if (mapAction.hasProgress)
+            if (mapAction.hasProgress && mapAction.dialogue != null)
             {
                 _currentGoalTextMeshPro.text = mapAction.title;
+
+                _currentActionDialogue = mapAction.dialogue.GetComponent<AudioSource>();
+                dialogueDuration = _currentActionDialogue.clip.length;
+                _currentActionDialogue.Play();
             }
         }
 
         _currentGoalPanel.SetActive(true);
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(dialogueDuration + 1f);
 
         _currentGoalPanel.SetActive(false);
     }
