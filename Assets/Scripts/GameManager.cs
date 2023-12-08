@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private Vector3 positionToChange;
     private Vector3 rotationToChange;
 
-    [SerializeField] public Camera _playerCamera;
+    [SerializeField] public GameObject _playerCameraObject;
 
     private Vector3 _lastCheckPointPos;
     private ThirdPersonMovement _playerScript;
@@ -79,10 +79,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-    /* M�TODOS */
+    /* MÉTODOS */
 
     /*
-     * Garante apenas uma inst�ncia de GameManager por cena.
+     * Garante apenas uma instância de GameManager por cena.
     */
     private void Awake()
     {
@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Esconde todos os bot�es de a��o no mapa por padr�o.
-     * Observa o estado atual do jogo, para que sempre que haja uma mudan�a o evento seja acionado.
+     * Esconde todos os botões de ação no mapa por padrão.
+     * Observa o estado atual do jogo, para que sempre que haja uma mudança o evento seja acionado.
     */
     private void Start()
     {
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
-        // assina o observ�vel para detetar mudan�as de estado
+        // assina o observável para detetar mudanças de estado
         _currentGameState.Subscribe(gameState =>
         {
             HandleGameStateChange(gameState);
@@ -129,14 +129,14 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // bloqueia outras a��es quando est� a resolver o puzzle
+        // bloqueia outras ações quando está a resolver o puzzle
         if (_puzzleManagerScript != null)
         {
             if (_puzzleManagerScript.IsSolving)
             {
                 if (_puzzleManagerScript.CheckPuzzleSolved())
                 {
-                    _puzzleManagerScript.AfterSolvePuzzle();
+                    _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject);
                 }
 
                 _puzzleManagerScript.DoPlay();
@@ -145,8 +145,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // n�o h� necessidade de verificar se clicou no bot�o de a��o,
-        // quando o estado � apenas de mostrar uma cutscene
+        // não há necessidade de verificar se clicou no botão de ação,
+        // quando o estado é apenas de mostrar uma cutscene
         if (_currentGameState.Value != GameState.INTRO_GAME ||
             _currentGameState.Value != GameState.INTRO_FOREST ||
             _currentGameState.Value != GameState.INTRO_CAMP ||
@@ -168,8 +168,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Trata da mudan�a para os diferentes estados do jogo.
-     * _currentMapActions[0] - porque existe sempre pelo menos uma a��o do mapa associada a um game state
+     * Trata da mudança para os diferentes estados do jogo.
+     * _currentMapActions[0] - porque existe sempre pelo menos uma ação do mapa associada a um game state
     */
     private void HandleGameStateChange(GameState nextGameState)
     {
@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour
             _isChangingPositon = true;
         }
 
-        // configura��es espec�ficas na mudan�a de estado
+        // configurações específicas na mudança de estado
         switch (nextGameState)
         {
             // mostra a cutscene externa e trata do colisor no script LevelChanger
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
                 ConfigTimelineCutscene(nextGameState);
                 break;
 
-            // muda a posi��o da nave na praia
+            // muda a posição da nave na praia
             case GameState.GO_TO_FOREST:
                 _starship.SetActive(true);
                 _starship.transform.localPosition = new Vector3(-19.17f, -4f, 65.87f);
@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
             // permite que o jogador comece a resolver o puzzle
             case GameState.SOLVE_PUZZLE:
                 _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
-                _puzzleManagerScript.IsSolving = true;
+                _puzzleManagerScript.BeforeSolvePuzzle(_playerCameraObject);
                 break;
 
             default:
@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Obt�m as a��es atuais do mapa associadas ao estado de jogo atual.
+     * Obtém as ações atuais do mapa associadas ao estado de jogo atual.
     */
     private List<MapAction> GetCurrentMapActions()
     {
@@ -239,8 +239,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Procura a a��o atual que diz respeito ao objetivo,
-     * que ser� a que tem "hasProgress" como true e devolve o t�tulo.
+     * Procura a ação atual que diz respeito ao objetivo,
+     * que será a que tem "hasProgress" como true e devolve o título.
     */
     public string GetCurrentGoal()
     {
@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
 
         nextGameState = GetNextGameState(_currentGameState.Value);
 
-        // evento de t�rmino da cutscene
+        // evento de término da cutscene
         _currentMapActions[0].gameStateInfo.videoCutscene.loopPointReached += (videoPlayer) => OnVideoCutsceneEnd(_currentMapActions[0].gameStateInfo.videoCutscene, nextGameState);
     }
 
@@ -303,7 +303,7 @@ public class GameManager : MonoBehaviour
 
         nextGameState = GetNextGameState(_currentGameState.Value);
 
-        // evento de t�rmino da cutscene
+        // evento de término da cutscene
         timeline.stopped += (timeline) => OnTimelineCutsceneEnd(timeline, timelineObject, nextGameState);
     }
 
@@ -403,7 +403,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Ao iniciar a cena, todos os bot�es de a��o s�o ocultos por padr�o.
+     * Ao iniciar a cena, todos os botões de ação são ocultos por padrão.
     */
     private void HideAllActionButtons()
     {
@@ -417,8 +417,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Esconde os bot�es das a��es do estado atual.
-     * Utiliz�vel quando o utilizador transita para o pr�ximo estado de jogo e as a��es do estado anterior j� n�o interessam.
+     * Esconde os botões das ações do estado atual.
+     * Utilizável quando o utilizador transita para o próximo estado de jogo e as ações do estado anterior já não interessam.
     */
     private void HideCurrentActionButtons()
     {
@@ -442,7 +442,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Mostra o texto da a��o atual e fala, apenas por 4 segundos e depois volta a desaparecer
+     * Mostra o texto da ação atual e fala, apenas por 4 segundos e depois volta a desaparecer
     */
     private IEnumerator ShowAndHideActionLabel(string text, GameObject dialogueObject)
     {
@@ -485,7 +485,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Se o jogador estiver perto das a��es de jogo, o bot�o de a��o ser� vis�vel, caso contr�rio continuar� oculto.
+     * Se o jogador estiver perto das ações de jogo, o botão de ação será visível, caso contrário continuará oculto.
     */
     private void CheckActionButtonsVisibilityDistance()
     {
@@ -503,7 +503,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Se o jogador estiver muito perto das a��es de jogo, o bot�o de a��o poder� ser clicado, caso contr�rio n�o.
+     * Se o jogador estiver muito perto das ações de jogo, o botão de ação poderá ser clicado, caso contrário não.
     */
     private void CheckActionButtonsClickDistance()
     {
@@ -526,8 +526,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Quando a��o clicada permite que o jogador progrida no jogo (passe para o pr�ximo game state).
-     * Quando o jogador alcan�a um objetivo, este n�o pode voltar ao objetivo anterior.
+     * Quando ação clicada permite que o jogador progrida no jogo (passe para o próximo game state).
+     * Quando o jogador alcança um objetivo, este não pode voltar ao objetivo anterior.
      * Exemplo: Quando encontra o esconderijo para a nave.
     */
     private void ProgressActionEvent(MapAction mapAction)
@@ -556,7 +556,7 @@ public class GameManager : MonoBehaviour
 
                     GameState nextGameState = GetNextGameState(_currentGameState.Value);
 
-                    // evento de t�rmino da cutscene
+                    // evento de término da cutscene
                     mapAction.gameStateInfo.videoCutscene.loopPointReached += (videoPlayer) => OnVideoCutsceneEnd(mapAction.gameStateInfo.videoCutscene, nextGameState);
                 }
                 else if (mapAction.gameStateInfo.cutsceneType == CutsceneType.INSIDE_EDITOR)
@@ -574,7 +574,7 @@ public class GameManager : MonoBehaviour
 
                     GameState nextGameState = GetNextGameState(_currentGameState.Value);
 
-                    // evento de t�rmino da cutscene
+                    // evento de término da cutscene
                     timeline.stopped += (timeline) => OnTimelineCutsceneEnd(timeline, timelineObject, nextGameState);
                 }
             }
@@ -582,7 +582,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * Quando a��o clicada n�o permite que o jogador progrida no jogo (passe para o pr�ximo game state).
+     * Quando ação clicada não permite que o jogador progrida no jogo (passe para o próximo game state).
      * Exemplo: Quando o jogador tenta um caminho errado para a floresta. Quando observa uma pista na floresta.
     */
     private void NoProgressActionEvent(MapAction mapAction)
@@ -598,7 +598,9 @@ public class GameManager : MonoBehaviour
 
     private void CenterActionButtonInCamera(GameObject actionButton)
     {
-        Vector3 cameraPosition = _playerCamera.transform.position;
+        Camera playerCamera = _playerCameraObject.GetComponent<Camera>();
+
+        Vector3 cameraPosition = playerCamera.transform.position;
         Vector3 objectPosition = actionButton.transform.position;
         Vector3 direction = cameraPosition - objectPosition;
 

@@ -191,12 +191,20 @@ public class PuzzleManager : MonoBehaviour
         return isSolved;
     }
 
-    /*
-     * Limpar os valores do turno anterior (troca de 2 peças).
-    */
-    public void AfterSolvePuzzle()
+    public void BeforeSolvePuzzle(GameObject playerCamera)
+    {
+        _isSolving = true;
+
+        ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
+        thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.FocusOnPuzzle);
+    }
+
+    public void AfterSolvePuzzle(GameObject playerCamera)
     {
         _isSolving = false;
+
+        ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
+        thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.Basic);
 
         _doorScript.StartMoving = true;
         _pyramidEntranceCollider.SetActive(true);

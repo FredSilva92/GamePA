@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.32555065, g: 0.40206027, b: 0.5303371, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.32555112, g: 0.40205997, b: 0.5303371, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15972,7 +15972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483890414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023721019, y: 0.018128404, z: 0.00043021602, w: 0.99955416}
+  m_LocalRotation: {x: -0.023716068, y: 0.027295379, z: 0.00064776285, w: 0.99934584}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20975,7 +20975,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 22.37
+  field of view: 28.96
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -21013,6 +21013,7 @@ MonoBehaviour:
   combatLookAt: {fileID: 1348621371}
   thirdPersonCam: {fileID: 794065814}
   combatCam: {fileID: 800450782}
+  focusOnPuzzleCam: {fileID: 0}
   crossHair: {fileID: 1365554308}
 --- !u!114 &680776770
 MonoBehaviour:
@@ -21108,8 +21109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017246343, y: 0.02297549, z: 0.00039640666, w: 0.9995872}
-  m_LocalPosition: {x: 69.381516, y: -5.9850435, z: 20.45034}
+  m_LocalRotation: {x: 0.05800656, y: -0, z: -0, w: 0.9983162}
+  m_LocalPosition: {x: 69.7, y: -5.2850437, z: 18.349998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24316,7 +24317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &800450783
 Transform:
   m_ObjectHideFlags: 0
@@ -52288,7 +52289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.017246338, y: 0.022975493, z: 0.0003964068, w: 0.9995872}
+  m_LocalRotation: {x: -0.01724196, y: 0.032142565, z: 0.00055456976, w: 0.99933445}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56194,7 +56195,7 @@ MonoBehaviour:
   _actionButtonsClickDistance: 2
   _canvas: {fileID: 1727921096}
   _backgroundAaudioSource: {fileID: 704925618}
-  _playerCamera: {fileID: 680776768}
+  _playerCameraObject: {fileID: 680776767}
   _puzzleManagerObject: {fileID: 0}
   _currentGoalPanel: {fileID: 1640218210}
   _currentGoalTextMeshPro: {fileID: 434802334}
@@ -66529,7 +66530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.012299435, y: 0.0078308955, z: 0.00009632582, w: 0.9998937}
+  m_LocalRotation: {x: -0.012298036, y: 0.016995605, z: 0.0002090586, w: 0.99977994}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

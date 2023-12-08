@@ -1,6 +1,4 @@
-using Unity.Burst.Intrinsics;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public class ThirdPersonCam : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class ThirdPersonCam : MonoBehaviour
 
     public GameObject thirdPersonCam;
     public GameObject combatCam;
+    public GameObject focusOnPuzzleCam;
 
     [SerializeField]
     private GameObject crossHair;
@@ -25,12 +24,14 @@ public class ThirdPersonCam : MonoBehaviour
     public enum CameraStyle
     {
         Basic,
-        Combat
+        Combat,
+        FocusOnPuzzle
     }
 
     private void Start()
     {
         currentStyle = CameraStyle.Basic;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -49,7 +50,17 @@ public class ThirdPersonCam : MonoBehaviour
         Transform playerTransform = player.transform;
 
         // switch styles
-        SwitchCameraStyle(currentStyle);
+        if (focusOnPuzzleCam != null)
+        {
+            if (!focusOnPuzzleCam.active)
+            {
+                SwitchCameraStyle(currentStyle);
+            }
+        }
+        else
+        {
+            SwitchCameraStyle(currentStyle);
+        }
 
         // rotate orientation
         Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
@@ -73,20 +84,24 @@ public class ThirdPersonCam : MonoBehaviour
 
             playerObj.forward = dirToCombatLookAt.normalized;
         }
-
     }
 
-    private void SwitchCameraStyle(CameraStyle newStyle)
+    public void SwitchCameraStyle(CameraStyle newStyle)
     {
         combatCam.SetActive(false);
         thirdPersonCam.SetActive(false);
         crossHair.SetActive(false);
+        if (focusOnPuzzleCam != null) focusOnPuzzleCam.SetActive(false);
 
         if (newStyle == CameraStyle.Basic) thirdPersonCam.SetActive(true);
         else if (newStyle == CameraStyle.Combat)
         {
             combatCam.SetActive(true);
             crossHair.SetActive(true);
+        }
+        else if (newStyle == CameraStyle.FocusOnPuzzle)
+        {
+            if (focusOnPuzzleCam != null) focusOnPuzzleCam.SetActive(true);
         }
 
         currentStyle = newStyle;
