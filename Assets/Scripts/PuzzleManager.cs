@@ -21,7 +21,11 @@ public class PuzzleManager : MonoBehaviour
 
     [SerializeField] private GameObject _door;
     private DoorAnimationManager _doorScript;
+
     [SerializeField] private GameObject _pyramidEntranceCollider;
+
+    [SerializeField] private GameObject _walkToPuzzlePoint;
+    private bool _walkStarted = false;
 
 
     /* PROPRIEDADES */
@@ -45,6 +49,14 @@ public class PuzzleManager : MonoBehaviour
         _pyramidEntranceCollider.SetActive(false);
 
         ShufflePuzzle();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_walkStarted)
+        {
+            WalkToPuzzle();
+        }
     }
 
     private void ShufflePuzzle()
@@ -191,24 +203,64 @@ public class PuzzleManager : MonoBehaviour
         return isSolved;
     }
 
-    public void BeforeSolvePuzzle(GameObject playerCamera)
+    public void BeforeSolvePuzzle(GameObject playerCamera, ThirdPersonMovement playerScript)
     {
-        _isSolving = true;
-
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.FocusOnPuzzle);
+
+        _walkStarted = true;
     }
 
-    public void AfterSolvePuzzle(GameObject playerCamera)
+    public void AfterSolvePuzzle(GameObject playerCamera, ThirdPersonMovement playerScript)
     {
         _isSolving = false;
 
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.Basic);
 
+        playerScript.freeze = false;
+
         _doorScript.StartMoving = true;
         _pyramidEntranceCollider.SetActive(true);
 
         Destroy(this);
+    }
+
+    private void LookToPuzzle()
+    {
+        // obtém o game object do player prefab para atualizar a rotação para que olhe para o puzzle
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+
+        // aplica a nova rotação
+        playerPrefab.transform.localRotation = Quaternion.Euler(
+            playerPrefab.transform.localRotation.x,
+            23f,
+            playerPrefab.transform.localRotation.z);
+    }
+
+    private void WalkToPuzzle()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        // calcula a direção para o ponto de destino
+        Vector3 direction = _walkToPuzzlePoint.transform.position - player.transform.position;
+        direction.Normalize();
+
+        // obtém o game object do player prefab para move-lo até aos botões do puzzle
+        player.transform.position += direction * 2f * Time.deltaTime;
+
+        // verifica se o jogador chegou ao ponto de destino
+        if (Vector3.Distance(player.transform.position, _walkToPuzzlePoint.transform.position) < 0.1f)
+        {
+            Debug.Log("O jogador chegou ao ponto de destino!");
+
+            _walkStarted = false;
+
+            LookToPuzzle();
+
+            player.GetComponent<ThirdPersonMovement>().freeze = true;
+
+            _isSolving = true;
+        }
     }
 }

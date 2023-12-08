@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             {
                 if (_puzzleManagerScript.CheckPuzzleSolved())
                 {
-                    _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject);
+                    _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject, _playerScript);
                 }
 
                 _puzzleManagerScript.DoPlay();
@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
             // permite que o jogador comece a resolver o puzzle
             case GameState.SOLVE_PUZZLE:
                 _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
-                _puzzleManagerScript.BeforeSolvePuzzle(_playerCameraObject);
+                _puzzleManagerScript.BeforeSolvePuzzle(_playerCameraObject, _playerScript);
                 break;
 
             default:

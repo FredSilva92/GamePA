@@ -122,6 +122,11 @@ public class ThirdPersonMovement : CharacterBase
 
     private void Update()
     {
+        if (freeze)
+        {
+            return;
+        }
+
         if (_isDead)
         {
             _isShooting = false;
@@ -403,7 +408,8 @@ public class ThirdPersonMovement : CharacterBase
 
     }
 
-    private void OnItemIter(Collider collision, Func<GameObject, IEnumerator> IterFunc, out bool var) {
+    private void OnItemIter(Collider collision, Func<GameObject, IEnumerator> IterFunc, out bool var)
+    {
 
         var = true;
 

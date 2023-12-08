@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class ThirdPersonCam : MonoBehaviour
@@ -52,10 +53,12 @@ public class ThirdPersonCam : MonoBehaviour
         // switch styles
         if (focusOnPuzzleCam != null)
         {
-            if (!focusOnPuzzleCam.active)
+            if (focusOnPuzzleCam.active)
             {
-                SwitchCameraStyle(currentStyle);
+                return;
             }
+
+            SwitchCameraStyle(currentStyle);
         }
         else
         {

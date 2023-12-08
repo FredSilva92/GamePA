@@ -31,6 +31,12 @@ public class PlayerAnimations : MonoBehaviour
 
     void Update()
     {
+        // impedir outras animações quando está a resolver o puzzle
+        if (thirdPersonMovement.freeze)
+        {
+            return;
+        }
+
         // ---------- MORRER ----------
         if (thirdPersonMovement.IsDead)
         {
