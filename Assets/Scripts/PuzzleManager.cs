@@ -226,7 +226,6 @@ public class PuzzleManager : MonoBehaviour
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.Basic);
 
-
         _doorScript.StartMoving = true;
         _pyramidEntranceCollider.SetActive(true);
 
@@ -277,7 +276,6 @@ public class PuzzleManager : MonoBehaviour
     */
     private void LookToPuzzle()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
 
         Vector3 direction = _lookToPuzzlePoint.transform.position - playerPrefab.transform.position;

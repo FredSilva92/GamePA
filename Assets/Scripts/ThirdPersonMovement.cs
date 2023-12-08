@@ -153,6 +153,11 @@ public class ThirdPersonMovement : CharacterBase
 
     private void FixedUpdate()
     {
+        if (freeze)
+        {
+            return;
+        }
+
         if (_isDead || _isPicking)
         {
             return;

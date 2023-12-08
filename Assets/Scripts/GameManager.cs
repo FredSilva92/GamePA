@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using static Utils;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +48,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
 
     [SerializeField] private GameObject _starship;
+
+    private GameObject _targetToLook;
+    private bool _isLookingToObject;
 
 
     /* PROPRIEDADES */
@@ -127,6 +131,12 @@ public class GameManager : MonoBehaviour
         {
             Invoke(nameof(RestartGame), 4);
             return;
+        }
+
+        if (_isLookingToObject)
+        {
+            FreezePlayer();
+            LookToObject();
         }
 
         // bloqueia outras ações quando está a resolver o puzzle
@@ -444,17 +454,24 @@ public class GameManager : MonoBehaviour
     /*
      * Mostra o texto da ação atual e fala, apenas por 4 segundos e depois volta a desaparecer
     */
-    private IEnumerator ShowAndHideActionLabel(string text, GameObject dialogueObject)
+    private IEnumerator ShowAndHideActionLabel(string text, GameObject dialogueObject, GameObject actionButtonObject)
     {
         AudioSource dialogueSource = dialogueObject.GetComponent<AudioSource>();
         float dialogueDuration = dialogueSource.clip.length;
-
         dialogueSource.Play();
 
+        _targetToLook = actionButtonObject;
+        _isLookingToObject = true;
+ 
         _currentActionTextMeshPro.text = text;
         _currentActionPanel.SetActive(true);
 
         yield return new WaitForSeconds(dialogueDuration + 1f);
+
+        _isLookingToObject = false;
+        _targetToLook = null;
+
+        UnFreezePlayer();
 
         _currentActionPanel.SetActive(false);
     }
@@ -591,9 +608,17 @@ public class GameManager : MonoBehaviour
         {
             if (mapAction.hasDialogue)
             {
-                StartCoroutine(ShowAndHideActionLabel(mapAction.title, mapAction.dialogue));
+                StartCoroutine(ShowAndHideActionLabel(mapAction.title, mapAction.dialogue, mapAction.button));
             }
         }
+    }
+
+    private void RestartGame()
+    {
+        if (_lastCheckPointPos != null) _player.transform.position = _lastCheckPointPos;
+        _playerScript.IsDead = false;
+        _playerScript.HealthManager.restoreHealth();
+        CancelInvoke(nameof(RestartGame));
     }
 
     private void CenterActionButtonInCamera(GameObject actionButton)
@@ -607,11 +632,53 @@ public class GameManager : MonoBehaviour
         actionButton.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180, 0);
     }
 
-    private void RestartGame()
+    private void LookToObject()
     {
-        if (_lastCheckPointPos != null) _player.transform.position = _lastCheckPointPos;
-        _playerScript.IsDead = false;
-        _playerScript.HealthManager.restoreHealth();
-        CancelInvoke(nameof(RestartGame));
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+
+        Vector3 direction = _targetToLook.transform.position - playerPrefab.transform.position;
+        direction.Normalize();
+
+        // Calcula a rotação desejada
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+
+        // suaviza a transição de rotação
+        float rotationSpeed = 3f;
+        playerPrefab.transform.rotation = Quaternion.Slerp(playerPrefab.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+        Vector3 forwardDirection = playerPrefab.transform.forward;
+
+        float dotProduct = Vector3.Dot(direction, forwardDirection);
+
+        // verifica se o jogador está a olhar para o puzzle
+        float angleThreshold = 0.9f;
+        if (dotProduct > angleThreshold)
+        {
+            _isLookingToObject = false;
+            _targetToLook = null;
+        }
+    }
+
+    private void FreezePlayer()
+    {
+        _playerScript.freeze = true;
+
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+      
+        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+        playerAnimations.FreezeAllAnimations = true;
+
+        Animator playerAnimatior = playerPrefab.GetComponent<Animator>();
+        playerAnimatior.SetBool(Animations.WALKING, false);
+    }
+
+    private void UnFreezePlayer()
+    {
+        _playerScript.freeze = false;
+
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+    
+        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+        playerAnimations.FreezeAllAnimations = false;
     }
 }
