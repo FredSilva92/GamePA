@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas _canvas;
 
     [SerializeField] private AudioSource _backgroundAaudioSource;
+    [SerializeField] private AudioSource _treasureChestAudioSource;
 
     private bool _isChangingPositon = false;
     private Vector3 positionToChange;
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject _targetToLook;
     private bool _isLookingToObject;
+
+    [SerializeField] private Animator _animator; 
 
 
     /* PROPRIEDADES */
@@ -126,6 +129,8 @@ public class GameManager : MonoBehaviour
         InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 30f);
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
+
+        _animator = _animator.GetComponent<Animator>();
 
         // assina o observável para detetar mudanças de estado
         _currentGameState.Subscribe(gameState =>
@@ -214,8 +219,10 @@ public class GameManager : MonoBehaviour
         {
             // mostra a cutscene externa e trata do colisor no script LevelChanger
             case GameState.INTRO_GAME:
+
+            //abre o baú e no fim mostra a cutscene final
             case GameState.FINISH_GAME:
-                ConfigVideoCutscene(nextGameState);
+                StartCoroutine(OpenChestAndStartCutscene(nextGameState));
                 break;
 
             // mostra a cutscene dentro do unity e trata do colisor no script LevelChanger
@@ -490,6 +497,16 @@ public class GameManager : MonoBehaviour
         UnFreezePlayer();
 
         _currentActionPanel.SetActive(false);
+    }
+
+    private IEnumerator OpenChestAndStartCutscene (GameState nextGameState)
+    {
+
+        _animator.SetBool("isOpen", true);
+        _treasureChestAudioSource.Play();
+        yield return new WaitForSeconds(10f);
+
+        ConfigVideoCutscene(nextGameState);
     }
 
     private void ShowAndHideGoalLoop()
