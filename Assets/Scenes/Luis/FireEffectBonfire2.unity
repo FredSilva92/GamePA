@@ -531,7 +531,6 @@ MonoBehaviour:
   _light: {fileID: 246977170}
   _minIntensity: 1.5
   _maxIntensity: 2.5
-  _originalIntensity: 2.5
   _flickerSpeed: 3
 --- !u!114 &246977169
 MonoBehaviour:
@@ -5940,7 +5939,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483890414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.014907981, y: 0.77769834, z: 0.018456064, w: 0.6281898}
+  m_LocalRotation: {x: -0.014969981, y: 0.775581, z: 0.018405827, w: 0.63080204}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6211,6 +6210,7 @@ MonoBehaviour:
   combatLookAt: {fileID: 1348621371}
   thirdPersonCam: {fileID: 794065814}
   combatCam: {fileID: 800450782}
+  focusOnPuzzleCam: {fileID: 0}
   crossHair: {fileID: 1365554308}
 --- !u!114 &680776770
 MonoBehaviour:
@@ -6306,7 +6306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.010774692, y: 0.780836, z: 0.013472067, w: 0.6244979}
+  m_LocalRotation: {x: -0.010819936, y: 0.77873105, z: 0.013435734, w: 0.62712073}
   m_LocalPosition: {x: 43.268192, y: -2.5280437, z: 273.06708}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7485,7 +7485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!73398921 &1048419742
 VFXRenderer:
   serializedVersion: 1
@@ -7494,7 +7494,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048419741}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -13623,7 +13623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560490763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.010774709, y: 0.7808359, z: 0.01347207, w: 0.62449795}
+  m_LocalRotation: {x: -0.010819958, y: 0.778731, z: 0.013435745, w: 0.62712085}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14091,7 +14091,6 @@ MonoBehaviour:
   _light: {fileID: 1703990195}
   _minIntensity: 1.5
   _maxIntensity: 2.5
-  _originalIntensity: 2.5
   _flickerSpeed: 3
 --- !u!1 &1711853819
 GameObject:
@@ -19134,7 +19133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907091131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007827039, y: 0.77133995, z: 0.009488081, w: 0.63630456}
+  m_LocalRotation: {x: -0.007858877, y: 0.76919633, z: 0.009461693, w: 0.63889414}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19322,7 +19321,6 @@ MonoBehaviour:
   _light: {fileID: 2006336809}
   _minIntensity: 1.5
   _maxIntensity: 2.5
-  _originalIntensity: 2.5
   _flickerSpeed: 3
 --- !u!1 &2016554226
 GameObject:
@@ -19349,7 +19347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016554226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11310568, y: -0.0000000042739914, z: 4.865348e-10, w: 0.99358296}
+  m_LocalRotation: {x: 0.11310568, y: 0.000000004273992, z: -4.8653487e-10, w: 0.99358296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
