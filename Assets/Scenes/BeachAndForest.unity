@@ -3113,6 +3113,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -6028,6 +6036,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -7703,6 +7719,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -13477,6 +13501,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -18591,6 +18623,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -20265,6 +20305,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -23351,7 +23399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439176276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05800655, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.058006555, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30578,6 +30626,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -31838,7 +31894,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05800656, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.058006566, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 69.7, y: -5.2850437, z: 18.349998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34934,6 +34990,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -42428,6 +42492,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -53097,6 +53169,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -55758,6 +55838,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -58395,6 +58483,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -72389,6 +72485,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1348621370}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245
@@ -82311,9 +82415,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1348621370}
     - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableItem
+      value: 
+      objectReference: {fileID: 2326703117694633478, guid: 8857b0e4bd0611440bfc9ec649590e92, type: 3}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: _healthManager
       value: 
       objectReference: {fileID: 481978294}
+    - target: {fileID: 7023907248129187997, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
+      propertyPath: droppableAction
+      value: 
+      objectReference: {fileID: 7547055015788871859, guid: 20272c4f4f1d75c49a1d22bfc78daf3a, type: 3}
     - target: {fileID: 7099898738749893023, guid: 5ce56f48fcb1081468b4397537070430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000018626245

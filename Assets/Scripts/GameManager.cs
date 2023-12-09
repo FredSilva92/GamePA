@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<GameStateInfo> _gameStateList;
     [SerializeField] private List<MapAction> _mapActions;
+    private List<GameObject> _medicineActions = new();
 
     [SerializeField] private float _actionButtonsVisibilityDistance = 20f;
     [SerializeField] private float _actionButtonsClickDistance = 2f;
@@ -182,6 +183,7 @@ public class GameManager : MonoBehaviour
         {
             CheckActionButtonsVisibilityDistance();
             CheckActionButtonsClickDistance();
+            CenterMedicionActions();
         }
     }
 
@@ -660,7 +662,7 @@ public class GameManager : MonoBehaviour
         CancelInvoke(nameof(RestartGame));
     }
 
-    private void CenterActionButtonInCamera(GameObject actionButton)
+    public void CenterActionButtonInCamera(GameObject actionButton)
     {
         Camera playerCamera = _playerCameraObject.GetComponent<Camera>();
 
@@ -719,5 +721,23 @@ public class GameManager : MonoBehaviour
 
         PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
         playerAnimations.FreezeAllAnimations = false;
+    }
+
+    public void addMedicine(GameObject medicineAction)
+    {
+        _medicineActions.Add(medicineAction);
+    }
+
+    public void removeMedicine(GameObject medicineAction)
+    {
+        _medicineActions.Remove(medicineAction);
+    }
+
+    private void CenterMedicionActions()
+    {
+        foreach (GameObject medicineAction in _medicineActions)
+        {
+            CenterActionButtonInCamera(medicineAction);
+        }
     }
 }

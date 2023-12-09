@@ -35,6 +35,9 @@ public class EnemyScript : CharacterBase
     private float timeWalking = 7f;
     private float currentTimeWalking = 0f;
 
+    private GameManager gameManager;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,6 +45,8 @@ public class EnemyScript : CharacterBase
         agent = GetComponent<NavMeshAgent>();
         initialPosition = transform.position;
         agent.speed = 5f;
+
+        gameManager = GameManager.Instance;
     }
 
     void Update()
@@ -53,6 +58,7 @@ public class EnemyScript : CharacterBase
             PlayAnimation(animator, Animations.DYING);
             GetComponent<CapsuleCollider>().enabled = false;
             if (!hasDropped) DropItem();
+
             return;
         }
 
@@ -99,7 +105,8 @@ public class EnemyScript : CharacterBase
                 agent.isStopped = true;
                 animator.SetBool(Animations.WALKING, false);
                 RandomWalking();
-            } else
+            }
+            else
             {
                 currentTimeWalking -= Time.deltaTime;
             }
@@ -129,7 +136,13 @@ public class EnemyScript : CharacterBase
 
     private void DropItem()
     {
-        Instantiate(droppableItem, transform.position, Quaternion.identity);
+        GameObject medicineInstantiated = Instantiate(droppableItem, new Vector3(
+            transform.position.x,
+            transform.position.y + 0.2f,
+            transform.position.z), Quaternion.identity);
+
+        gameManager.addMedicine(medicineInstantiated);
+
         hasDropped = true;
     }
 

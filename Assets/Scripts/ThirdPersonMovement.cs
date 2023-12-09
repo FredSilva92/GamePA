@@ -108,6 +108,8 @@ public class ThirdPersonMovement : CharacterBase
 
     public string CurrentEnvironment { get { return _currentEnvironment; } }
 
+    private GameManager gameManager;
+
 
     private void Start()
     {
@@ -118,6 +120,8 @@ public class ThirdPersonMovement : CharacterBase
         HealthManager = _healthManager;
 
         animator = GetComponent<Animator>();
+
+        gameManager = GameManager.Instance;
     }
 
     private void Update()
@@ -415,7 +419,6 @@ public class ThirdPersonMovement : CharacterBase
 
     private void OnItemIter(Collider collision, Func<GameObject, IEnumerator> IterFunc, out bool var)
     {
-
         var = true;
 
         GameObject item = collision.gameObject.CloneViaSerialization();
@@ -424,14 +427,17 @@ public class ThirdPersonMovement : CharacterBase
         StartCoroutine(StopPickingAnimation());
     }
 
-    IEnumerator PickUpMedicine(GameObject medicine)
+    IEnumerator PickUpMedicine(GameObject medicineAction)
     {
         yield return new WaitForSeconds(1f);
 
+        Transform medicine = medicineAction.transform.GetChild(0);
         MedicineScript medicineScript = medicine.GetComponent<MedicineScript>();
         _healthManager.UpdateHealth(medicineScript.Health);
 
-        Destroy(medicine);
+        gameManager.removeMedicine(medicineAction);
+
+        Destroy(medicineAction);
     }
 
     IEnumerator GrabTreasure(GameObject treasure)
