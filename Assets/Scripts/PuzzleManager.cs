@@ -16,8 +16,6 @@ public class PuzzleManager : MonoBehaviour
 
     private PuzzlePiece _firstPiece = null;
     private PuzzlePiece _secondPiece = null;
-    private int _firstPositionChosen = -1;
-    private int _secondPositionChosen = -1;
 
     private float _firstPieceToFrontDistance = 0.81f;
     private float _secondPieceToFrontDistance = 0.45f;
@@ -101,16 +99,12 @@ public class PuzzleManager : MonoBehaviour
                 if (_firstPiece == null)
                 {
                     _firstPiece = ChoosePiece(inputtedNumber);
-                    _firstPositionChosen = inputtedNumber;
                     StartCoroutine(MoveToFront(_firstPiece, _firstPieceToFrontDistance));
-
                     return;
                 }
                 else
                 {
                     _secondPiece = ChoosePiece(inputtedNumber);
-                    _secondPositionChosen = inputtedNumber;
-
                     StartCoroutine(MoveSecondPieceThenSwap());
                 }
             }
@@ -168,49 +162,16 @@ public class PuzzleManager : MonoBehaviour
         Vector3 endStartPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _secondPiece.piece.transform.position.z);
 
         yield return StartCoroutine(MoveToFront(_secondPiece, _secondPieceToFrontDistance));
-        //yield return StartCoroutine(SwapPieces());
-
-        int firstIndexOfList = _pieces.IndexOf(_firstPiece);
-        int secondIndeOfList = _pieces.IndexOf(_secondPiece);
 
         yield return StartCoroutine(MoveSecondToFirstPiece());
         yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
-        //yield return StartCoroutine(MoveToBack(_firstPiece, _firstPieceToFrontDistance));
         yield return StartCoroutine(MoveFirstToSecondPiece(endStartPosition));
 
-        //ResetValues();
-    }
-
-    private IEnumerator SwapPieces()
-    {
         int firstIndexOfList = _pieces.IndexOf(_firstPiece);
         int secondIndeOfList = _pieces.IndexOf(_secondPiece);
+        SwapPieceInList(firstIndexOfList, secondIndeOfList);
 
-        Vector3 secondEndPosition = new Vector3(_secondPiece.piece.transform.position.x,
-            _secondPiece.piece.transform.position.y,
-            _firstPiece.piece.transform.position.z);
-
-        Vector3 firstEndPosition = new Vector3(_firstPiece.piece.transform.position.x,
-       _firstPiece.piece.transform.position.y,
-       _secondPiece.piece.transform.position.z);
-
-        yield return null;
-        //yield return StartCoroutine(MoveFirstToSecondPiece());
-        //yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
-        //yield return StartCoroutine(MoveSecondToFirstPiece());
-        //yield return StartCoroutine(MoveToBack(_firstPiece, _firstPieceToFrontDistance));
-
-        //SwapPiecePosition(firstIndexOfList, secondIndeOfList);
-        //SwapPieceInList(firstIndexOfList, secondIndeOfList);
-    }
-
-    private void SwapPiecePosition(int firstIndex, int secondIndex)
-    {
-        Vector3 firstWallPosition = _wallPoints[_firstPositionChosen - 1].localPosition;
-        Vector3 secondWallPosition = _wallPoints[_secondPositionChosen - 1].localPosition;
-
-        UpdatePosition(firstIndex, secondWallPosition);
-        UpdatePosition(secondIndex, firstWallPosition);
+        ResetValues();
     }
 
     private void SwapPieceInList(int firstIndexOfList, int secondIndeOfList)
@@ -315,7 +276,6 @@ public class PuzzleManager : MonoBehaviour
         float elapsedTime = 0f;
 
         Vector3 startPosition = _firstPiece.piece.transform.position;
-        //Vector3 endPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _firstPiece.piece.transform.position.z);
 
         while (elapsedTime < _moveDuration)
         {
@@ -340,9 +300,6 @@ public class PuzzleManager : MonoBehaviour
     {
         _firstPiece = null;
         _secondPiece = null;
-
-        _firstPositionChosen = -1;
-        _secondPositionChosen = -1;
     }
 
     public bool CheckPuzzleSolved()
