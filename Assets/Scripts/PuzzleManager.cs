@@ -37,6 +37,8 @@ public class PuzzleManager : MonoBehaviour
     private bool _walkStarted = false;
     private bool _lookStarted = false;
 
+    [SerializeField] private AudioSource _pieceDragAudio;
+
 
     /* PROPRIEDADES */
 
@@ -225,6 +227,8 @@ public class PuzzleManager : MonoBehaviour
 
     IEnumerator MoveToFront(PuzzlePiece currentPiece, float moveUntil)
     {
+        _pieceDragAudio.Play();
+
         float startTime = Time.time;
         float elapsedTime = 0f;
 
@@ -248,6 +252,8 @@ public class PuzzleManager : MonoBehaviour
 
     IEnumerator MoveToBack(PuzzlePiece currentPiece, float moveUntil)
     {
+        _pieceDragAudio.Play();
+
         float startTime = Time.time;
         float elapsedTime = 0f;
 
@@ -274,6 +280,8 @@ public class PuzzleManager : MonoBehaviour
      */
     IEnumerator MoveSecondToFirstPiece()
     {
+        _pieceDragAudio.Play();
+
         float startTime = Time.time;
         float elapsedTime = 0f;
 
@@ -301,6 +309,8 @@ public class PuzzleManager : MonoBehaviour
     */
     IEnumerator MoveFirstToSecondPiece(Vector3 endPosition)
     {
+        _pieceDragAudio.Play();
+
         float startTime = Time.time;
         float elapsedTime = 0f;
 
