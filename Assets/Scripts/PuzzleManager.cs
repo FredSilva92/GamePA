@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,14 +12,19 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private int[] pieceOrder = { 6, 9, 8, 7, 2, 4, 5, 3, 1 };
 
     [SerializeField] private List<Transform> _wallPoints;
-    [SerializeField] private List<PuzzlePiece> _puzzlePieces;
+    [SerializeField] private List<PuzzlePiece> _pieces;
 
     private PuzzlePiece _firstPiece = null;
     private PuzzlePiece _secondPiece = null;
     private int _firstPositionChosen = -1;
     private int _secondPositionChosen = -1;
 
+    private float _firstPieceToFrontDistance = 0.81f;
+    private float _secondPieceToFrontDistance = 0.45f;
+
     private bool _isSolving = false;
+
+    [SerializeField] private float _moveDuration = 1f;
 
     [SerializeField] private GameObject _door;
     private DoorAnimationManager _doorScript;
@@ -69,18 +75,13 @@ public class PuzzleManager : MonoBehaviour
 
     private void ShufflePuzzle()
     {
-        _puzzlePieces = _puzzlePieces.OrderBy(puzzlePiece => Array.IndexOf(pieceOrder, puzzlePiece.position)).ToList();
+        _pieces = _pieces.OrderBy(piece => Array.IndexOf(pieceOrder, piece.position)).ToList();
 
-        for (int i = 0; i < _puzzlePieces.Count; i++)
+        for (int i = 0; i < _pieces.Count; i++)
         {
             Vector3 newPosition = _wallPoints[i].localPosition;
             UpdatePosition(i, newPosition);
         }
-    }
-
-    private void UpdatePosition(int listIndex, Vector3 wallPosition)
-    {
-        _puzzlePieces[listIndex].piece.transform.localPosition = wallPosition;
     }
 
     public void DoPlay()
@@ -99,14 +100,16 @@ public class PuzzleManager : MonoBehaviour
                 {
                     _firstPiece = ChoosePiece(inputtedNumber);
                     _firstPositionChosen = inputtedNumber;
+                    StartCoroutine(MoveToFront(_firstPiece, _firstPieceToFrontDistance));
+
                     return;
                 }
                 else
                 {
                     _secondPiece = ChoosePiece(inputtedNumber);
                     _secondPositionChosen = inputtedNumber;
-                    MovePieces();
-                    ResetValues();
+
+                    StartCoroutine(MoveSecondPieceThenSwap());
                 }
             }
         }
@@ -146,11 +149,11 @@ public class PuzzleManager : MonoBehaviour
 
     private PuzzlePiece ChoosePiece(int inputtedNumber)
     {
-        PuzzlePiece puzzlePiece = _puzzlePieces[inputtedNumber - 1];
+        PuzzlePiece piece = _pieces[inputtedNumber - 1];
 
-        if (puzzlePiece != null)
+        if (piece != null)
         {
-            return puzzlePiece;
+            return piece;
         }
         else
         {
@@ -158,16 +161,48 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    private void MovePieces()
+    private IEnumerator MoveSecondPieceThenSwap()
     {
-        int firstIndex = _puzzlePieces.IndexOf(_firstPiece);
-        int secondIndex = _puzzlePieces.IndexOf(_secondPiece);
+        Vector3 endStartPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _secondPiece.piece.transform.position.z);
 
-        SwapPuzzlePiecePosition(firstIndex, secondIndex);
-        SwapPuzzlePieceInList(firstIndex, secondIndex);
+        yield return StartCoroutine(MoveToFront(_secondPiece, _secondPieceToFrontDistance));
+        //yield return StartCoroutine(SwapPieces());
+
+        int firstIndexOfList = _pieces.IndexOf(_firstPiece);
+        int secondIndeOfList = _pieces.IndexOf(_secondPiece);
+
+        yield return StartCoroutine(MoveSecondToFirstPiece());
+        yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
+        //yield return StartCoroutine(MoveToBack(_firstPiece, _firstPieceToFrontDistance));
+        yield return StartCoroutine(MoveFirstToSecondPiece(endStartPosition));
+
+        //ResetValues();
     }
 
-    private void SwapPuzzlePiecePosition(int firstIndex, int secondIndex)
+    private IEnumerator SwapPieces()
+    {
+        int firstIndexOfList = _pieces.IndexOf(_firstPiece);
+        int secondIndeOfList = _pieces.IndexOf(_secondPiece);
+
+        Vector3 secondEndPosition = new Vector3(_secondPiece.piece.transform.position.x,
+            _secondPiece.piece.transform.position.y,
+            _firstPiece.piece.transform.position.z);
+
+        Vector3 firstEndPosition = new Vector3(_firstPiece.piece.transform.position.x,
+       _firstPiece.piece.transform.position.y,
+       _secondPiece.piece.transform.position.z);
+
+        yield return null;
+        //yield return StartCoroutine(MoveFirstToSecondPiece());
+        //yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
+        //yield return StartCoroutine(MoveSecondToFirstPiece());
+        //yield return StartCoroutine(MoveToBack(_firstPiece, _firstPieceToFrontDistance));
+
+        //SwapPiecePosition(firstIndexOfList, secondIndeOfList);
+        //SwapPieceInList(firstIndexOfList, secondIndeOfList);
+    }
+
+    private void SwapPiecePosition(int firstIndex, int secondIndex)
     {
         Vector3 firstWallPosition = _wallPoints[_firstPositionChosen - 1].localPosition;
         Vector3 secondWallPosition = _wallPoints[_secondPositionChosen - 1].localPosition;
@@ -176,11 +211,116 @@ public class PuzzleManager : MonoBehaviour
         UpdatePosition(secondIndex, firstWallPosition);
     }
 
-    private void SwapPuzzlePieceInList(int firstIndex, int secondIndex)
+    private void SwapPieceInList(int firstIndexOfList, int secondIndeOfList)
     {
-        PuzzlePiece tempPuzzlePiece = _puzzlePieces[firstIndex];
-        _puzzlePieces[firstIndex] = _puzzlePieces[secondIndex];
-        _puzzlePieces[secondIndex] = tempPuzzlePiece;
+        PuzzlePiece tempPiece = _pieces[firstIndexOfList];
+        _pieces[firstIndexOfList] = _pieces[secondIndeOfList];
+        _pieces[secondIndeOfList] = tempPiece;
+    }
+
+    private void UpdatePosition(int listIndex, Vector3 wallPosition)
+    {
+        _pieces[listIndex].piece.transform.localPosition = wallPosition;
+    }
+
+    IEnumerator MoveToFront(PuzzlePiece currentPiece, float moveUntil)
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = currentPiece.piece.transform.position;
+        Vector3 endPosition = startPosition - Vector3.forward * moveUntil;
+
+        while (elapsedTime < _moveDuration)
+        {
+            elapsedTime = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsedTime / _moveDuration);
+
+            currentPiece.piece.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+
+            yield return null;
+        }
+
+        currentPiece.piece.transform.position = endPosition;
+
+        yield return null;
+    }
+
+    IEnumerator MoveToBack(PuzzlePiece currentPiece, float moveUntil)
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = currentPiece.piece.transform.position;
+        Vector3 endPosition = startPosition - Vector3.back * moveUntil;
+
+        while (elapsedTime < _moveDuration)
+        {
+            elapsedTime = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsedTime / _moveDuration);
+
+            currentPiece.piece.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+
+            yield return null;
+        }
+
+        currentPiece.piece.transform.position = endPosition;
+
+        yield return null;
+    }
+
+    /*
+     * Mover a 2º peça até à 1º peça, mantendo o eixo z da 2º peça.
+     */
+    IEnumerator MoveSecondToFirstPiece()
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = _secondPiece.piece.transform.position;
+        Vector3 endPosition = new Vector3(_firstPiece.piece.transform.position.x, _firstPiece.piece.transform.position.y, _secondPiece.piece.transform.position.z);
+
+        while (elapsedTime < _moveDuration)
+        {
+            elapsedTime = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsedTime / _moveDuration);
+
+            _secondPiece.piece.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+
+            yield return null;
+        }
+
+        // garante que a 1º peça fique alinhada na 2º peça
+        _secondPiece.piece.transform.position = endPosition;
+
+        yield return null;
+    }
+
+    /*
+    * Mover a 1º peça até à 2º peça, mantendo o eixo z da 1º peça.
+    */
+    IEnumerator MoveFirstToSecondPiece(Vector3 endPosition)
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = _firstPiece.piece.transform.position;
+        //Vector3 endPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _firstPiece.piece.transform.position.z);
+
+        while (elapsedTime < _moveDuration)
+        {
+            elapsedTime = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsedTime / _moveDuration);
+
+            _firstPiece.piece.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+
+            yield return null;
+        }
+
+        // garante que a 1º peça fique alinhada na 2º peça
+        _firstPiece.piece.transform.position = endPosition;
+
+        yield return null;
     }
 
     /*
@@ -199,9 +339,9 @@ public class PuzzleManager : MonoBehaviour
     {
         bool isSolved = true;
 
-        for (int i = 0; i < _puzzlePieces.Count; i++)
+        for (int i = 0; i < _pieces.Count; i++)
         {
-            if (_puzzlePieces[i].position != i + 1)
+            if (_pieces[i].position != i + 1)
             {
                 isSolved = false;
                 break;
