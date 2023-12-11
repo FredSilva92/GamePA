@@ -12,6 +12,8 @@ TagManager:
   - Treasure
   - SpineRotation
   - DeathCollider
+  - Enemy
+  - LaserHole
   layers:
   - Default
   - TransparentFX

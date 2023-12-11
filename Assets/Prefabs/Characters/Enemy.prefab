@@ -2296,7 +2296,6 @@ MonoBehaviour:
   laser: {fileID: 2525952955390799428, guid: ed14c9052451e634e99974d5adeac8c7, type: 3}
   player: {fileID: 3610248153917254521}
   animator: {fileID: 8048444809673894841}
-  speed: 5
   fireRate: 2
 --- !u!1 &2238271108270802204
 GameObject:
@@ -3061,9 +3060,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9412f71eb597bf14eb0e80e3f2607b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
   player: {fileID: 0}
   droppableItem: {fileID: 1987713744733760, guid: b55df95fa6211964e8ad561501250fac, type: 3}
+  movingRadius: 5
   _healthManager: {fileID: 4192548877204385939}
 --- !u!95 &8048444809673894841
 Animator:
@@ -3164,7 +3163,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3610248153917254521}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.17
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -3173,7 +3172,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -3196,10 +3195,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.31443167
+  m_Radius: 0.23247433
   m_Height: 1.9020945
   m_Direction: 1
-  m_Center: {x: -0.060334682, y: 0.8487887, z: 0}
+  m_Center: {x: -0.01, y: 0.85, z: -0.02}
 --- !u!1 &4011116375206427695
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,8 +3243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a521a341d67bd3c428103774bc9331ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthBar: {fileID: 0}
-  initialHealth: 100
+  _currentHealthImage: {fileID: 0}
+  _initialHealth: 100
 --- !u!1 &4097763056287719029
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4731087545047838889}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 3.28, y: 2.3220208, z: 111.18}
+  m_LocalPosition: {x: -84.8, y: 2.3220208, z: 111.18}
   m_LocalScale: {x: 0.042122763, y: 0.042122763, z: 0.042122763}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 6571533398071872024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -205,7 +205,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: dd4e0a6af7702e14aa53a3ea6eabebe1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -230,7 +230,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -244,22 +244,22 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.17921992
-        value: 0.19999886
-        inSlope: 0.0047985315
-        outSlope: 0.0047985315
+        time: 0.20221452
+        value: 0.9803064
+        inSlope: -0.019893374
+        outSlope: -0.019893374
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.69182074
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.7951341
-        value: 0.19166374
-        inSlope: -0.34510216
-        outSlope: -0.34510216
+        time: 0.7915636
+        value: 0.98332787
+        inSlope: -0.000046152272
+        outSlope: -0.000046152272
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.25072902
+        inWeight: 0.28111
         outWeight: 0.921858
       - serializedVersion: 3
         time: 0.9784851
@@ -309,7 +309,7 @@ TrailRenderer:
     textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0

@@ -8,6 +8,9 @@ public class PlayerGunScript : MonoBehaviour
     protected Transform spawnPoint;
 
     [SerializeField]
+    private GameObject muzzlePrefab;
+
+    [SerializeField]
     protected GameObject laser;
 
     [SerializeField]
@@ -59,6 +62,13 @@ public class PlayerGunScript : MonoBehaviour
 
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
+
+            if (muzzlePrefab != null)
+            {
+                var muzzleVFX = Instantiate(muzzlePrefab, transform.position, transform.rotation);
+                muzzleVFX.transform.SetParent(spawnPoint.transform);
+                muzzleVFX.transform.forward = transform.forward;
+            }
 
             if (ThirdPersonCam.CameraStyle.Combat.Equals(cameraScript.CurrentStye))
             {
