@@ -21,10 +21,20 @@ public class EnemyGunScript : MonoBehaviour
     [SerializeField]
     protected float fireRate = 0;
 
+    [SerializeField]
+    private AudioClip laserShootSound;
+
+    private AudioSource audioSource;
+
     protected float time = 0;
 
     protected CharacterBase character;
-  
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         character = player.GetComponentInParent<CharacterBase>();
@@ -42,6 +52,8 @@ public class EnemyGunScript : MonoBehaviour
 
         if (time >= nextTimeToFire)
         {
+            audioSource.PlayOneShot(laserShootSound);
+
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 

@@ -6,6 +6,8 @@ public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerMainComp;
+    
+    private AudioSource walkingSound;
 
     private Animator animator;
     private Vector3 inputs;
@@ -35,6 +37,7 @@ public class PlayerAnimations : MonoBehaviour
         thirdPersonMovement = playerMainComp.GetComponent<ThirdPersonMovement>();
         animator = GetComponent<Animator>();
         layerShootIdx = animator.GetLayerIndex(Constants.SHOOT);
+        walkingSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -82,7 +85,7 @@ public class PlayerAnimations : MonoBehaviour
         bool isWalking = inputs != Vector3.zero;
 
         animator.SetBool(Animations.WALKING, isWalking);
-
+        if(walkingSound != null) walkingSound.enabled = isWalking;
 
         bool isAiming = Input.GetButton(Constants.AIM_KEY) || Input.GetButton(Constants.SHOOT_KEY);
 

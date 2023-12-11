@@ -25,6 +25,9 @@ public class PlayerGunScript : MonoBehaviour
     [SerializeField]
     protected GameObject crossHair;
 
+    [SerializeField]
+    private AudioClip audioClip;
+
     protected float time = 0;
 
     protected CharacterBase character;
@@ -33,10 +36,13 @@ public class PlayerGunScript : MonoBehaviour
     private Camera camera;
 
     private ThirdPersonCam cameraScript;
+    
+    private AudioSource audioSource;
 
     void Start()
     {
         cameraScript = camera.GetComponent<ThirdPersonCam>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -56,7 +62,7 @@ public class PlayerGunScript : MonoBehaviour
 
         if (time >= nextTimeToFire)
         {
-
+            audioSource.PlayOneShot(audioClip);
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();
 
