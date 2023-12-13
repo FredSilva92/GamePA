@@ -28,6 +28,7 @@ public class Utils
         public static readonly string GRABING = "isGrabing";
         public static readonly string RUNNING= "isRunning";
 
+        public static readonly string HOLE_CLOSING = "HoleClosing";
     }
 
     public static class Environments
