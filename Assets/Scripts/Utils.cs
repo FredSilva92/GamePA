@@ -78,6 +78,22 @@ public class Utils
         }
     }
 
+    public static void CheckIfIsDead(Collision collision, HealthManager healthManager, string bulletRef, ref bool isDead)
+    {
+        if (collision.gameObject.CompareTag(bulletRef))
+        {
+            LaserBulletScript laserScript = collision.gameObject.GetComponent<LaserBulletScript>();
+            healthManager.TakeDamage(laserScript.Damage);
+            isDead = healthManager.Health <= 0;
+        }
+
+        if (collision.gameObject.CompareTag(Constants.DEATH_COLLDER))
+        {
+            healthManager.TakeAllDamage();
+            isDead = true;
+        }
+    }
+
     public static float GetDistanceBetween2Objects(GameObject object1, GameObject object2)
     {
         return Vector3.Distance(object1.transform.position, object2.transform.position);

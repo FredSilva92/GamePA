@@ -131,6 +131,13 @@ public class EnemyScript : CharacterBase
 
     private void OnTriggerEnter(Collider collision)
     {
+        Debug.Log("E trigger");
+        //Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("E colisor");
         Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_PLAYER, ref _isDead);
     }
 

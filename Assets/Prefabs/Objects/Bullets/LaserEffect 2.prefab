@@ -152,7 +152,7 @@ MonoBehaviour:
   _damage: 20
   muzzlePrefab: {fileID: 6047389493889347409, guid: 0b743c7552e39a04aa78412ac829a772, type: 3}
   hitPrefab: {fileID: 7800396519719598812, guid: 6175568b099e40747983f3241682c6b2, type: 3}
-  holePrefab: {fileID: 6613987463785203187, guid: 9778cc47819bb8d41a7788d29b0a23d5, type: 3}
+  holePrefab: {fileID: 0}
 --- !u!1001 &2561696329726835709
 PrefabInstance:
   m_ObjectHideFlags: 0
