@@ -26,14 +26,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _actionButtonsVisibilityDistance = 20f;
     [SerializeField] private float _actionButtonsClickDistance = 2f;
 
-    [SerializeField] private Canvas _canvas;
+    [SerializeField] private Canvas _mainCanvas;
 
     [SerializeField] private AudioSource _backgroundAaudioSource;
     [SerializeField] private AudioSource _treasureChestAudioSource;
+    private AudioSource _currentActionDialogue;
+    private AudioSource _currentGoalDialogue;
 
     private bool _isChangingPositon = false;
-    private Vector3 positionToChange;
-    private Vector3 rotationToChange;
+    private Vector3 _positionToChange;
+    private Vector3 _rotationToChange;
 
     [SerializeField] public GameObject _playerCameraObject;
 
@@ -43,13 +45,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _puzzleManagerObject;
     private PuzzleManager _puzzleManagerScript;
 
-    [SerializeField] private GameObject _currentGoalPanel;
-    [SerializeField] private TextMeshProUGUI _currentGoalTextMeshPro;
-
     [SerializeField] private GameObject _currentActionPanel;
     [SerializeField] private TextMeshProUGUI _currentActionTextMeshPro;
 
-    private AudioSource _currentActionDialogue;
+    [SerializeField] private GameObject _currentGoalPanel;
+    [SerializeField] private TextMeshProUGUI _currentGoalTextMeshPro;
 
     [SerializeField] private GameObject _starship;
 
@@ -94,10 +94,28 @@ public class GameManager : MonoBehaviour
         set { _currentActionDialogue = value; }
     }
 
+    public AudioSource CurrentGoalDialogue
+    {
+        get { return _currentGoalDialogue; }
+        set { _currentGoalDialogue = value; }
+    }
+
     public Vector3 LastCheckPointPos
     {
         get { return _lastCheckPointPos; }
         set { _lastCheckPointPos = value; }
+    }
+
+    public GameObject CurrentActionPanel
+    {
+        get { return _currentActionPanel; }
+        set { _currentActionPanel = value; }
+    }
+
+    public GameObject CurrentGoalPanel
+    {
+        get { return _currentGoalPanel; }
+        set { _currentGoalPanel = value; }
     }
 
 
@@ -191,7 +209,7 @@ public class GameManager : MonoBehaviour
     {
         if (_isChangingPositon)
         {
-            ChangePlayerPosition(positionToChange, rotationToChange);
+            ChangePlayerPosition(_positionToChange, _rotationToChange);
             _isChangingPositon = false;
         }
     }
@@ -209,8 +227,8 @@ public class GameManager : MonoBehaviour
 
         if (_currentMapActions[0].gameStateInfo.hasNewPosition)
         {
-            positionToChange = _currentMapActions[0].gameStateInfo.position;
-            rotationToChange = _currentMapActions[0].gameStateInfo.rotation;
+            _positionToChange = _currentMapActions[0].gameStateInfo.position;
+            _rotationToChange = _currentMapActions[0].gameStateInfo.rotation;
             _isChangingPositon = true;
         }
 
@@ -347,9 +365,14 @@ public class GameManager : MonoBehaviour
             _backgroundAaudioSource.Pause();
         }
 
+        // bloquear falas da ação do F ou do objetivo
+        if (_currentActionDialogue != null) _currentActionDialogue.Stop();
+        if (_currentGoalDialogue != null) _currentGoalDialogue.Stop();
+        CancelInvoke(nameof(ShowAndHideGoalLoop));
+
         Time.timeScale = 0f;
 
-        _canvas.enabled = false;
+        _mainCanvas.enabled = false;
         videoPlayer.enabled = true;
         videoPlayer.Play();
     }
@@ -361,7 +384,7 @@ public class GameManager : MonoBehaviour
             _backgroundAaudioSource.UnPause();
         }
 
-        _canvas.enabled = true;
+        _mainCanvas.enabled = true;
         videoPlayer.enabled = false;
 
         Time.timeScale = 1f;
@@ -369,11 +392,14 @@ public class GameManager : MonoBehaviour
         if (_currentMapActions[0].gameStateInfo.hasNewPosition)
         {
             int lastGameStateInfoIndex = GetLastGameStateInfoIndex();
-            positionToChange = _gameStateList[lastGameStateInfoIndex].position;
-            rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
+            _positionToChange = _gameStateList[lastGameStateInfoIndex].position;
+            _rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
 
             _isChangingPositon = true;
         }
+
+        // ativar novamente a fala do objetivo durante o jogo
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
 
         if (_currentGameState.Value == GameState.FINISH_GAME)
         {
@@ -394,7 +420,12 @@ public class GameManager : MonoBehaviour
             _backgroundAaudioSource.Pause();
         }
 
-        _canvas.enabled = false;
+        // bloquear falas da ação do F ou do objetivo
+        if (_currentActionDialogue != null) _currentActionDialogue.Stop();
+        if (_currentGoalDialogue != null) _currentGoalDialogue.Stop();
+        CancelInvoke(nameof(ShowAndHideGoalLoop));
+
+        _mainCanvas.enabled = false;
 
         timelineObject.SetActive(true);
         timeline.Play();
@@ -407,17 +438,20 @@ public class GameManager : MonoBehaviour
             _backgroundAaudioSource.UnPause();
         }
 
-        _canvas.enabled = true;
+        _mainCanvas.enabled = true;
         timelineObject.SetActive(false);
 
         if (_currentMapActions[0].gameStateInfo.hasNewPosition)
         {
             int lastGameStateInfoIndex = GetLastGameStateInfoIndex();
-            positionToChange = _gameStateList[lastGameStateInfoIndex].position;
-            rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
+            _positionToChange = _gameStateList[lastGameStateInfoIndex].position;
+            _rotationToChange = _gameStateList[lastGameStateInfoIndex].rotation;
 
             _isChangingPositon = true;
         }
+
+        // ativar novamente a fala do objetivo durante o jogo
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
 
         ChangeGameState(nextGameState);
 
@@ -529,15 +563,17 @@ public class GameManager : MonoBehaviour
             {
                 _currentGoalTextMeshPro.text = mapAction.title;
 
-                _currentActionDialogue = mapAction.dialogue.GetComponent<AudioSource>();
-                dialogueDuration = _currentActionDialogue.clip.length;
-                _currentActionDialogue.Play();
+                _currentGoalDialogue = mapAction.dialogue.GetComponent<AudioSource>();
+                dialogueDuration = _currentGoalDialogue.clip.length;
+                _currentGoalDialogue.Play();
             }
         }
 
         _currentGoalPanel.SetActive(true);
 
         yield return new WaitForSeconds(dialogueDuration + 1f);
+
+        _currentGoalDialogue = null;
 
         _currentGoalPanel.SetActive(false);
     }
