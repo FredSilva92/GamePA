@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         HideCurrentActionLabel();
         HideAllActionButtons();
 
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 10f);
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
@@ -399,7 +399,7 @@ public class GameManager : MonoBehaviour
         }
 
         // ativar novamente a fala do objetivo durante o jogo
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 10f);
 
         if (_currentGameState.Value == GameState.FINISH_GAME)
         {
@@ -451,7 +451,7 @@ public class GameManager : MonoBehaviour
         }
 
         // ativar novamente a fala do objetivo durante o jogo
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 10f);
 
         ChangeGameState(nextGameState);
 
@@ -535,16 +535,6 @@ public class GameManager : MonoBehaviour
         _currentActionPanel.SetActive(false);
     }
 
-    private IEnumerator OpenChestAndStartCutscene(GameState nextGameState)
-    {
-        _treasureChestAnimator.SetBool("isOpen", true);
-        _treasureChestAudioSource.Play();
-
-        yield return new WaitForSeconds(10f);
-
-        ConfigVideoCutscene(nextGameState);
-    }
-
     private void ShowAndHideGoalLoop()
     {
         StartCoroutine(ShowAndHideGoalLabel());
@@ -559,23 +549,35 @@ public class GameManager : MonoBehaviour
 
         foreach (MapAction mapAction in _currentMapActions)
         {
-            if (mapAction.hasProgress && mapAction.dialogue != null)
+            if (mapAction.hasProgress && mapAction.dialogue != null && (_currentActionDialogue == null))
             {
                 _currentGoalTextMeshPro.text = mapAction.title;
 
                 _currentGoalDialogue = mapAction.dialogue.GetComponent<AudioSource>();
                 dialogueDuration = _currentGoalDialogue.clip.length;
                 _currentGoalDialogue.Play();
+
+                _currentGoalPanel.SetActive(true);
+
+                break;
             }
         }
-
-        _currentGoalPanel.SetActive(true);
 
         yield return new WaitForSeconds(dialogueDuration + 1f);
 
         _currentGoalDialogue = null;
 
         _currentGoalPanel.SetActive(false);
+    }
+
+    private IEnumerator OpenChestAndStartCutscene(GameState nextGameState)
+    {
+        _treasureChestAnimator.SetBool("isOpen", true);
+        _treasureChestAudioSource.Play();
+
+        yield return new WaitForSeconds(10f);
+
+        ConfigVideoCutscene(nextGameState);
     }
 
     /*
@@ -683,7 +685,8 @@ public class GameManager : MonoBehaviour
     {
         if (!mapAction.hasProgress)
         {
-            if (mapAction.hasDialogue)
+            // se ação tem diálogo e a fala do objetivo não está a ser falada no momento
+            if (mapAction.hasDialogue && _currentGoalDialogue == null)
             {
                 StartCoroutine(ShowAndHideActionLabel(mapAction.title, mapAction.dialogue, mapAction.button));
             }
