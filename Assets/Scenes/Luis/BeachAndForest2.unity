@@ -14442,7 +14442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439176276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05800655, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.058006555, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19966,7 +19966,10 @@ VisualEffect:
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.5, y: 0.5, z: 0}
+        m_Name: WindVelocity
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -21660,7 +21663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680776767}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05800656, y: -0, z: -0, w: 0.9983162}
+  m_LocalRotation: {x: 0.058006566, y: -0, z: -0, w: 0.9983162}
   m_LocalPosition: {x: 54.982, y: -1.8420439, z: 260.799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

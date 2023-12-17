@@ -36822,7 +36822,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7ac4fb61b973bf64a88afac7451a0bf9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eeee12b642179fd49beb03ab25cf6a58, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -78068,7 +78068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1348621370}
   _currentGameState:
-    value: 0
+    value: 1
   _gameStateList:
   - gameState: 0
     hasCutscene: 1
@@ -92108,7 +92108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016554226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11310568, y: -0.0000000042739914, z: 4.865348e-10, w: 0.99358296}
+  m_LocalRotation: {x: 0.11310568, y: 0.000000004273992, z: -4.8653487e-10, w: 0.99358296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
