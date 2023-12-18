@@ -40,13 +40,19 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (gameManager.CurrentActionDialogue != null)
-        {
-            gameManager.CurrentActionDialogue.Pause();
-        }
         if (gameManager.BackgroundAaudioSource != null)
         {
             gameManager.BackgroundAaudioSource.Pause();
+        }
+        if (gameManager.CurrentActionDialogue != null)
+        {
+            gameManager.CurrentActionPanel.SetActive(false);
+            gameManager.CurrentActionDialogue.Pause();
+        }
+        if (gameManager.CurrentGoalDialogue != null)
+        {
+            gameManager.CurrentGoalPanel.SetActive(false);
+            gameManager.CurrentGoalDialogue.Pause();
         }
 
         // desbloqueia este atributo, uma vez que é bloqueado quando a câmera de jogo está ativa
@@ -70,15 +76,20 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
         pauseMenuPanel.SetActive(false);
 
-        if (gameManager.CurrentActionDialogue != null)
-        {
-            gameManager.CurrentActionDialogue.Play();
-        }
         if (gameManager.BackgroundAaudioSource != null)
         {
             gameManager.BackgroundAaudioSource.Play();
         }
-
+        if (gameManager.CurrentActionDialogue != null)
+        {
+            gameManager.CurrentActionPanel.SetActive(true);
+            gameManager.CurrentActionDialogue.Play();
+        }
+        if (gameManager.CurrentGoalDialogue != null)
+        {
+            gameManager.CurrentGoalPanel.SetActive(true);
+            gameManager.CurrentGoalDialogue.Play();
+        }
     }
 
     public void QuitGame()

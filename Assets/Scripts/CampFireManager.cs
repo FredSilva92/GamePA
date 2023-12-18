@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class BonfireController : MonoBehaviour
+public class CampFireController : MonoBehaviour
 {
     private AudioSource audioSource;
     private Transform player;
 
-    public float maxVolume = 0.6f;
-    public float minVolume = 0.1f;
-    public float proximityRadius = 5f;
+    public float maxVolume = 0.45f;
+    public float minVolume = 0.01f;
+    public float proximityRadius = 20f;
 
 
     void Start()

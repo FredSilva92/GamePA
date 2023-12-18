@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 480
     y: -190
     width: 4435
-    height: 2873
+    height: 2914
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -994,7 +994,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0.4
     m_Space: 2147483647
   m_Property:
     name: A
@@ -1028,7 +1028,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 0.7
     m_Space: 2147483647
   m_Property:
     name: B
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614628}
   - {fileID: 8926484042661614649}
-  m_UIPosition: {x: 942, y: 833}
+  m_UIPosition: {x: 942, y: 943}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614589}
   - {fileID: 8926484042661614591}
   - {fileID: 8926484042661614593}
-  m_UIPosition: {x: 942, y: 1385}
+  m_UIPosition: {x: 942, y: 1454}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1749,7 +1749,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0.4
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -3181,7 +3181,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.TArcSphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":0.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":0.10000000149011612},"arc":6.28000020980835}'
+      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":0.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":0.05000000074505806},"arc":6.28000020980835}'
     m_Space: 0
   m_Property:
     name: arcSphere
@@ -3927,7 +3927,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 2287, y: 658}
+  m_UIPosition: {x: 2287, y: 678}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -3964,7 +3964,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661615037}
   - {fileID: 8926484042661615041}
-  m_UIPosition: {x: 2287, y: 811}
+  m_UIPosition: {x: 2287, y: 831}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -6906,7 +6906,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: True
+      m_SerializableObject: False
     m_Space: 2147483647
   m_Property:
     name: _vfx_enabled
@@ -8592,7 +8592,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615182}
   - {fileID: 8926484042661615184}
   - {fileID: 8926484042661615187}
-  m_UIPosition: {x: 3720, y: 1617.6}
+  m_UIPosition: {x: 3720, y: 1618}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -11181,7 +11181,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615250}
   - {fileID: 8926484042661615258}
   - {fileID: 8926484042661615261}
-  m_UIPosition: {x: 4491, y: 1148.6}
+  m_UIPosition: {x: 4491, y: 1151}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -12254,7 +12254,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615292}
   - {fileID: 8926484042661615298}
   - {fileID: 8926484042661615301}
-  m_UIPosition: {x: 4491, y: 1763.6}
+  m_UIPosition: {x: 4491, y: 1805}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
