@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentGoalTextMeshPro;
 
     [SerializeField] private GameObject _starship;
-
+    [SerializeField] private GameObject _orb;
     private GameObject _targetToLook;
     private bool _isLookingToObject;
 
@@ -575,8 +575,25 @@ public class GameManager : MonoBehaviour
         _treasureChestAnimator.SetBool("isOpen", true);
         _treasureChestAudioSource.Play();
 
-        yield return new WaitForSeconds(10f);
+        
+        Vector3 initialPosition = _orb.transform.localPosition;
+        Vector3 targetPosition = new Vector3(5.863f, 4.005f, 329.599f);
 
+        float duration = 5f; 
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            _orb.transform.localPosition = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / duration);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        _orb.transform.localPosition = targetPosition;
+
+        yield return new WaitForSeconds(3f);
         ConfigVideoCutscene(nextGameState);
     }
 
