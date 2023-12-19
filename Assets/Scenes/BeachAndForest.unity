@@ -45877,11 +45877,17 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 70
+        m_Name: DistanceToHideFire
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.5, y: 0.5, z: 0}
+        m_Name: WindVelocity
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -78414,6 +78420,7 @@ MonoBehaviour:
   _currentGoalPanel: {fileID: 1032960139}
   _currentGoalTextMeshPro: {fileID: 203753548}
   _starship: {fileID: 1666853567}
+  _orb: {fileID: 0}
   _treasureChestAnimator: {fileID: 0}
 --- !u!4 &1663026652
 Transform:
@@ -92108,7 +92115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016554226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11310568, y: -0.0000000042739914, z: 4.865348e-10, w: 0.99358296}
+  m_LocalRotation: {x: 0.11310568, y: 0.000000004273992, z: -4.8653487e-10, w: 0.99358296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
