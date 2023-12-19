@@ -1,44 +1,48 @@
 using UnityEngine;
 
-public class CampFireController : MonoBehaviour
+public class CampFireManager : MonoBehaviour
 {
-    private AudioSource audioSource;
-    private Transform player;
+    private Transform _player;
 
-    public float maxVolume = 0.45f;
-    public float minVolume = 0.01f;
-    public float proximityRadius = 20f;
-
+    private AudioSource _audioSource;
+    public float _maxVolume = 0.45f;
+    public float _minVolume = 0.01f;
+    public float _proximityRadius = 20f;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        player = Camera.main.transform;
+        _player = Camera.main.transform;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        UpdateVolume();
+    }
 
-        float volume = Mathf.Lerp(minVolume, maxVolume, 1 - (distance / proximityRadius));
+    private void UpdateVolume()
+    {
+        float distance = Vector3.Distance(transform.position, _player.position);
+
+        float volume = Mathf.Lerp(_minVolume, _maxVolume, 1 - (distance / _proximityRadius));
         volume = Mathf.Clamp01(volume);
 
-        audioSource.volume = volume;
+        _audioSource.volume = volume;
 
-        if (distance <= proximityRadius)
+        if (distance <= _proximityRadius)
         {
             // se está dentro do range
-            if (!audioSource.isPlaying)
+            if (!_audioSource.isPlaying)
             {
-                audioSource.Play();
+                _audioSource.Play();
             }
         }
         else
         {
             // se está fora do range
-            if (audioSource.isPlaying)
+            if (_audioSource.isPlaying)
             {
-                audioSource.Stop();
+                _audioSource.Stop();
             }
         }
     }

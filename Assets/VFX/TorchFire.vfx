@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 1280
     y: 2362
     width: 2310
-    height: 2867
+    height: 2883
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2730,7 +2730,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Vector, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"vector":{"x":-0.10000000149011612,"y":0.800000011920929,"z":0.10000000149011612}}'
+      m_SerializableObject: '{"vector":{"x":-0.10000000149011612,"y":0.699999988079071,"z":0.10000000149011612}}'
     m_Space: 0
   m_Property:
     name: A
@@ -3620,7 +3620,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616042}
   - {fileID: 8926484042661616468}
   - {fileID: 8926484042661616487}
-  m_UIPosition: {x: 1537, y: 4241}
+  m_UIPosition: {x: 1537, y: 4395}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
