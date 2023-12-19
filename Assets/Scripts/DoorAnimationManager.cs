@@ -6,7 +6,7 @@ public class DoorAnimationManager : MonoBehaviour
     [SerializeField] private float _endXPosition = 7.4f;
     [SerializeField] private float _movementSpeed = 0.5f;
 
-    [SerializeField] private AudioSource _audioSource;
+    private AudioSource _audioSource;
     
     private Vector3 _initialPosition;
     private Vector3 _endPosition;
@@ -23,8 +23,6 @@ public class DoorAnimationManager : MonoBehaviour
     {
         _initialPosition = transform.position;
         _endPosition = new Vector3(_endXPosition, _initialPosition.y, _initialPosition.z);
-
-       
     }
 
     void Update()
@@ -37,14 +35,13 @@ public class DoorAnimationManager : MonoBehaviour
 
     IEnumerator MoveDoorToRight()
     {
-
-        _audioSource.PlayOneShot(_audioSource.clip);
+        _audioSource=GetComponent<AudioSource>();
+        _audioSource.Play();
 
         float elapsedtime = 0f;
 
         while (elapsedtime < 1f)
         {
-            
 
             elapsedtime += Time.deltaTime * _movementSpeed;
 
