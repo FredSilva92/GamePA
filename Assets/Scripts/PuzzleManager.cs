@@ -318,10 +318,15 @@ public class PuzzleManager : MonoBehaviour
         return isSolved;
     }
 
-    public void BeforeSolvePuzzle(GameObject playerCamera, ThirdPersonMovement playerScript)
+    public void BeforeSolvePuzzle(GameObject playerCamera)
     {
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.FocusOnPuzzle);
+
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+        playerAnimations.FreezeAllAnimations = true;
+        playerAnimations.StopAllAnimations();
 
         _walkStarted = true;
     }
@@ -341,6 +346,7 @@ public class PuzzleManager : MonoBehaviour
         GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
         PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
         playerAnimations.FreezeAllAnimations = false;
+        playerAnimations.StopAllAnimations();
 
         Destroy(this);
     }
@@ -353,14 +359,14 @@ public class PuzzleManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
 
-        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
-        playerAnimations.FreezeAllAnimations = true;
+        // animação de andar
         playerPrefab.GetComponent<Animator>().SetBool(Animations.WALKING, true);
 
         // calcula a direção para o ponto de destino
         Vector3 direction = _walkToPuzzlePoint.transform.position - playerPrefab.transform.position;
         direction.Normalize();
 
+        // muda a rotação
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
         playerPrefab.transform.rotation = lookRotation;
 

@@ -6,7 +6,7 @@ public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerMainComp;
-    
+
     private AudioSource walkingSound;
 
     private Animator animator;
@@ -31,6 +31,7 @@ public class PlayerAnimations : MonoBehaviour
         get { return _freezeAllAnimations; }
         set { _freezeAllAnimations = value; }
     }
+
 
     void Start()
     {
@@ -85,7 +86,7 @@ public class PlayerAnimations : MonoBehaviour
         bool isWalking = inputs != Vector3.zero;
 
         animator.SetBool(Animations.WALKING, isWalking);
-        if(walkingSound != null) walkingSound.enabled = isWalking;
+        if (walkingSound != null) walkingSound.enabled = isWalking;
 
         bool isAiming = Input.GetButton(Constants.AIM_KEY) || Input.GetButton(Constants.SHOOT_KEY);
 
@@ -102,5 +103,21 @@ public class PlayerAnimations : MonoBehaviour
         Vector3 playerPosition = playerMainComp.transform.position;
 
         transform.position = playerPosition;
+    }
+
+    public void StopAllAnimations()
+    {
+        // parar animação de mirar
+        shootWeight = 0;
+        animator.SetLayerWeight(layerShootIdx, shootWeight);
+
+        animator.SetBool(Animations.WALKING, false);
+        animator.SetBool(Animations.DYING, false);
+        animator.SetBool(Animations.PICKING, false);
+        animator.SetBool(Animations.SHOOTING, false);
+        animator.SetBool(Animations.JUMPING, false);
+        animator.SetBool(Animations.GRABING, false);
+        animator.SetBool(Animations.RUNNING, false);
+        animator.SetBool(Animations.HOLE_CLOSING, false);
     }
 }

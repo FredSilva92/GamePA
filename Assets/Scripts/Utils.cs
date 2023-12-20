@@ -26,7 +26,7 @@ public class Utils
         public static readonly string SHOOTING = "isShooting";
         public static readonly string JUMPING = "isJumping";
         public static readonly string GRABING = "isGrabing";
-        public static readonly string RUNNING= "isRunning";
+        public static readonly string RUNNING = "isRunning";
 
         public static readonly string HOLE_CLOSING = "HoleClosing";
     }

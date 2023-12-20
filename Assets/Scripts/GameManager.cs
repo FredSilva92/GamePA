@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
             // permite que o jogador comece a resolver o puzzle
             case GameState.SOLVE_PUZZLE:
                 _puzzleManagerScript = _puzzleManagerObject.GetComponent<PuzzleManager>();
-                _puzzleManagerScript.BeforeSolvePuzzle(_playerCameraObject, _playerScript);
+                _puzzleManagerScript.BeforeSolvePuzzle(_playerCameraObject);
                 break;
 
             default:
@@ -575,11 +575,11 @@ public class GameManager : MonoBehaviour
         _treasureChestAnimator.SetBool("isOpen", true);
         _treasureChestAudioSource.Play();
 
-        
+
         Vector3 initialPosition = _orb.transform.localPosition;
         Vector3 targetPosition = new Vector3(5.863f, 4.005f, 329.599f);
 
-        float duration = 5f; 
+        float duration = 5f;
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
@@ -770,6 +770,7 @@ public class GameManager : MonoBehaviour
 
         PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
         playerAnimations.FreezeAllAnimations = true;
+        playerAnimations.StopAllAnimations();
 
         Animator playerAnimatior = playerPrefab.GetComponent<Animator>();
         playerAnimatior.SetBool(Animations.WALKING, false);

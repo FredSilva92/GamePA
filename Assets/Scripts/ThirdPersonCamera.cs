@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 
 public class ThirdPersonCam : MonoBehaviour
@@ -51,10 +50,6 @@ public class ThirdPersonCam : MonoBehaviour
             return;
         }
 
-        currentStyle = Input.GetButton(Utils.Constants.AIM_KEY) ? CameraStyle.Combat : CameraStyle.Basic;
-
-        Transform playerTransform = player.transform;
-
         // switch styles
         if (focusOnPuzzleCam != null)
         {
@@ -63,12 +58,16 @@ public class ThirdPersonCam : MonoBehaviour
                 return;
             }
 
+            currentStyle = Input.GetButton(Utils.Constants.AIM_KEY) ? CameraStyle.Combat : CameraStyle.Basic;
             SwitchCameraStyle(currentStyle);
         }
         else
         {
+            currentStyle = Input.GetButton(Utils.Constants.AIM_KEY) ? CameraStyle.Combat : CameraStyle.Basic;
             SwitchCameraStyle(currentStyle);
         }
+
+        Transform playerTransform = player.transform;
 
         // rotate orientation
         Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
@@ -99,6 +98,7 @@ public class ThirdPersonCam : MonoBehaviour
         combatCam.SetActive(false);
         thirdPersonCam.SetActive(false);
         crossHair.SetActive(false);
+
         if (focusOnPuzzleCam != null) focusOnPuzzleCam.SetActive(false);
 
         if (newStyle == CameraStyle.Basic) thirdPersonCam.SetActive(true);
