@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuPanel;
-    private bool isPaused = false;
 
+    private bool isPaused = false;
+  
     private GameManager gameManager;
 
     private void Start()
@@ -40,10 +41,12 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
+    
         if (gameManager.BackgroundAaudioSource != null)
         {
             gameManager.BackgroundAaudioSource.Pause();
         }
+
         if (gameManager.CurrentActionDialogue != null)
         {
             gameManager.CurrentActionPanel.SetActive(false);

@@ -36,7 +36,7 @@ public class PuzzleManager : MonoBehaviour
     private bool _lookStarted = false;
 
     [SerializeField] private AudioSource _pieceDragAudio;
-
+    
 
     /* PROPRIEDADES */
 
