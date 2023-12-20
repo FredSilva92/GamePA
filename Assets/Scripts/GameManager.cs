@@ -622,6 +622,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            // impedir ação se estivar a saltar
+            if (_playerScript.IsJumping)
+            {
+                return;
+            }
+
             foreach (MapAction mapAction in _currentMapActions)
             {
                 if (mapAction.hasClick)
