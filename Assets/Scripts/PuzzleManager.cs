@@ -36,7 +36,7 @@ public class PuzzleManager : MonoBehaviour
     private bool _lookStarted = false;
 
     [SerializeField] private AudioSource _pieceDragAudio;
-    
+
 
     /* PROPRIEDADES */
 
@@ -143,6 +143,18 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+    public bool IsSamePiece()
+    {
+        if (_firstPiece == _secondPiece)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private PuzzlePiece ChoosePiece(int inputtedNumber)
     {
         PuzzlePiece piece = _pieces[inputtedNumber - 1];
@@ -161,15 +173,21 @@ public class PuzzleManager : MonoBehaviour
     {
         Vector3 endStartPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _secondPiece.piece.transform.position.z);
 
-        yield return StartCoroutine(MoveToFront(_secondPiece, _secondPieceToFrontDistance));
+        if (IsSamePiece())
+        {
+            yield return StartCoroutine(MoveToBack(_firstPiece, _firstPieceToFrontDistance));
+        }
+        else
+        {
+            yield return StartCoroutine(MoveToFront(_secondPiece, _secondPieceToFrontDistance));
+            yield return StartCoroutine(MoveSecondToFirstPiece());
+            yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
+            yield return StartCoroutine(MoveFirstToSecondPiece(endStartPosition));
 
-        yield return StartCoroutine(MoveSecondToFirstPiece());
-        yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
-        yield return StartCoroutine(MoveFirstToSecondPiece(endStartPosition));
-
-        int firstIndexOfList = _pieces.IndexOf(_firstPiece);
-        int secondIndeOfList = _pieces.IndexOf(_secondPiece);
-        SwapPieceInList(firstIndexOfList, secondIndeOfList);
+            int firstIndexOfList = _pieces.IndexOf(_firstPiece);
+            int secondIndeOfList = _pieces.IndexOf(_secondPiece);
+            SwapPieceInList(firstIndexOfList, secondIndeOfList);
+        }
 
         ResetValues();
     }
