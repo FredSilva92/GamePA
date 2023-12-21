@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         HideCurrentActionLabel();
         HideAllActionButtons();
 
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 40f);
 
         _playerScript = _player.GetComponent<ThirdPersonMovement>();
 
@@ -399,7 +399,7 @@ public class GameManager : MonoBehaviour
         }
 
         // ativar novamente a fala do objetivo durante o jogo
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 40f);
 
         if (_currentGameState.Value == GameState.FINISH_GAME)
         {
@@ -451,7 +451,7 @@ public class GameManager : MonoBehaviour
         }
 
         // ativar novamente a fala do objetivo durante o jogo
-        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 35f);
+        InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 40f);
 
         ChangeGameState(nextGameState);
 

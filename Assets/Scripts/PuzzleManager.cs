@@ -35,8 +35,11 @@ public class PuzzleManager : MonoBehaviour
     private bool _walkStarted = false;
     private bool _lookStarted = false;
 
+    private bool _isMovingFirstPiece = false;
+    private bool _isMovingSecondPiece = false;
+
     [SerializeField] private AudioSource _pieceDragAudio;
-    
+
 
     /* PROPRIEDADES */
 
@@ -86,8 +89,8 @@ public class PuzzleManager : MonoBehaviour
 
     public void DoPlay()
     {
-        // se uma tecla for pressionada
-        if (Input.anyKeyDown)
+        // se uma tecla for pressionada e não existe nenhuma peça a mover-se
+        if (Input.anyKeyDown && !_isMovingFirstPiece && !_isMovingSecondPiece)
         {
             // obtém o número da tecla
             int inputtedNumber = GetNumericKeyValue();
@@ -100,7 +103,6 @@ public class PuzzleManager : MonoBehaviour
                 {
                     _firstPiece = ChoosePiece(inputtedNumber);
                     StartCoroutine(MoveToFront(_firstPiece, _firstPieceToFrontDistance));
-                    return;
                 }
                 else
                 {
@@ -143,6 +145,18 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+    public bool IsSamePiece()
+    {
+        if (_firstPiece == _secondPiece)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private PuzzlePiece ChoosePiece(int inputtedNumber)
     {
         PuzzlePiece piece = _pieces[inputtedNumber - 1];
@@ -159,19 +173,29 @@ public class PuzzleManager : MonoBehaviour
 
     private IEnumerator MoveSecondPieceThenSwap()
     {
+        _isMovingSecondPiece = true;
+
         Vector3 endStartPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _secondPiece.piece.transform.position.z);
 
-        yield return StartCoroutine(MoveToFront(_secondPiece, _secondPieceToFrontDistance));
+        if (IsSamePiece())
+        {
+            yield return StartCoroutine(MoveToBack(_firstPiece, _firstPieceToFrontDistance));
+        }
+        else
+        {
+            yield return StartCoroutine(MoveToFront(_secondPiece, _secondPieceToFrontDistance));
+            yield return StartCoroutine(MoveSecondToFirstPiece());
+            yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
+            yield return StartCoroutine(MoveFirstToSecondPiece(endStartPosition));
 
-        yield return StartCoroutine(MoveSecondToFirstPiece());
-        yield return StartCoroutine(MoveToBack(_secondPiece, _secondPieceToFrontDistance));
-        yield return StartCoroutine(MoveFirstToSecondPiece(endStartPosition));
-
-        int firstIndexOfList = _pieces.IndexOf(_firstPiece);
-        int secondIndeOfList = _pieces.IndexOf(_secondPiece);
-        SwapPieceInList(firstIndexOfList, secondIndeOfList);
+            int firstIndexOfList = _pieces.IndexOf(_firstPiece);
+            int secondIndeOfList = _pieces.IndexOf(_secondPiece);
+            SwapPieceInList(firstIndexOfList, secondIndeOfList);
+        }
 
         ResetValues();
+
+        _isMovingSecondPiece = false;
     }
 
     private void SwapPieceInList(int firstIndexOfList, int secondIndeOfList)
@@ -188,6 +212,8 @@ public class PuzzleManager : MonoBehaviour
 
     IEnumerator MoveToFront(PuzzlePiece currentPiece, float moveUntil)
     {
+        _isMovingFirstPiece = true;
+
         _pieceDragAudio.Play();
 
         float startTime = Time.time;
@@ -207,6 +233,8 @@ public class PuzzleManager : MonoBehaviour
         }
 
         currentPiece.piece.transform.position = endPosition;
+
+        _isMovingFirstPiece = false;
 
         yield return null;
     }
