@@ -35,6 +35,9 @@ public class PuzzleManager : MonoBehaviour
     private bool _walkStarted = false;
     private bool _lookStarted = false;
 
+    private bool _isMovingFirstPiece = false;
+    private bool _isMovingSecondPiece = false;
+
     [SerializeField] private AudioSource _pieceDragAudio;
 
 
@@ -86,8 +89,8 @@ public class PuzzleManager : MonoBehaviour
 
     public void DoPlay()
     {
-        // se uma tecla for pressionada
-        if (Input.anyKeyDown)
+        // se uma tecla for pressionada e não existe nenhuma peça a mover-se
+        if (Input.anyKeyDown && !_isMovingFirstPiece && !_isMovingSecondPiece)
         {
             // obtém o número da tecla
             int inputtedNumber = GetNumericKeyValue();
@@ -100,7 +103,6 @@ public class PuzzleManager : MonoBehaviour
                 {
                     _firstPiece = ChoosePiece(inputtedNumber);
                     StartCoroutine(MoveToFront(_firstPiece, _firstPieceToFrontDistance));
-                    return;
                 }
                 else
                 {
@@ -171,6 +173,8 @@ public class PuzzleManager : MonoBehaviour
 
     private IEnumerator MoveSecondPieceThenSwap()
     {
+        _isMovingSecondPiece = true;
+
         Vector3 endStartPosition = new Vector3(_secondPiece.piece.transform.position.x, _secondPiece.piece.transform.position.y, _secondPiece.piece.transform.position.z);
 
         if (IsSamePiece())
@@ -190,6 +194,8 @@ public class PuzzleManager : MonoBehaviour
         }
 
         ResetValues();
+
+        _isMovingSecondPiece = false;
     }
 
     private void SwapPieceInList(int firstIndexOfList, int secondIndeOfList)
@@ -206,6 +212,8 @@ public class PuzzleManager : MonoBehaviour
 
     IEnumerator MoveToFront(PuzzlePiece currentPiece, float moveUntil)
     {
+        _isMovingFirstPiece = true;
+
         _pieceDragAudio.Play();
 
         float startTime = Time.time;
@@ -225,6 +233,8 @@ public class PuzzleManager : MonoBehaviour
         }
 
         currentPiece.piece.transform.position = endPosition;
+
+        _isMovingFirstPiece = false;
 
         yield return null;
     }
