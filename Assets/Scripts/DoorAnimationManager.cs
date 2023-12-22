@@ -5,13 +5,14 @@ public class DoorAnimationManager : MonoBehaviour
 {
     [SerializeField] private float _endXPosition = 7.4f;
     [SerializeField] private float _movementSpeed = 0.5f;
-
-    private AudioSource _audioSource;
     
     private Vector3 _initialPosition;
     private Vector3 _endPosition;
 
     private bool _startMoving = false;
+    private bool _playSound = false;
+
+    [SerializeField] private AudioSource _audioSource;
 
     public bool StartMoving
     {
@@ -29,15 +30,20 @@ public class DoorAnimationManager : MonoBehaviour
     {
         if (_startMoving)
         {
+            if (!_playSound)
+            {
+                _audioSource = GetComponent<AudioSource>();
+                _audioSource.Play();
+
+                _playSound = true;
+            }
+
             StartCoroutine(MoveDoorToRight());
         }
     }
 
     IEnumerator MoveDoorToRight()
     {
-        _audioSource=GetComponent<AudioSource>();
-        _audioSource.Play();
-
         float elapsedtime = 0f;
 
         while (elapsedtime < 1f)

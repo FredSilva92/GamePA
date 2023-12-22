@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
+   
+    private AudioSource[] allAudioSources;
 
-    private AudioSource _audioSource;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.Play();
-    }
+
+        Instance = this;
+        allAudioSources = FindObjectsOfType<AudioSource>();
+   }
+    // Start is called before the first frame update
+  
 
     // Update is called once per frame
-    void Update()
+    public void PauseAll()
     {
-        
+        foreach(AudioSource audioSource in allAudioSources)
+        {
+            audioSource.Pause();
+        }
+    }
+
+    public void ResumeAll()
+    {
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            audioSource.UnPause();
+        }
     }
 }

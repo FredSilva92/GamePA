@@ -348,6 +348,9 @@ public class PuzzleManager : MonoBehaviour
 
     public void BeforeSolvePuzzle(GameObject playerCamera)
     {
+        //Animator _animator = GetComponent<Animator>();
+        //_animator.SetBool("isMoving", true);
+
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.FocusOnPuzzle);
 
