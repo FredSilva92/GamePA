@@ -178,14 +178,18 @@ public class GameManager : MonoBehaviour
         // bloqueia outras ações quando está a resolver o puzzle
         if (_puzzleManagerScript != null)
         {
-            if (_puzzleManagerScript.IsSolving)
+            // não executar o código se for a IA a jogar
+            if (SceneManager.GetActiveScene().name != "SolvePuzzleAI")
             {
-                if (_puzzleManagerScript.CheckPuzzleSolved())
+                if (_puzzleManagerScript.IsSolving)
                 {
-                    _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject, _playerScript);
-                }
+                    if (_puzzleManagerScript.CheckPuzzleSolved())
+                    {
+                        _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject, _playerScript);
+                    }
 
-                _puzzleManagerScript.DoPlay();
+                    _puzzleManagerScript.DoPlay();
+                }
             }
 
             return;
@@ -574,7 +578,6 @@ public class GameManager : MonoBehaviour
     {
         _treasureChestAnimator.SetBool("isOpen", true);
         _treasureChestAudioSource.Play();
-
 
         Vector3 initialPosition = _orb.transform.localPosition;
         Vector3 targetPosition = new Vector3(5.863f, 4.005f, 329.599f);
