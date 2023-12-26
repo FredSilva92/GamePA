@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Unity.MLAgents.Policies;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Utils;
@@ -92,16 +93,16 @@ public class PuzzleManager : MonoBehaviour
         // executar o código se for a IA a jogar
         if (SceneManager.GetActiveScene().name == "SolvePuzzleAI")
         {
-            //if (Training)
-            //{
-            //    Timeout += Time.fixedDeltaTime;
+            if (Training)
+            {
+                Timeout += Time.fixedDeltaTime;
 
-            //    if (Timeout > 2.0f)
-            //    {
-            //        Timeout = 0.0f;
-            //        ResetGame();
-            //    }
-            //}
+                //if (Timeout > 2.0f)
+                //{
+                //    Timeout = 0.0f;
+                //    ResetGame();
+                //}
+            }
 
             //if (PlayerO.AgentStatusAI == AgentStatusAI.Ready && PlayerX.AgentStatusAI == AgentStatusAI.Ready)
             //{
@@ -567,7 +568,15 @@ public class PuzzleManager : MonoBehaviour
         // executar o código se for a IA a jogar
         if (SceneManager.GetActiveScene().name == "SolvePuzzleAI")
         {
-            Train();
+            if (Training)
+            {
+                Train();
+            }
+            else
+            {
+                InitialiseGame();
+                GameStatusAI = GameStatusAI.WaitingOnHuman;
+            }
         }
 
         _walkStarted = true;
@@ -659,17 +668,19 @@ public class PuzzleManager : MonoBehaviour
 
     #region INTELIGÊNCIA ARTIFICIAL PARA RESOLVE O PUZZLE
 
-    public float GameRunSpeed = 1.0f;
+    //public float GameRunSpeed = 1f;
 
     public PlayerAI Player1;
     public PlayerAI Player2;
 
-    public bool Player1RandomFirstTurn = false;
+    public RewardsAI RewardsAI;
+
+    //public bool Player1RandomFirstTurn = false;
 
     //public GameObject O;
     //public GameObject X;
 
-    public GameObject[] PiecePositions = new GameObject[9];
+    //public GameObject[] PiecePositions = new GameObject[9];
 
     public GameStatusAI GameStatusAI { get; set; }
 
@@ -691,7 +702,6 @@ public class PuzzleManager : MonoBehaviour
 
     //private GameObject[] PlacedPieces;
 
-    public RewardsAI Rewards;
 
     public void Train()
     {
@@ -715,10 +725,42 @@ public class PuzzleManager : MonoBehaviour
         {
             GameStatusAI = GameStatusAI.ReadyToMove;
         }
-        //else
-        //{
-        //    GameStatusAI = GameStatusAI.WaitingToStart;
-        //}
+        else
+        {
+            GameStatusAI = GameStatusAI.WaitingToStart;
+
+            if (Player1.BehaviourParameters.BehaviorType == BehaviorType.HeuristicOnly)
+            {
+                if (Player1.BehaviourParameters.Model != null)
+                {
+                    Player1.BehaviourParameters.BehaviorType = BehaviorType.InferenceOnly;
+                }
+                else
+                {
+                    Debug.LogError("Nenhum modelo carregado para o player 1.");
+                }
+            }
+            else
+            {
+                Player1.BehaviourParameters.BehaviorType = BehaviorType.HeuristicOnly;
+            }
+
+            if (Player2.BehaviourParameters.BehaviorType == BehaviorType.HeuristicOnly)
+            {
+                if (Player2.BehaviourParameters.Model != null)
+                {
+                    Player2.BehaviourParameters.BehaviorType = BehaviorType.InferenceOnly;
+                }
+                else
+                {
+                    Debug.LogError("Nenhum modelo carregado para o player 2.");
+                }
+            }
+            else
+            {
+                Player2.BehaviourParameters.BehaviorType = BehaviorType.HeuristicOnly;
+            }
+        }
 
         BoardState = new int[9];
 
@@ -923,10 +965,10 @@ public class PuzzleManager : MonoBehaviour
         {
             GameStatusAI = GameStatusAI.ReadyToMove;
         }
-        //else
-        //{
-        //    GameStatusAI = GameStatusAI.WaitingOnHuman;
-        //}
+        else
+        {
+            GameStatusAI = GameStatusAI.WaitingOnHuman;
+        }
     }
 
     public GameResultAI CheckGameStatusAI()
@@ -1017,13 +1059,13 @@ public class PuzzleManager : MonoBehaviour
     {
         if (GameResultAI == GameResultAI.solved)
         {
-            Player1.AddReward(Rewards.HAS_PUZZLE_SOLVED);
-            Player2.AddReward(Rewards.HAS_PUZZLE_SOLVED);
+            Player1.AddReward(RewardsAI.HAS_PUZZLE_SOLVED);
+            Player2.AddReward(RewardsAI.HAS_PUZZLE_SOLVED);
         }
         else if (GameResultAI == GameResultAI.notSolved)
         {
-            Player1.AddReward(Rewards.NOT_HAS_PUZZLE_SOLVED);
-            Player2.AddReward(Rewards.NOT_HAS_PUZZLE_SOLVED);
+            Player1.AddReward(RewardsAI.NOT_HAS_PUZZLE_SOLVED);
+            Player2.AddReward(RewardsAI.NOT_HAS_PUZZLE_SOLVED);
         }
         //else if (GameResultAI == GameResultAI.xWon)
         //{

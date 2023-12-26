@@ -1,7 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RewardsAI", menuName = "RewardsAI")]
-public class RewardsAI : ScriptableObject
+//[CreateAssetMenu(fileName = "RewardsAI", menuName = "RewardsAI")]
+//public class RewardsAI : ScriptableObject
+public class RewardsAI : MonoBehaviour
 {
     //public float Player1Win = 100.0f;
     //public float Player1Lost = -100.0f;

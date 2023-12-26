@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
-using UnityEngine;
 
 public class PlayerAI : Agent
 {
@@ -16,11 +13,11 @@ public class PlayerAI : Agent
 
     public BehaviorParameters BehaviourParameters { get; private set; }
 
-    public VectorSensorComponent VSC { get; set; }
+    public VectorSensorComponent VectorSensorComponent { get; set; }
 
     private void Start()
     {
-        VSC = GetComponent<VectorSensorComponent>();
+        VectorSensorComponent = GetComponent<VectorSensorComponent>();
         BehaviourParameters = GetComponent<BehaviorParameters>();
         AgentStatusAI = AgentStatusAI.WakingUp;
     }
@@ -35,30 +32,52 @@ public class PlayerAI : Agent
         AgentStatusAI = AgentStatusAI.Ready;
     }
 
+    /*
+     * Informações que o agente recebe sobre o ambiente e o estado do jogo atual, antes de tomar uma decisão.
+     */
     public override void CollectObservations(VectorSensor sensor)
     {
-        foreach (int value in PuzzleManager.BoardState)
+        // observações para as posições atuais das peças
+        // (posição no mundo e posição no puzzle)
+        foreach (PuzzlePiece piece in PuzzleManager.Pieces)
         {
-            if (value == 1)
-            {
-                VSC.GetSensor().AddObservation(1.0f);
-            }
-            else
-            {
-                VSC.GetSensor().AddObservation(0.0f);
-            }
+            VectorSensorComponent.GetSensor().AddObservation(piece.piece.transform.position);
+            VectorSensorComponent.GetSensor().AddObservation(piece.position);
         }
-        foreach (int value in PuzzleManager.BoardState)
+
+        // observações para o saber o jogador atual
+        // (1 para Jogador 1, 2 para Jogador 2)
+        if (PuzzleManager.CurrentPlayer == PlayerTypeAI.player1)
         {
-            if (value == 2)
-            {
-                VSC.GetSensor().AddObservation(1.0f);
-            }
-            else
-            {
-                VSC.GetSensor().AddObservation(0.0f);
-            }
+            VectorSensorComponent.GetSensor().AddObservation(1);
         }
+        else if (PuzzleManager.CurrentPlayer == PlayerTypeAI.player2)
+        {
+            VectorSensorComponent.GetSensor().AddObservation(2);
+        }
+
+        //foreach (int value in PuzzleManager.BoardState)
+        //{
+        //    if (value == 1)
+        //    {
+        //        VectorSensorComponent.GetSensor().AddObservation(1f);
+        //    }
+        //    else
+        //    {
+        //        VectorSensorComponent.GetSensor().AddObservation(0f);
+        //    }
+        //}
+        //foreach (int value in PuzzleManager.BoardState)
+        //{
+        //    if (value == 2)
+        //    {
+        //        VectorSensorComponent.GetSensor().AddObservation(1f);
+        //    }
+        //    else
+        //    {
+        //        VectorSensorComponent.GetSensor().AddObservation(0f);
+        //    }
+        //}
     }
 
     /*
@@ -112,6 +131,7 @@ public class PlayerAI : Agent
                 actionMask.SetActionEnabled(0, i, true);
             }
             actionMask.SetActionEnabled(0, 10, false);
+            int a = 2;
             //}
         }
         else if (PuzzleManager.GameStatusAI == GameStatusAI.ObservingMove || PuzzleManager.GameStatusAI == GameStatusAI.MakingFinalObservation)
@@ -127,6 +147,7 @@ public class PlayerAI : Agent
                 actionMask.SetActionEnabled(0, i, false);
             }
             actionMask.SetActionEnabled(0, 10, true);
+            int a = 2;
         }
     }
 
