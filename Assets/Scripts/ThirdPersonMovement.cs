@@ -63,8 +63,6 @@ public class ThirdPersonMovement : CharacterBase
 
     bool keepMomentum;
 
-    private Animator animator;
-
     private bool _isPicking = false;
 
     public bool IsPicking
@@ -119,7 +117,7 @@ public class ThirdPersonMovement : CharacterBase
         _healthManager = healthObject.GetComponent<HealthManager>();
         HealthManager = _healthManager;
 
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
 
         gameManager = GameManager.Instance;
     }
@@ -380,7 +378,7 @@ public class ThirdPersonMovement : CharacterBase
 
     private void OnTriggerEnter(Collider collision)
     {
-        Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
+        //Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
         CheckMedicineCollision(collision);
     }
 
