@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
@@ -5,15 +6,20 @@ using Unity.MLAgents.Sensors;
 
 public class PlayerAI : Agent
 {
+    /* ATRIBUTOS */
+
     public PlayerTypeAI Player;
 
     public AgentStatusAI AgentStatusAI { get; set; }
 
-    public PuzzleManager PuzzleManager;
-
     public BehaviorParameters BehaviourParameters { get; private set; }
 
     public VectorSensorComponent VectorSensorComponent { get; set; }
+
+    public PuzzleManager PuzzleManager;
+
+
+    /* MÉTODOS */
 
     private void Start()
     {
@@ -33,7 +39,7 @@ public class PlayerAI : Agent
     }
 
     /*
-     * Informações que o agente recebe sobre o ambiente e o estado do jogo atual, antes de tomar uma decisão.
+     * Define informações que o agente recebe sobre o ambiente e o estado do jogo atual, antes de tomar uma decisão.
      */
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -56,98 +62,44 @@ public class PlayerAI : Agent
             VectorSensorComponent.GetSensor().AddObservation(2);
         }
 
-        //foreach (int value in PuzzleManager.BoardState)
-        //{
-        //    if (value == 1)
-        //    {
-        //        VectorSensorComponent.GetSensor().AddObservation(1f);
-        //    }
-        //    else
-        //    {
-        //        VectorSensorComponent.GetSensor().AddObservation(0f);
-        //    }
-        //}
-        //foreach (int value in PuzzleManager.BoardState)
-        //{
-        //    if (value == 2)
-        //    {
-        //        VectorSensorComponent.GetSensor().AddObservation(1f);
-        //    }
-        //    else
-        //    {
-        //        VectorSensorComponent.GetSensor().AddObservation(0f);
-        //    }
-        //}
+        // observações para o saber a última escolha de um número
+        // (-1 se escolha ainda não foi definida)
+        if (PuzzleManager.LastChoice != -1)
+        {
+            VectorSensorComponent.GetSensor().AddObservation(PuzzleManager.LastChoice);
+            PuzzleManager.LastChoice = -1;
+        }
     }
 
     /*
      * Cada agente toma 2 decisões por turno.
      * Cada decisão é uma ação (número possível que a IA pode escolher).
-     * 1º decisão: escolhe o número da peça (ação entre 1 a 9).
+     * 1º decisão: escolhe o número da peça (ação entre 1 a 9),
+     * mas usamos "availablePiecesToOrder" pois só é preciso escolher as peças que ainda não estão no sítio correto.
      * 2º decisão: verifica se resolveu o puzzle, etc. (representado pela ação 10).
      * Portanto na 1º decisão só são aceites números entre 1 a 9, e na 2º decisão apenas o 10.
     */
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
     {
-        //bool[] availableGamePlayActions = PuzzleManager.GetAvailableMoves();
+        bool[] availablePiecesToOrder = PuzzleManager.GetAvailablePiecesToOrder();
 
         if (PuzzleManager.GameStatusAI == GameStatusAI.PerformingMove)
         {
-            //if (PuzzleManager.CurrentPlayer == PlayerTypeAI.player1 && PuzzleManager.Turn == 0 && PuzzleManager.PlayerXRandomFirstTurn)
-            //{
-            //    if (UnityEngine.Random.Range(0, 10) < 4)
-            //    {
-            //        for (int i = 1; i < 10; i++)
-            //        {
-            //            actionMask.SetActionEnabled(0, i, false);
-            //        }
-
-            //        int rnd = UnityEngine.Random.Range(1, 10);
-            //        actionMask.SetActionEnabled(0, 0, false);
-            //        actionMask.SetActionEnabled(0, rnd, true);
-            //        actionMask.SetActionEnabled(0, 10, false);
-            //    }
-            //    else
-            //    {
-            //        for (int i = 1; i < availableGamePlayActions.Count(); i++)
-            //        {
-            //            actionMask.SetActionEnabled(0, 0, false);
-            //            actionMask.SetActionEnabled(0, i, availableGamePlayActions[i]);
-            //            actionMask.SetActionEnabled(0, 10, false);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //for (int i = 1; i < availableGamePlayActions.Count(); i++)
-            //{
-            //    actionMask.SetActionEnabled(0, 0, false);
-            //    actionMask.SetActionEnabled(0, i, availableGamePlayActions[i]);
-            //    actionMask.SetActionEnabled(0, 10, false);
-            //}
-            actionMask.SetActionEnabled(0, 0, false);
-            for (int i = 1; i <= PuzzleManager.Pieces.Count; i++)
+            for (int i = 1; i < availablePiecesToOrder.Length; i++)
             {
-                actionMask.SetActionEnabled(0, i, true);
+                actionMask.SetActionEnabled(0, 0, false);
+                actionMask.SetActionEnabled(0, i, availablePiecesToOrder[i]);
+                actionMask.SetActionEnabled(0, 10, false);
             }
-            actionMask.SetActionEnabled(0, 10, false);
-            int a = 2;
-            //}
         }
         else if (PuzzleManager.GameStatusAI == GameStatusAI.ObservingMove || PuzzleManager.GameStatusAI == GameStatusAI.MakingFinalObservation)
         {
-            //actionMask.SetActionEnabled(0, 0, false);
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    actionMask.SetActionEnabled(0, i, false);
-            //}
-            //actionMask.SetActionEnabled(0, 10, true);
             for (int i = 0; i <= PuzzleManager.Pieces.Count; i++)
             {
                 actionMask.SetActionEnabled(0, i, false);
             }
+
             actionMask.SetActionEnabled(0, 10, true);
-            int a = 2;
         }
     }
 
@@ -159,27 +111,27 @@ public class PlayerAI : Agent
         {
             if (PuzzleManager.Training)
             {
-                //bool[] availableActions = PuzzleManager.GetAvailableMoves();
+                bool[] availableActions = PuzzleManager.GetAvailablePiecesToOrder();
 
-                //List<int> trueIndices = new List<int>();
+                List<int> trueIndices = new List<int>();
 
-                //for (int i = 1; i < 10; i++)
-                //{
-                //    if (availableActions[i])
-                //    {
-                //        trueIndices.Add(i);
-                //    }
-                //}
+                for (int i = 1; i < availableActions.Length; i++)
+                {
+                    if (availableActions[i])
+                    {
+                        trueIndices.Add(i);
+                    }
+                }
 
-                //int randomPiece = trueIndices[UnityEngine.Random.Range(0, trueIndices.Count)];
-                int randomPiece = UnityEngine.Random.Range(0, PuzzleManager.Pieces.Count);
+                int randomPiece = trueIndices[UnityEngine.Random.Range(0, trueIndices.Count)];
 
                 discreteActionsOut[0] = randomPiece;
             }
-            //else
-            //{
-            //    discreteActionsOut[0] = PuzzleManager.HeuristicSelectedPiece;
-            //}
+            else
+            {
+                int a = 3;
+                //discreteActionsOut[0] = PuzzleManager.HeuristicSelectedPiece;
+            }
         }
         else if (PuzzleManager.GameStatusAI == GameStatusAI.ObservingMove || PuzzleManager.GameStatusAI == GameStatusAI.MakingFinalObservation)
         {
@@ -195,15 +147,36 @@ public class PlayerAI : Agent
         //int couldWinThisTurn = 0;
         //int missedBlockThisTurn = 0;
         //bool missedBlock = false;
+        bool samePiece = false;
 
         if (action > 0 && action < 10)
         {
+            PuzzleManager.LastChoice = action;
+
+            if (Player == PlayerTypeAI.player1)
+            {
+                PuzzleManager.LastFirstChoice = action;
+            }
+            else if (Player == PlayerTypeAI.player2)
+            {
+                PuzzleManager.LastSecondChoice = action;
+
+                if (PuzzleManager.LastFirstChoice == action)
+                {
+                    samePiece = true;
+                }
+                else
+                {
+                    samePiece = false;
+                }
+            }
+
             //if (Player == PlayerTypeAI.player1)
             //{
             //    couldWinThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1);
             //    missedBlockThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2);
             //}
-            //else
+            //else if (Player == PlayerTypeAI.player2)
             //{
             //    couldWinThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2);
             //    missedBlockThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1);
@@ -228,26 +201,38 @@ public class PlayerAI : Agent
                     //}
                     //else
                     //{
-                    //if (Player == PlayerTypeAI.player1)
-                    //{
-                    //    if (missedBlockThisTurn > 0 && missedBlockThisTurn == PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2))
+                    //    if (Player == PlayerTypeAI.player1)
                     //    {
-                    //        missedBlock = true;
+                    //        if (missedBlockThisTurn > 0 && missedBlockThisTurn == PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2))
+                    //        {
+                    //            missedBlock = true;
+                    //        }
                     //    }
-                    //}
-                    //else
-                    //{
-                    //    if (missedBlockThisTurn > 0 && missedBlockThisTurn == PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1))
+                    //    else
                     //    {
-                    //        missedBlock = true;
+                    //        if (missedBlockThisTurn > 0 && missedBlockThisTurn == PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1))
+                    //        {
+                    //            missedBlock = true;
+                    //        }
                     //    }
-                    //}
                     //}
 
                     //if (missedBlock)
                     //{
                     //    AddReward(PuzzleManager.Rewards.CouldHaveBlocked);
                     //}
+
+                    if (Player == PlayerTypeAI.player2)
+                    {
+                        if (samePiece)
+                        {
+                            AddReward(PuzzleManager.RewardsAI.SAME_PIECE);
+                        }
+                        else
+                        {
+                            AddReward(PuzzleManager.RewardsAI.DIFFERENT_PIECCE);
+                        }
+                    }
 
                     PuzzleManager.GameStatusAI = GameStatusAI.ObserveMove;
                 }

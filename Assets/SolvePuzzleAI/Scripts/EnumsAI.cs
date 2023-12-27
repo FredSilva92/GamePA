@@ -33,17 +33,6 @@ public enum GameStatusAI
 
 public enum GameResultAI
 {
-    none,
-    xWon,
-    oWon,
-    draw,
-    solved,
-    notSolved
-}
-
-public enum MenuGroupAI
-{
-    Default = 0,
-    Sensors = 50,
-    Actuators = 100
+    notSolved,
+    solved
 }

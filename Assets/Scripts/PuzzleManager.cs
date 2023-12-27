@@ -12,8 +12,6 @@ public class PuzzleManager : MonoBehaviour
 {
     /* ATRIBUTOS */
 
-    [SerializeField] private int[] _pieceOrder = { 6, 9, 8, 7, 2, 4, 5, 3, 1 };
-
     [SerializeField] private List<Transform> _wallPoints;
     [SerializeField] private List<PuzzlePiece> _pieces;
 
@@ -95,7 +93,7 @@ public class PuzzleManager : MonoBehaviour
         {
             if (Training)
             {
-                Timeout += Time.fixedDeltaTime;
+                //Timeout += Time.fixedDeltaTime;
 
                 //if (Timeout > 2.0f)
                 //{
@@ -106,8 +104,8 @@ public class PuzzleManager : MonoBehaviour
 
             //if (PlayerO.AgentStatusAI == AgentStatusAI.Ready && PlayerX.AgentStatusAI == AgentStatusAI.Ready)
             //{
-            //    PlayerO.AgentStatusAI = AgentStatusAI.Working;
             //    PlayerX.AgentStatusAI = AgentStatusAI.Working;
+            //    PlayerO.AgentStatusAI = AgentStatusAI.Working;
 
             //    InitialiseGame();
             //    AgentsWorking = true;
@@ -175,18 +173,38 @@ public class PuzzleManager : MonoBehaviour
                 GameStatusAI = GameStatusAI.EndingGame;
 
                 EndGame();
+                RestartGame();
             }
         }
     }
 
     private void ShufflePuzzle()
     {
-        _pieces = _pieces.OrderBy(piece => Array.IndexOf(_pieceOrder, piece.position)).ToList();
+        int[] pieceOrder = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        ShuffleNumbers(pieceOrder);
+
+        _pieces = _pieces.OrderBy(piece => Array.IndexOf(pieceOrder, piece.position)).ToList();
 
         for (int i = 0; i < _pieces.Count; i++)
         {
             Vector3 newPosition = _wallPoints[i].localPosition;
             UpdatePosition(i, newPosition);
+        }
+    }
+
+    private void ShuffleNumbers(int[] array)
+    {
+        System.Random random = new System.Random();
+
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int j = random.Next(0, i + 1);
+
+            // troca os elementos de i e j
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
         }
     }
 
@@ -696,16 +714,20 @@ public class PuzzleManager : MonoBehaviour
 
     private float Timeout { get; set; }
 
-    public int[] BoardState { get; private set; }
+    //public int[] BoardState { get; private set; }
 
     public int Turn { get; private set; }
 
     //private GameObject[] PlacedPieces;
 
+    public int LastFirstChoice { get; set; }
+    public int LastSecondChoice { get; set; }
+    public int LastChoice { get; set; }
+
 
     public void Train()
     {
-        if (Player2.AgentStatusAI == AgentStatusAI.Ready && Player1.AgentStatusAI == AgentStatusAI.Ready)
+        if (Player1.AgentStatusAI == AgentStatusAI.Ready && Player2.AgentStatusAI == AgentStatusAI.Ready)
         {
             Player2.AgentStatusAI = AgentStatusAI.Working;
             Player1.AgentStatusAI = AgentStatusAI.Working;
@@ -720,6 +742,10 @@ public class PuzzleManager : MonoBehaviour
         Timeout = 0;
 
         GameResultAI = GameResultAI.notSolved;
+
+        LastFirstChoice = -1;
+        LastSecondChoice = -1;
+        LastChoice = -1;
 
         if (Training)
         {
@@ -762,7 +788,7 @@ public class PuzzleManager : MonoBehaviour
             }
         }
 
-        BoardState = new int[9];
+        //BoardState = new int[9];
 
         CurrentPlayer = PlayerTypeAI.player1;
 
@@ -788,20 +814,20 @@ public class PuzzleManager : MonoBehaviour
     //    return BoardState[piece] == 0;
     //}
 
-    //public bool[] GetAvailableMoves()
-    //{
-    //    bool[] availableGamePlayActions = new bool[10];
+    public bool[] GetAvailablePiecesToOrder()
+    {
+        bool[] availablePiecesToOrder = new bool[10];
 
-    //    for (int i = 0; i < 9; i++)
-    //    {
-    //        if (BoardState[i] == 0)
-    //        {
-    //            availableGamePlayActions[i + 1] = true;
-    //        }
-    //    }
+        for (int i = 0; i < _pieces.Count; i++)
+        {
+            if (_pieces[i].position != i + 1)
+            {
+                availablePiecesToOrder[i + 1] = true;
+            }
+        }
 
-    //    return availableGamePlayActions;
-    //}
+        return availablePiecesToOrder;
+    }
 
     //public int CheckCouldWinOnNextMove(PlayerTypeAI player)
     //{
@@ -902,8 +928,6 @@ public class PuzzleManager : MonoBehaviour
             return false;
         }
 
-        Debug.Log("Numero:" + piece);
-
         if (CurrentPlayer == PlayerTypeAI.player1)
         {
             //PlacedPieces[piece] = Instantiate(X, PiecePositions[piece].transform.position, Quaternion.identity);
@@ -911,7 +935,7 @@ public class PuzzleManager : MonoBehaviour
             _firstPiece = ChoosePiece(piece);
             await MoveToFront2(_firstPiece, _firstPieceToFrontDistance);
 
-            BoardState[piece - 1] = 1;
+            //BoardState[piece - 1] = 1;
         }
         else if (CurrentPlayer == PlayerTypeAI.player2)
         {
@@ -943,7 +967,7 @@ public class PuzzleManager : MonoBehaviour
 
             _isMovingSecondPiece = false;
 
-            BoardState[piece - 1] = 2;
+            //BoardState[piece - 1] = 2;
         }
 
         return true;
@@ -1097,7 +1121,7 @@ public class PuzzleManager : MonoBehaviour
 
     //    if (CheckValidMove(piece))
     //    {
-    //HeuristicSelectedPiece = piece;
+    //        HeuristicSelectedPiece = piece;
     //        GameStatusAI = GameStatusAI.ReadyToMove;
     //    }
     //}
@@ -1106,6 +1130,17 @@ public class PuzzleManager : MonoBehaviour
     {
         Player1.EndEpisode();
         Player2.EndEpisode();
+    }
+
+    public void RestartGame()
+    {
+        Player1.AgentStatusAI = AgentStatusAI.Working;
+        Player2.AgentStatusAI = AgentStatusAI.Working;
+
+        ShufflePuzzle();
+
+        InitialiseGame();
+        AgentsWorking = true;
     }
 
     public void ResetGame()
