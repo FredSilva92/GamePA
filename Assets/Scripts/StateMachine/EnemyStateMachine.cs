@@ -36,8 +36,8 @@ public class EnemyStateMachine : StateManager
         states.Add(EnemyStates.IDLE, new IdleEnemy(_enemyScript));
         states.Add(EnemyStates.PATROL, new PatrolEnemy(_enemyScript));
         states.Add(EnemyStates.DEATH, new DeathEnemy(_enemyScript));
-        states.Add(EnemyStates.CHASE, new ChaseEnemy(_enemyScript));
-        states.Add(EnemyStates.ATTACK, new AttackEnemy(_enemyScript));
+        states.Add(EnemyStates.ATTACK_CHASE, new AttackChaseEnemy(_enemyScript));
+        states.Add(EnemyStates.ATTACK_IDLE, new AttackIdleEnemy(_enemyScript));
     }
 
     public void TakeTransition(string newStateName) {

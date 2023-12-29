@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Utils;
 
-public class ChaseEnemy : BaseState
+public class AttackIdleEnemy : BaseState
 {
     private EnemyScript _enemyScript;
-
-    public ChaseEnemy(EnemyScript enemyScript) : base(Utils.EnemyStates.CHASE)
+    public AttackIdleEnemy(EnemyScript enemyScript) : base(Utils.EnemyStates.ATTACK_IDLE)
     {
         _enemyScript = enemyScript;
     }
 
-    public override void Enter(string previousEnemyState)
+    public override void Enter(string previousStateName)
     {
         _enemyScript.SetShootingAnimation(1.0f);
-        _enemyScript.Agent.isStopped = false;
-        _enemyScript.Animator.SetBool(Animations.WALKING, true);
+
+        _enemyScript.Animator.SetBool(Animations.WALKING, false);
         _enemyScript.Animator.SetBool(Animations.SHOOTING, true);
+
         _enemyScript.IsShooting = true;
+        _enemyScript.Agent.isStopped = true;
+        
     }
 
-    public override void Exit(string nextEnemyState)
+    public override void Exit(string nextStateName)
     {
-        if(!EnemyStates.ATTACK.Equals(nextEnemyState))
+
+        if (!EnemyStates.ATTACK_CHASE.Equals(nextStateName))
         {
             _enemyScript.SetShootingAnimation(0.0f);
             _enemyScript.StopShooting();

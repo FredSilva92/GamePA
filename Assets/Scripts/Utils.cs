@@ -59,8 +59,8 @@ public class Utils
     {
         public static readonly string IDLE = "Idle";
         public static readonly string PATROL = "Patrol";
-        public static readonly string CHASE = "Chase";
-        public static readonly string ATTACK = "Attack";
+        public static readonly string ATTACK_CHASE = "AttackChase";
+        public static readonly string ATTACK_IDLE = "AttackIdle";
         public static readonly string DEATH = "Death";
     }
 

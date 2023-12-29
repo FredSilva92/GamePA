@@ -78,14 +78,14 @@ public class EnemyScript : CharacterBase
 
         if (playerDistance > _minDistance && playerDistance < _maxDistance && !playerIsDead)
         {
-            _currentSateName = EnemyStates.CHASE;
+            _currentSateName = EnemyStates.ATTACK_CHASE;
             SetState();
 
             if (_isGroupAttack) OnGroupAttack();
         }
         else if (playerDistance <= _minDistance && !playerIsDead)
         {
-            _currentSateName = EnemyStates.ATTACK;
+            _currentSateName = EnemyStates.ATTACK_IDLE;
             SetState();
 
             if (_isGroupAttack) OnGroupAttack();
@@ -182,7 +182,7 @@ public class EnemyScript : CharacterBase
     public void SetGroupState(string newStateName)
     {
         _stateManager.TakeTransition(newStateName);
-        _isGroupAttack = EnemyStates.ATTACK.Equals(newStateName) || EnemyStates.CHASE.Equals(newStateName);
+        _isGroupAttack = EnemyStates.ATTACK_IDLE.Equals(newStateName) || EnemyStates.ATTACK_CHASE.Equals(newStateName);
 
         if (_isGroupAttack) currentTimeWalking = timeWalking;
     }

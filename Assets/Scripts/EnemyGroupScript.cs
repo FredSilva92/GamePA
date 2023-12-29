@@ -24,25 +24,11 @@ public class EnemyGroupScript : MonoBehaviour
 
         foreach (GameObject child in enemies)
         {
-            // Access each child GameObject here
             EnemyScript enemyScript = child.GetComponent<EnemyScript>();
 
-            //if (detectionActivated){
-                isPlayerDetected = EnemyStates.ATTACK.Equals(enemyScript.CurrentStateName) || EnemyStates.CHASE.Equals(enemyScript.CurrentStateName);
+            isPlayerDetected = EnemyStates.ATTACK_IDLE.Equals(enemyScript.CurrentStateName) || EnemyStates.ATTACK_CHASE.Equals(enemyScript.CurrentStateName);
 
-                Debug.Log("Player detected: " + isPlayerDetected);
-                if (isPlayerDetected)
-                {
-                    break;
-                }
-            /*} else
-            {
-                detectionActivated = EnemyStates.IDLE.Equals(enemyScript.CurrentStateName) || EnemyStates.PATROL.Equals(enemyScript.CurrentStateName);
-
-                if (detectionActivated) {
-                    break;
-                }
-            }*/
+            if (isPlayerDetected) break;
         }
 
         
@@ -51,10 +37,9 @@ public class EnemyGroupScript : MonoBehaviour
 
         foreach (GameObject child in enemies)
         {
-            // Access each child GameObject here
             EnemyScript enemyScript = child.GetComponent<EnemyScript>();
 
-            enemyScript.SetGroupState(Utils.EnemyStates.CHASE);
+            enemyScript.SetGroupState(Utils.EnemyStates.ATTACK_CHASE);
         }
 
         detectionActivated = false;
