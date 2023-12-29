@@ -15,7 +15,7 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private float movingRadius = 5f;
 
-    private float _minDistance = 3f;
+    private float _minDistance = 7f;
     private float _maxDistance = 10f;
     private float shootWeight = 0.0f;
 
