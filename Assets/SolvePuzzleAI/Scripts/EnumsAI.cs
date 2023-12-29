@@ -1,10 +1,16 @@
+/*
+ * Define os 2 agentes utilizados para resolver o puzzle.
+ */
 public enum PlayerTypeAI
 {
-    player1,
-    player2
+    player1,    // escolhe a 1º peça
+    player2     // escolhe a 2º peça
 }
 
-public enum AgentStatusAI
+/*
+ * O estado atual dos agentes.
+ */
+public enum PlayerStatusAI
 {
     WakingUp,
     Ready,
@@ -14,6 +20,9 @@ public enum AgentStatusAI
     Resetting
 }
 
+/*
+ * O estado atual do jogo (resolver o puzzle).
+ */
 public enum GameStatusAI
 {
     WaitingToStart,
@@ -31,8 +40,12 @@ public enum GameStatusAI
     EndingGame
 }
 
+/*
+ * O resultado atual do jogo (resolver o puzzle).
+ */
 public enum GameResultAI
 {
-    notSolved,
-    solved
+    notSolved,          // quando ainda não resolveu o puzzle
+    noMoreAttempts,     // quando esgotam-se as tentivas e perde
+    solved              // quando resolve o puzzle
 }

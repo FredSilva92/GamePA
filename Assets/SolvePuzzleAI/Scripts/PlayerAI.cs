@@ -9,14 +9,13 @@ public class PlayerAI : Agent
     /* ATRIBUTOS */
 
     public PlayerTypeAI Player;
-
-    public AgentStatusAI AgentStatusAI { get; set; }
+    public PlayerStatusAI PlayerStatusAI { get; set; }
 
     public BehaviorParameters BehaviourParameters { get; private set; }
-
     public VectorSensorComponent VectorSensorComponent { get; set; }
 
     public PuzzleManager PuzzleManager;
+    public BoardAI BoardAI;
 
 
     /* MÉTODOS */
@@ -25,17 +24,17 @@ public class PlayerAI : Agent
     {
         VectorSensorComponent = GetComponent<VectorSensorComponent>();
         BehaviourParameters = GetComponent<BehaviorParameters>();
-        AgentStatusAI = AgentStatusAI.WakingUp;
+        PlayerStatusAI = PlayerStatusAI.WakingUp;
     }
 
     public override void Initialize()
     {
-        AgentStatusAI = AgentStatusAI.Ready;
+        PlayerStatusAI = PlayerStatusAI.Ready;
     }
 
     public override void OnEpisodeBegin()
     {
-        AgentStatusAI = AgentStatusAI.Ready;
+        PlayerStatusAI = PlayerStatusAI.Ready;
     }
 
     /*
@@ -43,8 +42,7 @@ public class PlayerAI : Agent
      */
     public override void CollectObservations(VectorSensor sensor)
     {
-        // observações para as posições atuais das peças
-        // (posição no mundo e posição no puzzle)
+        // observações para as posições atuais das peças no puzzle
         foreach (PuzzlePiece piece in PuzzleManager.Pieces)
         {
             VectorSensorComponent.GetSensor().AddObservation(piece.piece.transform.position);
@@ -52,22 +50,26 @@ public class PlayerAI : Agent
         }
 
         // observações para o saber o jogador atual
-        // (1 para Jogador 1, 2 para Jogador 2)
-        if (PuzzleManager.CurrentPlayer == PlayerTypeAI.player1)
+        if (BoardAI.CurrentPlayer == PlayerTypeAI.player1)
         {
-            VectorSensorComponent.GetSensor().AddObservation(1);
+            VectorSensorComponent.GetSensor().AddObservation(new float[] { 1, 0 });
         }
-        else if (PuzzleManager.CurrentPlayer == PlayerTypeAI.player2)
+        else if (BoardAI.CurrentPlayer == PlayerTypeAI.player2)
         {
-            VectorSensorComponent.GetSensor().AddObservation(2);
+            VectorSensorComponent.GetSensor().AddObservation(new float[] { 0, 1 });
         }
 
         // observações para o saber a última escolha de um número
         // (-1 se escolha ainda não foi definida)
-        if (PuzzleManager.LastChoice != -1)
+        if (BoardAI.LastChoice != -1)
         {
-            VectorSensorComponent.GetSensor().AddObservation(PuzzleManager.LastChoice);
-            PuzzleManager.LastChoice = -1;
+            float[] oneHotChoice = new float[PuzzleManager.Pieces.Count];
+            oneHotChoice[BoardAI.LastChoice - 1] = 1;
+            VectorSensorComponent.GetSensor().AddObservation(oneHotChoice);
+        }
+        else
+        {
+            VectorSensorComponent.GetSensor().AddObservation(new float[PuzzleManager.Pieces.Count]);
         }
     }
 
@@ -81,9 +83,9 @@ public class PlayerAI : Agent
     */
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
     {
-        bool[] availablePiecesToOrder = PuzzleManager.GetAvailablePiecesToOrder();
+        bool[] availablePiecesToOrder = BoardAI.GetAvailablePiecesToOrder();
 
-        if (PuzzleManager.GameStatusAI == GameStatusAI.PerformingMove)
+        if (BoardAI.CurrentGameStatus == GameStatusAI.PerformingMove)
         {
             for (int i = 1; i < availablePiecesToOrder.Length; i++)
             {
@@ -92,7 +94,7 @@ public class PlayerAI : Agent
                 actionMask.SetActionEnabled(0, 10, false);
             }
         }
-        else if (PuzzleManager.GameStatusAI == GameStatusAI.ObservingMove || PuzzleManager.GameStatusAI == GameStatusAI.MakingFinalObservation)
+        else if (BoardAI.CurrentGameStatus == GameStatusAI.ObservingMove || BoardAI.CurrentGameStatus == GameStatusAI.MakingFinalObservation)
         {
             for (int i = 0; i <= PuzzleManager.Pieces.Count; i++)
             {
@@ -103,15 +105,19 @@ public class PlayerAI : Agent
         }
     }
 
+    /*
+     * Determina as ações a serem tomadas com base nas entradas fornecidas.
+     * A função da heuristica não é chamada quando o treino é realizado no ambiente Python, apenas em fase de desenvolvimento.
+     */
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<int> discreteActionsOut = actionsOut.DiscreteActions;
 
-        if (PuzzleManager.GameStatusAI == GameStatusAI.PerformingMove)
+        if (BoardAI.CurrentGameStatus == GameStatusAI.PerformingMove)
         {
-            if (PuzzleManager.Training)
+            if (BoardAI.Training)
             {
-                bool[] availableActions = PuzzleManager.GetAvailablePiecesToOrder();
+                bool[] availableActions = BoardAI.GetAvailablePiecesToOrder();
 
                 List<int> trueIndices = new List<int>();
 
@@ -127,135 +133,112 @@ public class PlayerAI : Agent
 
                 discreteActionsOut[0] = randomPiece;
             }
-            else
-            {
-                int a = 3;
-                //discreteActionsOut[0] = PuzzleManager.HeuristicSelectedPiece;
-            }
         }
-        else if (PuzzleManager.GameStatusAI == GameStatusAI.ObservingMove || PuzzleManager.GameStatusAI == GameStatusAI.MakingFinalObservation)
+        else if (BoardAI.CurrentGameStatus == GameStatusAI.ObservingMove || BoardAI.CurrentGameStatus == GameStatusAI.MakingFinalObservation)
         {
             discreteActionsOut[0] = 10;
         }
     }
 
+    /*
+     * Executa de facto as ações, ou seja, na 1º decisão move uma peça e na 2º verifica se resolveu o puzzle.
+     */
     public override async void OnActionReceived(ActionBuffers actions)
     {
         int action = actions.DiscreteActions[0];
 
-        bool placedPiece = false;
-        //int couldWinThisTurn = 0;
-        //int missedBlockThisTurn = 0;
-        //bool missedBlock = false;
-        bool samePiece = false;
-
         if (action > 0 && action < 10)
         {
-            PuzzleManager.LastChoice = action;
+            bool correctPieceExchange = false;
+            bool samePiece = false;
+
+            BoardAI.LastChoice = action;
 
             if (Player == PlayerTypeAI.player1)
             {
-                PuzzleManager.LastFirstChoice = action;
+                BoardAI.LastFirstChoice = action;
             }
             else if (Player == PlayerTypeAI.player2)
             {
-                PuzzleManager.LastSecondChoice = action;
-
-                if (PuzzleManager.LastFirstChoice == action)
-                {
-                    samePiece = true;
-                }
-                else
-                {
-                    samePiece = false;
-                }
+                correctPieceExchange = BoardAI.CheckCorrectPieceExchange(BoardAI.LastFirstChoice, action);
+                samePiece = BoardAI.CheckSameChoice(BoardAI.LastFirstChoice, action);
             }
 
-            //if (Player == PlayerTypeAI.player1)
-            //{
-            //    couldWinThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1);
-            //    missedBlockThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2);
-            //}
-            //else if (Player == PlayerTypeAI.player2)
-            //{
-            //    couldWinThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2);
-            //    missedBlockThisTurn = PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1);
-            //}
+            bool placedPiece = await BoardAI.PlacePiece(action);
 
-            placedPiece = await PuzzleManager.PlacePiece(action);
-
-            // se jogada não é válida (número inválido)
+            // se a jogada não é válida (número inválido)
             if (!placedPiece)
             {
-                PuzzleManager.ResetGame();
+                BoardAI.ResetGame();
             }
             else
             {
-                PuzzleManager.GameResultAI = PuzzleManager.CheckGameStatusAI();
-
-                if (PuzzleManager.GameResultAI == GameResultAI.notSolved)
+                // atualiza o número de tentativas para resolver o puzzle
+                if (BoardAI.Training && Player == PlayerTypeAI.player2)
                 {
-                    //if (couldWinThisTurn > 0)
-                    //{
-                    //    AddReward(PuzzleManager.Rewards.CouldHaveWon);
-                    //}
-                    //else
-                    //{
-                    //    if (Player == PlayerTypeAI.player1)
-                    //    {
-                    //        if (missedBlockThisTurn > 0 && missedBlockThisTurn == PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player2))
-                    //        {
-                    //            missedBlock = true;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        if (missedBlockThisTurn > 0 && missedBlockThisTurn == PuzzleManager.CheckCouldWinOnNextMove(PlayerTypeAI.player1))
-                    //        {
-                    //            missedBlock = true;
-                    //        }
-                    //    }
-                    //}
+                    BoardAI.CurrentAttempts -= 1;
+                }
 
-                    //if (missedBlock)
-                    //{
-                    //    AddReward(PuzzleManager.Rewards.CouldHaveBlocked);
-                    //}
+                BoardAI.CurrentGameResult = BoardAI.CheckGameStatusAI();
 
+                // se não resolveu, continua a tentar resolver
+                if (BoardAI.CurrentGameResult == GameResultAI.notSolved)
+                {
                     if (Player == PlayerTypeAI.player2)
                     {
-                        if (samePiece)
+                        // atribui recompensas se a troca das peças tem alguma que fica na posição correta
+                        if (correctPieceExchange)
                         {
-                            AddReward(PuzzleManager.RewardsAI.SAME_PIECE);
+                            BoardAI.Player1.AddReward(BoardAI.RewardsAI.CORRECT_PIECE_EXCHANGE);
+                            BoardAI.Player2.AddReward(BoardAI.RewardsAI.CORRECT_PIECE_EXCHANGE);
                         }
                         else
                         {
-                            AddReward(PuzzleManager.RewardsAI.DIFFERENT_PIECCE);
+                            BoardAI.Player1.AddReward(BoardAI.RewardsAI.WRONG_PIECE_EXCHANGE);
+                            BoardAI.Player2.AddReward(BoardAI.RewardsAI.WRONG_PIECE_EXCHANGE);
+                        }
+
+                        // atribui recompensas se as peças são iguais ou diferentes
+                        if (samePiece)
+                        {
+                            BoardAI.Player1.AddReward(BoardAI.RewardsAI.SAME_PIECE);
+                            BoardAI.Player2.AddReward(BoardAI.RewardsAI.SAME_PIECE);
+                        }
+                        else
+                        {
+                            BoardAI.Player1.AddReward(BoardAI.RewardsAI.DIFFERENT_PIECE);
+                            BoardAI.Player2.AddReward(BoardAI.RewardsAI.DIFFERENT_PIECE);
                         }
                     }
 
-                    PuzzleManager.GameStatusAI = GameStatusAI.ObserveMove;
+                    BoardAI.CurrentGameStatus = GameStatusAI.ObserveMove;
                 }
-                else if (PuzzleManager.GameResultAI == GameResultAI.solved)
+                // se ficou sem tentativas, termina o puzzle
+                else if (BoardAI.CurrentGameResult == GameResultAI.noMoreAttempts)
                 {
-                    PuzzleManager.GameStatusAI = GameStatusAI.GiveRewards;
+                    BoardAI.CurrentGameStatus = GameStatusAI.GiveRewards;
+                }
+                // se resolveu, termina o puzzle
+                else if (BoardAI.CurrentGameResult == GameResultAI.solved)
+                {
+                    BoardAI.CurrentGameStatus = GameStatusAI.GiveRewards;
                 }
             }
         }
         else if (action == 10)
         {
-            if (PuzzleManager.GameStatusAI == GameStatusAI.ObservingMove)
+            if (BoardAI.CurrentGameStatus == GameStatusAI.ObservingMove)
             {
-                PuzzleManager.GameStatusAI = GameStatusAI.ChangePlayer;
+                BoardAI.CurrentGameStatus = GameStatusAI.ChangePlayer;
             }
-            else if (PuzzleManager.GameStatusAI == GameStatusAI.MakingFinalObservation)
+            else if (BoardAI.CurrentGameStatus == GameStatusAI.MakingFinalObservation)
             {
-                AgentStatusAI = AgentStatusAI.MadeFinalObservation;
+                PlayerStatusAI = PlayerStatusAI.MadeFinalObservation;
             }
         }
         else
         {
-            PuzzleManager.ResetGame();
+            BoardAI.ResetGame();
         }
     }
 }

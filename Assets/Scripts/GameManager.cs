@@ -178,18 +178,25 @@ public class GameManager : MonoBehaviour
         // bloqueia outras ações quando está a resolver o puzzle
         if (_puzzleManagerScript != null)
         {
-            // não executar o código se for a IA a jogar
-            if (SceneManager.GetActiveScene().name != "SolvePuzzleAI")
+            // executar o código se for a IA a jogar (nas respetivas cenas)
+            if (SceneManager.GetActiveScene().name == "SolvePuzzleAI_Train" ||
+                SceneManager.GetActiveScene().name == "SolvePuzzleAI_Play")
             {
-                if (_puzzleManagerScript.IsSolving)
+                if (_puzzleManagerScript.BoardAI.StopPlaying)
                 {
-                    if (_puzzleManagerScript.CheckPuzzleSolved())
-                    {
-                        _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject, _playerScript);
-                    }
-
-                    _puzzleManagerScript.DoPlay();
+                    _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject, _playerScript);
                 }
+                return;
+            }
+
+            if (_puzzleManagerScript.IsSolving)
+            {
+                if (_puzzleManagerScript.CheckPuzzleSolved())
+                {
+                    _puzzleManagerScript.AfterSolvePuzzle(_playerCameraObject, _playerScript);
+                }
+
+                _puzzleManagerScript.DoPlay();
             }
 
             return;
