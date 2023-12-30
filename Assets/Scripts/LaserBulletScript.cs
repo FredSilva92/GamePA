@@ -44,6 +44,7 @@ public class LaserBulletScript : MonoBehaviour
         if (collision.collider.CompareTag("LaserHole"))
         {
             // Do something (ignore the collision, for example)
+            Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider, true);
             Destroy(gameObject);
             return;
         }
@@ -51,9 +52,9 @@ public class LaserBulletScript : MonoBehaviour
         if (holePrefab != null)
         {
             Vector3 colliderPosition = transform.TransformPoint(capsuleCollider.center);
-            GameObject holeInstance = Instantiate(holePrefab, colliderPosition, collision.transform.rotation);
+            GameObject holeInstance = Instantiate(holePrefab, colliderPosition, Quaternion.Euler(0, 0, 0));
 
-            holeInstance.transform.SetParent(collision.gameObject.transform);
+            //holeInstance.transform.SetParent(collision.gameObject.transform);
         }
 
         Destroy(gameObject);

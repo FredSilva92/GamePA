@@ -378,7 +378,12 @@ public class ThirdPersonMovement : CharacterBase
         return Mathf.Round(value * mult) / mult;
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
+    {
+        CheckMedicineCollision(other);
+    }
+
+    private void OnCollisionEnter(Collision collision)
     {
         Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
 
@@ -386,8 +391,6 @@ public class ThirdPersonMovement : CharacterBase
         {
             SetDeathCollider(true);
         }
-
-        CheckMedicineCollision(collision);
     }
 
     private void OnTriggerStay(Collider other)
