@@ -381,6 +381,12 @@ public class ThirdPersonMovement : CharacterBase
     private void OnTriggerEnter(Collider collision)
     {
         Utils.CheckIfIsDead(collision, _healthManager, Utils.Constants.LAZER_BULLET_ENEMY, ref _isDead);
+
+        if (_isDead)
+        {
+            SetDeathCollider(true);
+        }
+
         CheckMedicineCollision(collision);
     }
 
@@ -452,5 +458,11 @@ public class ThirdPersonMovement : CharacterBase
         yield return new WaitForSeconds(2f);
         _isPicking = false;
         _isGrabing = false;
+    }
+
+    public void SetDeathCollider(bool activate)
+    {
+        GameObject kachujinObj = GameObject.Find("Kachujin");
+        kachujinObj.GetComponent<CapsuleCollider>().enabled = activate;
     }
 }
