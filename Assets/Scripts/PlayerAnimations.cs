@@ -86,7 +86,7 @@ public class PlayerAnimations : MonoBehaviour
         bool isWalking = inputs != Vector3.zero;
 
         animator.SetBool(Animations.WALKING, isWalking);
-        if (walkingSound != null) walkingSound.enabled = isWalking;
+        if (walkingSound != null) walkingSound.enabled = isWalking && !thirdPersonMovement.IsJumping;
 
         bool isAiming = Input.GetButton(Constants.AIM_KEY) || Input.GetButton(Constants.SHOOT_KEY);
 
