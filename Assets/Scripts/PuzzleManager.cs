@@ -32,6 +32,8 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private GameObject _walkToPuzzlePoint;
     [SerializeField] private GameObject _lookToPuzzlePoint;
 
+    [SerializeField] private Animator animator;
+
     private bool _walkStarted = false;
     private bool _lookStarted = false;
 
@@ -348,9 +350,6 @@ public class PuzzleManager : MonoBehaviour
 
     public void BeforeSolvePuzzle(GameObject playerCamera)
     {
-        //Animator _animator = GetComponent<Animator>();
-        //_animator.SetBool("isMoving", true);
-
         ThirdPersonCam thirdPersonCamera = playerCamera.GetComponent<ThirdPersonCam>();
         thirdPersonCamera.SwitchCameraStyle(ThirdPersonCam.CameraStyle.FocusOnPuzzle);
 
@@ -378,6 +377,8 @@ public class PuzzleManager : MonoBehaviour
         PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
         playerAnimations.FreezeAllAnimations = false;
         playerAnimations.StopAllAnimations();
+
+        animator.SetTrigger("isMoving");
 
         Destroy(this);
     }
