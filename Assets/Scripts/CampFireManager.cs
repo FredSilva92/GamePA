@@ -17,7 +17,11 @@ public class CampFireManager : MonoBehaviour
 
     void Update()
     {
-        UpdateVolume();
+        // para não ouvir o som quando está em pausa
+        if (Time.timeScale == 1)
+        {
+            UpdateVolume();
+        }
     }
 
     private void UpdateVolume()
