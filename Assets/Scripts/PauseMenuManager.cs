@@ -6,7 +6,7 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
 
     private bool isPaused = false;
-  
+
     private GameManager gameManager;
 
     private void Start()
@@ -41,31 +41,29 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
-    
-        if (gameManager.BackgroundAaudioSource != null)
-        {
-            gameManager.BackgroundAaudioSource.Pause();
-        }
-
-        if (gameManager.CurrentActionDialogue != null)
-        {
-            gameManager.CurrentActionPanel.SetActive(false);
-            gameManager.CurrentActionDialogue.Pause();
-        }
-        if (gameManager.CurrentGoalDialogue != null)
-        {
-            gameManager.CurrentGoalPanel.SetActive(false);
-            gameManager.CurrentGoalDialogue.Pause();
-        }
-
         // desbloqueia este atributo, uma vez que é bloqueado quando a câmera de jogo está ativa
         Cursor.lockState = CursorLockMode.None;
+
+        StopAudio();
 
         // congela o tempo
         Time.timeScale = 0;
 
         isPaused = true;
         pauseMenuPanel.SetActive(true);
+    }
+
+    private void StopAudio()
+    {
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+
+        foreach (AudioSource audio in audios)
+        {
+            if (audio.isPlaying)
+            {
+                audio.Pause();
+            }
+        }
     }
 
     public void ResumeGame()
@@ -79,19 +77,19 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
         pauseMenuPanel.SetActive(false);
 
-        if (gameManager.BackgroundAaudioSource != null)
+        PlayAudio();
+    }
+
+    private void PlayAudio()
+    {
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+
+        foreach (AudioSource audio in audios)
         {
-            gameManager.BackgroundAaudioSource.Play();
-        }
-        if (gameManager.CurrentActionDialogue != null)
-        {
-            gameManager.CurrentActionPanel.SetActive(true);
-            gameManager.CurrentActionDialogue.Play();
-        }
-        if (gameManager.CurrentGoalDialogue != null)
-        {
-            gameManager.CurrentGoalPanel.SetActive(true);
-            gameManager.CurrentGoalDialogue.Play();
+            if (audio.time != 0)
+            {
+                audio.UnPause();
+            }
         }
     }
 
