@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using static Utils;
@@ -126,6 +128,11 @@ public class GameManager : MonoBehaviour
     */
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "CaveAndPyramid")
+        {
+            RenderSettings.ambientIntensity = 0.3f;
+        }
+
         if (_instance == null)
         {
             _instance = this;
