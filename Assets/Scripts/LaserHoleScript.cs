@@ -9,7 +9,7 @@ public class LaserHoleScript : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        animator.Play(Utils.Animations.HOLE_CLOSING);
+        animator.Play("HoleClosing");
     }
 
     // Update is called once per frame

@@ -738,6 +738,7 @@ public class GameManager : MonoBehaviour
         if (_lastCheckPointPos != null) _player.transform.position = _lastCheckPointPos;
         _playerScript.IsDead = false;
         _playerScript.HealthManager.restoreHealth();
+        _playerScript.SetDeathCollider(false);
         CancelInvoke(nameof(RestartGame));
     }
 

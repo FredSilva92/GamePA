@@ -16,6 +16,9 @@ public class EnemyGunScript : MonoBehaviour
     [SerializeField]
     protected Animator animator;
 
+    [SerializeField]
+    private GameObject muzzlePrefab;
+
     protected float speed = 10f;
 
     [SerializeField]
@@ -53,6 +56,13 @@ public class EnemyGunScript : MonoBehaviour
         if (time >= nextTimeToFire)
         {
             audioSource.PlayOneShot(laserShootSound);
+
+            if (muzzlePrefab != null)
+            {
+                var muzzleVFX = Instantiate(muzzlePrefab, transform.position, transform.rotation);
+                muzzleVFX.transform.SetParent(spawnPoint.transform);
+                muzzleVFX.transform.forward = transform.forward;
+            }
 
             GameObject cb = Instantiate(laser, spawnPoint.position, spawnPoint.transform.rotation);
             Rigidbody rb = cb.GetComponent<Rigidbody>();

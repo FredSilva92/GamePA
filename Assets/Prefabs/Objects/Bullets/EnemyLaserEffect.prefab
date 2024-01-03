@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6393066780161203187}
   - component: {fileID: 3465929985036238857}
   m_Layer: 0
-  m_Name: LaserEffect 2
+  m_Name: EnemyLaserEffect
   m_TagString: LazerBulletPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,11 +30,11 @@ Transform:
   m_GameObject: {fileID: 4731087545047838889}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -104.07, y: 2.3220208, z: 111.18}
+  m_LocalPosition: {x: -19.9, y: 2.3220208, z: 111.18}
   m_LocalScale: {x: 0.042122763, y: 0.042122763, z: 0.042122763}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5373857723723552723}
+  - {fileID: 2771388908186376904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!33 &4440015953228917086
@@ -102,14 +102,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.5574987
+  m_Height: 1.9199305
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.03142198, z: -0.057498276}
 --- !u!54 &6393066780161203187
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   muzzlePrefab: {fileID: 6047389493889347409, guid: 0b743c7552e39a04aa78412ac829a772, type: 3}
   hitPrefab: {fileID: 7800396519719598812, guid: 6175568b099e40747983f3241682c6b2, type: 3}
   holePrefab: {fileID: 0}
---- !u!1 &8419231001451230192
+--- !u!1 &6571533398071872024
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,8 +161,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5373857723723552723}
-  - component: {fileID: 8393810143578639318}
+  - component: {fileID: 2771388908186376904}
+  - component: {fileID: 225638949536144219}
   m_Layer: 0
   m_Name: Trail
   m_TagString: Untagged
@@ -170,29 +170,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5373857723723552723
+--- !u!4 &2771388908186376904
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8419231001451230192}
+  m_GameObject: {fileID: 6571533398071872024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7117944535705878020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!96 &8393810143578639318
+--- !u!96 &225638949536144219
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8419231001451230192}
+  m_GameObject: {fileID: 6571533398071872024}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -206,7 +206,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f905070839372042895d4e980dc8b26, type: 2}
+  - {fileID: 2100000, guid: dd4e0a6af7702e14aa53a3ea6eabebe1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,17 +227,17 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
-  m_PreviewTimeScale: 0
+  m_Time: 0.65
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.031871796
-        value: 0.028305054
+        time: 0.014339447
+        value: 0.058330536
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -245,26 +245,26 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.18539163
-        value: 0.19167611
-        inSlope: 0
-        outSlope: 0
+        time: 0.20221452
+        value: 0.9803064
+        inSlope: -0.019893374
+        outSlope: -0.019893374
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+        inWeight: 0.69182074
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.79495347
-        value: 0.21054807
-        inSlope: 0
-        outSlope: 0
+        time: 0.7915636
+        value: 0.98332787
+        inSlope: -0.000046152272
+        outSlope: -0.000046152272
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+        inWeight: 0.28111
+        outWeight: 0.921858
       - serializedVersion: 3
-        time: 0.9721116
-        value: 0
+        time: 0.9784851
+        value: 0.07499707
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -276,8 +276,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.123237096, b: 0.9716981, a: 1}
-      key1: {r: 0, g: 0.1999358, b: 0.9433962, a: 1}
+      key0: {r: 0, g: 0.009604469, b: 0.6320754, a: 1}
+      key1: {r: 0, g: 0.009604469, b: 0.6320754, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -310,7 +310,7 @@ TrailRenderer:
     textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0

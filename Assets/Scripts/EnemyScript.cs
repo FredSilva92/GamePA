@@ -15,7 +15,7 @@ public class EnemyScript : CharacterBase
     [SerializeField]
     private float movingRadius = 5f;
 
-    private float _minDistance = 3f;
+    private float _minDistance = 7f;
     private float _maxDistance = 10f;
     private float shootWeight = 0.0f;
 
@@ -79,6 +79,7 @@ public class EnemyScript : CharacterBase
         }
         else if (playerDistance <= _minDistance && !playerIsDead)
         {
+            SetShootingAnimation(1.0f);
             agent.isStopped = true;
             animator.SetBool(Animations.WALKING, false);
             animator.SetBool(Animations.SHOOTING, true);
@@ -143,12 +144,17 @@ public class EnemyScript : CharacterBase
 
     private void DropItem()
     {
-        GameObject medicineInstantiated = Instantiate(droppableItem, new Vector3(
-            transform.position.x,
-            transform.position.y + 0.2f,
-            transform.position.z), Quaternion.identity);
+        bool isDropping = Random.Range(0, 2) == 0;
 
-        gameManager.addMedicine(medicineInstantiated);
+        if (isDropping) {
+
+            GameObject medicineInstantiated = Instantiate(droppableItem, new Vector3(
+                transform.position.x,
+                transform.position.y + 0.2f,
+                transform.position.z), Quaternion.identity);
+
+            gameManager.addMedicine(medicineInstantiated);
+        }
 
         hasDropped = true;
     }
