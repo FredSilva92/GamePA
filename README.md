@@ -24,6 +24,17 @@ A execução deste código acontece na classe EnemyScript.
 
 Além disso, também é executado um script chamado EnemyGroupScript que permite mudar estado para diferentes enemies ao mesmo tempo.
 
+Scripts utilizados/criados:
+- BaseState
+- EnemyStateMachine
+- StateManager
+- AttackChaseEnemy
+- AttackIdleEnemy
+- DeathEnemy
+- IdleEnemy
+- PatrolEnemy
+- EnemyGroupScript
+
 O código encontra-se no seguinte branch:
 https://github.com/FredSilva92/GamePA/tree/AIStateMachine
 
