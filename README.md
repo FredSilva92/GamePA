@@ -6,10 +6,30 @@
 ---
 
 
-## 1º Técnica de IA - Path Finding para movimento dos inimigos e aranhas
+## 1º Técnica de IA - Path Finding para movimento das aranhas
 
-[INFORMAÇÕES]
+###  Navmesh: 
 
+O objetivo pretendido seria que as aranhas se deslocassem pelo mapa em diferentes direções, com uma velocidade e distância constante. Para isso foi utilizada a solução de pathfinding do unity chamada de Navmesh, que foi adicionada à superfície e foi realizado bake da mesma, o que permitiu criar assim uma mesh de navegação com a área pela qual a aranha pode andar.  De forma a permitir que a aranha circule pela cena utilizando a Navmesh foi necessário adicionar um componente à mesma, chamado de Navmesh Agent. 
+
+###  Implementação:
+
+A nível de código foram utilizadas três funções, sendo elas o Start, Update e SetRandomTarget.
+
+Quando inicia a cena é chamada a função SetRandomTarget() para o movimento das aranhas, que faz a verificação através de um if else. Se a aranha está a andar para a frente, a posição target é definida como a posição inicial da aranha mais um ponto aleatório da esfera multiplicado pela distância máxima definida. Se não estiver a mover para a frente, a posição target é definida como sendo igual à inicial.
+
+Na função Update que vai sendo atualizada a cada frame, é feita a verificação através de um if, se a distância restante para a posição alvo é inferior a 0.1 e se for chama a função SetRandomTarget para calcular um novo ponto de destino. Desta forma a aranha irá sempre andar em diferentes direções. 
+
+
+#### Ficheiros utilizados
+
+O código relativo ao **desenvolvimento da técnica** encontra-se em [Assets/Scripts/SpiderAI.cs](Assets/Scripts/SpiderAI.cs).
+
+
+### Demonstração
+
+Criamos uma pequeno **trailer** para mostrar o funcionamento do pathfinding das aranhas.
+[![Demonstração](https://img.youtube.com/vi/0DWwADyst5Y/0.jpg)](https://www.youtube.com/watch?v=0DWwADyst5Y)
 
 ---
 
@@ -65,7 +85,7 @@ Através destas 2 métricas concluímos que o modelo treinado apresenta bons res
 
 Primeiro de tudo, recorremos aos conteúdos disponibilizadas pelo docente e às informações contidas na internet para abordar a teoria por trás do aprendizado por reforço.\
 Foram utilizados 2 agentes que tomam decisões, um para escolher a 1º peça e outro para escolher a 2º peça, e no fim as peças trocam de lugar no puzzle.
-Durante o treinamento usou-se um número máximo de 30 tentativas, cada uma envolvendo a troca de 2 peças, se não resolvesse o puzzle nessas tentativas, perdia e recomeçava de novo, para assim acreescentar mais um indicador para melhor ser o treino.
+Durante o treinamento usou-se um número máximo de 30 tentativas, cada uma envolvendo a troca de 2 peças, se não resolvesse o puzzle nessas tentativas, perdia e recomeçava de novo, para assim acrescentar mais um indicador para melhor ser o treino.
 
 #### Ficheiros utilizados
 
