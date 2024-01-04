@@ -85,7 +85,7 @@ Através destas 2 métricas concluímos que o modelo treinado apresenta bons res
 
 Primeiro de tudo, recorremos aos conteúdos disponibilizadas pelo docente e às informações contidas na internet para abordar a teoria por trás do aprendizado por reforço.\
 Foram utilizados 2 agentes que tomam decisões, um para escolher a 1º peça e outro para escolher a 2º peça, e no fim as peças trocam de lugar no puzzle.
-Durante o treinamento usou-se um número máximo de 30 tentativas, cada uma envolvendo a troca de 2 peças, se não resolvesse o puzzle nessas tentativas, perdia e recomeçava de novo, para assim acreescentar mais um indicador para melhor ser o treino.
+Durante o treinamento usou-se um número máximo de 30 tentativas, cada uma envolvendo a troca de 2 peças, se não resolvesse o puzzle nessas tentativas, perdia e recomeçava de novo, para assim acrescentar mais um indicador para melhor ser o treino.
 
 #### Ficheiros utilizados
 
