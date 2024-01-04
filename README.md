@@ -6,10 +6,24 @@
 ---
 
 
-## 1º Técnica de IA - Path Finding para movimento dos inimigos e aranhas
+## 1º Técnica de IA - Path Finding para movimento das aranhas
 
-[INFORMAÇÕES]
+###  Navmesh: 
 
+O objetivo pretendido seria que as aranhas se deslocassem pelo mapa em diferentes direções, com uma velocidade e distância constante. Para isso foi utilizada a solução de pathfinding do unity chamada de Navmesh, que foi adicionada à superfície e foi realizado bake da mesma, o que permitiu criar assim uma mesh de navegação com a área pela qual a aranha pode andar.  De forma a permitir que a aranha circule pela cena utilizando a Navmesh foi necessário adicionar um componente à mesma, chamado de Navmesh Agent. 
+
+###  Implementação:
+
+A nível de código foram utilizadas três funções, sendo elas o Start, Update e SetRandomTarget.
+
+Quando inicia a cena é chamada a função SetRandomTarget() para o movimento das aranhas, que faz a verificação através de um if else. Se a aranha está a andar para a frente, a posição target é definida como a posição inicial da aranha mais um ponto aleatório da esfera multiplicado pela distância máxima definida. Se não estiver a mover para a frente, a posição target é definida como sendo igual à inicial.
+
+Na função Update que vai sendo atualizada a cada frame, é feita a verificação através de um if, se a distância restante para a posição alvo é inferior a 0.1 e se for chama a função SetRandomTarget para calcular um novo ponto de destino. Desta forma a aranha irá sempre andar em diferentes direções. 
+
+
+#### Ficheiros utilizados
+
+O código relativo ao **desenvolvimento da técnica** encontra-se em [Assets/Scripts/SpiderAI](Assets/Scripts/SpiderAI).
 
 ---
 
