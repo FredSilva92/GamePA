@@ -16,7 +16,16 @@
 
 ## 2º Técnica de IA - Máquina de Estados para tomada de decisão dos inimigos
 
-[INFORMAÇÕES]
+Para este tópico, foi criada uma máquina de estados, que faz a transição entre 5 estados:
+Idle, patrulhar, atacar parado, atacar a caminhar e morrer. Para cada um destes estados foram criadas uma classe para cada estado.
+Estas classes foram criadas a partir da baseState, que é a classe da qual herdam os métodos principais da máquina de estados: Enter, Update e Exit.
+Também foi criado uma classe cahamda stateManager, que vai gerir a transição entre estados. Esta classe é a super classe da EnemyStateMachine, na qual vai injectar as features do enemy nos diferentes estados.
+A execução deste código acontece na classe EnemyScript.
+
+Além disso, também é executado um script chamado EnemyGroupScript que permite mudar estado para diferentes enemies ao mesmo tempo.
+
+O código encontra-se no seguinte branch: 
+https://github.com/FredSilva92/GamePA/tree/AIStateMachine
 
 
 ---
