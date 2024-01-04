@@ -594,7 +594,7 @@ public class GameManager : MonoBehaviour
         _treasureChestAudioSource.Play();
 
         Vector3 initialPosition = _orb.transform.localPosition;
-        Vector3 targetPosition = new Vector3(5.863f, 4.005f, 329.599f);
+        Vector3 targetPosition = new Vector3(-129.8151f, -809.9969f, 329.599f);
 
         float duration = 5f;
         float elapsedTime = 0f;
