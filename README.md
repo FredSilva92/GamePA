@@ -25,6 +25,12 @@ Na função Update que vai sendo atualizada a cada frame, é feita a verificaç�
 
 O código relativo ao **desenvolvimento da técnica** encontra-se em [Assets/Scripts/SpiderAI](Assets/Scripts/SpiderAI).
 
+
+### Demonstração
+
+Criamos uma pequeno **trailer** para mostrar o funcionamento do pathfinding das aranhas.
+[![Demonstração](https://img.youtube.com/vi/0DWwADyst5Y/0.jpg)](https://www.youtube.com/watch?v=0DWwADyst5Y)
+
 ---
 
 
