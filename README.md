@@ -23,7 +23,7 @@ Na função Update que vai sendo atualizada a cada frame, é feita a verificaç�
 
 #### Ficheiros utilizados
 
-O código relativo ao **desenvolvimento da técnica** encontra-se em [Assets/Scripts/SpiderAI](Assets/Scripts/SpiderAI).
+O código relativo ao **desenvolvimento da técnica** encontra-se em [Assets/Scripts/SpiderAI.cs](Assets/Scripts/SpiderAI.cs).
 
 
 ### Demonstração
