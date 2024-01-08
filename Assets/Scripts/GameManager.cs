@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using static Utils;
@@ -54,6 +52,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentGoalTextMeshPro;
 
     [SerializeField] private GameObject _starship;
+
+    [SerializeField] private GameObject _colliderInFrontOfCampCutscene;
+
     [SerializeField] private GameObject _orb;
     private GameObject _targetToLook;
     private bool _isLookingToObject;
@@ -470,6 +471,15 @@ public class GameManager : MonoBehaviour
 
         // ativar novamente a fala do objetivo durante o jogo
         InvokeRepeating(nameof(ShowAndHideGoalLoop), 4f, 40f);
+
+        if (CurrentGameState.Value == GameState.INTRO_CAMP)
+        {
+            // não permite que os inimigos venham ter connosco durante a cutscene
+            if (_colliderInFrontOfCampCutscene != null)
+            {
+                Destroy(_colliderInFrontOfCampCutscene.gameObject);
+            }
+        }
 
         ChangeGameState(nextGameState);
 

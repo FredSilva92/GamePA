@@ -107,7 +107,7 @@ public class PlayerAI : Agent
 
     /*
      * Determina as ações a serem tomadas com base nas entradas fornecidas.
-     * A função da heuristica não é chamada quando o treino é realizado no ambiente Python, apenas em fase de desenvolvimento.
+     * A função da heuristica só é chamada quando o treino é realizado no ambiente Python, apenas em fase de desenvolvimento.
      */
     public override void Heuristic(in ActionBuffers actionsOut)
     {
