@@ -379,6 +379,13 @@ public class GameManager : MonoBehaviour
 
     private void OnVideoCutsceneStart(VideoPlayer videoPlayer)
     {
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        if (playerPrefab != null)
+        {
+            PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+            playerAnimations.WalkingSound.Pause();
+        }
+
         if (_backgroundAaudioSource != null && _backgroundAaudioSource.isPlaying)
         {
             _backgroundAaudioSource.Pause();
@@ -398,6 +405,13 @@ public class GameManager : MonoBehaviour
 
     private void OnVideoCutsceneEnd(VideoPlayer videoPlayer, GameState nextGameState)
     {
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        if (playerPrefab != null)
+        {
+            PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+            playerAnimations.WalkingSound.UnPause();
+        }
+
         if (_backgroundAaudioSource != null && !_backgroundAaudioSource.isPlaying)
         {
             _backgroundAaudioSource.UnPause();
@@ -434,6 +448,13 @@ public class GameManager : MonoBehaviour
     {
         _player.SetActive(false);
 
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        if (playerPrefab != null)
+        {
+            PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+            playerAnimations.WalkingSound.Pause();
+        }
+
         if (_backgroundAaudioSource != null && _backgroundAaudioSource.isPlaying)
         {
             _backgroundAaudioSource.Pause();
@@ -447,11 +468,19 @@ public class GameManager : MonoBehaviour
         _mainCanvas.enabled = false;
 
         timelineObject.SetActive(true);
+
         timeline.Play();
     }
 
     private void OnTimelineCutsceneEnd(PlayableDirector timeline, GameObject timelineObject, GameState nextGameState)
     {
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        if (playerPrefab != null)
+        {
+            PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+            playerAnimations.WalkingSound.UnPause();
+        }
+
         if (_backgroundAaudioSource != null && !_backgroundAaudioSource.isPlaying)
         {
             _backgroundAaudioSource.UnPause();
@@ -551,6 +580,10 @@ public class GameManager : MonoBehaviour
         _currentActionTextMeshPro.text = text;
         _currentActionPanel.SetActive(true);
 
+        GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+        PlayerAnimations playerAnimations = playerPrefab.GetComponent<PlayerAnimations>();
+        playerAnimations.WalkingSound.Pause();
+
         yield return new WaitForSeconds(dialogueDuration + 1f);
 
         _currentActionDialogue = null;
@@ -561,6 +594,8 @@ public class GameManager : MonoBehaviour
         UnFreezePlayer();
 
         _currentActionPanel.SetActive(false);
+
+        playerAnimations.WalkingSound.UnPause();
     }
 
     private void ShowAndHideGoalLoop()

@@ -32,6 +32,11 @@ public class PlayerAnimations : MonoBehaviour
         set { _freezeAllAnimations = value; }
     }
 
+    public AudioSource WalkingSound
+    {
+        get { return walkingSound; }
+    }
+
 
     void Start()
     {
