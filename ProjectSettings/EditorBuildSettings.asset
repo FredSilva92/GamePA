@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Luis/TorchFireVFX.unity
     guid: 555ba24e062fba547affe36a1379f698
+  - enabled: 0
+    path: Assets/Scenes/BeachAndForest2.unity
+    guid: 2dc44d38777b1a941af29a6c52e7c927
   m_configObjects: {}

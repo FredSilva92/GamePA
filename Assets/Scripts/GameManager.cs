@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
         {
             // mostra a cutscene externa e trata do colisor no script LevelChanger
             case GameState.INTRO_GAME:
-                ConfigVideoCutscene(nextGameState);
+                StartCoroutine(OpenInitialCutscene(nextGameState));
                 break;
 
             // abre o baú e no fim mostra a cutscene final
@@ -526,6 +526,12 @@ public class GameManager : MonoBehaviour
         _player.transform.localRotation = Quaternion.Euler(rotation);
     }
 
+    private IEnumerator OpenInitialCutscene(GameState nextGameState)
+    {
+        yield return new WaitForSeconds(1f);
+        ConfigVideoCutscene(nextGameState);
+    }
+
     /*
      * Ao iniciar a cena, todos os botões de ação são ocultos por padrão.
     */
@@ -656,6 +662,7 @@ public class GameManager : MonoBehaviour
         _orb.transform.localPosition = targetPosition;
 
         yield return new WaitForSeconds(3f);
+
         ConfigVideoCutscene(nextGameState);
     }
 
